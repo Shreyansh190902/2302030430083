@@ -171,14 +171,6 @@
 
   /* ---------- 01: provided cover + Gujarati touches ---------- */
   #s1 { padding: 0; background: url('assets/cover.webp') no-repeat 0 0 / 1080px 1440px; }
-  #s1 .tape {
-    position: absolute; left: 46px; top: 30px; transform: rotate(-3deg);
-    background: var(--yellow); padding: 8px 24px 10px;
-    font: 800 31px/1.3 'Inter'; letter-spacing: -0.01em; color: #0b0b0b;
-    box-shadow: 4px 5px 0 rgba(0,0,0,.12);
-    clip-path: polygon(0 6%, 3% 0, 97% 4%, 100% 0, 99% 94%, 96% 100%, 2% 96%, 0 100%);
-  }
-  #s1 .tape .red { color: var(--red); }
   #s1 .head-patch {           /* paper + grid matching the cover (52.92px grid, lines at x≈47, y≈48) */
     position: absolute; left: 36px; top: 146px; width: 670px; height: 446px;
     background-color: #f5f3ef;
@@ -199,9 +191,7 @@
     background: linear-gradient(transparent 14%, #fff04a 14%, #fff04a 90%, transparent 90%);
     transform: rotate(-1.2deg);
   }
-  #s1 .head .hi .gu { font-size: 94px; }
-  #s1 .head .hi .en { margin-left: 14px; }
-  #s1 .head .hi .en { font-size: 100px; }
+  #s1 .head .hi .gu { font-size: 104px; }
   #s1 .patch {                 /* hides the original English note so it can be rewritten */
     position: absolute; left: 240px; top: 646px; width: 388px; height: 172px;
     background: #f5f3ef;
@@ -291,12 +281,11 @@
 
 <!-- ================= 01 ================= -->
 <section class="slide" id="s1">
-  <div class="tape">Should you put <span class="red">water</span> directly in your eyes? 🤔</div>
   <div class="head-patch"></div>
   <div class="head">
     <div class="row gu">શું તમે પણ</div>
     <div class="row en">Directly</div>
-    <div class="row"><span class="hi"><span class="gu">આંખમાં</span> <span class="en">Water</span></span></div>
+    <div class="row"><span class="hi"><span class="gu">આંખમાં પાણી</span></span></div>
     <div class="row gu">નાખો છો?</div>
   </div>
   <div class="patch"></div>
