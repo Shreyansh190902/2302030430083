@@ -183,10 +183,10 @@
   .yt-btn .word { font: 900 52px 'Inter'; letter-spacing: -0.04em; }
   .yt-btn .sub { font: 700 26px 'Noto Sans Gujarati'; color: var(--muted); text-align: left; }
   .hosts {
-    position: absolute; left: 0; right: 0; bottom: 0; height: 600px;
+    position: absolute; left: 0; right: 0; bottom: 0; height: 740px;
     background: url('assets/cover.webp') no-repeat center bottom / 1080px 1440px;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 90px);
-            mask-image: linear-gradient(to bottom, transparent 0, #000 90px);
+    /* trace both hosts' yellow outlines so only the people (not the cover's background) show */
+    clip-path: polygon(0px 95px, 40px 70px, 100px 52px, 180px 48px, 250px 60px, 300px 90px, 330px 140px, 345px 200px, 355px 260px, 380px 300px, 425px 312px, 460px 350px, 490px 400px, 505px 445px, 560px 448px, 632px 452px, 640px 495px, 650px 480px, 665px 430px, 700px 380px, 745px 340px, 760px 300px, 740px 255px, 730px 200px, 725px 150px, 730px 100px, 760px 60px, 830px 22px, 930px 26px, 970px 44px, 1008px 66px, 1025px 100px, 1025px 150px, 1010px 200px, 1000px 260px, 1010px 300px, 1050px 300px, 1080px 295px, 1080px 740px, 0px 740px);
   }
 </style>
 </head>
@@ -435,8 +435,8 @@
     </div>
   </div>
 
-  <svg style="position:absolute; left:120px; top:700px; transform:rotate(-20deg)" width="80" height="80"><use href="#burst"/></svg>
-  <div class="note" style="right:70px; top:760px; transform:rotate(6deg); font-size:44px; text-align:right">
+  <svg style="position:absolute; left:150px; top:630px; transform:rotate(-20deg)" width="80" height="80"><use href="#burst"/></svg>
+  <div class="note" style="right:60px; top:630px; transform:rotate(6deg); font-size:44px; text-align:right">
     <span class="mark">link in bio</span> 👆
     <span class="gu" style="font-size:32px; margin-top:6px">લિંક બાયોમાં છે</span>
   </div>
