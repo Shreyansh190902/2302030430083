@@ -169,6 +169,33 @@
   }
   .disclaimer span { display: block; font-family: 'Noto Sans Gujarati'; }
 
+  /* ---------- 01: provided cover + Gujarati touches ---------- */
+  #s1 { padding: 0; background: url('assets/cover.webp') no-repeat 0 0 / 1080px 1440px; }
+  #s1 .tape {
+    position: absolute; left: 46px; top: 30px; transform: rotate(-3deg);
+    background: var(--yellow); padding: 6px 26px 10px;
+    font: 800 42px/1.3 'Noto Sans Gujarati'; color: #0b0b0b;
+    box-shadow: 4px 5px 0 rgba(0,0,0,.12);
+    clip-path: polygon(0 6%, 3% 0, 97% 4%, 100% 0, 99% 94%, 96% 100%, 2% 96%, 0 100%);
+  }
+  #s1 .tape .red { color: var(--red); }
+  #s1 .patch {                 /* hides the original English note so it can be rewritten */
+    position: absolute; left: 240px; top: 646px; width: 388px; height: 172px;
+    background: #f5f3ef;
+    /* stays clear of her hair (bottom-left) and the "?" doodle (right) */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 64px 100%, 56px 122px, 0 112px);
+  }
+  #s1 .mix {
+    position: absolute; left: 252px; top: 652px; transform: rotate(-4deg); transform-origin: left top;
+    line-height: 1.12; color: #111; text-align: left;
+  }
+  #s1 .mix .gu { font: 700 38px 'Baloo Bhai 2'; }
+  #s1 .mix .en { font: 700 46px 'Caveat'; }
+  #s1 .mix .l2 { padding-left: 22px; }
+  #s1 .mix .l3 { padding-left: 50px; }
+  #s1 .mix .hi { background: var(--yellow-soft); padding: 0 6px; }
+  #s1 .mix .ul { background: linear-gradient(transparent 78%, var(--yellow) 78%, var(--yellow) 94%, transparent 94%); }
+
   /* ---------- dark slides (alternate with light; matches the podcast outro) ---------- */
   .slide.dark {
     --paper: #050505; --grid: #1c1c1c; --ink: #f4f4f4; --muted: #b8b8b8; --card: #151515;
@@ -238,6 +265,17 @@
     </symbol>
   </defs>
 </svg>
+
+<!-- ================= 01 ================= -->
+<section class="slide" id="s1">
+  <div class="tape">આંખમાં <span class="red">પાણી</span> નાખવું જોઈએ? 🤔</div>
+  <div class="patch"></div>
+  <div class="mix">
+    <div class="l1"><span class="gu">રોજની</span> <span class="en hi">common habit...</span></div>
+    <div class="l2"><span class="gu">પણ શું એ</span> <span class="en">actually</span></div>
+    <div class="l3"><span class="gu ul">આંખ માટે સારી છે?</span></div>
+  </div>
+</section>
 
 <!-- ================= 02 ================= -->
 <section class="slide dark" id="s2">

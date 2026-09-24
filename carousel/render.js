@@ -10,12 +10,6 @@ const fs = require('fs');
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1200, height: 1500 } });
 
-  // Slide 01 is the provided cover, resized to 1080x1440.
-  await page.goto('file://' + path.join(__dirname, 'assets/cover.webp'));
-  await page.waitForFunction(() => document.images[0] && document.images[0].naturalWidth > 0);
-  await page.addStyleTag({ content: 'body{margin:0} img{display:block;width:1080px;height:1440px}' });
-  await (await page.$('img')).screenshot({ path: path.join(out, '01.png') });
-
   await page.goto('file://' + path.join(__dirname, 'slides.html'), { waitUntil: 'networkidle' });
   await page.evaluate(async () => { await Promise.all([...document.fonts].map(f => f.load().catch(() => {}))); });
   await page.evaluate(() => document.fonts.ready);
