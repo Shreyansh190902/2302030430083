@@ -169,25 +169,32 @@
   }
   .disclaimer span { display: block; font-family: 'Noto Sans Gujarati'; }
 
-  /* ---------- 09: watch on YouTube ---------- */
-  #s9 { padding-top: 70px; text-align: center; }
-  #s9 .logo { display: block; width: 400px; margin: 0 auto; mix-blend-mode: multiply; }
-  #s9 .h-en { font-size: 92px; margin-top: 34px; }
-  #s9 .h-gu { font-size: 46px; margin-top: 14px; }
-  .yt-btn {
-    display: inline-flex; align-items: center; gap: 22px;
-    margin-top: 34px; padding: 20px 40px 20px 26px;
-    background: #fff; border: 4px solid var(--ink); border-radius: 999px;
-    box-shadow: 8px 8px 0 var(--ink);
+  /* ---------- 09: outro, dark theme matching the podcast outro ---------- */
+  #s9 { background: #000; color: #fff; padding: 0; text-align: center; }
+  #s9 .pager { background: #fff; color: #000; }
+  #s9 .logo { position: absolute; top: 34px; left: 50%; transform: translateX(-50%); width: 250px; }
+  #s9 .doc {
+    position: absolute; top: 176px; left: 0; right: 0;
+    font: 700 116px/1 'Caveat', cursive; color: #ffd21f; letter-spacing: .01em;
   }
-  .yt-btn .word { font: 900 52px 'Inter'; letter-spacing: -0.04em; }
-  .yt-btn .sub { font: 700 26px 'Noto Sans Gujarati'; color: var(--muted); text-align: left; }
-  .hosts {
-    position: absolute; left: 0; right: 0; bottom: 0; height: 740px;
-    background: url('assets/cover.webp') no-repeat center bottom / 1080px 1440px;
-    /* trace both hosts' yellow outlines so only the people (not the cover's background) show */
-    clip-path: polygon(0px 95px, 40px 70px, 100px 52px, 180px 48px, 250px 60px, 300px 90px, 330px 140px, 345px 200px, 355px 260px, 380px 300px, 425px 312px, 460px 350px, 490px 400px, 505px 445px, 560px 448px, 632px 452px, 640px 495px, 650px 480px, 665px 430px, 700px 380px, 745px 340px, 760px 300px, 740px 255px, 730px 200px, 725px 150px, 730px 100px, 760px 60px, 830px 22px, 930px 26px, 970px 44px, 1008px 66px, 1025px 100px, 1025px 150px, 1010px 200px, 1000px 260px, 1010px 300px, 1050px 300px, 1080px 295px, 1080px 740px, 0px 740px);
+  #s9 .doc-gu { position: absolute; top: 302px; left: 0; right: 0; font: 700 34px 'Baloo Bhai 2'; color: #fff; opacity: .9; }
+  #s9 .doc-line { position: absolute; top: 286px; left: 50%; transform: translateX(-50%); }
+  #s9 .photo {
+    position: absolute; left: 0; right: 0; top: 356px; height: 864px;
+    background: url('assets/outro.jpg') no-repeat 0 -444px / 1080px 1920px;   /* outro y 370..1090 at 1.2x */
   }
+  #s9 .photo::before {      /* soften the top crop edge */
+    content: ''; position: absolute; inset: 0 0 auto 0; height: 50px; z-index: 1;
+    background: linear-gradient(#000, transparent);
+  }
+  #s9 .photo::after {       /* melt the bottom into the black like the outro does */
+    content: ''; position: absolute; inset: auto 0 0 0; height: 260px;
+    background: linear-gradient(transparent, #000 85%);
+  }
+  #s9 .watch { position: absolute; top: 1110px; left: 0; right: 0; font: 700 96px/1 'Caveat', cursive; color: #fff; }
+  #s9 .watch-gu { position: absolute; top: 1206px; left: 0; right: 0; font: 700 38px 'Baloo Bhai 2'; color: #ffd21f; }
+  #s9 .yt { position: absolute; top: 1268px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 18px; }
+  #s9 .yt .word { font: 900 84px/1 'Inter'; letter-spacing: -0.06em; color: #fff; transform: scaleY(1.12); }
 </style>
 </head>
 <body>
@@ -419,29 +426,23 @@
 <!-- ================= 09 ================= -->
 <section class="slide" id="s9">
   <div class="pager">09 / 09</div>
-  <img class="logo" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
+  <img class="logo" src="assets/show-logo-dark.png" alt="The Sagar Kathrotiya Show">
 
-  <h1 class="h-en">Watch the<br><span class="hl red">full podcast</span></h1>
-  <p class="h-gu">આખો પોડકાસ્ટ <span class="red">YouTube</span> પર જુઓ</p>
+  <div class="doc">Dr. Rupal Shah</div>
+  <svg class="doc-line" width="620" height="24" viewBox="0 0 620 24"><path d="M6 16 C 180 4, 440 4, 614 18" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/></svg>
+  <div class="doc-gu">ડૉ. રૂપલ શાહ</div>
 
-  <div class="yt-btn">
-    <svg width="96" height="68" viewBox="0 0 96 68" aria-label="YouTube">
-      <rect x="0" y="0" width="96" height="68" rx="18" fill="#ff0000"/>
+  <div class="photo"></div>
+
+  <div class="watch">Watch Full Podcast On</div>
+  <div class="watch-gu">આખો પોડકાસ્ટ જુઓ</div>
+  <div class="yt">
+    <svg width="130" height="92" viewBox="0 0 96 68" aria-label="YouTube">
+      <rect x="0" y="0" width="96" height="68" rx="18" fill="#ff0033"/>
       <path d="M38 19 L 66 34 L 38 49 Z" fill="#fff"/>
     </svg>
-    <div>
-      <div class="word">YouTube</div>
-      <div class="sub">પર હમણાં જ જુઓ</div>
-    </div>
+    <div class="word">YouTube</div>
   </div>
-
-  <svg style="position:absolute; left:150px; top:630px; transform:rotate(-20deg)" width="80" height="80"><use href="#burst"/></svg>
-  <div class="note" style="right:60px; top:630px; transform:rotate(6deg); font-size:44px; text-align:right">
-    <span class="mark">link in bio</span> 👆
-    <span class="gu" style="font-size:32px; margin-top:6px">લિંક બાયોમાં છે</span>
-  </div>
-
-  <div class="hosts"></div>
 </section>
 
 </body>
