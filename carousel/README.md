@@ -3,7 +3,7 @@
 Topic: *Should you put water directly in your eyes?* — 9 slides, 1080×1440 (3:4), matching the provided cover.
 
 - `assets/cover.webp` — provided cover, base of slide 01
-- `slides.html` — all slides: 01 (cover + Gujarati touches), 02–09 (09 = dark outro: watch full podcast on YouTube) (edit text here)
+- `slides.html` — all slides: 01 (cover + Gujarati touches), 02–09 (09 = outro: watch full podcast on YouTube) (edit text here)
 - `assets/fonts.css`, `assets/fonts/` — bundled Inter, Noto Sans Gujarati, Baloo Bhai 2, Caveat
 - `assets/show-logo.jpg`, `assets/show-logo-dark.png` — show logo (light / dark-background versions)
 - `assets/outro.jpg` — podcast outro artwork used for slide 09
