@@ -170,16 +170,7 @@
   .disclaimer span { display: block; font-family: 'Noto Sans Gujarati'; }
 
   /* ---------- 01: provided cover + Gujarati touches ---------- */
-  #s1 { padding: 0; background: url('assets/cover.webp') no-repeat 0 0 / 1080px 1440px; }
-  #s1 .head-patch {           /* paper + grid matching the cover (52.92px grid, lines at x≈47, y≈48) */
-    position: absolute; left: 36px; top: 146px; width: 670px; height: 446px;
-    background-color: #f5f3ef;
-    background-image:
-      linear-gradient(#e5e3df 2px, transparent 2px),
-      linear-gradient(90deg, #e5e3df 2px, transparent 2px);
-    background-size: 52.92px 52.92px;
-    background-position: 10.4px 12.8px;
-  }
+  #s1 { padding: 0; }
   #s1 .head {
     position: absolute; left: 52px; top: 150px; color: #0b0b0b;
   }
@@ -192,14 +183,8 @@
     transform: rotate(-1.2deg);
   }
   #s1 .head .hi .gu { font-size: 104px; }
-  #s1 .patch {                 /* hides the original English note so it can be rewritten */
-    position: absolute; left: 240px; top: 646px; width: 388px; height: 172px;
-    background: #f5f3ef;
-    /* stays clear of her hair (bottom-left) and the "?" doodle (right) */
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 64px 100%, 56px 122px, 0 112px);
-  }
   #s1 .mix {
-    position: absolute; left: 252px; top: 652px; transform: rotate(-4deg); transform-origin: left top;
+    position: absolute; left: 330px; top: 690px; transform: rotate(-4deg); transform-origin: left top;
     line-height: 1.12; color: #111; text-align: left;
   }
   #s1 .mix .gu { font: 700 38px 'Baloo Bhai 2'; }
@@ -247,6 +232,70 @@
   #s9 .yt { position: absolute; top: 1238px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 18px; }
   #s9 .yt .word { font: 900 84px/1 'Inter'; letter-spacing: -0.06em; color: var(--ink); transform: scaleY(1.12); }
   #s9 .swoosh9 { position: absolute; top: 1150px; left: 50%; transform: translateX(-50%); }
+
+  /* =====================================================================
+     THEME: "Sunset" — light, built from the show logo's pink→orange.
+     Overrides the base grid-paper styles above; content is unchanged.
+     ===================================================================== */
+  :root {
+    --paper: #fff7f2; --ink: #1e1a1d; --muted: #6d6166; --card: #ffffff;
+    --red: #e8364f; --accent: #e8364f; --peach: #ffe1d1;
+    --grad: linear-gradient(120deg, #ec3462 0%, #f4714a 55%, #f9a94b 100%);
+    --soft-shadow: 0 16px 36px rgba(232, 54, 79, .14), 0 2px 6px rgba(30, 26, 29, .05);
+  }
+  .slide {
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 100% 0, rgba(249, 169, 75, .22), transparent 420px),
+      radial-gradient(circle at 0 100%, rgba(236, 52, 98, .14), transparent 480px),
+      radial-gradient(rgba(232, 54, 79, .13) 2px, transparent 2.5px);
+    background-size: auto, auto, 36px 36px;
+  }
+  .slide svg { color: var(--accent); }
+  .h-en .hl {
+    display: inline-block; color: #fff; background: var(--grad); border-radius: 20px;
+    padding: 2px 20px 12px; margin: 14px 0 0 -6px; line-height: 1;
+  }
+  .h-gu .red, .red { color: var(--accent); }
+  .pager { background: var(--grad); color: #fff; box-shadow: var(--soft-shadow); }
+  .swipe { color: var(--accent); }
+  .mark { background: var(--peach); border-radius: 6px; }
+
+  .card, .chip, .cta {
+    border: 2px solid #ffe2d6; box-shadow: var(--soft-shadow); background: var(--card);
+  }
+  .card .num { background: var(--peach); border: 0; color: var(--accent); }
+  .card .num.bad { background: var(--grad); color: #fff; }
+  .chip .ico { color: var(--accent); }
+  .cta svg path, .cta svg circle { fill: var(--peach); }
+
+  .film { border: 0; box-shadow: var(--soft-shadow); }
+  .layer { border-bottom: 2px solid #fff; }
+  .l-oil { background: #ffe8cc; }
+  .l-water { background: #dff0ff; }
+  .l-mucus { background: #fff; }
+  .eyeball { background: var(--grad); color: #fff; }
+  .alert { background: var(--grad); border: 0; box-shadow: var(--soft-shadow); }
+  .big-rule { background: var(--grad); color: #fff; }
+  .disclaimer { border-top: 3px dashed #f3b8a6; bottom: 150px; }
+
+  .brand { position: absolute; left: 56px; bottom: 34px; width: 150px; mix-blend-mode: multiply; }
+
+  /* slide 01 */
+  #s1 .head .hi { background: var(--grad); color: #fff; border-radius: 22px; padding: 0 22px 6px; margin: 18px 0 8px -8px; transform: rotate(-1.5deg); }
+  #s1 .mix .hi { background: var(--peach); border-radius: 6px; }
+  #s1 .mix .ul { background: linear-gradient(transparent 76%, #ffb99a 76%, #ffb99a 94%, transparent 94%); }
+  #s1 .eye-sticker { width: 350px; height: 290px; background-size: 1193px auto; background-position: -852px -104px; }
+  #s1 .hosts1 {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 740px;
+    background: url('assets/cover.webp') no-repeat center bottom / 1080px 1440px;
+    clip-path: polygon(0px 128px, 40px 100px, 100px 72px, 160px 57px, 220px 58px, 270px 72px, 300px 92px, 330px 140px, 345px 200px, 355px 260px, 380px 300px, 425px 312px, 460px 350px, 490px 400px, 505px 445px, 560px 448px, 632px 452px, 640px 495px, 650px 480px, 665px 430px, 700px 380px, 745px 340px, 760px 300px, 740px 255px, 730px 200px, 725px 150px, 730px 100px, 760px 60px, 830px 22px, 930px 26px, 970px 44px, 1008px 66px, 1016px 100px, 1014px 150px, 1000px 200px, 990px 250px, 1000px 292px, 1050px 300px, 1080px 296px, 1080px 740px, 0px 740px);
+  }
+
+  /* slide 09 */
+  #s9 .photo { border: 0; box-shadow: 0 22px 50px rgba(232, 54, 79, .25); }
+  #s9 .doc span { background: linear-gradient(transparent 58%, var(--peach) 58%, var(--peach) 92%, transparent 92%); }
+  #s9 .doc-gu, #s9 .watch-gu { color: var(--accent); }
 </style>
 </head>
 <body>
@@ -254,6 +303,9 @@
 <!-- reusable doodles -->
 <svg width="0" height="0" style="position:absolute">
   <defs>
+    <linearGradient id="brandgrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ec3462"/><stop offset=".55" stop-color="#f4714a"/><stop offset="1" stop-color="#f9a94b"/>
+    </linearGradient>
     <symbol id="arrow-curve" viewBox="0 0 160 120">
       <path d="M10 10 C 10 70, 60 100, 140 96" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
       <path d="M118 78 L 142 96 L 116 112" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -266,10 +318,10 @@
       <path d="M40 6 L 44 28 M 70 18 L 54 34 M 74 50 L 54 48" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
     </symbol>
     <symbol id="burst-y" viewBox="0 0 80 80">
-      <path d="M40 6 L 44 28 M 70 18 L 54 34 M 74 50 L 54 48" stroke="#ffe01a" stroke-width="7" stroke-linecap="round"/>
+      <path d="M40 6 L 44 28 M 70 18 L 54 34 M 74 50 L 54 48" stroke="url(#brandgrad)" stroke-width="7" stroke-linecap="round"/>
     </symbol>
     <symbol id="underline" viewBox="0 0 600 30">
-      <path d="M6 20 C 150 6, 350 8, 594 14" fill="none" stroke="#ffe01a" stroke-width="12" stroke-linecap="round"/>
+      <path d="M6 20 C 150 6, 350 8, 594 14" fill="none" stroke="url(#brandgrad)" stroke-width="12" stroke-linecap="round"/>
     </symbol>
     <symbol id="drop" viewBox="0 0 40 56">
       <path d="M20 4 C 30 20, 36 30, 36 38 A 16 16 0 0 1 4 38 C 4 30, 10 20, 20 4 Z" fill="#cfe8ff" stroke="currentColor" stroke-width="4"/>
@@ -279,23 +331,26 @@
 
 <!-- ================= 01 ================= -->
 <section class="slide" id="s1">
-  <div class="head-patch"></div>
   <div class="head">
     <div class="row gu">શું તમે પણ</div>
     <div class="row en">Directly</div>
     <div class="row"><span class="hi"><span class="gu">આંખમાં પાણી</span></span></div>
     <div class="row gu">નાખો છો?</div>
   </div>
-  <div class="patch"></div>
+  <div class="sticker eye-sticker" style="right:40px; top:96px; transform:rotate(5deg)"></div>
+  <svg style="position:absolute; right:380px; top:70px" width="80" height="80"><use href="#burst"/></svg>
+  <svg style="position:absolute; left:150px; top:636px" width="150" height="110"><use href="#arrow-curve"/></svg>
   <div class="mix">
     <div class="l1"><span class="gu">રોજની</span> <span class="en hi">common habit...</span></div>
     <div class="l2"><span class="gu">પણ શું એ</span> <span class="en">actually</span></div>
     <div class="l3"><span class="gu ul">આંખ માટે સારી છે?</span></div>
   </div>
+  <div class="hosts1"></div>
 </section>
 
 <!-- ================= 02 ================= -->
 <section class="slide" id="s2">
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
   <div class="pager">02 / 09</div>
   <h1 class="h-en">Your eyes<br><span class="hl red">clean&nbsp;themselves</span></h1>
   <p class="h-gu">આંખો <span class="red">પોતાની જાતે</span> સાફ થાય છે</p>
@@ -317,7 +372,7 @@
     <div class="eyeball">▲ EYE SURFACE · <span>આંખની સપાટી</span></div>
   </div>
 
-  <div class="note" style="left:80px; bottom:150px; transform:rotate(-3deg)">
+  <div class="note" style="left:80px; bottom:180px; transform:rotate(-3deg)">
     This thin <span class="mark">tear film</span> is your eye's shield 🛡️
     <span class="gu">આ પાતળું આંસુનું પડ જ આંખનું કવચ છે</span>
   </div>
@@ -326,6 +381,7 @@
 
 <!-- ================= 03 ================= -->
 <section class="slide" id="s3">
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
   <div class="pager">03 / 09</div>
   <h1 class="h-en">Splashing water<br><span class="hl red">washes it away</span></h1>
   <p class="h-gu">પાણીની છાલક આ <span class="red">કવચ ધોઈ નાખે</span> છે</p>
@@ -353,6 +409,7 @@
 
 <!-- ================= 04 ================= -->
 <section class="slide" id="s4">
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
   <div class="pager">04 / 09</div>
   <h1 class="h-en">Tap water is<br><span class="hl red">not sterile</span></h1>
   <p class="h-gu">નળનું પાણી <span class="red">જંતુમુક્ત નથી</span></p>
@@ -381,7 +438,7 @@
     <div class="card"><div class="num bad">!</div><div><div class="en">Contact lens users: highest risk</div><div class="gu">કોન્ટેક્ટ લેન્સ પહેરનારને સૌથી વધુ જોખમ</div></div></div>
   </div>
 
-  <div class="note" style="left:80px; bottom:140px; transform:rotate(-3deg)">
+  <div class="note" style="left:80px; bottom:180px; transform:rotate(-3deg)">
     Infection risk is <span class="mark">real</span> 😬
     <span class="gu">ચેપનું જોખમ સાચું છે</span>
   </div>
@@ -390,6 +447,7 @@
 
 <!-- ================= 05 ================= -->
 <section class="slide" id="s5">
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
   <div class="pager">05 / 09</div>
   <h1 class="h-en">Signs you're<br><span class="hl red">overdoing it</span></h1>
   <p class="h-gu">આ સંકેતો દેખાય તો <span class="red">ચેતી જાવ</span></p>
@@ -413,6 +471,7 @@
 
 <!-- ================= 06 ================= -->
 <section class="slide" id="s6">
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
   <div class="pager">06 / 09</div>
   <h1 class="h-en">Do this<br><span class="hl red">instead</span> ✓</h1>
   <p class="h-gu">તેના બદલે <span class="red">આ કરો</span></p>
@@ -433,6 +492,7 @@
 
 <!-- ================= 07 ================= -->
 <section class="slide" id="s7">
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
   <div class="pager">07 / 09</div>
   <h1 class="h-en">The one<br><span class="hl red">exception</span> ⚠️</h1>
   <p class="h-gu">ફક્ત <span class="red">એક અપવાદ</span></p>
@@ -458,6 +518,7 @@
 
 <!-- ================= 08 ================= -->
 <section class="slide" id="s8">
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
   <div class="pager">08 / 09</div>
   <h1 class="h-en">Save this.<br><span class="hl red">Share it.</span></h1>
   <p class="h-gu">સેવ કરો અને <span class="red">શેર કરો</span></p>
