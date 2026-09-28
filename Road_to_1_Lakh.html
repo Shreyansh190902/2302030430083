@@ -153,6 +153,9 @@ td.p{color:var(--profit);font-weight:600} td.l{color:var(--loss);font-weight:600
 .rate-row label{margin:0}
 .rate-in{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:13px;color:var(--ink-2)}
 .rate-in input{width:96px;padding:6px 8px;font-size:16px}
+.rate-in .btn-sm{padding:6px 10px;white-space:nowrap}
+@media (max-width:420px){.rate-row{grid-template-columns:1fr}.rate-in input{flex:1 1 0;width:auto;min-width:0}}
+.rate-in{min-width:0}
 @media (max-width:420px){.rate-row{grid-template-columns:1fr auto}.rate-row .note{grid-column:1/-1}}
 .cur-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px}
 .fee-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}
@@ -301,7 +304,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
         </div>
         <div class="rate-row">
           <label for="rateIn">USD rate for this day</label>
-          <div class="rate-in"><span>1 $ = ₹</span><input type="number" id="rateIn" step="0.01" min="0.01" inputmode="decimal"></div>
+          <div class="rate-in"><span>1 $ = ₹</span><input type="number" id="rateIn" step="0.01" min="0.01" inputmode="decimal"><button type="button" class="btn-ghost btn-sm" id="rateFetch" title="Get this day's rate">↻ Live</button></div>
           <span class="note" id="rateHint"></span>
         </div>
         <div class="entry-grid">
@@ -633,9 +636,9 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   }
   function renderEntry(keepInput){
     const r = M.rows[state.selected-1]; if (!r) return;
-    if (!keepInput){ $("rateIn").value = r.rate.toFixed(2); }
+    if (!keepInput){ $("rateIn").value = r.rate.toFixed(2); rateDirty = false; if (!r.ownRate) autoRate(r); }
     const fr = formRate();
-    $("rateHint").textContent = r.ownRate ? "Saved with this day" : (M.logged.some(x => x.ownRate && x.day < r.day) ? "Last day's rate · change it if today's differs" : "Default rate from Settings · change it if needed");
+    if (!keepInput) $("rateHint").textContent = r.ownRate ? "Saved with this day" : (liveHint[iso(r.date)] || (M.logged.some(x => x.ownRate && x.day < r.day) ? "Last day's rate · tap ↻ Live for today's" : "Default rate · tap ↻ Live for today's"));
     $("eOpen").innerHTML = inr(r.open) + u(r.open, false, fr); $("eTarget").innerHTML = inr(r.target) + u(r.target, false, fr); $("eLimit").innerHTML = inr(r.limit) + u(r.limit, false, fr);
     $("closeLbl").textContent = `Closing balance (${curSym()})`; $("feeLbl").textContent = `Fees & tax paid today (${curSym()})`; $("fcLbl").textContent = `Traded value (${curSym()})`;
     document.querySelectorAll(".seg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cur === inCur)));
@@ -802,6 +805,60 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   });
   $("showAll").addEventListener("change", renderTable);
   $("feeIn").addEventListener("input", updatePreview);
+  // ---- live USD→INR rate (free, no key). Blocked inside claude.ai, works on your domain / offline file when online.
+  let rateDirty = false;
+  const liveHint = {};
+  const rateCache = {};
+  try { Object.assign(rateCache, JSON.parse(localStorage.getItem("r1l-rates") || "{}")); } catch(e){}
+  const todayIST = () => iso(new Date(Date.now() + 330*60000));
+  async function getJSON(url){
+    const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 8000);
+    try { const r = await fetch(url, {signal: ctl.signal}); if (!r.ok) throw new Error(r.status); return await r.json(); }
+    finally { clearTimeout(t); }
+  }
+  async function fetchRate(dateStr){
+    const today = todayIST(), isPast = dateStr < today;
+    const key = isPast ? dateStr : "latest:" + today;
+    if (rateCache[key]) return rateCache[key];
+    let out = null;
+    try {
+      const j = await getJSON(`https://api.frankfurter.app/${isPast ? dateStr : "latest"}?from=USD&to=INR`);
+      if (j && j.rates && j.rates.INR > 0) out = {rate: r2(j.rates.INR), date: j.date, src: "ECB via Frankfurter"};
+    } catch(e){}
+    if (!out && !isPast){
+      try {
+        const j = await getJSON("https://open.er-api.com/v6/latest/USD");
+        if (j && j.rates && j.rates.INR > 0) out = {rate: r2(j.rates.INR), date: today, src: "open.er-api.com"};
+      } catch(e){}
+    }
+    if (out){ rateCache[key] = out; try { localStorage.setItem("r1l-rates", JSON.stringify(rateCache)); } catch(e){} }
+    return out;
+  }
+  function showRate(r, res, manual){
+    const ds = iso(r.date);
+    if (!res){ if (manual) $("rateHint").textContent = "Couldn't get a live rate here (offline, or blocked inside claude.ai). Type it in."; return; }
+    const d = parseISO(res.date);
+    liveHint[ds] = `Live rate ${shortDate(d)} · ${res.src}${res.date !== ds && ds <= todayIST() ? " (latest available)" : ""}`;
+    if (state.selected !== r.day || rateDirty) return;
+    $("rateIn").value = res.rate.toFixed(2);
+    $("rateHint").textContent = liveHint[ds];
+    $("rateIn").dispatchEvent(new Event("input"));
+    rateDirty = false;
+  }
+  async function autoRate(r){
+    if (iso(r.date) > todayIST()) return;           // future day: no rate yet
+    const res = await fetchRate(iso(r.date));
+    if (res) showRate(r, res, false);
+  }
+  $("rateFetch").addEventListener("click", async () => {
+    const r = M.rows[state.selected-1]; if (!r) return;
+    $("rateFetch").disabled = true; $("rateHint").textContent = "Getting the rate…";
+    const ds = iso(r.date) > todayIST() ? todayIST() : iso(r.date);
+    const res = await fetchRate(ds);
+    rateDirty = false; showRate(r, res, true);
+    $("rateFetch").disabled = false;
+  });
+  $("rateIn").addEventListener("input", e => { if (e.isTrusted) rateDirty = true; });
   $("rateIn").addEventListener("input", () => {
     const r = M.rows[state.selected-1]; if (!r) return;
     const fr = formRate();
