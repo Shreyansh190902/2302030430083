@@ -49,7 +49,7 @@ button:active{transform:scale(.98)}
 @media (pointer:coarse){button,select,input[type=number],input[type=text],input[type=date]{min-height:44px}.check input{width:22px;height:22px}}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.5}
 .wrap{max-width:1180px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px;display:grid;gap:20px}
-.wrap>*,.hero>*,.charts>*{min-width:0}
+.wrap>*,.hero>*,.charts>*,.tab>*{min-width:0}
 .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
 h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
 h1{font-size:clamp(22px,3.4vw,30px);font-weight:700}
@@ -129,7 +129,7 @@ th{position:sticky;top:0;background:var(--surface-2);color:var(--ink-2);font-siz
 th:nth-child(-n+2),td:nth-child(-n+2){text-align:left}
 td{padding:7px 10px;border-top:1px solid var(--line);text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
 tr.proj td{color:var(--muted);font-style:italic}
-tr.more-row td{text-align:center;font-family:var(--body);font-size:12px;color:var(--muted);cursor:default}
+tr.more-row td{white-space:normal;text-align:center;font-family:var(--body);font-size:12px;color:var(--muted);cursor:default}
 .chart{touch-action:pan-y}
 tr.sel td{background:var(--accent-soft)}
 tbody tr{cursor:pointer}
@@ -143,6 +143,18 @@ td.p{color:var(--profit);font-weight:600} td.l{color:var(--loss);font-weight:600
 .confirm{margin-top:12px;border:1px solid var(--goal);background:var(--surface-2);border-radius:8px;padding:12px;display:grid;gap:10px}
 .confirm p{margin:0;font-size:13px}
 .btn-sm{padding:6px 12px;font-size:13px}
+.u{display:block;font-family:var(--mono);font-size:11px;font-weight:500;color:var(--muted);font-style:normal}
+.tile .u{font-size:12px;margin-top:-2px}
+.usd-line{font-family:var(--mono);font-size:15px;color:var(--ink-2);margin-top:-6px}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:999px;padding:3px;gap:2px}
+.seg button{border:0;background:none;border-radius:999px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(19,34,63,.15)}
+.rate-row{display:grid;grid-template-columns:auto auto 1fr;gap:8px;align-items:center}
+.rate-row label{margin:0}
+.rate-in{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:13px;color:var(--ink-2)}
+.rate-in input{width:96px;padding:6px 8px;font-size:16px}
+@media (max-width:420px){.rate-row{grid-template-columns:1fr auto}.rate-row .note{grid-column:1/-1}}
+.cur-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px}
 .fee-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}
 .fee-row input{font-size:16px!important}
 .opt{font-weight:400;color:var(--muted)}
@@ -264,6 +276,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       <div class="hero-main">
         <div class="eyebrow">Current balance</div>
         <div class="big" id="curBal">₹4,220.00</div>
+        <div class="usd-line" id="curUsd"></div>
         <div class="chips" id="curChips"></div>
         <div class="meter" role="progressbar" aria-label="Progress to goal" id="meter"><span id="meterBar" style="width:4%"></span><div id="ticks"></div></div>
         <div class="meter-labels"><span id="progPct">4.2% of goal</span><span id="remain">₹95,780.00 to go</span></div>
@@ -275,9 +288,21 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
           <h2>Log closing balance</h2>
           <span class="note" id="entryHint"></span>
         </div>
+        <div class="cur-row">
+          <span class="note">Enter amounts in</span>
+          <div class="seg" role="group" aria-label="Enter amounts in">
+            <button type="button" data-cur="INR" aria-pressed="true">₹ INR</button>
+            <button type="button" data-cur="USD" aria-pressed="false">$ USD</button>
+          </div>
+        </div>
         <div>
           <label for="daySel">Trading day</label>
           <select id="daySel"></select>
+        </div>
+        <div class="rate-row">
+          <label for="rateIn">USD rate for this day</label>
+          <div class="rate-in"><span>1 $ = ₹</span><input type="number" id="rateIn" step="0.01" min="0.01" inputmode="decimal"></div>
+          <span class="note" id="rateHint"></span>
         </div>
         <div class="entry-grid">
           <div class="mini"><div class="eyebrow">Opening</div><div class="v" id="eOpen">—</div></div>
@@ -285,7 +310,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
           <div class="mini s"><div class="eyebrow" id="eLimitLbl">Loss limit</div><div class="v" id="eLimit">—</div></div>
         </div>
         <div>
-          <label for="closeIn">Closing balance (₹)</label>
+          <label for="closeIn" id="closeLbl">Closing balance (₹)</label>
           <input type="number" id="closeIn" step="0.01" min="0" inputmode="decimal" placeholder="Balance at end of day">
         </div>
         <div class="quick" aria-label="Quick fill">
@@ -295,14 +320,14 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
         </div>
         <div class="fee-row">
           <div>
-            <label for="feeIn">Fees &amp; tax paid today (₹) <span class="opt">optional</span></label>
+            <label for="feeIn"><span id="feeLbl">Fees &amp; tax paid today (₹)</span> <span class="opt">optional</span></label>
             <input type="number" id="feeIn" step="0.01" min="0" inputmode="decimal" placeholder="0.00">
           </div>
           <button type="button" class="btn-ghost" id="feeCalcBtn" aria-expanded="false" aria-controls="feeCalc">Calculate</button>
         </div>
         <div class="fee-calc" id="feeCalc" hidden>
           <div class="row2">
-            <div><label for="fcValue">Traded value (₹)</label><input type="number" id="fcValue" step="0.01" min="0" inputmode="decimal" placeholder="All buys + sells"></div>
+            <div><label for="fcValue" id="fcLbl">Traded value (₹)</label><input type="number" id="fcValue" step="0.01" min="0" inputmode="decimal" placeholder="All buys + sells"></div>
             <div><label for="fcType">Order type</label><select id="fcType"><option value="taker">Taker</option><option value="maker">Maker</option></select></div>
           </div>
           <div class="fee-out" id="fcOut">Add up the value of every buy and sell you made today.</div>
@@ -360,7 +385,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       <p class="note" style="margin:0 0 10px">Tap a row to log or edit that day. Grey italic rows are projections*; ⚠ = loss over your limit.</p>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Day</th><th>Date</th><th class="hide-m">Opening</th><th class="hide-m">Target</th><th class="hide-m">Loss limit</th><th class="hide-m">If target met</th><th>P / L</th><th>Closing</th><th class="hide-m">Fees &amp; tax</th><th class="hide-m">Status</th><th class="hide-m">Done</th></tr></thead>
+          <thead><tr><th>Day</th><th>Date</th><th class="hide-m">Opening</th><th class="hide-m">Target</th><th class="hide-m">Loss limit</th><th class="hide-m">If target met</th><th>P / L</th><th>Closing</th><th class="hide-m">Fees &amp; tax</th><th class="hide-m">1 $ = ₹</th><th class="hide-m">Status</th><th class="hide-m">Done</th></tr></thead>
           <tbody id="tbody"></tbody>
         </table>
       </div>
@@ -399,6 +424,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
           <div><label for="sMaker">Maker fee (%)</label><input type="number" id="sMaker" step="0.001" min="0" max="100" inputmode="decimal"></div>
           <div><label for="sTaker">Taker fee (%)</label><input type="number" id="sTaker" step="0.001" min="0" max="100" inputmode="decimal"></div>
           <div><label for="sGst">GST on fees (%)</label><input type="number" id="sGst" step="0.1" min="0" max="100" inputmode="decimal"></div>
+          <div><label for="sUsd">Default USD rate (1 $ in ₹)</label><input type="number" id="sUsd" step="0.01" min="0.01" inputmode="decimal"></div>
         </div>
         <div class="hol">
           <label for="sHol">NSE trading holidays on weekdays (one per line: YYYY-MM-DD Name). These days are skipped, like weekends.</label>
@@ -423,7 +449,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
 <script>
 (function(){
   const DEFAULTS = {
-    start:"2026-09-26", capital:4220, goal:100000, targetPct:3, lossPct:3, makerPct:0.01, takerPct:0.01, gstPct:18,
+    start:"2026-09-26", capital:4220, goal:100000, targetPct:3, lossPct:3, makerPct:0.01, takerPct:0.01, gstPct:18, usdInr:95.8,
     holidays:[
       ["2026-01-26","Republic Day"],["2026-03-03","Holi"],["2026-03-26","Shri Ram Navami"],["2026-03-31","Shri Mahavir Jayanti"],
       ["2026-04-03","Good Friday"],["2026-04-14","Dr. Baba Saheb Ambedkar Jayanti"],["2026-05-01","Maharashtra Day"],["2026-05-28","Bakri Id"],
@@ -440,6 +466,22 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   const r2 = x => Math.round((x + (x >= 0 ? 1 : -1) * 1e-9) * 100) / 100;
   const inr = (x, d = 2) => (x < 0 ? "−" : "") + "₹" + Math.abs(x).toLocaleString("en-IN", {minimumFractionDigits:d, maximumFractionDigits:d});
   const sinr = x => (x > 0 ? "+" : "") + inr(x);
+  const defRate = () => { const v = Number(state.settings.usdInr); return v > 0 ? v : DEFAULTS.usdInr; };
+  // latest rate = rate of the last logged day (or the default); set in render()
+  let latestRate = null;
+  const rate = () => latestRate || defRate();
+  const fmtUsd = (d, signed) => (signed && d > 0 ? "+" : "") + (d < 0 ? "−" : "") + "$" + Math.abs(d).toLocaleString("en-US", {minimumFractionDigits:2, maximumFractionDigits:2});
+  const usd = (x, rt) => fmtUsd(x / (rt || rate()));
+  const susd = (x, rt) => fmtUsd(x / (rt || rate()), true);
+  const u = (x, signed, rt) => `<span class="u">≈ ${signed ? susd(x, rt) : usd(x, rt)}</span>`;
+  const ud = (d, signed) => `<span class="u">≈ ${fmtUsd(d, signed)}</span>`;
+  let inCur = "INR";
+  try { if (localStorage.getItem("r1l-cur") === "USD") inCur = "USD"; } catch(e){}
+  const formRate = () => { const v = parseFloat(document.getElementById("rateIn").value); return v > 0 ? v : rate(); };
+  const toInr = v => inCur === "USD" ? v * formRate() : v;
+  const fromInr = v => inCur === "USD" ? v / formRate() : v;
+  const curSym = () => inCur === "USD" ? "$" : "₹";
+  const fmtIn = v => inCur === "USD" ? "$" + (v / formRate()).toFixed(2) : inr(v);
   const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
@@ -463,7 +505,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     const isTrading = d => { const w = d.getUTCDay(); return w !== 0 && w !== 6 && !hol.has(iso(d)); };
     let d = parseISO(s.start);
     while (!isTrading(d)) d = new Date(d.getTime() + 864e5);
-    const rows = []; let open = r2(Number(s.capital));
+    const rows = []; let open = r2(Number(s.capital)); let carryRate = defRate();
     for (let day = 1; day <= MAX_DAYS; day++){
       if (day > 1){ d = new Date(d.getTime() + 864e5); while (!isTrading(d)) d = new Date(d.getTime() + 864e5); }
       const target = r2(open*tp), limit = r2(open*lp), ifMet = r2(open + target);
@@ -474,7 +516,9 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       let status = "Projection";
       if (actual) status = pnl < -limit ? "Loss (limit breached)" : pnl < 0 ? "Loss" : pnl > 0 ? "Profit" : "No trade";
       const fees = actual && e && typeof e.fees === "number" && isFinite(e.fees) ? r2(e.fees) : 0;
-      rows.push({day, date:d, open, target, limit, ifMet, actual, close, pnl, fees, gross: actual ? r2(pnl + fees) : null, status, done: !!(e && e.done), note: (e && e.note) || ""});
+      if (actual && e && Number(e.usdRate) > 0) carryRate = Number(e.usdRate);
+      const rowRate = carryRate, ownRate = actual && e && Number(e.usdRate) > 0;
+      rows.push({day, date:d, open, target, limit, ifMet, actual, close, pnl, fees, gross: actual ? r2(pnl + fees) : null, rate: rowRate, ownRate, status, done: !!(e && e.done), note: (e && e.note) || ""});
       const next = actual ? close : ifMet;
       if (next >= s.goal || next <= 0) break;
       open = next;
@@ -498,6 +542,10 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       avgWin: wins.length ? sum(wins)/wins.length : null, avgLoss: losses.length ? sum(losses)/losses.length : null,
       breaches: logged.filter(r => r.pnl < -r.limit).length,
       totalFees: sum(logged.map(r => r.fees)), feeDays: logged.filter(r => r.fees > 0).length,
+      usdProfit: logged.filter(r => r.pnl > 0).reduce((a, r) => a + r2(r.pnl / r.rate), 0),
+      usdLoss: logged.filter(r => r.pnl < 0).reduce((a, r) => a + r2(r.pnl / r.rate), 0),
+      usdFees: logged.reduce((a, r) => a + r2(r.fees / r.rate), 0),
+      latestRate: last ? last.rate : defRate(),
       targetHits: logged.filter(r => r.pnl >= r.target).length,
       doneCount: rows.filter(r => r.done).length,
       daysLeft: current >= s.goal ? 0 : projRows.length,
@@ -510,11 +558,12 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   // ---------- render ----------
   let M = null;
   function render(){
-    M = compute();
+    M = compute(); latestRate = M.latestRate;
     const s = state.settings;
     const inrShort = x => "₹" + Number(x).toLocaleString("en-IN", {maximumFractionDigits:0});
     $("title").textContent = `${inrShort(s.capital)} → ${inrShort(s.goal)}`;
     $("curBal").textContent = inr(M.current);
+    $("curUsd").textContent = "≈ " + usd(M.current) + " at ₹" + rate().toFixed(2) + " per $1" + (M.last && M.last.ownRate ? ` (Day ${M.last.day} rate)` : "");
     const chips = [];
     if (M.logged.length){
       const cls = M.net > 0 ? "p" : M.net < 0 ? "l" : "";
@@ -532,25 +581,25 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     $("meterBar").style.width = (M.progress*100).toFixed(1) + "%";
     $("meter").setAttribute("aria-valuenow", (M.progress*100).toFixed(1));
     $("progPct").textContent = (M.progress*100).toFixed(1) + "% of " + inr(s.goal, 0);
-    $("remain").textContent = M.goalReached ? "Goal reached" : inr(M.remaining) + " to go";
+    $("remain").textContent = M.goalReached ? "Goal reached" : inr(M.remaining) + " (≈ " + usd(M.remaining) + ") to go";
 
     renderTiles(); renderDaySelect(); renderEntry(); renderTable(); renderBalance(); renderPnl();
   }
 
-  function tile(k, v, sub, cls = ""){ return `<div class="tile ${cls}"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${sub}</div></div>`; }
+  function tile(k, v, sub, cls = "", usdHtml = ""){ return `<div class="tile ${cls}"><div class="k">${k}</div><div class="v">${v}</div>${usdHtml}<div class="s">${sub}</div></div>`; }
   function renderTiles(){
     const dash = "—", st = state.settings;
     const t = [
-      tile("Total profit", inr(M.totalProfit), M.wins ? `${M.wins} profit day${M.wins>1?"s":""} · avg ${inr(M.avgWin)}` : "No profit days yet", M.totalProfit > 0 ? "p" : ""),
-      tile("Total loss", inr(M.totalLoss), M.losses ? `${M.losses} loss day${M.losses>1?"s":""} · avg ${inr(M.avgLoss)}` : "No loss days yet", M.totalLoss < 0 ? "l" : ""),
-      tile("Net profit / loss", sinr(M.net), M.logged.length ? `${(M.net/st.capital*100).toFixed(1)}% on starting capital` : "Log a day to start", M.net > 0 ? "p" : M.net < 0 ? "l" : ""),
+      tile("Total profit", inr(M.totalProfit), M.wins ? `${M.wins} profit day${M.wins>1?"s":""} · avg ${inr(M.avgWin)}` : "No profit days yet", M.totalProfit > 0 ? "p" : "", ud(M.usdProfit)),
+      tile("Total loss", inr(M.totalLoss), M.losses ? `${M.losses} loss day${M.losses>1?"s":""} · avg ${inr(M.avgLoss)}` : "No loss days yet", M.totalLoss < 0 ? "l" : "", ud(M.usdLoss)),
+      tile("Net profit / loss", sinr(M.net), M.logged.length ? `${(M.net/st.capital*100).toFixed(1)}% on starting capital` : "Log a day to start", M.net > 0 ? "p" : M.net < 0 ? "l" : "", ud(M.usdProfit + M.usdLoss, true)),
       tile("Win rate", M.winRate === null ? dash : Math.round(M.winRate*100) + "%", `${M.logged.length} day${M.logged.length===1?"":"s"} logged · ${M.flat} no-trade`),
-      tile("Best day", M.best === null ? dash : sinr(M.best), M.worst === null ? "Worst —" : `Worst ${sinr(M.worst)}`),
+      tile("Best day", M.best === null ? dash : sinr(M.best), M.worst === null ? "Worst —" : `Worst ${sinr(M.worst)}`, "", M.best === null ? "" : (() => { const b = M.logged.find(r => r.pnl === M.best); return u(M.best, true, b && b.rate); })()),
       tile("Target hit", String(M.targetHits), `Days you made ${st.targetPct}% or more`),
       tile("Loss-limit breaches", String(M.breaches), M.breaches ? "Days you lost more than the limit" : "None so far", M.breaches ? "l" : ""),
       tile("Days done ✔", String(M.doneCount), "Ticked “Done for the day”"),
-      tile("Fees & tax paid", inr(M.totalFees), M.feeDays ? `On ${M.feeDays} day${M.feeDays>1?"s":""} · ${M.totalProfit > 0 ? (M.totalFees / (M.totalProfit + M.totalFees) * 100).toFixed(1) + "% of gross profit" : "fees + GST"}` : "Add them in the Today form", M.totalFees > 0 ? "l" : ""),
-      tile("Profit before fees", sinr(r2(M.net + M.totalFees)), `Net ${sinr(M.net)} after fees & tax`, (M.net + M.totalFees) > 0 ? "p" : (M.net + M.totalFees) < 0 ? "l" : ""),
+      tile("Fees & tax paid", inr(M.totalFees), M.feeDays ? `On ${M.feeDays} day${M.feeDays>1?"s":""} · ${M.totalProfit > 0 ? (M.totalFees / (M.totalProfit + M.totalFees) * 100).toFixed(1) + "% of gross profit" : "fees + GST"}` : "Add them in the Today form", M.totalFees > 0 ? "l" : "", ud(M.usdFees)),
+      tile("Profit before fees", sinr(r2(M.net + M.totalFees)), `Net ${sinr(M.net)} after fees & tax`, (M.net + M.totalFees) > 0 ? "p" : (M.net + M.totalFees) < 0 ? "l" : "", ud(M.usdProfit + M.usdLoss + M.usdFees, true)),
       tile("Days left if targets met*", M.goalReached ? "0" : String(M.daysLeft), "Projection, not a promise"),
       tile("Projected goal date*", M.goalReached ? "Reached" : M.goalDate ? fmtDate(M.goalDate) : `Beyond ${MAX_DAYS} days`, "Projection, not a promise"),
     ];
@@ -571,27 +620,33 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   }
   function renderEntry(keepInput){
     const r = M.rows[state.selected-1]; if (!r) return;
-    $("eOpen").textContent = inr(r.open); $("eTarget").textContent = inr(r.target); $("eLimit").textContent = inr(r.limit);
+    if (!keepInput){ $("rateIn").value = r.rate.toFixed(2); }
+    const fr = formRate();
+    $("rateHint").textContent = r.ownRate ? "Saved with this day" : (M.logged.some(x => x.ownRate && x.day < r.day) ? "Last day's rate · change it if today's differs" : "Default rate from Settings · change it if needed");
+    $("eOpen").innerHTML = inr(r.open) + u(r.open, false, fr); $("eTarget").innerHTML = inr(r.target) + u(r.target, false, fr); $("eLimit").innerHTML = inr(r.limit) + u(r.limit, false, fr);
+    $("closeLbl").textContent = `Closing balance (${curSym()})`; $("feeLbl").textContent = `Fees & tax paid today (${curSym()})`; $("fcLbl").textContent = `Traded value (${curSym()})`;
+    document.querySelectorAll(".seg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cur === inCur)));
     $("eTargetLbl").textContent = `Target +${state.settings.targetPct}%`; $("eLimitLbl").textContent = `Limit −${state.settings.lossPct}%`;
-    $("qTarget").textContent = `Target hit ${inr(r.open + r.target)}`; $("qLimit").textContent = `Limit hit ${inr(r2(r.open - r.limit))}`;
+    $("qTarget").textContent = `Target hit ${fmtIn(r.open + r.target)}`; $("qLimit").textContent = `Limit hit ${fmtIn(r2(r.open - r.limit))}`;
     $("entryHint").textContent = r.actual ? "Editing a saved day" : (M.nextRow && r.day === M.nextRow.day ? "Next day to log" : "");
     if (!keepInput){
-      $("closeIn").value = r.actual ? r.close : "";
+      $("closeIn").value = r.actual ? (inCur === "USD" ? (r.close / r.rate).toFixed(2) : r.close) : "";
       $("doneIn").checked = r.done; $("noteIn").value = r.note;
-      const ef = state.entries[r.day]; $("feeIn").value = ef && typeof ef.fees === "number" && ef.fees ? ef.fees : "";
+      const ef = state.entries[r.day]; $("feeIn").value = ef && typeof ef.fees === "number" && ef.fees ? (inCur === "USD" ? (ef.fees / r.rate).toFixed(2) : ef.fees) : "";
     }
     $("clearBtn").disabled = !state.entries[r.day];
     updatePreview();
   }
   function updatePreview(){
-    const r = M.rows[state.selected-1], p = $("preview"), v = parseFloat($("closeIn").value);
+    const r = M.rows[state.selected-1], p = $("preview"), raw = parseFloat($("closeIn").value), v = isFinite(raw) ? r2(toInr(raw)) : NaN;
     p.className = "preview";
     if (!r || !isFinite(v)){ p.innerHTML = "Type your account balance at the end of the day, or tap a quick-fill button above."; return; }
     const pnl = r2(v - r.open), pct = r.open ? pnl / r.open * 100 : 0;
-    if (pnl > 0){ p.classList.add("p"); p.innerHTML = `Profit <strong>${sinr(pnl)}</strong> (${pct.toFixed(2)}%)${pnl >= r.target ? " · target hit" : ""}. Next day opens at ${inr(v)}.`; }
-    else if (pnl < 0){ p.classList.add("l"); p.innerHTML = `Loss <strong>${inr(pnl)}</strong> (${pct.toFixed(2)}%)${-pnl > r.limit ? " · more than your loss limit of " + inr(r.limit) : ""}. Next day opens at ${inr(v)}.`; }
-    else p.innerHTML = `No change <strong>₹0.00</strong> (no trade). Next day opens at ${inr(v)}.`;
-    const f = parseFloat($("feeIn").value);
+    const conv = inCur === "USD" ? `$${raw.toFixed(2)} = ${inr(v)}. ` : "";
+    if (pnl > 0){ p.classList.add("p"); p.innerHTML = conv + `Profit <strong>${sinr(pnl)}</strong> (≈ ${susd(pnl, formRate())}, ${pct.toFixed(2)}%)${pnl >= r.target ? " · target hit" : ""}. Next day opens at ${inr(v)}.`; }
+    else if (pnl < 0){ p.classList.add("l"); p.innerHTML = conv + `Loss <strong>${inr(pnl)}</strong> (≈ ${usd(pnl, formRate())}, ${pct.toFixed(2)}%)${-pnl > r.limit ? " · more than your loss limit of " + inr(r.limit) : ""}. Next day opens at ${inr(v)}.`; }
+    else p.innerHTML = conv + `No change <strong>₹0.00</strong> (no trade). Next day opens at ${inr(v)}.`;
+    const fr = parseFloat($("feeIn").value), f = isFinite(fr) ? r2(toInr(fr)) : NaN;
     if (isFinite(f) && f > 0) p.innerHTML += `<br>Fees &amp; tax ${inr(f)} are already out of this balance · before fees ${sinr(r2(pnl + f))}.`;
   }
 
@@ -606,9 +661,9 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
         r.status === "Loss" ? `<span class="pill l">Loss</span>` : r.status === "Profit" ? `<span class="pill p">Profit</span>` : `<span class="pill f">No trade</span>`;
       html += `<tr class="${r.actual ? "" : "proj"} ${r.day === state.selected ? "sel" : ""}" data-day="${r.day}" title="${esc(r.note)}">
         <td>${r.day}${r.done ? '<span class="m-only"> ✔</span>' : ""}</td><td><span class="d-only">${fmtDate(r.date)}</span><span class="m-only">${shortDate(r.date)}</span></td><td class="hide-m">${inr(r.open)}</td><td class="hide-m">${inr(r.target)}</td><td class="hide-m">${inr(r.limit)}</td><td class="hide-m">${inr(r.ifMet)}</td>
-        <td class="${pc}">${r.actual ? sinr(r.pnl) + (r.status === "Loss (limit breached)" ? '<span class="m-only"> ⚠</span>' : "") : '<span class="m-only pill">Proj.</span>'}</td><td>${r.actual ? inr(r.close) : '<span class="m-only">' + inr(r.ifMet) + '</span>'}</td><td class="hide-m">${r.actual && r.fees ? inr(r.fees) : ""}</td><td class="hide-m">${pill}</td><td class="hide-m">${r.done ? "✔" : ""}</td></tr>`;
+        <td class="${pc}">${r.actual ? sinr(r.pnl) + (r.status === "Loss (limit breached)" ? '<span class="m-only"> ⚠</span>' : "") + u(r.pnl, true, r.rate) : '<span class="m-only pill">Proj.</span>'}</td><td>${r.actual ? inr(r.close) + u(r.close, false, r.rate) : '<span class="m-only">' + inr(r.ifMet) + '</span>'}</td><td class="hide-m">${r.actual && r.fees ? inr(r.fees) : ""}</td><td class="hide-m">${r.actual ? r.rate.toFixed(2) : ""}</td><td class="hide-m">${pill}</td><td class="hide-m">${r.done ? "✔" : ""}</td></tr>`;
     }
-    if (!showAll && rows.length < M.rows.length) html += `<tr class="more-row"><td colspan="11">${M.rows.length - rows.length} more projected day${M.rows.length - rows.length === 1 ? "" : "s"} · tick “Show all projected days” to see them</td></tr>`;
+    if (!showAll && rows.length < M.rows.length) html += `<tr class="more-row"><td colspan="12">${M.rows.length - rows.length} more projected day${M.rows.length - rows.length === 1 ? "" : "s"} · tick “Show all projected days” to see them</td></tr>`;
     $("tbody").innerHTML = html;
   }
 
@@ -659,7 +714,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       $("bhDot").setAttribute("cx", x(i)); $("bhDot").setAttribute("cy", y(v));
       $("balHover").setAttribute("visibility", "visible");
       tip.hidden = false;
-      tip.innerHTML = r ? `Day ${r.day} · ${shortDate(r.date)}<br><b>${inr(v)}</b> ${r.actual ? "actual" : "projection*"}` : `Start<br><b>${inr(v)}</b>`;
+      tip.innerHTML = r ? `Day ${r.day} · ${shortDate(r.date)}<br><b>${inr(v)}</b> ≈ ${usd(v, r.rate)} ${r.actual ? "actual" : "projection*"}` : `Start<br><b>${inr(v)}</b> ≈ ${usd(v)}`;
       placeTip(tip, x(i) / W * rect.width, y(v) / H * rect.height, rect);
     };
     const leave = e => { if (e && e.pointerType === "touch") return; $("balHover").setAttribute("visibility", "hidden"); tip.hidden = true; };
@@ -693,7 +748,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
         const r = logged[+b.dataset.i], rect = svg.getBoundingClientRect();
         b.setAttribute("opacity", ".8");
         tip.hidden = false;
-        tip.innerHTML = `Day ${r.day} · ${shortDate(r.date)}<br><b>${sinr(r.pnl)}</b> · closed ${inr(r.close)}`;
+        tip.innerHTML = `Day ${r.day} · ${shortDate(r.date)}<br><b>${sinr(r.pnl)}</b> ≈ ${susd(r.pnl, r.rate)} · closed ${inr(r.close)}`;
         const bx = +b.getAttribute("x") + +b.getAttribute("width")/2, by = +b.getAttribute("y");
         placeTip(tip, bx / W * rect.width, by / H * rect.height, rect);
       });
@@ -705,7 +760,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   function fillSettings(){
     const s = state.settings;
     $("sStart").value = s.start; $("sCap").value = s.capital; $("sGoal").value = s.goal; $("sT").value = s.targetPct; $("sL").value = s.lossPct;
-    $("sMaker").value = s.makerPct ?? DEFAULTS.makerPct; $("sTaker").value = s.takerPct ?? DEFAULTS.takerPct; $("sGst").value = s.gstPct ?? DEFAULTS.gstPct;
+    $("sMaker").value = s.makerPct ?? DEFAULTS.makerPct; $("sTaker").value = s.takerPct ?? DEFAULTS.takerPct; $("sGst").value = s.gstPct ?? DEFAULTS.gstPct; $("sUsd").value = s.usdInr ?? DEFAULTS.usdInr;
     $("sHol").value = (s.holidays||[]).map(h => h[0] + " " + h[1]).join("\n");
   }
 
@@ -730,17 +785,34 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     const b = e.target.closest("button[data-q]"); if (!b) return;
     const r = M.rows[state.selected-1]; if (!r) return;
     const v = b.dataset.q === "target" ? r.open + r.target : b.dataset.q === "limit" ? r.open - r.limit : r.open;
-    $("closeIn").value = r2(v).toFixed(2); updatePreview();
+    $("closeIn").value = fromInr(r2(v)).toFixed(2); updatePreview();
   });
   $("showAll").addEventListener("change", renderTable);
   $("feeIn").addEventListener("input", updatePreview);
+  $("rateIn").addEventListener("input", () => {
+    const r = M.rows[state.selected-1]; if (!r) return;
+    const fr = formRate();
+    $("eOpen").innerHTML = inr(r.open) + u(r.open, false, fr); $("eTarget").innerHTML = inr(r.target) + u(r.target, false, fr); $("eLimit").innerHTML = inr(r.limit) + u(r.limit, false, fr);
+    $("qTarget").textContent = `Target hit ${fmtIn(r.open + r.target)}`; $("qLimit").textContent = `Limit hit ${fmtIn(r2(r.open - r.limit))}`;
+    updatePreview(); if (!$("feeCalc").hidden) updateCalc();
+  });
+  document.querySelector(".seg").addEventListener("click", e => {
+    const b = e.target.closest("button[data-cur]"); if (!b || b.dataset.cur === inCur) return;
+    const c = parseFloat($("closeIn").value), f = parseFloat($("feeIn").value), tv = parseFloat($("fcValue").value);
+    const before = [c, f, tv].map(x => isFinite(x) ? toInr(x) : null);
+    inCur = b.dataset.cur;
+    try { localStorage.setItem("r1l-cur", inCur); } catch(e){}
+    [["closeIn", before[0]], ["feeIn", before[1]], ["fcValue", before[2]]].forEach(([id, val]) => { if (val !== null) $(id).value = fromInr(val).toFixed(2); });
+    renderEntry(true); if (!$("feeCalc").hidden) updateCalc();
+  });
   let calcTotal = null;
   function updateCalc(){
     const st = state.settings, v = parseFloat($("fcValue").value), type = $("fcType").value;
     const rate = type === "maker" ? (st.makerPct ?? DEFAULTS.makerPct) : (st.takerPct ?? DEFAULTS.takerPct), gst = st.gstPct ?? DEFAULTS.gstPct;
     if (!isFinite(v) || v <= 0){ calcTotal = null; $("fcUse").disabled = true; $("fcOut").textContent = `Add up the value of every buy and sell you made today. ${type === "maker" ? "Maker" : "Taker"} fee ${rate}% + GST ${gst}%.`; return; }
     const fee = v * rate / 100, tax = fee * gst / 100; calcTotal = r2(fee + tax);
-    $("fcOut").innerHTML = `Fee ${rate}% = <strong>${inr(r2(fee))}</strong> + GST ${gst}% = <strong>${inr(r2(tax))}</strong> → total <strong>${inr(calcTotal)}</strong>`;
+    const fc = x => inCur === "USD" ? "$" + x.toFixed(2) : inr(x);
+    $("fcOut").innerHTML = `Fee ${rate}% = <strong>${fc(r2(fee))}</strong> + GST ${gst}% = <strong>${fc(r2(tax))}</strong> → total <strong>${fc(calcTotal)}</strong>`;
     $("fcUse").disabled = false;
   }
   $("feeCalcBtn").addEventListener("click", () => { const open = $("feeCalc").hidden; $("feeCalc").hidden = !open; $("feeCalcBtn").setAttribute("aria-expanded", String(open)); if (open){ updateCalc(); $("fcValue").focus(); } });
@@ -771,12 +843,14 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   showTab("today");
   $("entryForm").addEventListener("submit", async e => {
     e.preventDefault();
-    const v = parseFloat($("closeIn").value);
+    const rawV = parseFloat($("closeIn").value), v = isFinite(rawV) ? r2(toInr(rawV)) : NaN;
     if (!isFinite(v) || v < 0){ flash("toast", "Enter your closing balance as a number, e.g. 4346.60", true); $("closeIn").focus(); return; }
     const day = state.selected, prev = state.entries;
-    const fv = parseFloat($("feeIn").value);
+    const rawF = parseFloat($("feeIn").value), fv = isFinite(rawF) ? r2(toInr(rawF)) : NaN;
     if ($("feeIn").value !== "" && (!isFinite(fv) || fv < 0)){ flash("toast", "Fees & tax must be 0 or more, e.g. 1.20", true); $("feeIn").focus(); return; }
-    const entry = {close: r2(v), done: $("doneIn").checked, note: $("noteIn").value.trim().slice(0, 200)};
+    const rt = parseFloat($("rateIn").value);
+    if (!(rt > 0)){ flash("toast", "Enter today's USD rate, e.g. 95.80", true); $("rateIn").focus(); return; }
+    const entry = {close: r2(v), done: $("doneIn").checked, note: $("noteIn").value.trim().slice(0, 200), usdRate: r2(rt)};
     if (isFinite(fv) && fv > 0) entry.fees = r2(fv);
     state.entries = {...state.entries, [day]: entry};
     const was = M.nextRow && M.nextRow.day === day;
@@ -803,8 +877,10 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     const hol = $("sHol").value.split("\n").map(x => x.trim()).filter(Boolean).map(line => { const m = line.match(/^(\d{4}-\d{2}-\d{2})\s*(.*)$/); return m ? [m[1], m[2] || "Holiday"] : null; });
     if (hol.some(h => !h)){ flash("setToast", "Each holiday line must start with a date like 2027-01-26.", true); return; }
     const mk = parseFloat($("sMaker").value), tk = parseFloat($("sTaker").value), gs = parseFloat($("sGst").value);
+    const ur = parseFloat($("sUsd").value);
+    if (!(ur > 0)){ flash("setToast", "Enter how many rupees 1 US dollar costs, e.g. 95.80.", true); return; }
     if (!(mk >= 0) || !(tk >= 0) || !(gs >= 0)){ flash("setToast", "Fee and GST percentages must be 0 or more.", true); return; }
-    state.settings = {start, capital: r2(cap), goal: r2(goal), targetPct: t, lossPct: l, makerPct: mk, takerPct: tk, gstPct: gs, holidays: hol};
+    state.settings = {start, capital: r2(cap), goal: r2(goal), targetPct: t, lossPct: l, makerPct: mk, takerPct: tk, gstPct: gs, usdInr: r2(ur), holidays: hol};
     state.selected = null; render(); await persistSettings(); flash("setToast", "Settings saved");
   });
 
@@ -891,14 +967,16 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     setCell(tr, "C5", toSerial(s.start)); setCell(tr, "C6", s.capital); setCell(tr, "C7", s.goal);
     setCell(tr, "C8", s.targetPct/100); setCell(tr, "C9", s.lossPct/100);
     setCell(tr, "M5", (s.makerPct ?? DEFAULTS.makerPct)/100); setCell(tr, "M6", (s.takerPct ?? DEFAULTS.takerPct)/100); setCell(tr, "M7", (s.gstPct ?? DEFAULTS.gstPct)/100);
+    setCell(tr, "O5", s.usdInr ?? DEFAULTS.usdInr);
     for (let day = 1; day <= MAX_DAYS; day++){
       const e = state.entries[day], r = FIRST_ROW + day - 1;
       const has = e && typeof e.close === "number";
-      if (!has && !(e && (e.done || e.note || e.fees)) && day > 60) continue; // template rows are already empty
+      if (!has && !(e && (e.done || e.note || e.fees || e.usdRate)) && day > 60) continue; // template rows are already empty
       setCell(tr, "H" + r, has ? e.close : null);
       setCell(tr, "J" + r, e && e.done ? "✔" : null);
       setCell(tr, "K" + r, e && e.note ? e.note : null);
       setCell(tr, "L" + r, e && typeof e.fees === "number" && e.fees > 0 ? e.fees : null);
+      setCell(tr, "P" + r, e && Number(e.usdRate) > 0 ? Number(e.usdRate) : null);
     }
     if (out["NSE Holidays"]){
       const hs = parseXml(await zip.file(out["NSE Holidays"]).async("string"));
@@ -944,6 +1022,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     if (num("M5") !== null && num("M5") >= 0) settings.makerPct = Math.round(num("M5") * 1e6) / 1e4;
     if (num("M6") !== null && num("M6") >= 0) settings.takerPct = Math.round(num("M6") * 1e6) / 1e4;
     if (num("M7") !== null && num("M7") >= 0) settings.gstPct = r2(num("M7") * 100);
+    if (num("O5") > 0) settings.usdInr = r2(num("O5"));
     const entries = {};
     for (let day = 1; day <= MAX_DAYS; day++){
       const r = FIRST_ROW + day - 1, close = num("H" + r);
@@ -951,7 +1030,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       const done = doneV === true || (typeof doneV === "string" && /✔|✓|yes|true|done/i.test(doneV));
       const note = typeof noteV === "string" ? noteV.trim().slice(0, 200) : (typeof noteV === "number" ? String(noteV) : "");
       const fee = num("L" + r);
-      if (close !== null || done || note){ entries[day] = {close: close === null ? null : r2(close), done, note}; if (fee !== null && fee > 0) entries[day].fees = r2(fee); }
+      if (close !== null || done || note){ entries[day] = {close: close === null ? null : r2(close), done, note}; if (fee !== null && fee > 0) entries[day].fees = r2(fee); const rt = num("P" + r); if (rt !== null && rt > 0) entries[day].usdRate = r2(rt); }
     }
     if (out["NSE Holidays"]){
       const hc = readCells(parseXml(await zip.file(out["NSE Holidays"]).async("string")), sst), hol = [];
