@@ -125,6 +125,10 @@ td.p{color:var(--profit);font-weight:600} td.l{color:var(--loss);font-weight:600
 .pill{font-family:var(--body);font-style:normal;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--surface-2);color:var(--muted)}
 .pill.p{background:var(--profit-soft);color:var(--profit)} .pill.l{background:var(--loss-soft);color:var(--loss)} .pill.b{background:var(--loss);color:#fff} .pill.f{background:var(--accent-soft);color:var(--accent-ink)}
 
+.syncbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.syncbar p{margin:0;font-size:13px;color:var(--ink-2);max-width:62ch}
+.confirm{margin-top:12px;border:1px solid var(--goal);background:var(--surface-2);border-radius:8px;padding:12px;display:grid;gap:10px}
+.confirm p{margin:0;font-size:13px}
 details.settings summary{cursor:pointer;font-family:var(--display);font-weight:600;font-size:15px}
 .set-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:14px}
 .hol{margin-top:14px}
@@ -153,6 +157,25 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     </div>
     <span class="sync" id="sync"><span class="dot" id="syncDot"></span><span id="syncText">Connecting…</span></span>
   </header>
+
+  <section class="panel" aria-label="Sync with Excel">
+    <div class="syncbar">
+      <div>
+        <h2>Sync with Excel</h2>
+        <p>Download the Excel tracker filled with everything saved here, or import your Excel file to update this page. Keep one of them as the place you type, and move the data across with these buttons.</p>
+      </div>
+      <div class="btns">
+        <button type="button" class="btn-primary" id="dlBtn">Download Excel</button>
+        <button type="button" class="btn-ghost" id="upBtn">Import from Excel</button>
+        <input type="file" id="upFile" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
+      </div>
+    </div>
+    <div class="toast" id="syncToast" role="status"></div>
+    <div class="confirm" id="impConfirm" hidden>
+      <p id="impText"></p>
+      <div class="btns"><button type="button" class="btn-primary" id="impYes">Replace website data</button><button type="button" class="btn-ghost" id="impNo">Cancel</button></div>
+    </div>
+  </section>
 
   <section class="panel hero" aria-label="Balance and today's entry">
     <div class="hero-main">
@@ -256,6 +279,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   </section>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
 (function(){
   const DEFAULTS = {
@@ -565,6 +589,195 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     if (hol.some(h => !h)){ flash("setToast", "Each holiday line must start with a date like 2027-01-26.", true); return; }
     state.settings = {start, capital: r2(cap), goal: r2(goal), targetPct: t, lossPct: l, holidays: hol};
     state.selected = null; render(); await persistSettings(); flash("setToast", "Settings saved");
+  });
+
+  // ---------- Excel sync ----------
+  const NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+  const TEMPLATE = "tracker-template.b64.txt", FIRST_ROW = 13;
+  const EPOCH = Date.UTC(1899, 11, 30);
+  const toSerial = isoStr => Math.round((parseISO(isoStr).getTime() - EPOCH) / 864e5);
+  const fromSerial = n => iso(new Date(EPOCH + Math.round(n) * 864e5));
+  const colNum = ref => { let n = 0; for (const ch of ref.match(/^[A-Z]+/)[0]) n = n*26 + ch.charCodeAt(0) - 64; return n; };
+  const parseXml = t => new DOMParser().parseFromString(t, "application/xml");
+  const xmlOut = d => { const t = new XMLSerializer().serializeToString(d); return t.startsWith("<?xml") ? t : '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' + t; };
+
+  async function sheetFiles(zip){
+    const wb = parseXml(await zip.file("xl/workbook.xml").async("string"));
+    const rels = parseXml(await zip.file("xl/_rels/workbook.xml.rels").async("string"));
+    const target = {};
+    for (const r of rels.getElementsByTagName("Relationship")) target[r.getAttribute("Id")] = r.getAttribute("Target");
+    const out = {};
+    for (const sh of wb.getElementsByTagNameNS(NS, "sheet")){
+      const rid = sh.getAttribute("r:id") || sh.getAttributeNS("http://schemas.openxmlformats.org/officeDocument/2006/relationships", "id");
+      let t = target[rid]; if (!t) continue;
+      t = t.startsWith("/") ? t.slice(1) : "xl/" + t;
+      out[sh.getAttribute("name")] = t;
+    }
+    return {wb, out};
+  }
+  async function sharedStrings(zip){
+    const f = zip.file("xl/sharedStrings.xml"); if (!f) return [];
+    const d = parseXml(await f.async("string"));
+    return [...d.getElementsByTagNameNS(NS, "si")].map(si => [...si.getElementsByTagNameNS(NS, "t")].map(t => t.textContent).join(""));
+  }
+  function readCells(doc, sst){
+    const m = {};
+    for (const c of doc.getElementsByTagNameNS(NS, "c")){
+      const t = c.getAttribute("t"), v = c.getElementsByTagNameNS(NS, "v")[0], hasF = c.getElementsByTagNameNS(NS, "f").length > 0;
+      let val = null;
+      if (t === "s" && v) val = sst[+v.textContent] ?? "";
+      else if (t === "inlineStr") val = [...c.getElementsByTagNameNS(NS, "t")].map(x => x.textContent).join("");
+      else if ((t === "str" || t === "e") && v) val = v.textContent;
+      else if (t === "b" && v) val = v.textContent === "1";
+      else if (v && v.textContent !== "") val = Number(v.textContent);
+      m[c.getAttribute("r")] = {val, formula: hasF};
+    }
+    return m;
+  }
+  function setCell(doc, ref, val){
+    const rowNum = +ref.match(/\d+$/)[0], data = doc.getElementsByTagNameNS(NS, "sheetData")[0];
+    let row = [...data.children].find(r => +r.getAttribute("r") === rowNum);
+    if (!row){
+      row = doc.createElementNS(NS, "row"); row.setAttribute("r", rowNum);
+      const after = [...data.children].find(r => +r.getAttribute("r") > rowNum);
+      data.insertBefore(row, after || null);
+    }
+    let c = [...row.children].find(x => x.getAttribute("r") === ref);
+    if (!c){
+      c = doc.createElementNS(NS, "c"); c.setAttribute("r", ref);
+      const after = [...row.children].find(x => colNum(x.getAttribute("r")) > colNum(ref));
+      row.insertBefore(c, after || null);
+    }
+    while (c.firstChild) c.removeChild(c.firstChild);
+    c.removeAttribute("t");
+    if (val === null || val === undefined || val === "") return;
+    if (typeof val === "number"){ const v = doc.createElementNS(NS, "v"); v.textContent = String(val); c.appendChild(v); }
+    else { c.setAttribute("t", "inlineStr"); const is = doc.createElementNS(NS, "is"), t = doc.createElementNS(NS, "t"); t.textContent = val; t.setAttribute("xml:space", "preserve"); is.appendChild(t); c.appendChild(is); }
+  }
+  function dropCachedResults(doc){
+    // Formula results in the template are stale once inputs change; remove them so Excel, Google Sheets and LibreOffice recalculate.
+    for (const c of [...doc.getElementsByTagNameNS(NS, "c")]){
+      if (!c.getElementsByTagNameNS(NS, "f").length) continue;
+      for (const v of [...c.getElementsByTagNameNS(NS, "v")]) c.removeChild(v);
+      c.removeAttribute("t");
+    }
+  }
+
+  async function exportExcel(){
+    if (typeof JSZip === "undefined") throw new Error("The Excel tools didn't load. Reload the page and try again.");
+    const res = await fetch(TEMPLATE); if (!res.ok) throw new Error("Couldn't load the Excel template.");
+    const zip = await JSZip.loadAsync((await res.text()).trim(), {base64: true});
+    const {wb, out} = await sheetFiles(zip);
+    if (!out["Tracker"]) throw new Error("The Excel template is missing its Tracker sheet.");
+    const s = state.settings;
+    const tr = parseXml(await zip.file(out["Tracker"]).async("string"));
+    setCell(tr, "C5", toSerial(s.start)); setCell(tr, "C6", s.capital); setCell(tr, "C7", s.goal);
+    setCell(tr, "C8", s.targetPct/100); setCell(tr, "C9", s.lossPct/100);
+    for (let day = 1; day <= MAX_DAYS; day++){
+      const e = state.entries[day], r = FIRST_ROW + day - 1;
+      const has = e && typeof e.close === "number";
+      if (!has && !(e && (e.done || e.note)) && day > 60) continue; // template rows are already empty
+      setCell(tr, "H" + r, has ? e.close : null);
+      setCell(tr, "J" + r, e && e.done ? "✔" : null);
+      setCell(tr, "K" + r, e && e.note ? e.note : null);
+    }
+    if (out["NSE Holidays"]){
+      const hs = parseXml(await zip.file(out["NSE Holidays"]).async("string"));
+      const hol = (s.holidays || []).slice(0, 60);
+      for (let i = 0; i < 60; i++){
+        const h = hol[i];
+        setCell(hs, "A" + (5+i), h ? toSerial(h[0]) : null);
+        setCell(hs, "C" + (5+i), h ? h[1] : null);
+      }
+      zip.file(out["NSE Holidays"], xmlOut(hs));
+    }
+    zip.file(out["Tracker"], xmlOut(tr));
+    for (const name of Object.keys(out)){
+      const path = out[name]; const d = name === "Tracker" ? tr : parseXml(await zip.file(path).async("string"));
+      dropCachedResults(d); zip.file(path, xmlOut(d));
+    }
+    let calc = wb.getElementsByTagNameNS(NS, "calcPr")[0];
+    if (!calc){ calc = wb.createElementNS(NS, "calcPr"); const ext = wb.getElementsByTagNameNS(NS, "extLst")[0]; wb.documentElement.insertBefore(calc, ext || null); }
+    calc.setAttribute("fullCalcOnLoad", "1");
+    zip.file("xl/workbook.xml", xmlOut(wb));
+    if (zip.file("xl/calcChain.xml")) zip.remove("xl/calcChain.xml");
+    return zip.generateAsync({type: "blob", mimeType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+  }
+
+  async function parseExcel(buf){
+    if (typeof JSZip === "undefined") throw new Error("The Excel tools didn't load. Reload the page and try again.");
+    let zip; try { zip = await JSZip.loadAsync(buf); } catch(e){ throw new Error("That file isn't an .xlsx workbook."); }
+    const {out} = await sheetFiles(zip);
+    if (!out["Tracker"]) throw new Error("No Tracker sheet found. Import the Trading_PnL_Tracker.xlsx file.");
+    const sst = await sharedStrings(zip);
+    const cells = readCells(parseXml(await zip.file(out["Tracker"]).async("string")), sst);
+    const hdr = String(cells["H12"] && cells["H12"].val || "");
+    if (!/closing balance/i.test(hdr) || !(cells["H12"] && /enter/i.test(hdr))){
+      throw new Error("This looks like an older version of the tracker, where you typed profit/loss instead of the balance. Download the Excel file from this page and use that one.");
+    }
+    const num = ref => cells[ref] && typeof cells[ref].val === "number" && isFinite(cells[ref].val) ? cells[ref].val : null;
+    const settings = {...state.settings};
+    if (num("C5") !== null) settings.start = fromSerial(num("C5"));
+    if (num("C6") > 0) settings.capital = r2(num("C6"));
+    if (num("C7") > 0) settings.goal = r2(num("C7"));
+    if (num("C8") > 0) settings.targetPct = r2(num("C8") * 100);
+    if (num("C9") > 0) settings.lossPct = r2(num("C9") * 100);
+    const entries = {};
+    for (let day = 1; day <= MAX_DAYS; day++){
+      const r = FIRST_ROW + day - 1, close = num("H" + r);
+      const doneV = cells["J" + r] && cells["J" + r].val, noteV = cells["K" + r] && cells["K" + r].val;
+      const done = doneV === true || (typeof doneV === "string" && /✔|✓|yes|true|done/i.test(doneV));
+      const note = typeof noteV === "string" ? noteV.trim().slice(0, 200) : (typeof noteV === "number" ? String(noteV) : "");
+      if (close !== null || done || note){ entries[day] = {close: close === null ? null : r2(close), done, note}; }
+    }
+    if (out["NSE Holidays"]){
+      const hc = readCells(parseXml(await zip.file(out["NSE Holidays"]).async("string")), sst), hol = [];
+      for (let i = 5; i <= 64; i++){
+        const a = hc["A" + i] && hc["A" + i].val;
+        if (typeof a === "number" && a > 0) hol.push([fromSerial(a), String((hc["C" + i] && hc["C" + i].val) || "Holiday")]);
+      }
+      settings.holidays = hol;
+    }
+    return {settings, entries};
+  }
+
+  let pendingImport = null;
+  $("dlBtn").addEventListener("click", async () => {
+    const btn = $("dlBtn"); btn.disabled = true; flash("syncToast", "Preparing your Excel file…");
+    try {
+      const blob = await exportExcel();
+      const dl = window.claude && window.claude.use ? await window.claude.use("downloads") : null;
+      if (!dl){ flash("syncToast", "Downloads aren't available in this view. Open the page in claude.ai to download.", true); return; }
+      const today = iso(new Date(Date.now() + 330*60000));
+      await dl.save({filename: `Trading_PnL_Tracker_${today}.xlsx`, data: blob});
+      flash("syncToast", "Excel file downloaded. Open it in Excel or Google Sheets. It recalculates when it opens.");
+    } catch(err){
+      if (err && err.code === "declined") flash("syncToast", "Download cancelled.", true);
+      else flash("syncToast", (err && err.message) || "Couldn't create the Excel file.", true);
+    } finally { btn.disabled = false; }
+  });
+  $("upBtn").addEventListener("click", () => $("upFile").click());
+  $("upFile").addEventListener("change", async e => {
+    const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return;
+    try {
+      pendingImport = await parseExcel(await f.arrayBuffer());
+      const days = Object.keys(pendingImport.entries).map(Number).filter(d => typeof pendingImport.entries[d].close === "number").sort((a,b) => a-b);
+      const lastD = days[days.length-1], lastE = lastD ? pendingImport.entries[lastD] : null;
+      const webDays = Object.values(state.entries).filter(x => typeof x.close === "number").length;
+      $("impText").innerHTML = `<strong>${esc(f.name)}</strong> has <strong>${days.length}</strong> logged day${days.length===1?"":"s"}${lastE ? ` (last: Day ${lastD}, balance ${inr(lastE.close)})` : ""}, starting capital ${inr(pendingImport.settings.capital)}. This page has ${webDays} logged day${webDays===1?"":"s"}. Importing replaces this page's days and settings with the Excel file's.`;
+      $("impConfirm").hidden = false;
+    } catch(err){ pendingImport = null; $("impConfirm").hidden = true; flash("syncToast", err.message || "Couldn't read that file.", true); }
+  });
+  $("impNo").addEventListener("click", () => { pendingImport = null; $("impConfirm").hidden = true; });
+  $("impYes").addEventListener("click", async () => {
+    if (!pendingImport) return;
+    const cleaned = {};
+    for (const [d, e] of Object.entries(pendingImport.entries)){ if (typeof e.close === "number" || e.done || e.note) cleaned[d] = typeof e.close === "number" ? e : {...e, close: undefined}; }
+    for (const d of Object.keys(cleaned)) if (cleaned[d].close === undefined) delete cleaned[d].close;
+    state.settings = pendingImport.settings; state.entries = cleaned; state.selected = null; pendingImport = null;
+    $("impConfirm").hidden = true; fillSettings(); render();
+    await persistSettings(); await persistEntries();
+    flash("syncToast", "Imported from Excel.");
   });
 
   // ---------- boot ----------
