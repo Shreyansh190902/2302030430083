@@ -39,8 +39,16 @@
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent}
+select,input[type=number],input[type=text],input[type=date],textarea,button{-webkit-appearance:none;appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 19px) 55%,calc(100% - 13px) 55%;background-size:6px 6px;background-repeat:no-repeat;padding-right:36px!important;text-overflow:ellipsis}
+input[type=date]{min-height:44px;display:block;text-align:left}
+input[type=date]::-webkit-date-and-time-value{text-align:left}
+button:active{transform:scale(.98)}
+@media (pointer:coarse){button,select,input[type=number],input[type=text],input[type=date]{min-height:44px}.check input{width:22px;height:22px}}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.5}
-.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:grid;gap:20px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px;display:grid;gap:20px}
 .wrap>*,.hero>*,.charts>*{min-width:0}
 .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
 h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
@@ -171,6 +179,12 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   .d-only{display:none}
   .table-wrap{max-height:65vh}
   .syncbar .btns{width:100%}
+}
+@media (max-width:900px){
+  table{min-width:0}
+  .hide-m{display:none}
+  .m-only{display:inline}
+  .d-only{display:none}
 }
 @media (max-width:380px){
   table{font-size:11px}
@@ -330,7 +344,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   };
   const MAX_DAYS = 500;
   const LS_KEY = "road-to-1-lakh-v1";
-  const state = { settings: structuredClone(DEFAULTS), entries: {}, selected: null, mode: "local" };
+  const state = { settings: JSON.parse(JSON.stringify(DEFAULTS)), entries: {}, selected: null, mode: "local" };
   let refs = null, writeChain = Promise.resolve();
 
   const $ = id => document.getElementById(id);
@@ -496,6 +510,11 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   function niceStep(max, n){ const raw = max/n, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw/p; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * p; }
   function kfmt(v){ return v >= 100000 ? "₹" + (v/100000).toFixed(v % 100000 ? 1 : 0) + "L" : v >= 1000 ? "₹" + (v/1000).toFixed(v % 1000 ? 1 : 0) + "k" : "₹" + Math.round(v); }
 
+  function placeTip(tip, x, y, rect){
+    const tw = tip.offsetWidth || 0;
+    tip.style.left = Math.min(Math.max(x, tw/2 + 4), rect.width - tw/2 - 4) + "px";
+    tip.style.top = y + "px";
+  }
   function renderBalance(){
     const box = $("balChart"), W = Math.max(280, Math.round(box.clientWidth || 720)), H = W < 500 ? 220 : 300, L = 46, R = 12, T = 14, B = 26;
     const rows = M.rows, N = rows.length, goal = state.settings.goal;
@@ -535,10 +554,10 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       $("balHover").setAttribute("visibility", "visible");
       tip.hidden = false;
       tip.innerHTML = r ? `Day ${r.day} · ${shortDate(r.date)}<br><b>${inr(v)}</b> ${r.actual ? "actual" : "projection*"}` : `Start<br><b>${inr(v)}</b>`;
-      tip.style.left = (x(i) / W * rect.width) + "px"; tip.style.top = (y(v) / H * rect.height) + "px";
+      placeTip(tip, x(i) / W * rect.width, y(v) / H * rect.height, rect);
     };
-    const leave = () => { $("balHover").setAttribute("visibility", "hidden"); tip.hidden = true; };
-    $("balHit").addEventListener("pointermove", move); $("balHit").addEventListener("pointerleave", leave);
+    const leave = e => { if (e && e.pointerType === "touch") return; $("balHover").setAttribute("visibility", "hidden"); tip.hidden = true; };
+    $("balHit").addEventListener("pointermove", move); $("balHit").addEventListener("pointerdown", move); $("balHit").addEventListener("pointerleave", leave);
   }
 
   function renderPnl(){
@@ -559,16 +578,20 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     });
     box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Daily profit and loss chart">${g}</svg><div class="tip" id="pnlTip" hidden></div>`;
     const svg = box.querySelector("svg"), tip = $("pnlTip");
+    const hideTip = () => { tip.hidden = true; svg.querySelectorAll(".bar").forEach(x => x.removeAttribute("opacity")); };
+    svg.addEventListener("pointerdown", e => { if (!e.target.classList.contains("bar")) hideTip(); });
     svg.querySelectorAll(".bar").forEach(b => {
+      b.addEventListener("pointerdown", () => b.dispatchEvent(new Event("pointerenter")));
       b.addEventListener("pointerenter", () => {
+        svg.querySelectorAll(".bar").forEach(x => x.removeAttribute("opacity"));
         const r = logged[+b.dataset.i], rect = svg.getBoundingClientRect();
         b.setAttribute("opacity", ".8");
         tip.hidden = false;
         tip.innerHTML = `Day ${r.day} · ${shortDate(r.date)}<br><b>${sinr(r.pnl)}</b> · closed ${inr(r.close)}`;
         const bx = +b.getAttribute("x") + +b.getAttribute("width")/2, by = +b.getAttribute("y");
-        tip.style.left = (bx / W * rect.width) + "px"; tip.style.top = (by / H * rect.height) + "px";
+        placeTip(tip, bx / W * rect.width, by / H * rect.height, rect);
       });
-      b.addEventListener("pointerleave", () => { b.removeAttribute("opacity"); tip.hidden = true; });
+      b.addEventListener("pointerleave", e => { if (e.pointerType === "touch") return; b.removeAttribute("opacity"); tip.hidden = true; });
     });
   }
 
