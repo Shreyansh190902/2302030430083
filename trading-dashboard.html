@@ -38,6 +38,7 @@
   --shadow:0 1px 2px rgba(0,0,0,.3);
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.5}
 .wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:grid;gap:20px}
 .wrap>*,.hero>*,.charts>*{min-width:0}
@@ -48,6 +49,8 @@ h2{font-size:16px;font-weight:600}
 .eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 header.top{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between}
 .sub{color:var(--ink-2);margin:4px 0 0}
+.top-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.m-only{display:none}
 .sync{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);background:var(--surface);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--proj)}
 .dot.ok{background:var(--profit-mark)} .dot.warn{background:var(--goal)}
@@ -72,7 +75,7 @@ header.top{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-con
 .mini .v{font-family:var(--mono);font-weight:600;font-size:15px}
 .mini.t .v{color:var(--profit)} .mini.s .v{color:var(--loss)}
 label{font-size:12px;font-weight:600;color:var(--ink-2);display:block;margin-bottom:4px}
-select,input[type=number],input[type=text],input[type=date],textarea{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 10px}
+select,input[type=number],input[type=text],input[type=date],textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 10px}
 input[type=number]{font-family:var(--mono);font-size:18px;font-weight:600}
 input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -106,7 +109,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .legend i.sq{width:10px;height:10px;border:0;border-radius:2px}
 .chart{position:relative}
 .chart svg{display:block;width:100%;height:auto;overflow:visible}
-.chart text{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+.chart text{font-family:var(--mono);font-size:11px;fill:var(--muted)}
 .tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;padding:6px 9px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-110%);box-shadow:var(--shadow)}
 .tip b{font-family:var(--mono)}
 .empty{font-size:13px;color:var(--muted);padding:40px 12px;text-align:center}
@@ -118,6 +121,7 @@ th{position:sticky;top:0;background:var(--surface-2);color:var(--ink-2);font-siz
 th:nth-child(-n+2),td:nth-child(-n+2){text-align:left}
 td{padding:7px 10px;border-top:1px solid var(--line);text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
 tr.proj td{color:var(--muted);font-style:italic}
+.chart{touch-action:pan-y}
 tr.sel td{background:var(--accent-soft)}
 tbody tr{cursor:pointer}
 tbody tr:hover td{background:var(--surface-2)}
@@ -141,9 +145,38 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   .tiles{grid-template-columns:repeat(2,1fr)}
   .set-grid{grid-template-columns:repeat(2,1fr)}
 }
-@media (max-width:420px){
-  .entry-grid{grid-template-columns:1fr 1fr}
-  .tile .v{font-size:17px}
+@media (max-width:640px){
+  .wrap{gap:14px;padding-block:14px 40px}
+  .panel{padding:14px;border-radius:10px}
+  header.top{align-items:flex-start}
+  .top-actions{width:100%;justify-content:space-between}
+  .sub{font-size:13px}
+  .big{font-size:34px}
+  .entry-grid{gap:6px}
+  .mini{padding:6px 8px}
+  .mini .eyebrow{font-size:10px;letter-spacing:.04em}
+  .mini .v{font-size:13px}
+  .row2{grid-template-columns:1fr}
+  .btns>button{flex:1 1 auto;min-height:44px}
+  #saveBtn{flex-basis:100%}
+  .tiles{gap:8px}
+  .tile{padding:10px 12px}
+  .tile .v{font-size:16px}
+  .tile .k,.tile .s{font-size:11px}
+  .legend{gap:8px;font-size:11px}
+  table{min-width:0;font-size:12px}
+  th,td{padding:8px 6px}
+  .hide-m{display:none}
+  .m-only{display:inline}
+  .d-only{display:none}
+  .table-wrap{max-height:65vh}
+  .syncbar .btns{width:100%}
+}
+@media (max-width:380px){
+  table{font-size:11px}
+  th,td{padding:7px 3px}
+  th{font-size:10px;letter-spacing:0}
+  .panel{padding:12px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -155,27 +188,12 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       <h1 id="title">₹4,220 → ₹1,00,000</h1>
       <p class="sub">Type each day's closing balance. Profit or loss, tomorrow's 3% target and loss limit are worked out for you.</p>
     </div>
-    <span class="sync" id="sync"><span class="dot" id="syncDot"></span><span id="syncText">Connecting…</span></span>
+    <div class="top-actions">
+      <span class="sync" id="sync"><span class="dot" id="syncDot"></span><span id="syncText">Connecting…</span></span>
+      <button type="button" class="btn-primary" id="dlTop">Export to Excel</button>
+    </div>
+    <div class="toast" id="topToast" role="status" style="width:100%"></div>
   </header>
-
-  <section class="panel" aria-label="Sync with Excel">
-    <div class="syncbar">
-      <div>
-        <h2>Sync with Excel</h2>
-        <p>Download the Excel tracker filled with everything saved here, or import your Excel file to update this page. Keep one of them as the place you type, and move the data across with these buttons.</p>
-      </div>
-      <div class="btns">
-        <button type="button" class="btn-primary" id="dlBtn">Download Excel</button>
-        <button type="button" class="btn-ghost" id="upBtn">Import from Excel</button>
-        <input type="file" id="upFile" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
-      </div>
-    </div>
-    <div class="toast" id="syncToast" role="status"></div>
-    <div class="confirm" id="impConfirm" hidden>
-      <p id="impText"></p>
-      <div class="btns"><button type="button" class="btn-primary" id="impYes">Replace website data</button><button type="button" class="btn-ghost" id="impNo">Cancel</button></div>
-    </div>
-  </section>
 
   <section class="panel hero" aria-label="Balance and today's entry">
     <div class="hero-main">
@@ -247,13 +265,32 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   <section class="panel">
     <div class="chart-head">
       <h2>Day by day</h2>
-      <span class="note">Click a row to log or edit that day. Grey italic rows are projections*.</span>
+      <span class="note">Tap a row to log or edit that day. Grey italic rows are projections*; ⚠ = loss over your limit.</span>
     </div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Day</th><th>Date</th><th>Opening</th><th>Target 3%</th><th>Loss limit 3%</th><th>If target met</th><th>Profit / Loss</th><th>Closing</th><th>Status</th><th>Done</th></tr></thead>
+        <thead><tr><th>Day</th><th>Date</th><th class="hide-m">Opening</th><th class="hide-m">Target 3%</th><th class="hide-m">Loss limit 3%</th><th class="hide-m">If target met</th><th>P / L</th><th>Closing</th><th class="hide-m">Status</th><th class="hide-m">Done</th></tr></thead>
         <tbody id="tbody"></tbody>
       </table>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Sync with Excel">
+    <div class="syncbar">
+      <div>
+        <h2>Excel export &amp; import</h2>
+        <p>Export to Excel gives you the Excel tracker filled with everything saved here, or import your Excel file to update this page. Keep one of them as the place you type, and move the data across with these buttons.</p>
+      </div>
+      <div class="btns">
+        <button type="button" class="btn-primary" id="dlBtn">Export to Excel</button>
+        <button type="button" class="btn-ghost" id="upBtn">Import from Excel</button>
+        <input type="file" id="upFile" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
+      </div>
+    </div>
+    <div class="toast" id="syncToast" role="status"></div>
+    <div class="confirm" id="impConfirm" hidden>
+      <p id="impText"></p>
+      <div class="btns"><button type="button" class="btn-primary" id="impYes">Replace website data</button><button type="button" class="btn-ghost" id="impNo">Cancel</button></div>
     </div>
   </section>
 
@@ -445,12 +482,12 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     let html = "";
     for (const r of M.rows){
       const pc = r.actual ? (r.pnl > 0 ? "p" : r.pnl < 0 ? "l" : "") : "";
-      const pill = !r.actual ? `<span class="pill">Projection</span>` :
-        r.status === "Loss (limit breached)" ? `<span class="pill b">Limit breached</span>` :
+      const pill = !r.actual ? `<span class="pill">Proj.</span>` :
+        r.status === "Loss (limit breached)" ? `<span class="pill b">Over limit</span>` :
         r.status === "Loss" ? `<span class="pill l">Loss</span>` : r.status === "Profit" ? `<span class="pill p">Profit</span>` : `<span class="pill f">No trade</span>`;
       html += `<tr class="${r.actual ? "" : "proj"} ${r.day === state.selected ? "sel" : ""}" data-day="${r.day}" title="${esc(r.note)}">
-        <td>${r.day}</td><td>${fmtDate(r.date)}</td><td>${inr(r.open)}</td><td>${inr(r.target)}</td><td>${inr(r.limit)}</td><td>${inr(r.ifMet)}</td>
-        <td class="${pc}">${r.actual ? sinr(r.pnl) : ""}</td><td>${r.actual ? inr(r.close) : ""}</td><td>${pill}</td><td>${r.done ? "✔" : ""}</td></tr>`;
+        <td>${r.day}${r.done ? '<span class="m-only"> ✔</span>' : ""}</td><td><span class="d-only">${fmtDate(r.date)}</span><span class="m-only">${shortDate(r.date)}</span></td><td class="hide-m">${inr(r.open)}</td><td class="hide-m">${inr(r.target)}</td><td class="hide-m">${inr(r.limit)}</td><td class="hide-m">${inr(r.ifMet)}</td>
+        <td class="${pc}">${r.actual ? sinr(r.pnl) + (r.status === "Loss (limit breached)" ? '<span class="m-only"> ⚠</span>' : "") : '<span class="m-only pill">Proj.</span>'}</td><td>${r.actual ? inr(r.close) : '<span class="m-only">' + inr(r.ifMet) + '</span>'}</td><td class="hide-m">${pill}</td><td class="hide-m">${r.done ? "✔" : ""}</td></tr>`;
     }
     $("tbody").innerHTML = html;
   }
@@ -460,7 +497,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   function kfmt(v){ return v >= 100000 ? "₹" + (v/100000).toFixed(v % 100000 ? 1 : 0) + "L" : v >= 1000 ? "₹" + (v/1000).toFixed(v % 1000 ? 1 : 0) + "k" : "₹" + Math.round(v); }
 
   function renderBalance(){
-    const box = $("balChart"), W = 720, H = 300, L = 52, R = 14, T = 12, B = 30;
+    const box = $("balChart"), W = Math.max(280, Math.round(box.clientWidth || 720)), H = W < 500 ? 220 : 300, L = 46, R = 12, T = 14, B = 26;
     const rows = M.rows, N = rows.length, goal = state.settings.goal;
     const vals = rows.map(r => r.actual ? r.close : r.ifMet);
     const ymaxRaw = Math.max(goal, ...vals, state.settings.capital) * 1.05;
@@ -469,7 +506,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     const y = v => T + (1 - v/ymax) * (H - T - B);
     let g = "";
     for (let v = 0; v <= ymax + 1e-6; v += step){ g += `<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/><text x="${L-8}" y="${y(v)+3}" text-anchor="end">${kfmt(v)}</text>`; }
-    const xstep = Math.max(1, Math.ceil(N/8/5)*5);
+    const xstep = Math.max(1, Math.ceil(N/(W < 500 ? 4 : 8)/5)*5);
     for (let i = 0; i <= N; i += xstep){ g += `<text x="${x(i)}" y="${H-10}" text-anchor="middle">${i === 0 ? "Start" : "D" + i}</text>`; }
     g += `<line x1="${L}" x2="${W-R}" y1="${y(goal)}" y2="${y(goal)}" stroke="var(--goal)" stroke-width="1.5" stroke-dasharray="2 4"/><text x="${W-R}" y="${y(goal)-6}" text-anchor="end" style="fill:var(--goal)">Goal ${inr(goal,0)}</text>`;
     // actual path: start + logged days
@@ -507,7 +544,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   function renderPnl(){
     const box = $("pnlChart"), logged = M.logged;
     if (!logged.length){ box.innerHTML = `<div class="empty">Log your first closing balance to see profit and loss bars here.</div>`; return; }
-    const W = 440, H = 300, L = 52, R = 10, T = 12, B = 30;
+    const W = Math.max(280, Math.round(box.clientWidth || 440)), H = W < 500 ? 220 : 300, L = 52, R = 10, T = 12, B = 26;
     const maxAbs = Math.max(...logged.map(r => Math.abs(r.pnl)), ...logged.map(r => r.target)) * 1.1;
     const step = niceStep(maxAbs, 2), m = Math.ceil(maxAbs/step)*step;
     const y = v => T + (m - v) / (2*m) * (H - T - B);
@@ -518,7 +555,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       const x0 = L + i*bw + gap/2, w = Math.max(2, bw - gap), top = Math.min(y(0), y(r.pnl)), h = Math.max(1.5, Math.abs(y(r.pnl) - y(0)));
       const col = r.pnl >= 0 ? "var(--profit-mark)" : "var(--loss-mark)";
       g += `<rect class="bar" x="${x0.toFixed(1)}" y="${top.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="${col}" data-i="${i}"/>`;
-      if (logged.length <= 20 || i % Math.ceil(logged.length/10) === 0) g += `<text x="${(x0 + w/2).toFixed(1)}" y="${H-10}" text-anchor="middle">D${r.day}</text>`;
+      if (i % Math.max(1, Math.ceil(logged.length / Math.floor(W/42))) === 0) g += `<text x="${(x0 + w/2).toFixed(1)}" y="${H-10}" text-anchor="middle">D${r.day}</text>`;
     });
     box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Daily profit and loss chart">${g}</svg><div class="tip" id="pnlTip" hidden></div>`;
     const svg = box.querySelector("svg"), tip = $("pnlTip");
@@ -552,7 +589,8 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     if (refs) return queue(() => refs.settings.set(state.settings));
     saveLocal();
   }
-  function flash(id, msg, bad){ const el = $(id); el.textContent = msg; el.style.color = bad ? "var(--loss)" : "var(--profit)"; clearTimeout(el._t); el._t = setTimeout(() => el.textContent = "", 3500); }
+  function flash(id, msg, bad){ if (id === "syncToast") flash1("topToast", msg, bad); flash1(id, msg, bad); }
+  function flash1(id, msg, bad){ const el = $(id); el.textContent = msg; el.style.color = bad ? "var(--loss)" : "var(--profit)"; clearTimeout(el._t); el._t = setTimeout(() => el.textContent = "", 3500); }
   function setSync(kind, text){ $("syncDot").className = "dot " + kind; $("syncText").textContent = text; }
 
   // ---------- events ----------
@@ -756,6 +794,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       else flash("syncToast", (err && err.message) || "Couldn't create the Excel file.", true);
     } finally { btn.disabled = false; }
   });
+  $("dlTop").addEventListener("click", () => $("dlBtn").click());
   $("upBtn").addEventListener("click", () => $("upFile").click());
   $("upFile").addEventListener("change", async e => {
     const f = e.target.files && e.target.files[0]; e.target.value = ""; if (!f) return;
@@ -779,6 +818,9 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     await persistSettings(); await persistEntries();
     flash("syncToast", "Imported from Excel.");
   });
+
+  let rsT = null, lastW = 0;
+  addEventListener("resize", () => { clearTimeout(rsT); rsT = setTimeout(() => { const w = $("balChart").clientWidth; if (Math.abs(w - lastW) > 20){ lastW = w; renderBalance(); renderPnl(); } }, 150); });
 
   // ---------- boot ----------
   loadLocal(); fillSettings(); render(); setSync("", "Connecting…");
