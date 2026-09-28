@@ -129,6 +129,7 @@ th{position:sticky;top:0;background:var(--surface-2);color:var(--ink-2);font-siz
 th:nth-child(-n+2),td:nth-child(-n+2){text-align:left}
 td{padding:7px 10px;border-top:1px solid var(--line);text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
 tr.proj td{color:var(--muted);font-style:italic}
+tr.more-row td{text-align:center;font-family:var(--body);font-size:12px;color:var(--muted);cursor:default}
 .chart{touch-action:pan-y}
 tr.sel td{background:var(--accent-soft)}
 tbody tr{cursor:pointer}
@@ -141,6 +142,43 @@ td.p{color:var(--profit);font-weight:600} td.l{color:var(--loss);font-weight:600
 .syncbar p{margin:0;font-size:13px;color:var(--ink-2);max-width:62ch}
 .confirm{margin-top:12px;border:1px solid var(--goal);background:var(--surface-2);border-radius:8px;padding:12px;display:grid;gap:10px}
 .confirm p{margin:0;font-size:13px}
+.btn-sm{padding:6px 12px;font-size:13px}
+.hero-note{grid-column:1/-1;margin:0}
+.recent{margin-top:10px;display:grid;gap:0}
+.recent h3{font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
+.recent .r{display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center;padding:7px 0;border-top:1px solid var(--line);font-size:13px}
+.recent .r .d{color:var(--muted);font-family:var(--mono);font-size:12px}
+.recent .r .n{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+.recent .r .n.p{color:var(--profit);font-weight:600} .recent .r .n.l{color:var(--loss);font-weight:600}
+.recent .empty-r{font-size:13px;color:var(--muted);padding:10px 0;border-top:1px solid var(--line)}
+#topToast:empty{display:none}
+.entry-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.quick{display:flex;flex-wrap:wrap;gap:6px;margin-top:-4px}
+.quick button{font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
+.quick button.p{color:var(--profit)} .quick button.l{color:var(--loss)}
+.quick button:hover{border-color:var(--accent)}
+.tab{display:grid;gap:20px;align-content:start}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:-8px}
+.tile.wide{grid-column:span 2}
+.meter{position:relative}
+.meter .tick{position:absolute;top:0;bottom:0;width:2px;background:var(--surface)}
+.chip.m{background:var(--accent-soft);color:var(--accent-ink)}
+.tabbar{display:none}
+.snack{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;align-items:center;gap:14px;background:var(--ink);color:var(--bg);border-radius:10px;padding:10px 12px 10px 16px;box-shadow:0 6px 24px rgba(0,0,0,.25);max-width:calc(100% - 32px);font-size:14px}
+.snack button{background:none;border:0;color:var(--accent-soft);font-weight:700;padding:6px 8px;min-height:0}
+.snack button[hidden]{display:none}
+@media (max-width:900px){
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);padding:4px max(8px,env(safe-area-inset-right,0px)) calc(4px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px));box-shadow:0 -2px 12px rgba(19,34,63,.06)}
+  .tabbar button{flex:1;display:grid;justify-items:center;gap:2px;background:none;border:0;border-radius:10px;color:var(--muted);font-size:11px;font-weight:600;padding:6px 0 4px;min-height:52px}
+  .tabbar svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .tabbar button[aria-selected="true"]{color:var(--accent)}
+  .tabbar button[aria-selected="true"] svg{stroke-width:2.4}
+  .tab{display:none}
+  .tab.active{display:grid}
+  .wrap{padding-block-end:calc(84px + env(safe-area-inset-bottom,0px))}
+  .snack{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+  .tile.wide{grid-column:span 2}
+}
 details.settings summary{cursor:pointer;font-family:var(--display);font-weight:600;font-size:15px}
 .set-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:14px}
 .hol{margin-top:14px}
@@ -159,7 +197,14 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   header.top{align-items:flex-start}
   .top-actions{width:100%;justify-content:space-between}
   .sub{font-size:13px}
-  .big{font-size:34px}
+  .big{font-size:30px}
+  .hero{gap:14px}
+  .hero-main{gap:8px}
+  .chips{gap:6px}
+  .chip{font-size:11px}
+  h1{font-size:22px}
+  .sec-head .note{display:none}
+  .recent{display:none}
   .entry-grid{gap:6px}
   .mini{padding:6px 8px}
   .mini .eyebrow{font-size:10px;letter-spacing:.04em}
@@ -198,126 +243,138 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
 <div class="wrap">
   <header class="top">
     <div>
-      <div class="eyebrow">Daily trading tracker · NSE trading days</div>
+      <div class="eyebrow">Road to your goal · NSE trading days</div>
       <h1 id="title">₹4,220 → ₹1,00,000</h1>
-      <p class="sub">Type each day's closing balance. Profit or loss, tomorrow's 3% target and loss limit are worked out for you.</p>
     </div>
     <div class="top-actions">
       <span class="sync" id="sync"><span class="dot" id="syncDot"></span><span id="syncText">Connecting…</span></span>
-      <button type="button" class="btn-primary" id="dlTop">Export to Excel</button>
+      <button type="button" class="btn-ghost btn-sm" id="dlTop">Export to Excel</button>
     </div>
     <div class="toast" id="topToast" role="status" style="width:100%"></div>
   </header>
 
-  <section class="panel hero" aria-label="Balance and today's entry">
-    <div class="hero-main">
-      <div class="eyebrow">Current balance</div>
-      <div class="big" id="curBal">₹4,220.00</div>
-      <div class="chips" id="curChips"></div>
-      <div class="meter" role="progressbar" aria-label="Progress to goal" id="meter"><span id="meterBar" style="width:4%"></span></div>
-      <div class="meter-labels"><span id="progPct">4.2% of goal</span><span id="remain">₹95,780.00 to go</span></div>
-      <p class="disclaimer">Rows and figures marked <em>Projection</em> assume every daily profit target is met. They show what that would look like, not what will happen. Real trading can lose money.</p>
-    </div>
+  <section class="tab" id="tab-today" data-tab="today" aria-label="Today">
+    <div class="panel hero">
+      <div class="hero-main">
+        <div class="eyebrow">Current balance</div>
+        <div class="big" id="curBal">₹4,220.00</div>
+        <div class="chips" id="curChips"></div>
+        <div class="meter" role="progressbar" aria-label="Progress to goal" id="meter"><span id="meterBar" style="width:4%"></span><div id="ticks"></div></div>
+        <div class="meter-labels"><span id="progPct">4.2% of goal</span><span id="remain">₹95,780.00 to go</span></div>
+        <div class="recent" id="recent"></div>
+      </div>
 
-    <form class="entry" id="entryForm" autocomplete="off">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap">
-        <h2>Log closing balance</h2>
-        <span class="note" id="entryHint"></span>
-      </div>
-      <div>
-        <label for="daySel">Trading day</label>
-        <select id="daySel"></select>
-      </div>
-      <div class="entry-grid">
-        <div class="mini"><div class="eyebrow">Opening</div><div class="v" id="eOpen">—</div></div>
-        <div class="mini t"><div class="eyebrow">Target +3%</div><div class="v" id="eTarget">—</div></div>
-        <div class="mini s"><div class="eyebrow">Loss limit −3%</div><div class="v" id="eLimit">—</div></div>
-      </div>
-      <div>
-        <label for="closeIn">Closing balance (₹)</label>
-        <input type="number" id="closeIn" step="0.01" min="0" inputmode="decimal" placeholder="e.g. 4346.60">
-      </div>
-      <div class="preview" id="preview" aria-live="polite">Enter the balance in your account at the end of the day. If you didn't trade, enter the opening balance.</div>
-      <div class="row2">
-        <label class="check" for="doneIn"><input type="checkbox" id="doneIn"> Done for the day</label>
-        <input type="text" id="noteIn" placeholder="Note (optional)" aria-label="Note">
-      </div>
-      <div class="btns">
-        <button type="submit" class="btn-primary" id="saveBtn">Save day</button>
-        <button type="button" class="btn-ghost" id="clearBtn">Clear this day</button>
-        <span class="toast" id="toast" role="status"></span>
-      </div>
-    </form>
+      <form class="entry" id="entryForm" autocomplete="off">
+        <div class="entry-head">
+          <h2>Log closing balance</h2>
+          <span class="note" id="entryHint"></span>
+        </div>
+        <div>
+          <label for="daySel">Trading day</label>
+          <select id="daySel"></select>
+        </div>
+        <div class="entry-grid">
+          <div class="mini"><div class="eyebrow">Opening</div><div class="v" id="eOpen">—</div></div>
+          <div class="mini t"><div class="eyebrow" id="eTargetLbl">Target</div><div class="v" id="eTarget">—</div></div>
+          <div class="mini s"><div class="eyebrow" id="eLimitLbl">Loss limit</div><div class="v" id="eLimit">—</div></div>
+        </div>
+        <div>
+          <label for="closeIn">Closing balance (₹)</label>
+          <input type="number" id="closeIn" step="0.01" min="0" inputmode="decimal" placeholder="Balance at end of day">
+        </div>
+        <div class="quick" aria-label="Quick fill">
+          <button type="button" class="p" data-q="target" id="qTarget">Target hit</button>
+          <button type="button" data-q="flat">No trade</button>
+          <button type="button" class="l" data-q="limit" id="qLimit">Limit hit</button>
+        </div>
+        <div class="preview" id="preview" aria-live="polite"></div>
+        <div class="row2">
+          <label class="check" for="doneIn"><input type="checkbox" id="doneIn"> Done for the day</label>
+          <input type="text" id="noteIn" placeholder="Note (optional)" aria-label="Note">
+        </div>
+        <div class="btns">
+          <button type="submit" class="btn-primary" id="saveBtn">Save day</button>
+          <button type="button" class="btn-ghost" id="clearBtn">Clear this day</button>
+          <span class="toast" id="toast" role="status"></span>
+        </div>
+      </form>
+      <p class="disclaimer hero-note">Figures marked <em>Projection</em> assume every daily profit target is met. They show what that would look like, not what will happen. Real trading can lose money.</p>
+    </div>
   </section>
 
-  <section class="tiles" id="tiles" aria-label="Summary"></section>
+  <section class="tab" id="tab-stats" data-tab="stats" aria-label="Stats">
+    <div class="sec-head"><h2>Performance</h2><span class="note">From the balances you've logged</span></div>
+    <div class="tiles" id="tiles"></div>
+    <div class="charts">
+      <div class="panel">
+        <div class="chart-head">
+          <h2>Balance path</h2>
+          <div class="legend">
+            <span><i style="border-color:var(--accent)"></i>Actual</span>
+            <span><i style="border-color:var(--proj);border-top-style:dashed"></i>Projection*</span>
+            <span><i style="border-color:var(--goal);border-top-style:dotted"></i>Goal</span>
+          </div>
+        </div>
+        <div class="chart" id="balChart"></div>
+      </div>
+      <div class="panel">
+        <div class="chart-head">
+          <h2>Daily profit &amp; loss</h2>
+          <div class="legend">
+            <span><i class="sq" style="background:var(--profit-mark)"></i>Profit</span>
+            <span><i class="sq" style="background:var(--loss-mark)"></i>Loss</span>
+          </div>
+        </div>
+        <div class="chart" id="pnlChart"></div>
+      </div>
+    </div>
+  </section>
 
-  <section class="charts">
+  <section class="tab" id="tab-history" data-tab="history" aria-label="History">
     <div class="panel">
       <div class="chart-head">
-        <h2>Balance path</h2>
-        <div class="legend">
-          <span><i style="border-color:var(--accent)"></i>Actual</span>
-          <span><i style="border-color:var(--proj);border-top-style:dashed"></i>Projection*</span>
-          <span><i style="border-color:var(--goal);border-top-style:dotted"></i>Goal</span>
+        <h2>Day by day</h2>
+        <label class="check" for="showAll"><input type="checkbox" id="showAll"> Show all projected days</label>
+      </div>
+      <p class="note" style="margin:0 0 10px">Tap a row to log or edit that day. Grey italic rows are projections*; ⚠ = loss over your limit.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Day</th><th>Date</th><th class="hide-m">Opening</th><th class="hide-m">Target</th><th class="hide-m">Loss limit</th><th class="hide-m">If target met</th><th>P / L</th><th>Closing</th><th class="hide-m">Status</th><th class="hide-m">Done</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="tab" id="tab-more" data-tab="more" aria-label="More">
+    <div class="panel" aria-label="Excel">
+      <div class="syncbar">
+        <div>
+          <h2>Excel export &amp; import</h2>
+          <p>Export to Excel gives you the Excel tracker filled with everything saved here. Import from Excel reads your Excel file and replaces this page's data. Type in one place, then move the data across with these buttons.</p>
+        </div>
+        <div class="btns">
+          <button type="button" class="btn-primary" id="dlBtn">Export to Excel</button>
+          <button type="button" class="btn-ghost" id="upBtn">Import from Excel</button>
+          <input type="file" id="upFile" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
         </div>
       </div>
-      <div class="chart" id="balChart"></div>
+      <div class="toast" id="syncToast" role="status"></div>
+      <div class="confirm" id="impConfirm" hidden>
+        <p id="impText"></p>
+        <div class="btns"><button type="button" class="btn-primary" id="impYes">Replace website data</button><button type="button" class="btn-ghost" id="impNo">Cancel</button></div>
+      </div>
     </div>
+
     <div class="panel">
-      <div class="chart-head">
-        <h2>Daily profit &amp; loss</h2>
-        <div class="legend">
-          <span><i class="sq" style="background:var(--profit-mark)"></i>Profit</span>
-          <span><i class="sq" style="background:var(--loss-mark)"></i>Loss</span>
-        </div>
-      </div>
-      <div class="chart" id="pnlChart"></div>
-    </div>
-  </section>
-
-  <section class="panel">
-    <div class="chart-head">
-      <h2>Day by day</h2>
-      <span class="note">Tap a row to log or edit that day. Grey italic rows are projections*; ⚠ = loss over your limit.</span>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Day</th><th>Date</th><th class="hide-m">Opening</th><th class="hide-m">Target 3%</th><th class="hide-m">Loss limit 3%</th><th class="hide-m">If target met</th><th>P / L</th><th>Closing</th><th class="hide-m">Status</th><th class="hide-m">Done</th></tr></thead>
-        <tbody id="tbody"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="panel" aria-label="Sync with Excel">
-    <div class="syncbar">
-      <div>
-        <h2>Excel export &amp; import</h2>
-        <p>Export to Excel gives you the Excel tracker filled with everything saved here, or import your Excel file to update this page. Keep one of them as the place you type, and move the data across with these buttons.</p>
-      </div>
-      <div class="btns">
-        <button type="button" class="btn-primary" id="dlBtn">Export to Excel</button>
-        <button type="button" class="btn-ghost" id="upBtn">Import from Excel</button>
-        <input type="file" id="upFile" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
-      </div>
-    </div>
-    <div class="toast" id="syncToast" role="status"></div>
-    <div class="confirm" id="impConfirm" hidden>
-      <p id="impText"></p>
-      <div class="btns"><button type="button" class="btn-primary" id="impYes">Replace website data</button><button type="button" class="btn-ghost" id="impNo">Cancel</button></div>
-    </div>
-  </section>
-
-  <section class="panel">
-    <details class="settings" id="setDetails">
-      <summary>Settings &amp; NSE holidays</summary>
+      <h2>Settings &amp; NSE holidays</h2>
       <form id="setForm">
         <div class="set-grid">
           <div><label for="sStart">Start trading from</label><input type="date" id="sStart"></div>
-          <div><label for="sCap">Starting capital (₹)</label><input type="number" id="sCap" step="0.01" min="1"></div>
-          <div><label for="sGoal">Goal (₹)</label><input type="number" id="sGoal" step="1" min="1"></div>
-          <div><label for="sT">Daily profit target (%)</label><input type="number" id="sT" step="0.1" min="0.1" max="100"></div>
-          <div><label for="sL">Daily loss limit (%)</label><input type="number" id="sL" step="0.1" min="0.1" max="100"></div>
+          <div><label for="sCap">Starting capital (₹)</label><input type="number" id="sCap" step="0.01" min="1" inputmode="decimal"></div>
+          <div><label for="sGoal">Goal (₹)</label><input type="number" id="sGoal" step="1" min="1" inputmode="decimal"></div>
+          <div><label for="sT">Daily profit target (%)</label><input type="number" id="sT" step="0.1" min="0.1" max="100" inputmode="decimal"></div>
+          <div><label for="sL">Daily loss limit (%)</label><input type="number" id="sL" step="0.1" min="0.1" max="100" inputmode="decimal"></div>
         </div>
         <div class="hol">
           <label for="sHol">NSE trading holidays on weekdays (one per line: YYYY-MM-DD Name). These days are skipped, like weekends.</label>
@@ -326,9 +383,17 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
         </div>
         <div class="btns"><button type="submit" class="btn-primary">Save settings</button><span class="toast" id="setToast" role="status"></span></div>
       </form>
-    </details>
+    </div>
   </section>
 </div>
+
+<nav class="tabbar" id="tabbar" role="tablist" aria-label="Sections">
+  <button type="button" role="tab" data-go="today" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Today</button>
+  <button type="button" role="tab" data-go="stats" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V11M12 20V5M19 20v-7"/></svg>Stats</button>
+  <button type="button" role="tab" data-go="history" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>History</button>
+  <button type="button" role="tab" data-go="more" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>More</button>
+</nav>
+<div class="snack" id="snack" role="status" hidden><span id="snackText"></span><button type="button" id="snackUndo">Undo</button></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
@@ -415,6 +480,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
     };
   }
 
+  const MILESTONES = [10000, 25000, 50000, 75000];
   // ---------- render ----------
   let M = null;
   function render(){
@@ -430,6 +496,12 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       chips.push(`<span class="chip">Last logged: Day ${M.last.day}, ${shortDate(M.last.date)}</span>`);
     } else chips.push(`<span class="chip">No days logged yet</span>`);
     if (M.goalReached) chips.push(`<span class="chip p">Goal reached</span>`);
+    const ms = MILESTONES.filter(m => m > s.capital && m < s.goal);
+    const nextM = ms.find(m => m > M.current);
+    if (nextM && !M.goalReached) chips.push(`<span class="chip m">Next milestone ${inr(nextM, 0)} · ${inr(r2(nextM - M.current))} to go</span>`);
+    const rec = M.logged.slice(-5).reverse();
+    $("recent").innerHTML = `<h3>Recent days</h3>` + (rec.length ? rec.map(r => `<div class="r"><span class="d">D${r.day}</span><span>${fmtDate(r.date).slice(0,-5)}</span><span class="n ${r.pnl > 0 ? "p" : r.pnl < 0 ? "l" : ""}">${sinr(r.pnl)}${r.pnl < -r.limit ? " ⚠" : ""}</span><span class="n">${inr(r.close)}</span></div>`).join("") : `<div class="empty-r">Your last five logged days will show here.</div>`);
+    $("ticks").innerHTML = ms.map(m => `<span class="tick" style="left:${(m/s.goal*100).toFixed(2)}%" title="${inr(m,0)}"></span>`).join("");
     $("curChips").innerHTML = chips.join("");
     $("meterBar").style.width = (M.progress*100).toFixed(1) + "%";
     $("meter").setAttribute("aria-valuenow", (M.progress*100).toFixed(1));
@@ -441,20 +513,18 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
 
   function tile(k, v, sub, cls = ""){ return `<div class="tile ${cls}"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${sub}</div></div>`; }
   function renderTiles(){
-    const n = M.nextRow, dash = "—";
+    const dash = "—", st = state.settings;
     const t = [
       tile("Total profit", inr(M.totalProfit), M.wins ? `${M.wins} profit day${M.wins>1?"s":""} · avg ${inr(M.avgWin)}` : "No profit days yet", M.totalProfit > 0 ? "p" : ""),
       tile("Total loss", inr(M.totalLoss), M.losses ? `${M.losses} loss day${M.losses>1?"s":""} · avg ${inr(M.avgLoss)}` : "No loss days yet", M.totalLoss < 0 ? "l" : ""),
-      tile("Net profit / loss", sinr(M.net), M.logged.length ? `${(M.net/state.settings.capital*100).toFixed(1)}% on starting capital` : "Log a day to start", M.net > 0 ? "p" : M.net < 0 ? "l" : ""),
+      tile("Net profit / loss", sinr(M.net), M.logged.length ? `${(M.net/st.capital*100).toFixed(1)}% on starting capital` : "Log a day to start", M.net > 0 ? "p" : M.net < 0 ? "l" : ""),
       tile("Win rate", M.winRate === null ? dash : Math.round(M.winRate*100) + "%", `${M.logged.length} day${M.logged.length===1?"":"s"} logged · ${M.flat} no-trade`),
-      tile("Next trading day", n ? fmtDate(n.date).slice(0,-5) : dash, n ? `Day ${n.day}` : "Goal reached"),
-      tile("Next target", n && !M.goalReached ? inr(n.target) : dash, `+${state.settings.targetPct}% of opening capital`, "p"),
-      tile("Next loss limit", n && !M.goalReached ? inr(n.limit) : dash, `Stop if down ${state.settings.lossPct}%`, "l"),
+      tile("Best day", M.best === null ? dash : sinr(M.best), M.worst === null ? "Worst —" : `Worst ${sinr(M.worst)}`),
+      tile("Target hit", String(M.targetHits), `Days you made ${st.targetPct}% or more`),
       tile("Loss-limit breaches", String(M.breaches), M.breaches ? "Days you lost more than the limit" : "None so far", M.breaches ? "l" : ""),
-      tile("Best day", M.best === null ? dash : sinr(M.best), M.worst === null ? "—" : `Worst ${sinr(M.worst)}`),
-      tile("Target hit", String(M.targetHits), `Days you made ${state.settings.targetPct}% or more`),
-      tile("Days left if targets met*", M.goalReached ? "0" : String(M.daysLeft), "Projection, not a promise"),
-      tile("Projected goal date*", M.goalReached ? "Reached" : M.goalDate ? fmtDate(M.goalDate) : `Beyond ${MAX_DAYS} days`, "Projection, not a promise"),
+      tile("Days done ✔", String(M.doneCount), "Ticked “Done for the day”"),
+      tile("Days left if targets met*", M.goalReached ? "0" : String(M.daysLeft), "Projection, not a promise", "wide"),
+      tile("Projected goal date*", M.goalReached ? "Reached" : M.goalDate ? fmtDate(M.goalDate) : `Beyond ${MAX_DAYS} days`, "Projection, not a promise", "wide"),
     ];
     $("tiles").innerHTML = t.join("");
   }
@@ -474,6 +544,8 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   function renderEntry(keepInput){
     const r = M.rows[state.selected-1]; if (!r) return;
     $("eOpen").textContent = inr(r.open); $("eTarget").textContent = inr(r.target); $("eLimit").textContent = inr(r.limit);
+    $("eTargetLbl").textContent = `Target +${state.settings.targetPct}%`; $("eLimitLbl").textContent = `Limit −${state.settings.lossPct}%`;
+    $("qTarget").textContent = `Target hit ${inr(r.open + r.target)}`; $("qLimit").textContent = `Limit hit ${inr(r2(r.open - r.limit))}`;
     $("entryHint").textContent = r.actual ? "Editing a saved day" : (M.nextRow && r.day === M.nextRow.day ? "Next day to log" : "");
     if (!keepInput){
       $("closeIn").value = r.actual ? r.close : "";
@@ -485,7 +557,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   function updatePreview(){
     const r = M.rows[state.selected-1], p = $("preview"), v = parseFloat($("closeIn").value);
     p.className = "preview";
-    if (!r || !isFinite(v)){ p.innerHTML = "Enter the balance in your account at the end of the day. If you didn't trade, enter the opening balance."; return; }
+    if (!r || !isFinite(v)){ p.innerHTML = "Type your account balance at the end of the day, or tap a quick-fill button above."; return; }
     const pnl = r2(v - r.open), pct = r.open ? pnl / r.open * 100 : 0;
     if (pnl > 0){ p.classList.add("p"); p.innerHTML = `Profit <strong>${sinr(pnl)}</strong> (${pct.toFixed(2)}%)${pnl >= r.target ? " · target hit" : ""}. Next day opens at ${inr(v)}.`; }
     else if (pnl < 0){ p.classList.add("l"); p.innerHTML = `Loss <strong>${inr(pnl)}</strong> (${pct.toFixed(2)}%)${-pnl > r.limit ? " · more than your loss limit of " + inr(r.limit) : ""}. Next day opens at ${inr(v)}.`; }
@@ -494,7 +566,9 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
 
   function renderTable(){
     let html = "";
-    for (const r of M.rows){
+    const showAll = $("showAll").checked, lastDay = M.last ? M.last.day : 0;
+    const rows = showAll ? M.rows : M.rows.filter(r => r.actual || r.day <= lastDay + 5 || r.day === state.selected);
+    for (const r of rows){
       const pc = r.actual ? (r.pnl > 0 ? "p" : r.pnl < 0 ? "l" : "") : "";
       const pill = !r.actual ? `<span class="pill">Proj.</span>` :
         r.status === "Loss (limit breached)" ? `<span class="pill b">Over limit</span>` :
@@ -503,6 +577,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
         <td>${r.day}${r.done ? '<span class="m-only"> ✔</span>' : ""}</td><td><span class="d-only">${fmtDate(r.date)}</span><span class="m-only">${shortDate(r.date)}</span></td><td class="hide-m">${inr(r.open)}</td><td class="hide-m">${inr(r.target)}</td><td class="hide-m">${inr(r.limit)}</td><td class="hide-m">${inr(r.ifMet)}</td>
         <td class="${pc}">${r.actual ? sinr(r.pnl) + (r.status === "Loss (limit breached)" ? '<span class="m-only"> ⚠</span>' : "") : '<span class="m-only pill">Proj.</span>'}</td><td>${r.actual ? inr(r.close) : '<span class="m-only">' + inr(r.ifMet) + '</span>'}</td><td class="hide-m">${pill}</td><td class="hide-m">${r.done ? "✔" : ""}</td></tr>`;
     }
+    if (!showAll && rows.length < M.rows.length) html += `<tr class="more-row"><td colspan="10">${M.rows.length - rows.length} more projected day${M.rows.length - rows.length === 1 ? "" : "s"} · tick “Show all projected days” to see them</td></tr>`;
     $("tbody").innerHTML = html;
   }
 
@@ -619,26 +694,56 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   // ---------- events ----------
   $("daySel").addEventListener("change", e => { state.selected = +e.target.value; renderEntry(); renderTable(); });
   $("closeIn").addEventListener("input", updatePreview);
+  document.querySelector(".quick").addEventListener("click", e => {
+    const b = e.target.closest("button[data-q]"); if (!b) return;
+    const r = M.rows[state.selected-1]; if (!r) return;
+    const v = b.dataset.q === "target" ? r.open + r.target : b.dataset.q === "limit" ? r.open - r.limit : r.open;
+    $("closeIn").value = r2(v).toFixed(2); updatePreview();
+  });
+  $("showAll").addEventListener("change", renderTable);
+
+  // snackbar with undo
+  let snackT = null, snackUndo = null;
+  function snack(msg, undo){
+    $("snackText").textContent = msg; snackUndo = undo || null; $("snackUndo").hidden = !undo;
+    $("snack").hidden = false; clearTimeout(snackT); snackT = setTimeout(() => { $("snack").hidden = true; snackUndo = null; }, 5000);
+  }
+  $("snackUndo").addEventListener("click", async () => { const f = snackUndo; $("snack").hidden = true; snackUndo = null; if (f) await f(); });
+  async function restore(prev, day){ state.entries = prev; state.selected = day; render(); await persistEntries(); snack(`Day ${day} restored`); }
+
+  // tabs (phone layout)
+  const TABS = ["today", "stats", "history", "more"];
+  function showTab(name){
+    if (!TABS.includes(name)) name = "today";
+    document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === name));
+    document.querySelectorAll("#tabbar button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.go === name)));
+    if (name === "stats" && M){ renderBalance(); renderPnl(); }
+  }
+  $("tabbar").addEventListener("click", e => {
+    const b = e.target.closest("button[data-go]"); if (!b) return;
+    showTab(b.dataset.go); window.scrollTo({top: 0});
+  });
+  showTab("today");
   $("entryForm").addEventListener("submit", async e => {
     e.preventDefault();
     const v = parseFloat($("closeIn").value);
     if (!isFinite(v) || v < 0){ flash("toast", "Enter your closing balance as a number, e.g. 4346.60", true); $("closeIn").focus(); return; }
-    const day = state.selected;
+    const day = state.selected, prev = state.entries;
     state.entries = {...state.entries, [day]: {close: r2(v), done: $("doneIn").checked, note: $("noteIn").value.trim().slice(0, 200)}};
     const was = M.nextRow && M.nextRow.day === day;
     render();
     if (was && M.nextRow){ state.selected = M.nextRow.day; render(); }
     await persistEntries();
-    flash("toast", `Day ${day} saved`);
+    snack(`Day ${day} saved`, () => restore(prev, day));
   });
   $("clearBtn").addEventListener("click", async () => {
     const day = state.selected; if (!state.entries[day]) return;
-    const copy = {...state.entries}; delete copy[day]; state.entries = copy;
-    render(); await persistEntries(); flash("toast", `Day ${day} cleared`);
+    const prev = state.entries, copy = {...state.entries}; delete copy[day]; state.entries = copy;
+    render(); await persistEntries(); snack(`Day ${day} cleared`, () => restore(prev, day));
   });
   $("tbody").addEventListener("click", e => {
     const tr = e.target.closest("tr[data-day]"); if (!tr) return;
-    state.selected = +tr.dataset.day; render();
+    state.selected = +tr.dataset.day; showTab("today"); render();
     $("entryForm").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center"});
     $("closeIn").focus({preventScroll:true});
   });
