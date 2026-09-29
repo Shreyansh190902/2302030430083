@@ -5,484 +5,179 @@
 <title>No Small Business</title>
 <link href="assets/fonts.css" rel="stylesheet">
 <style>
-  :root {
-    --paper: #f2f1ec;
-    --grid: #e0dfd8;
-    --ink: #0b0b0b;
-    --red: #b10000;
-    --yellow: #ffec3d;
-    --yellow-soft: #fff27a;
-    --muted: #4a4a4a;
-    --card: #ffffff;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #777; font-family: 'Inter', 'Noto Sans Gujarati', sans-serif; color: var(--ink); }
+  :root { --ink:#111; --muted:#6f6f6f; --faint:#a3a3a3; --line:#e2e2e2; --red:#c8102e; --paper:#fafaf8; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#777; font-family:'Inter','Noto Sans Gujarati',sans-serif; color:var(--ink); }
+  .slide { position:relative; width:1080px; height:1440px; margin:0 auto 40px; overflow:hidden;
+           background:var(--paper); padding:88px 88px 0; display:flex; flex-direction:column; }
 
-  .slide {
-    position: relative;
-    width: 1080px; height: 1440px;
-    overflow: hidden;
-    background-color: var(--paper);
-    background-image:
-      linear-gradient(var(--grid) 1.5px, transparent 1.5px),
-      linear-gradient(90deg, var(--grid) 1.5px, transparent 1.5px);
-    background-size: 44px 44px;
-    padding: 96px 72px 0;
-    margin: 0 auto 40px;
-  }
+  /* header / footer */
+  .top { display:flex; justify-content:space-between; align-items:center;
+         font:600 22px 'Inter'; letter-spacing:.16em; color:var(--faint); text-transform:uppercase; }
+  .top b { color:var(--red); font-weight:700; }
+  .foot { position:absolute; left:88px; right:88px; bottom:64px; display:flex; justify-content:space-between; align-items:center;
+          font:600 22px 'Inter'; letter-spacing:.16em; color:var(--faint); text-transform:uppercase; }
+  .foot img { width:110px; filter:grayscale(1) opacity(.55); mix-blend-mode:multiply; }
+  .foot .sw::after { content:' →'; color:var(--red); }
 
-  /* ---------- type ---------- */
-  .h-en {
-    font-family: 'Inter', sans-serif;
-    font-weight: 900;
-    font-size: 104px;
-    line-height: .98;
-    letter-spacing: -0.045em;
-  }
-  .h-gu {
-    font-family: 'Noto Sans Gujarati', sans-serif;
-    font-weight: 800;
-    font-size: 54px;
-    line-height: 1.35;
-    margin-top: 22px;
-  }
-  .red { color: var(--red); }
-  .hl {
-    background: linear-gradient(transparent 12%, var(--yellow) 12%, var(--yellow) 92%, transparent 92%);
-    padding: 0 .12em;
-    margin: 0 -.06em;
-    box-decoration-break: clone; -webkit-box-decoration-break: clone;
-    transform: rotate(-1deg);
-    display: inline;
-  }
-  .hand { font-family: 'Caveat', cursive; font-weight: 700; }
-  .hand-gu { font-family: 'Baloo Bhai 2', sans-serif; font-weight: 700; }
+  /* type */
+  h1 { font:800 92px/1.14 'Inter','Noto Sans Gujarati'; letter-spacing:-0.02em; margin-top:96px; }
+  h1 em { font-style:normal; color:var(--red); }
+  .rule { width:80px; height:6px; background:var(--red); margin:40px 0 30px; }
+  .sub { font:500 34px/1.45 'Inter','Noto Sans Gujarati'; color:var(--muted); max-width:860px; }
 
-  .swoosh { display: block; margin-top: 18px; }
+  /* numbered list */
+  .list { margin-top:64px; border-top:1.5px solid var(--line); }
+  .item { display:grid; grid-template-columns:96px 1fr; padding:40px 0; border-bottom:1.5px solid var(--line); }
+  .item .n { font:700 26px 'Inter'; color:var(--red); letter-spacing:.06em; padding-top:10px; }
+  .item .g { font:700 46px/1.3 'Inter','Noto Sans Gujarati'; }
+  .item .e { font:500 30px/1.4 'Inter'; color:var(--muted); margin-top:8px; }
 
-  /* ---------- chrome ---------- */
-  .pager {
-    position: absolute; top: 40px; right: 56px;
-    font: 800 26px 'Inter'; letter-spacing: .04em;
-    background: var(--ink); color: var(--paper);
-    padding: 8px 18px; border-radius: 40px;
-  }
-  .swipe {
-    position: absolute; bottom: 44px; right: 60px;
-    display: flex; align-items: center; gap: 10px;
-    font-family: 'Caveat'; font-weight: 700; font-size: 44px;
-  }
-  .swipe .gu { font-family: 'Baloo Bhai 2'; font-size: 32px; margin-top: 6px; }
+  /* comparison */
+  .vs { margin-top:64px; display:grid; grid-template-columns:1fr 1fr; border-top:1.5px solid var(--line); border-bottom:1.5px solid var(--line); }
+  .vs > div { padding:48px 0; }
+  .vs > div + div { border-left:1.5px solid var(--line); padding-left:48px; }
+  .vs .k { font:700 24px 'Inter','Noto Sans Gujarati'; letter-spacing:.14em; color:var(--faint); text-transform:uppercase; }
+  .vs .v { font:800 52px/1.25 'Inter','Noto Sans Gujarati'; margin-top:18px; }
+  .vs .v.red { color:var(--red); }
+  .vs .t { font:500 28px/1.4 'Inter'; color:var(--muted); margin-top:12px; }
 
-  /* ---------- cards ---------- */
-  .cards { display: flex; flex-direction: column; gap: 22px; margin-top: 52px; }
-  .card {
-    display: flex; align-items: center; gap: 28px;
-    background: var(--card);
-    border: 4px solid var(--ink);
-    border-radius: 26px;
-    padding: 24px 30px;
-    box-shadow: 8px 8px 0 var(--ink);
-  }
-  .card .num {
-    flex: 0 0 76px; height: 76px; border-radius: 50%;
-    background: var(--yellow); border: 4px solid var(--ink);
-    display: grid; place-items: center;
-    font: 900 38px 'Inter'; color: #0b0b0b;
-  }
-  .card .num.bad { background: var(--red); color: #fff; }
-  .card .en { font: 800 40px/1.12 'Inter'; letter-spacing: -0.02em; }
-  .card .gu { font: 700 32px/1.4 'Noto Sans Gujarati'; color: var(--muted); margin-top: 4px; }
+  /* stacked rows (before/after thinking) */
+  .row { padding:44px 0; border-bottom:1.5px solid var(--line); }
+  .row .k { font:700 24px 'Inter','Noto Sans Gujarati'; letter-spacing:.12em; color:var(--faint); }
+  .row .k.red { color:var(--red); }
+  .row .q { font:800 54px/1.3 'Inter','Noto Sans Gujarati'; margin-top:14px; }
+  .row .q.dim { color:#9b9b9b; text-decoration:line-through; text-decoration-thickness:3px; }
+  .row .e { font:500 28px 'Inter'; color:var(--muted); margin-top:10px; }
 
-  .note {
-    position: absolute;
-    font-family: 'Caveat'; font-weight: 700; font-size: 50px; line-height: 1.05;
-  }
-  .note .gu { font-family: 'Baloo Bhai 2'; font-weight: 700; font-size: 36px; display: block; margin-top: 14px; }
-  .mark { background: var(--yellow-soft); padding: 0 8px; }
+  /* takeaway */
+  .take { position:absolute; left:88px; right:88px; bottom:150px; border-left:6px solid var(--red); padding:6px 0 6px 32px; }
+  .take .g { font:700 40px/1.35 'Inter','Noto Sans Gujarati'; }
+  .take .e { font:500 28px/1.4 'Inter'; color:var(--muted); margin-top:6px; }
 
-  .sticker {
-    position: absolute;
-    background-image: url('assets/cover.webp');
-    background-repeat: no-repeat;
-    filter: drop-shadow(6px 8px 0 rgba(0,0,0,.12));
-  }
-  .eye-sticker {
-    width: 360px; height: 290px;
-    background-size: 1193px auto;          /* 1086 * 1.098 */
-    background-position: -833px -95px;
-    clip-path: polygon(4% 8%, 30% 3%, 58% 6%, 97% 2%, 100% 40%, 95% 78%, 99% 97%, 60% 93%, 34% 99%, 5% 90%, 1% 52%);
-  }
+  /* big numbers */
+  .big { font:800 112px/1 'Inter','Noto Sans Gujarati'; letter-spacing:-0.03em; color:var(--red); }
+  .bl { font:700 40px 'Inter','Noto Sans Gujarati'; margin-top:18px; }
+  .be { font:500 28px 'Inter'; color:var(--muted); margin-top:6px; }
+  .arrow { font:300 60px/1 'Inter'; color:var(--faint); margin:22px 0; }
 
-  /* layered tear film */
-  .film { margin-top: 56px; display: flex; flex-direction: column; gap: 0; border: 4px solid var(--ink); border-radius: 30px; overflow: hidden; box-shadow: 10px 10px 0 var(--ink); }
-  .layer { color: #0b0b0b; display: flex; align-items: center; gap: 28px; padding: 30px 34px; border-bottom: 4px solid var(--ink); }
-  .layer:last-child { border-bottom: 0; }
-  .layer .tag { flex: 0 0 210px; font: 900 40px 'Inter'; letter-spacing: -0.02em; }
-  .layer .tag small { display: block; font: 800 30px 'Noto Sans Gujarati'; letter-spacing: 0; margin-top: 2px; }
-  .layer .what { font: 700 34px/1.2 'Inter'; letter-spacing: -0.01em; }
-  .layer .what small { display: block; font: 700 30px/1.4 'Noto Sans Gujarati'; color: #4a4a4a; margin-top: 4px; }
-  .l-oil { background: #ffe68a; }
-  .l-water { background: #cfe8ff; }
-  .l-mucus { background: #ffffff; }
-  .eyeball { background: #111; color: #fff; text-align: center; font: 800 28px 'Inter'; letter-spacing: .12em; padding: 16px; }
-  .eyeball span { font-family: 'Noto Sans Gujarati'; letter-spacing: 0; }
-
-  .alert {
-    margin-top: 44px;
-    background: var(--red); color: #fff;
-    border: 4px solid var(--ink); border-radius: 30px;
-    padding: 34px 40px;
-    box-shadow: 10px 10px 0 var(--ink);
-  }
-  .alert .en { font: 900 54px/1.05 'Inter'; letter-spacing: -0.03em; }
-  .alert .gu { font: 800 40px/1.4 'Noto Sans Gujarati'; margin-top: 8px; }
-
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 52px; }
-  .chip {
-    background: var(--card); border: 4px solid var(--ink); border-radius: 24px;
-    padding: 26px 26px; box-shadow: 7px 7px 0 var(--ink);
-  }
-  .chip .en { font: 900 42px 'Inter'; letter-spacing: -0.03em; }
-  .chip .gu { font: 700 30px/1.4 'Noto Sans Gujarati'; color: var(--muted); margin-top: 6px; }
-  .chip.wide { grid-column: span 2; }
-  .chip .ico { font: 900 42px 'Inter'; color: var(--red); margin-right: 8px; }
-
-  .big-rule {
-    margin-top: 12px; display: inline-block;
-    font: 900 40px 'Inter'; background: var(--ink); color: var(--yellow);
-    padding: 4px 16px; border-radius: 12px; letter-spacing: -0.01em;
-  }
-
-  .cta-row { display: flex; gap: 26px; margin-top: 90px; }
-  .cta {
-    flex: 1; background: var(--card); border: 4px solid var(--ink); border-radius: 28px;
-    padding: 34px 20px; text-align: center; box-shadow: 9px 9px 0 var(--ink);
-  }
-  .cta svg { display: block; margin: 0 auto 16px; }
-  .cta .en { font: 900 40px 'Inter'; letter-spacing: -0.02em; }
-  .cta .gu { font: 700 30px 'Noto Sans Gujarati'; color: var(--muted); margin-top: 4px; }
-  .disclaimer {
-    position: absolute; left: 72px; right: 72px; bottom: 110px;
-    border-top: 3px dashed var(--ink); padding-top: 22px;
-    font: 700 28px/1.4 'Inter'; color: var(--muted);
-  }
-  .disclaimer span { display: block; font-family: 'Noto Sans Gujarati'; }
-
-  /* ---------- 01: provided cover + Gujarati touches ---------- */
-
-  /* ---------- dark slides (alternate with light; matches the podcast outro) ---------- */
-  .slide.dark {
-    --paper: #050505; --grid: #1c1c1c; --ink: #f4f4f4; --muted: #b8b8b8; --card: #151515;
-    color: var(--ink);
-  }
-  .dark .h-gu .red { color: var(--yellow); }
-  .dark .card, .dark .chip, .dark .cta { box-shadow: 8px 8px 0 var(--yellow); }
-  .dark .film, .dark .alert { box-shadow: 10px 10px 0 var(--yellow); }
-  .dark .layer { border-bottom-color: #0b0b0b; }
-  .dark .eyeball { background: var(--yellow); color: #0b0b0b; }
-  .dark .big-rule { background: var(--yellow); color: #0b0b0b; }
-  .dark .mark { color: #0b0b0b; }
-  .dark .eye-sticker { filter: drop-shadow(0 0 0 transparent); }
-
-  /* ---------- 09: outro (light theme; hosts + eye artwork from the podcast outro in a card) ---------- */
-
-  /* ================= Gopal carousel additions ================= */
-  .h-g { font: 800 92px/1.12 'Inter', 'Baloo Bhai 2'; letter-spacing: -0.03em; letter-spacing: -0.01em; color: var(--ink); }
-  .h-g .hl2 {
-    display: inline-block; color: #fff; background: var(--grad); border-radius: 22px;
-    padding: 0 24px 4px; margin: 10px 0 6px -8px; transform: rotate(-1.2deg);
-  }
-  .sub-en { font: 800 40px/1.2 'Inter'; letter-spacing: -0.02em; color: var(--muted); margin-top: 16px; }
-  .photo-card {
-    position: absolute; border-radius: 28px; overflow: hidden;
-    box-shadow: 0 22px 50px rgba(232, 54, 79, .25);
-    background: url('assets/thumb.jpg') no-repeat;
-  }
-  .stat-row { display: flex; gap: 22px; }
-  .stat {
-    flex: 1; background: #fff; border: 2px solid #ffe2d6; border-radius: 28px;
-    box-shadow: var(--soft-shadow); padding: 26px 28px;
-  }
-  .stat .big { font: 900 72px/1 'Inter'; letter-spacing: -0.04em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .stat .big.gu { font: 800 64px/1.15 'Baloo Bhai 2'; }
-  .stat .lbl { font: 700 32px/1.3 'Inter', 'Baloo Bhai 2'; margin-top: 8px; }
-  .stat .lbl-en { font: 700 26px/1.3 'Inter'; color: var(--muted); }
-  .stat.ok .big { background: none; color: #1f9d55; }
-
-  .tl { position: relative; margin-top: 50px; padding-left: 70px; }
-  .tl::before { content: ''; position: absolute; left: 26px; top: 20px; bottom: 30px; width: 6px; border-radius: 3px; background: var(--grad); }
-  .tl .step { position: relative; margin-bottom: 26px; background: #fff; border: 2px solid #ffe2d6; border-radius: 24px; box-shadow: var(--soft-shadow); padding: 20px 26px; }
-  .tl .step::before { content: ''; position: absolute; left: -58px; top: 28px; width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 7px solid #f4714a; }
-  .tl .when { font: 900 28px 'Inter'; letter-spacing: .02em; color: var(--accent); text-transform: uppercase; }
-  .tl .what { font: 800 36px/1.3 'Inter', 'Baloo Bhai 2'; letter-spacing: -0.01em; }
-  .tl .what small { display: block; font: 700 26px/1.3 'Inter'; color: var(--muted); }
-  .tl .step.win { background: var(--grad); border: 0; color: #fff; }
-  .tl .step.win .when, .tl .step.win .what small { color: #fff; }
-
-  .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 64px; }
-  .lesson { background: #fff; border: 2px solid #ffe2d6; border-radius: 28px; box-shadow: var(--soft-shadow); padding: 30px 28px; min-height: 380px; }
-  .lesson .n { width: 70px; height: 70px; border-radius: 50%; background: var(--grad); color: #fff; display: grid; place-items: center; font: 900 36px 'Inter'; }
-  .lesson .t { font: 800 44px/1.2 'Inter', 'Baloo Bhai 2'; letter-spacing: -0.01em; margin-top: 22px; }
-  .lesson .e { font: 700 26px/1.3 'Inter'; color: var(--muted); margin-top: 8px; }
-  .card .gu-main { font: 800 38px/1.25 'Inter', 'Baloo Bhai 2'; letter-spacing: -0.01em; }
-  .card .en-sub { font: 700 27px/1.3 'Inter'; color: var(--muted); margin-top: 2px; }
-  .card .emoji { flex: 0 0 76px; height: 76px; border-radius: 50%; background: var(--peach); display: grid; place-items: center; font-size: 38px; }
-  .yt9 { display: flex; align-items: center; gap: 18px; justify-content: center; }
-  .yt9 .word { font: 900 80px/1 'Inter'; letter-spacing: -0.06em; transform: scaleY(1.12); }
-  .fine { font: 600 24px/1.4 'Inter'; color: var(--muted); }
-  .fine span { display: block; font-family: 'Noto Sans Gujarati'; }
-
-  /* ================= Old grid-paper theme for the Gopal additions ================= */
-  :root { --accent: var(--red); --peach: var(--yellow-soft); }
-  .brand { position: absolute; left: 56px; bottom: 34px; width: 150px; mix-blend-mode: multiply; }
-  .h-g .hl2 {
-    color: var(--red); border-radius: 0; padding: 0 16px 2px;
-    background: linear-gradient(transparent 10%, var(--yellow) 10%, var(--yellow) 92%, transparent 92%);
-  }
-  .photo-card { border: 4px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); border-radius: 26px; }
-  .stat, .tl .step, .lesson { border: 4px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); border-radius: 26px; }
-  .stat .big { background: none; color: var(--red); -webkit-background-clip: border-box; background-clip: border-box; }
-  .tl::before { background: var(--ink); }
-  .tl .step::before { border-color: var(--ink); background: var(--yellow); }
-  .tl .when { color: var(--red); }
-  .tl .step.win { background: var(--yellow); border: 4px solid var(--ink); color: var(--ink); }
-  .tl .step.win .when { color: var(--red); }
-  .tl .step.win .what small { color: var(--muted); }
-  .lesson .n { background: var(--yellow); color: var(--ink); border: 4px solid var(--ink); }
-  .card .emoji { background: var(--yellow); border: 4px solid var(--ink); }
-  .alert .gu, .alert .en { color: #fff; }
-
-  /* Gujarati fallbacks: Latin keeps its font, Gujarati letters use a proper Gujarati font */
-  .sub-en { font-family: 'Inter', 'Noto Sans Gujarati', sans-serif; }
-  .note, .note .mark, .swipe { font-family: 'Caveat', 'Baloo Bhai 2', cursive; }
-  .ph { position:absolute; border:4px solid var(--ink); border-radius:26px; box-shadow:10px 10px 0 var(--ink); background-size:cover; background-position:center; }
-  .cap { position:absolute; background:var(--yellow); border:3px solid var(--ink); border-radius:10px; padding:4px 14px; font:800 28px 'Inter','Baloo Bhai 2'; transform:rotate(-2deg); }
-
-  /* text-only content slides: larger, fill the page */
-  #s2 .card, #s4 .card, #s5 .card { padding: 44px 36px !important; }
-  #s2 .gu-main, #s4 .gu-main, #s5 .gu-main { font-size: 50px; }
-  #s2 .en-sub, #s4 .en-sub, #s5 .en-sub { font-size: 32px; margin-top: 6px; }
-  #s4 .cards, #s5 .cards { gap: 40px !important; margin-top: 70px !important; }
-  #s4 .cards { gap: 60px !important; margin-top: 100px !important; }
-  #s4 .card { padding: 60px 36px !important; }
-  #s2 .cards { gap: 26px !important; margin-top: 40px !important; }
-  #s2 .card { padding: 28px 30px !important; }
-  #s2 .gu-main { font-size: 44px !important; }
-  #s2 .stat-row { margin-top: 36px !important; }
-  #s2 .stat { padding: 34px 20px !important; }
-  #s3 .stat-row { margin-top: 40px !important; gap: 28px; }
-  #s4 .card .emoji, #s5 .card .emoji, #s2 .card .emoji { flex-basis: 100px; height: 100px; font-size: 52px; }
-  #s2 .stat { padding: 50px 24px; }
-  #s2 .stat .big { font-size: 58px !important; }
-  #s2 .stat .lbl-en { font-size: 30px; margin-top: 8px; }
-  #s3 .stat-row { flex-direction: column; gap: 34px; }
-  #s3 .stat { padding: 34px 40px; }
-  #s3 .stat .lbl { font-size: 54px; margin-top: 22px !important; }
-  #s3 .stat .lbl-en { font-size: 32px; }
-  .stat .big { font-family: 'Inter', 'Baloo Bhai 2', sans-serif; }
-
-  /* cover in the style of the eye-care cover: cut-out people with red outline, torn sticker */
-  .person { position:absolute; bottom:0; background-repeat:no-repeat; background-size:100% 100%;
-    filter: drop-shadow(5px 0 0 #c8102e) drop-shadow(-5px 0 0 #c8102e) drop-shadow(0 5px 0 #c8102e) drop-shadow(0 -5px 0 #c8102e); }
-  .gopal-sticker { position:absolute; width:330px; height:262px; background:url('assets/outro.webp') no-repeat -385px -312px / 1086px 1648px;
-    clip-path: polygon(4% 8%, 30% 2%, 58% 7%, 96% 1%, 100% 40%, 95% 78%, 99% 97%, 60% 92%, 34% 99%, 5% 91%, 1% 50%);
-    filter: drop-shadow(6px 8px 0 rgba(0,0,0,.14)); }
-
-  /* ===== palette: black, white and red only (no yellow) ===== */
-  :root { --red:#c8102e; --yellow:#c8102e; --yellow-soft:#fff; --peach:#fff; }
-  .h-g .hl2, .hl { background:#c8102e !important; color:#fff !important; padding:0 18px 6px; }
-  .mark { background:none; color:#c8102e; border-bottom:4px solid #c8102e; padding:0 4px; }
-  .card .emoji, .lesson .n, .tl .step::before { background:#fff !important; border:4px solid var(--ink) !important; }
-  .stat[style*="background:var(--red)"] .lbl, .stat[style*="background:var(--red)"] .lbl-en { color:#fff; }
-  .card .num { background:#fff; }
-  .gopal-sticker { filter: grayscale(1) contrast(1.15) drop-shadow(6px 8px 0 rgba(0,0,0,.14)) !important; }
-
-  /* ================= MINIMAL theme: black / white / red, flat, lots of space ================= */
-  .slide { background:#fafaf8 !important; background-image:none !important; }
-  .slide svg.swoosh, #s1 > svg, .card .emoji, .dots { display:none !important; }
-  .pager { background:none !important; color:#9a9a9a !important; box-shadow:none !important; font:600 24px 'Inter'; letter-spacing:.08em; padding:0; top:56px; right:72px; }
-  .h-g { font-family:'Inter','Noto Sans Gujarati',sans-serif !important; font-weight:800 !important; font-size:80px !important; line-height:1.18 !important; letter-spacing:-0.02em !important; }
-  .h-g .hl2, .hl { background:none !important; color:#c8102e !important; padding:0 !important; margin:0 !important; transform:none !important; border-radius:0 !important; }
-  .slide:not(#s1):not(#s7) .h-g::after { content:''; display:block; width:72px; height:6px; background:#c8102e; margin-top:34px; }
-  .sub-en { font:500 30px/1.4 'Inter','Noto Sans Gujarati' !important; color:#6b6b6b !important; margin-top:26px !important; }
-  .card, .chip, .stat, .lesson, .tl .step { background:transparent !important; border:0 !important; border-top:1.5px solid #dcdcdc !important; border-radius:0 !important; box-shadow:none !important; color:#111 !important; }
-  .cards { gap:0 !important; }
-  .card { padding:34px 0 !important; }
-  .card .gu-main { font-weight:700 !important; }
-  .card .en-sub, .stat .lbl-en { color:#8a8a8a !important; font-weight:500 !important; }
-  .stat { padding:30px 0 !important; text-align:left !important; }
-  .stat .big, .stat .big.gu { color:#c8102e !important; background:none !important; -webkit-background-clip:border-box; }
-  .stat .lbl, .stat div { color:#111 !important; }
-  .stat .big, .stat .big * { color:#c8102e !important; }
-  .stat-row { gap:40px !important; align-items:stretch !important; }
-  .stat-row > div:not(.stat) { display:none; }
-  .note, .note .gu { font-family:'Inter','Noto Sans Gujarati',sans-serif !important; font-weight:500 !important; font-size:30px !important; color:#6b6b6b !important; transform:none !important; line-height:1.45 !important; }
-  .note .gu { display:block !important; margin-top:6px; }
-  .mark { background:none !important; border:0 !important; color:#c8102e !important; font-weight:700; padding:0 !important; }
-  .swipe { font:600 22px 'Inter' !important; color:#9a9a9a !important; letter-spacing:.12em; text-transform:uppercase; }
-  .swipe svg { display:none; }
-  .brand { width:120px !important; filter:grayscale(1) opacity(.6); }
   /* cover */
-  #s1 .person { filter:none !important; }
-  #s1 .gopal-sticker { clip-path:none !important; transform:none !important; width:220px !important; height:175px !important; background-size:724px 1099px !important; background-position:-257px -208px !important; filter:grayscale(1) !important; top:170px !important; right:72px !important; }
-  #s1 .h-g { font-size:96px !important; top:150px !important; }
-  #s1 .note { top:560px !important; left:72px !important; }
+  #s1 h1 { font-size:104px; margin-top:72px; }
+  #s1 .sub { font-size:36px; }
+  #s1 .sub b { color:var(--red); font-weight:700; }
+  .person { position:absolute; bottom:0; background-repeat:no-repeat; background-size:100% 100%; }
+
   /* outro */
-  .photo-card { border:0 !important; box-shadow:none !important; border-radius:0 !important; }
-  #s7 div[style*="Caveat"] { font:800 56px 'Inter' !important; letter-spacing:-0.02em; }
-  #s1 .gopal-sticker { display:none !important; }
-  .note .mark, .note span { font-family:'Inter','Noto Sans Gujarati',sans-serif !important; font-size:30px !important; }
-  #s6 div[style*="text-align:center; font:900 70px"] { text-align:left !important; font-size:48px !important; color:#c8102e; }
-  #s2 .stat .big { font-size:46px !important; }
+  #s7 { padding:0; }
+  #s7 .art { position:absolute; left:88px; right:88px; top:150px; height:840px;
+             background:url('assets/outro.webp') no-repeat 0 0 / 904px 1372px; }
+  #s7 .top { position:absolute; left:88px; right:88px; top:88px; }
+  #s7 .cta { position:absolute; left:88px; right:88px; top:1040px; }
+  #s7 .cta h2 { font:800 64px/1.1 'Inter'; letter-spacing:-0.02em; }
+  #s7 .cta h2 em { font-style:normal; color:var(--red); }
+  #s7 .cta p { font:600 34px 'Inter','Noto Sans Gujarati'; color:var(--muted); margin-top:14px; }
+  #s7 .fine { position:absolute; left:88px; right:88px; bottom:64px; font:500 22px/1.5 'Inter','Noto Sans Gujarati'; color:var(--faint); }
+  #s4 .list { margin-top:90px; }
+  #s4 .item { padding:62px 0; }
+  #s5 .list { margin-top:60px !important; }
+  #s5 .item { padding:40px 0 !important; }
+  #s6 .bl { font-size:36px; margin-top:12px; }
+  #s6 .take { bottom:140px; }
 </style>
 </head>
 <body>
 
-<!-- reusable doodles -->
-<svg width="0" height="0" style="position:absolute">
-  <defs>
-    <linearGradient id="brandgrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#ec3462"/><stop offset=".55" stop-color="#f4714a"/><stop offset="1" stop-color="#f9a94b"/>
-    </linearGradient>
-    <symbol id="arrow-curve" viewBox="0 0 160 120">
-      <path d="M10 10 C 10 70, 60 100, 140 96" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
-      <path d="M118 78 L 142 96 L 116 112" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="arrow-right" viewBox="0 0 120 40">
-      <path d="M6 22 C 40 12, 70 30, 104 18" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
-      <path d="M88 6 L 108 18 L 90 34" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="burst" viewBox="0 0 80 80">
-      <path d="M40 6 L 44 28 M 70 18 L 54 34 M 74 50 L 54 48" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="burst-y" viewBox="0 0 80 80">
-      <path d="M40 6 L 44 28 M 70 18 L 54 34 M 74 50 L 54 48" stroke="#c8102e" stroke-width="7" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="underline" viewBox="0 0 600 30">
-      <path d="M6 20 C 150 6, 350 8, 594 14" fill="none" stroke="#c8102e" stroke-width="12" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="drop" viewBox="0 0 40 56">
-      <path d="M20 4 C 30 20, 36 30, 36 38 A 16 16 0 0 1 4 38 C 4 30, 10 20, 20 4 Z" fill="#cfe8ff" stroke="currentColor" stroke-width="4"/>
-    </symbol>
-  </defs>
-</svg>
-
+<!-- 01 -->
 <section class="slide" id="s1">
-  <h1 class="h-g" style="position:absolute; left:56px; top:150px; font-size:104px; line-height:1.16; white-space:nowrap">કોઈ <span class="hl2">ધંધો</span><br>નાનો નથી<br>હોતો!</h1>
-  <svg style="position:absolute; left:70px; top:545px; width:520px" height="26"><use href="#underline"/></svg>
-  <div class="gopal-sticker" style="right:40px; top:120px; transform:rotate(5deg)"></div>
-  <svg style="position:absolute; right:330px; top:80px" width="80" height="80"><use href="#burst"/></svg>
-  <svg style="position:absolute; right:250px; top:390px; transform:rotate(-100deg)" width="120" height="90"><use href="#arrow-curve"/></svg>
-  <svg style="position:absolute; left:150px; top:565px" width="130" height="90"><use href="#arrow-curve"/></svg>
-  <div class="note" style="left:300px; top:575px; transform:rotate(-4deg); font-size:48px; line-height:1.15">
-    <span class="gu" style="display:inline; font-size:40px">લોકો કહે</span> <span class="mark">"small business"</span>…<br>
-    <span class="gu" style="display:inline; font-size:40px">પણ Gopal ની journey</span><br>
-    <span class="gu" style="display:inline; font-size:40px; padding-left:40px">actually શું કહે છે?</span>
-  </div>
-  <svg style="position:absolute; left:790px; top:470px; transform:rotate(12deg)" width="100" height="128" viewBox="0 0 120 150"><path d="M20 40 C 20 5, 100 5, 100 45 C 100 80, 60 75, 60 105" fill="none" stroke="#c8102e" stroke-width="16" stroke-linecap="round"/><path d="M20 40 C 20 5, 100 5, 100 45 C 100 80, 60 75, 60 105" fill="none" stroke="#0b0b0b" stroke-width="6" stroke-linecap="round"/><circle cx="60" cy="132" r="10" fill="#0b0b0b"/></svg>
-  <div class="person" style="left:560px; width:520px; height:771px; background-image:url('assets/person-sagar.png')"></div>
+  <div class="top"><span>The Sagar Kathrotiya Show</span><span>01 / 07</span></div>
+  <h1>કોઈ <em>ધંધો</em><br>નાનો નથી હોતો.</h1>
+  <div class="rule"></div>
+  <p class="sub">લોકો કહે <b>“small business”</b>…<br>પણ Gopal ની journey actually શું કહે છે?</p>
   <div class="person" style="left:-90px; bottom:-70px; width:703px; height:787px; background-image:url('assets/person-bipin.png')"></div>
+  <div class="person" style="left:560px; width:520px; height:771px; background-image:url('assets/person-sagar.png')"></div>
 </section>
 
+<!-- 02 -->
 <section class="slide" id="s2">
-  <div class="pager" style="z-index:2">02 / 07</div>
-  <h1 class="h-g">Deodorant નો ધંધો…<br><span class="hl2">નાનો? </span></h1>
-  <p class="sub-en">A "small" product can become a big brand</p>
-  <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
-  <div class="stat-row" style="margin-top:50px; align-items:center">
-    <div class="stat" style="text-align:center"><div style="font-size:90px"></div><div class="big gu" style="color:var(--ink); font-size:50px">એક સામાન્ય product</div><div class="lbl-en">just a deodorant</div></div>
-    <div style="font:900 70px 'Inter'">→</div>
-    <div class="stat" style="text-align:center; background:var(--red); color:#fff"><div style="font-size:90px"></div><div class="big gu" style="color:#fff; font-size:50px">ઘરે ઘરે જાણીતી brand</div><div class="lbl-en">a household name</div></div>
+  <div class="top"><span>The Sagar Kathrotiya Show</span><span>02 / 07</span></div>
+  <h1>Deodorant નો ધંધો…<br><em>નાનો?</em></h1>
+  <div class="rule"></div>
+  <p class="sub">A “small” product can become a big brand.</p>
+  <div class="vs">
+    <div><div class="k">Product</div><div class="v">એક સામાન્ય<br>deodorant</div><div class="t">Just an everyday item</div></div>
+    <div><div class="k">Brand</div><div class="v red">ઘરે ઘરે<br>જાણીતી brand</div><div class="t">A household name</div></div>
   </div>
-  <div class="cards" style="margin-top:50px">
-    <div class="card" style="padding:30px"><div class="emoji"></div><div><div class="gu-main">Product નાનું હોઈ શકે, brand નહીં</div><div class="en-sub">Size of the product ≠ size of the business</div></div></div>
-    <div class="card" style="padding:30px"><div class="emoji"></div><div><div class="gu-main">મહત્વનું છે brand કેવી રીતે બનાવો છો</div><div class="en-sub">What matters is how you build it</div></div></div>
-  </div>
-  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
-  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+  <div class="take"><div class="g">Product નાનું હોઈ શકે, brand નહીં.</div><div class="e">What matters is how you build it.</div></div>
+  <div class="foot"><img src="assets/show-logo.jpg" alt=""><span class="sw">Swipe</span></div>
 </section>
 
+<!-- 03 -->
 <section class="slide" id="s3">
-  <div class="pager" style="z-index:2">03 / 07</div>
-  <h1 class="h-g">ધંધો નાનો નથી,<br><span class="hl2">વિચાર નાનો હોય છે</span></h1>
-  <p class="sub-en">The business isn't small. The thinking is.</p>
-  <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
-  <div class="stat-row" style="margin-top:50px">
-    <div class="stat"><div style="font:900 52px 'Inter','Baloo Bhai 2'; color:var(--red)">✕ નાની વિચારસરણી</div><div class="lbl" style="margin-top:18px">"આ તો નાનો ધંધો છે"</div><div class="lbl-en">"It's just a small business"</div></div>
-    <div class="stat" style="background:var(--red); color:#fff"><div style="font:900 52px 'Inter','Baloo Bhai 2'; color:#fff">✓ મોટી વિચારસરણી</div><div class="lbl" style="margin-top:18px">"આને મોટી brand બનાવીશ"</div><div class="lbl-en">"I'll build this into a big brand"</div></div>
+  <div class="top"><span>The Sagar Kathrotiya Show</span><span>03 / 07</span></div>
+  <h1>ધંધો નાનો નથી,<br><em>વિચાર નાનો હોય છે.</em></h1>
+  <div class="rule"></div>
+  <p class="sub">The business isn't small. The thinking is.</p>
+  <div style="margin-top:40px; border-top:1.5px solid var(--line)">
+    <div class="row"><div class="k">નાની વિચારસરણી · SMALL THINKING</div><div class="q dim">“આ તો નાનો ધંધો છે”</div><div class="e">“It's just a small business”</div></div>
+    <div class="row"><div class="k red">મોટી વિચારસરણી · BIG THINKING</div><div class="q">“આને મોટી brand બનાવીશ”</div><div class="e">“I'll build this into a big brand”</div></div>
   </div>
-  <div class="note" style="left:80px; bottom:175px; transform:rotate(-3deg); font-size:50px">
-    Product નહીં, <span class="mark">vision</span> નક્કી કરે છે 
-    <span class="gu">Vision decides how big you grow</span>
-  </div>
-  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
-  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+  <div class="take"><div class="g">Product નહીં, <span style="color:var(--red)">vision</span> નક્કી કરે છે.</div><div class="e">Vision decides how big you grow.</div></div>
+  <div class="foot"><img src="assets/show-logo.jpg" alt=""><span class="sw">Swipe</span></div>
 </section>
 
+<!-- 04 -->
 <section class="slide" id="s4">
-  <div class="pager" style="z-index:2">04 / 07</div>
-  <h1 class="h-g">મોટું <span class="hl2">વિચારો </span></h1>
-  <p class="sub-en">Think big, even when you start small</p>
-  <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
-  <div class="cards" style="margin-top:50px; gap:26px">
-    <div class="card" style="padding:30px"><div class="emoji"></div><div><div class="gu-main">મોટું vision રાખો</div><div class="en-sub">Aim beyond today's size</div></div></div>
-    <div class="card" style="padding:30px"><div class="emoji"></div><div><div class="gu-main">નાના કામ ને પણ પૂરી ગંભીરતા થી કરો</div><div class="en-sub">Treat small work seriously</div></div></div>
-    <div class="card" style="padding:30px"><div class="emoji"></div><div><div class="gu-main">નાની શરૂઆત થી ડરો નહીં</div><div class="en-sub">Starting small is not a weakness</div></div></div>
+  <div class="top"><span>The Sagar Kathrotiya Show</span><span>04 / 07</span></div>
+  <h1>મોટું <em>વિચારો.</em></h1>
+  <div class="rule"></div>
+  <p class="sub">Think big, even when you start small.</p>
+  <div class="list">
+    <div class="item"><div class="n">01</div><div><div class="g">મોટું vision રાખો</div><div class="e">Aim beyond today's size</div></div></div>
+    <div class="item"><div class="n">02</div><div><div class="g">નાના કામ ને પણ પૂરી ગંભીરતા થી કરો</div><div class="e">Treat small work seriously</div></div></div>
+    <div class="item"><div class="n">03</div><div><div class="g">નાની શરૂઆત થી ડરો નહીં</div><div class="e">Starting small is not a weakness</div></div></div>
   </div>
-  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
-  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+  <div class="foot"><img src="assets/show-logo.jpg" alt=""><span class="sw">Swipe</span></div>
 </section>
 
+<!-- 05 -->
 <section class="slide" id="s5">
-  <div class="pager" style="z-index:2">05 / 07</div>
-  <h1 class="h-g">માન <span class="hl2">કામ થી</span> મળે છે </h1>
-  <p class="sub-en">Respect comes from the work, not the size</p>
-  <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
-  <div class="cards" style="margin-top:50px; gap:26px">
-    <div class="card" style="padding:30px"><div class="emoji"></div><div><div class="gu-main">મહેનત</div><div class="en-sub">Hard work every single day</div></div></div>
-    <div class="card" style="padding:30px"><div class="emoji"></div><div><div class="gu-main">ઈમાનદારી</div><div class="en-sub">Honesty with customers and partners</div></div></div>
-    <div class="card" style="padding:30px"><div class="emoji">⭐</div><div><div class="gu-main">કામ ની quality</div><div class="en-sub">Quality of work, not size of business</div></div></div>
+  <div class="top"><span>The Sagar Kathrotiya Show</span><span>05 / 07</span></div>
+  <h1>માન <em>કામ થી</em><br>મળે છે.</h1>
+  <div class="rule"></div>
+  <p class="sub">Respect comes from the work, not the size.</p>
+  <div class="list" style="margin-top:48px">
+    <div class="item" style="padding:32px 0"><div class="n">01</div><div><div class="g">મહેનત</div><div class="e">Hard work, every single day</div></div></div>
+    <div class="item" style="padding:32px 0"><div class="n">02</div><div><div class="g">ઈમાનદારી</div><div class="e">Honesty with customers and partners</div></div></div>
+    <div class="item" style="padding:32px 0"><div class="n">03</div><div><div class="g">કામ ની quality</div><div class="e">Quality of work, not size of business</div></div></div>
   </div>
-  <div class="note" style="right:70px; bottom:170px; transform:rotate(-3deg); text-align:right">
-    ધંધો કોઈ પણ હોય,<br><span class="mark">મહેનત + ઈમાનદારી</span> = સફળતા
-  </div>
-  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
-  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+  <div class="take"><div class="g">ધંધો કોઈ પણ હોય, <span style="color:var(--red)">મહેનત + ઈમાનદારી</span> = સફળતા</div></div>
+  <div class="foot"><img src="assets/show-logo.jpg" alt=""><span class="sw">Swipe</span></div>
 </section>
 
+<!-- 06 -->
 <section class="slide" id="s6">
-  <div class="pager" style="z-index:2">06 / 07</div>
-  <h1 class="h-g">Proof: <span class="hl2">Gopal Snacks</span></h1>
-  <p class="sub-en">From a "small" farsan business to a big brand</p>
-  <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
-  <div style="margin-top:50px; display:flex; flex-direction:column; gap:20px; align-items:stretch">
-    <div class="stat" style="text-align:center"><div class="big gu" style="color:var(--red); font-size:90px">50 પૈસા</div><div class="lbl">નું ફરસાણ</div><div class="lbl-en">where it started</div></div>
-    <div style="text-align:center; font:900 70px 'Inter'">↓</div>
-    <div class="stat" style="text-align:center; background:var(--red); color:#fff"><div class="big gu" style="color:#fff; font-size:90px">₹10,000 કરોડ</div><div class="lbl">ની company</div><div class="lbl-en">where it is today</div></div>
+  <div class="top"><span>The Sagar Kathrotiya Show</span><span>06 / 07</span></div>
+  <h1>Proof:<br><em>Gopal Snacks.</em></h1>
+  <div class="rule"></div>
+  <p class="sub">From a “small” farsan business to a big brand.</p>
+  <div style="margin-top:48px">
+    <div class="big">50 પૈસા</div><div class="bl">નું ફરસાણ</div><div class="be">Where it started</div>
+    <div class="arrow">↓</div>
+    <div class="big">₹10,000 કરોડ</div><div class="bl">ની company</div><div class="be">Where it is today</div>
   </div>
-  <div class="note" style="left:80px; bottom:160px; transform:rotate(-3deg)">
-    ફરસાણ પણ "નાનો" ધંધો જ ગણાતો <br><span class="mark">કોઈ ધંધો નાનો નથી હોતો</span>
-  </div>
-  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
-  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+  <div class="take"><div class="g">ફરસાણ પણ “નાનો” ધંધો જ ગણાતો.<br><span style="color:var(--red)">કોઈ ધંધો નાનો નથી હોતો.</span></div></div>
+  <div class="foot"><img src="assets/show-logo.jpg" alt=""><span class="sw">Swipe</span></div>
 </section>
 
-<section class="slide" id="s7" style="padding:0; text-align:center">
-  <div class="pager" style="z-index:2">07 / 07</div>
-  <div class="photo-card" style="left:60px; right:60px; top:96px; height:900px; background-image:url('assets/outro.webp'); background-size:960px 1457px; background-position:0 0;"></div>
-  <div style="position:absolute; left:0; right:0; top:1036px">
-    <div style="font:700 88px/1 'Caveat'">Watch Full Podcast On</div>
-    <div style="font:700 36px 'Baloo Bhai 2'; color:var(--red); margin-top:6px">આખો પોડકાસ્ટ YouTube પર જુઓ</div>
-    <div class="yt9" style="margin-top:20px">
-      <svg width="120" height="85" viewBox="0 0 96 68" aria-label="YouTube"><rect width="96" height="68" rx="18" fill="#ff0033"/><path d="M38 19 L 66 34 L 38 49 Z" fill="#fff"/></svg>
-      <div class="word">YouTube</div>
-    </div>
+<!-- 07 -->
+<section class="slide" id="s7">
+  <div class="top"><span>The Sagar Kathrotiya Show</span><span>07 / 07</span></div>
+  <div class="art"></div>
+  <div class="cta">
+    <h2>Watch the full podcast<br>on <em>YouTube</em></h2>
+    <p>આખો પોડકાસ્ટ YouTube પર જુઓ</p>
   </div>
-  <div class="fine" style="position:absolute; left:72px; right:72px; bottom:36px">
-    Views shared are the guest's own. Not investment advice.
-    <span>આ વિચારો મહેમાનના અંગત છે. રોકાણ સલાહ નથી.</span>
-  </div>
+  <div class="fine">Views shared are the guest's own. Not investment advice. · આ વિચારો મહેમાનના અંગત છે. રોકાણ સલાહ નથી.</div>
 </section>
 
 </body>
