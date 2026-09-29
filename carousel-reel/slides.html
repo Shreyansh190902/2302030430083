@@ -281,6 +281,13 @@
   #s3 .stat .lbl { font-size: 54px; margin-top: 22px !important; }
   #s3 .stat .lbl-en { font-size: 32px; }
   .stat .big { font-family: 'Inter', 'Baloo Bhai 2', sans-serif; }
+
+  /* cover in the style of the eye-care cover: cut-out people with yellow outline, torn sticker */
+  .person { position:absolute; bottom:0; background-repeat:no-repeat; background-size:100% 100%;
+    filter: drop-shadow(5px 0 0 #ffe01a) drop-shadow(-5px 0 0 #ffe01a) drop-shadow(0 5px 0 #ffe01a) drop-shadow(0 -5px 0 #ffe01a); }
+  .gopal-sticker { position:absolute; width:330px; height:262px; background:url('assets/outro.webp') no-repeat -385px -312px / 1086px 1648px;
+    clip-path: polygon(4% 8%, 30% 2%, 58% 7%, 96% 1%, 100% 40%, 95% 78%, 99% 97%, 60% 92%, 34% 99%, 5% 91%, 1% 50%);
+    filter: drop-shadow(6px 8px 0 rgba(0,0,0,.14)); }
 </style>
 </head>
 <body>
@@ -315,19 +322,21 @@
 </svg>
 
 <section class="slide" id="s1">
-  <div class="pager" style="z-index:2">01 / 07</div>
-  <div style="position:absolute; left:72px; top:200px">
-    <div style="font:900 56px 'Inter'; letter-spacing:-0.03em">Bipinbhai Hadvani</div>
-    <div class="fine" style="font-size:32px">Founder – Gopal Snacks</div>
+  <h1 class="h-g" style="position:absolute; left:56px; top:150px; font-size:104px; line-height:1.16; white-space:nowrap">કોઈ <span class="hl2">ધંધો</span><br>નાનો નથી<br>હોતો!</h1>
+  <svg style="position:absolute; left:70px; top:545px; width:520px" height="26"><use href="#underline"/></svg>
+  <div class="gopal-sticker" style="right:40px; top:120px; transform:rotate(5deg)"></div>
+  <svg style="position:absolute; right:330px; top:80px" width="80" height="80"><use href="#burst"/></svg>
+  <svg style="position:absolute; left:470px; top:960px" width="80" height="80"><use href="#burst"/></svg>
+  <svg style="position:absolute; right:250px; top:390px; transform:rotate(-100deg)" width="120" height="90"><use href="#arrow-curve"/></svg>
+  <svg style="position:absolute; left:90px; top:590px" width="130" height="100"><use href="#arrow-curve"/></svg>
+  <div class="note" style="left:240px; top:620px; transform:rotate(-4deg); font-size:48px; line-height:1.15">
+    <span class="gu" style="display:inline; font-size:40px">લોકો કહે</span> <span class="mark">"small business"</span>…<br>
+    <span class="gu" style="display:inline; font-size:40px">પણ Gopal ની journey</span><br>
+    <span class="gu" style="display:inline; font-size:40px; padding-left:40px">actually શું કહે છે?</span>
   </div>
-  <div class="ph" style="left:40px; right:40px; top:430px; height:434px; background-image:url('assets/cover-clean.jpg'); background-size:100% 100%"></div>
-  <h1 class="h-g" style="position:absolute; left:268px; width:550px; top:470px; text-align:center; font-size:78px; line-height:1.2; white-space:nowrap">કોઈ <span class="hl2">ધંધો</span><br>નાનો નથી હોતો</h1>
-  <div class="note" style="left:0; right:0; top:960px; text-align:center; transform:rotate(-3deg); font-size:64px">
-    No business is <span class="mark">small</span> 👇
-    <span class="gu" style="font-size:44px">આખી વાત સમજો</span>
-  </div>
-  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
-  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+  <svg style="position:absolute; left:780px; top:560px; transform:rotate(12deg)" width="110" height="140" viewBox="0 0 120 150"><path d="M20 40 C 20 5, 100 5, 100 45 C 100 80, 60 75, 60 105" fill="none" stroke="#ffe01a" stroke-width="16" stroke-linecap="round"/><path d="M20 40 C 20 5, 100 5, 100 45 C 100 80, 60 75, 60 105" fill="none" stroke="#0b0b0b" stroke-width="6" stroke-linecap="round"/><circle cx="60" cy="132" r="10" fill="#0b0b0b"/></svg>
+  <div class="person" style="left:-20px; width:420px; height:640px; background-image:url('assets/cut-left.png'); background-size:420px 706px; background-position:0 0"></div>
+  <div class="person" style="right:-10px; width:420px; height:640px; background-image:url('assets/cut-right.png'); background-size:420px 728px; background-position:0 0"></div>
 </section>
 
 <section class="slide" id="s2">
