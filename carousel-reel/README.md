@@ -10,3 +10,8 @@ Slide 06 numbers (50 પૈસા → ₹10,000 કરોડ) come from the full
 - `out/`, `out-jpg/`, `no-small-business-jpg.zip` — exports
 
 Re-render: `NODE_PATH=$(npm root -g) node render.js`
+
+## Minimal theme
+`slides-minimal.html` is the same content in a minimal black/white/red design (flat, no grid,
+no doodles or emojis). Render with `NODE_PATH=$(npm root -g) node render.js slides-minimal.html out-minimal`.
+Exports: `out-minimal/`, `out-minimal-jpg/`, `no-small-business-minimal-jpg.zip`.
