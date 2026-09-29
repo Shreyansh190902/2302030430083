@@ -1,7 +1,7 @@
 # Gopal Snacks fire comeback — Instagram carousel (Gujarati + English)
 
 "₹400 કરોડ ની આગ પછી Bipinbhai Hadvani એ કેવી રીતે બદલી નાખી નસીબની બાજી?" —
-9 slides, 1080×1440, Sunset theme (same as `../carousel`).
+9 slides, 1080×1440, original grid-paper theme (yellow highlight, red text, black-bordered cards).
 
 - `slides.html` — all slides
 - `assets/thumb.jpg` — episode thumbnail (cover, fire photo and portraits are cropped from it)
