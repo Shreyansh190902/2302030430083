@@ -258,6 +258,29 @@
   .note, .note .mark, .swipe { font-family: 'Caveat', 'Baloo Bhai 2', cursive; }
   .ph { position:absolute; border:4px solid var(--ink); border-radius:26px; box-shadow:10px 10px 0 var(--ink); background-size:cover; background-position:center; }
   .cap { position:absolute; background:var(--yellow); border:3px solid var(--ink); border-radius:10px; padding:4px 14px; font:800 28px 'Inter','Baloo Bhai 2'; transform:rotate(-2deg); }
+
+  /* text-only content slides: larger, fill the page */
+  #s2 .card, #s4 .card, #s5 .card { padding: 44px 36px !important; }
+  #s2 .gu-main, #s4 .gu-main, #s5 .gu-main { font-size: 50px; }
+  #s2 .en-sub, #s4 .en-sub, #s5 .en-sub { font-size: 32px; margin-top: 6px; }
+  #s4 .cards, #s5 .cards { gap: 40px !important; margin-top: 70px !important; }
+  #s4 .cards { gap: 60px !important; margin-top: 100px !important; }
+  #s4 .card { padding: 60px 36px !important; }
+  #s2 .cards { gap: 26px !important; margin-top: 40px !important; }
+  #s2 .card { padding: 28px 30px !important; }
+  #s2 .gu-main { font-size: 44px !important; }
+  #s2 .stat-row { margin-top: 36px !important; }
+  #s2 .stat { padding: 34px 20px !important; }
+  #s3 .stat-row { margin-top: 40px !important; gap: 28px; }
+  #s4 .card .emoji, #s5 .card .emoji, #s2 .card .emoji { flex-basis: 100px; height: 100px; font-size: 52px; }
+  #s2 .stat { padding: 50px 24px; }
+  #s2 .stat .big { font-size: 58px !important; }
+  #s2 .stat .lbl-en { font-size: 30px; margin-top: 8px; }
+  #s3 .stat-row { flex-direction: column; gap: 34px; }
+  #s3 .stat { padding: 34px 40px; }
+  #s3 .stat .lbl { font-size: 54px; margin-top: 22px !important; }
+  #s3 .stat .lbl-en { font-size: 32px; }
+  .stat .big { font-family: 'Inter', 'Baloo Bhai 2', sans-serif; }
 </style>
 </head>
 <body>
@@ -312,10 +335,15 @@
   <h1 class="h-g">Deodorant નો ધંધો…<br><span class="hl2">નાનો? 🤔</span></h1>
   <p class="sub-en">A "small" product can become a big brand</p>
   <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
-  <div class="ph" style="left:72px; width:440px; top:520px; height:560px; background-image:url('assets/fogg-bottle.jpg'); transform:rotate(-2deg)"></div>
-  <div class="ph" style="right:72px; width:440px; top:540px; height:560px; background-image:url('assets/fogg-ad.jpg'); transform:rotate(2deg)"></div>
-  <div class="cap" style="left:110px; top:1100px">એક સામાન્ય product…</div>
-  <div class="cap" style="right:100px; top:1120px; transform:rotate(2deg)">…ઘરે ઘરે જાણીતી brand</div>
+  <div class="stat-row" style="margin-top:50px; align-items:center">
+    <div class="stat" style="text-align:center"><div style="font-size:90px">🧴</div><div class="big gu" style="color:var(--ink); font-size:50px">એક સામાન્ય product</div><div class="lbl-en">just a deodorant</div></div>
+    <div style="font:900 70px 'Inter'">→</div>
+    <div class="stat" style="text-align:center; background:var(--yellow)"><div style="font-size:90px">🏆</div><div class="big gu" style="color:var(--red); font-size:50px">ઘરે ઘરે જાણીતી brand</div><div class="lbl-en">a household name</div></div>
+  </div>
+  <div class="cards" style="margin-top:50px">
+    <div class="card" style="padding:30px"><div class="emoji">💡</div><div><div class="gu-main">Product નાનું હોઈ શકે, brand નહીં</div><div class="en-sub">Size of the product ≠ size of the business</div></div></div>
+    <div class="card" style="padding:30px"><div class="emoji">🚀</div><div><div class="gu-main">મહત્વનું છે brand કેવી રીતે બનાવો છો</div><div class="en-sub">What matters is how you build it</div></div></div>
+  </div>
   <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
   <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
 </section>
@@ -325,9 +353,13 @@
   <h1 class="h-g">ધંધો નાનો નથી,<br><span class="hl2">વિચાર નાનો હોય છે</span></h1>
   <p class="sub-en">The business isn't small. The thinking is.</p>
   <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
-  <div class="ph" style="left:210px; right:210px; top:460px; height:700px; background-image:url('assets/talk.jpg'); background-position:center 60%"></div>
-  <div class="note" style="left:80px; bottom:150px; transform:rotate(-3deg)">
+  <div class="stat-row" style="margin-top:50px">
+    <div class="stat"><div style="font:900 52px 'Inter','Baloo Bhai 2'; color:var(--red)">✕ નાની વિચારસરણી</div><div class="lbl" style="margin-top:18px">"આ તો નાનો ધંધો છે"</div><div class="lbl-en">"It's just a small business"</div></div>
+    <div class="stat" style="background:var(--yellow)"><div style="font:900 52px 'Inter','Baloo Bhai 2'; color:#1f7a3d">✓ મોટી વિચારસરણી</div><div class="lbl" style="margin-top:18px">"આને મોટી brand બનાવીશ"</div><div class="lbl-en">"I'll build this into a big brand"</div></div>
+  </div>
+  <div class="note" style="left:80px; bottom:175px; transform:rotate(-3deg); font-size:50px">
     Product નહીં, <span class="mark">vision</span> નક્કી કરે છે 💡
+    <span class="gu">Vision decides how big you grow</span>
   </div>
   <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
   <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
@@ -338,10 +370,10 @@
   <h1 class="h-g">મોટું <span class="hl2">વિચારો 🏙️</span></h1>
   <p class="sub-en">Think big, even when you start small</p>
   <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
-  <div class="ph" style="left:72px; right:72px; top:430px; height:440px; background-image:url('assets/office.jpg'); background-position:center 45%"></div>
-  <div class="cards" style="position:absolute; left:72px; right:72px; top:920px; margin:0; gap:18px">
-    <div class="card"><div class="emoji">🎯</div><div><div class="gu-main">મોટું vision રાખો</div><div class="en-sub">Aim beyond today's size</div></div></div>
-    <div class="card"><div class="emoji">🧭</div><div><div class="gu-main">નાના કામ ને પણ પૂરી ગંભીરતા થી કરો</div><div class="en-sub">Treat small work seriously</div></div></div>
+  <div class="cards" style="margin-top:50px; gap:26px">
+    <div class="card" style="padding:30px"><div class="emoji">🎯</div><div><div class="gu-main">મોટું vision રાખો</div><div class="en-sub">Aim beyond today's size</div></div></div>
+    <div class="card" style="padding:30px"><div class="emoji">🧭</div><div><div class="gu-main">નાના કામ ને પણ પૂરી ગંભીરતા થી કરો</div><div class="en-sub">Treat small work seriously</div></div></div>
+    <div class="card" style="padding:30px"><div class="emoji">🪜</div><div><div class="gu-main">નાની શરૂઆત થી ડરો નહીં</div><div class="en-sub">Starting small is not a weakness</div></div></div>
   </div>
   <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
   <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
@@ -352,8 +384,12 @@
   <h1 class="h-g">માન <span class="hl2">કામ થી</span> મળે છે 👏</h1>
   <p class="sub-en">Respect comes from the work, not the size</p>
   <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
-  <div class="ph" style="left:72px; right:72px; top:430px; height:600px; background-image:url('assets/podium.jpg'); background-position:center 55%"></div>
-  <div class="note" style="right:70px; bottom:150px; transform:rotate(-3deg); text-align:right">
+  <div class="cards" style="margin-top:50px; gap:26px">
+    <div class="card" style="padding:30px"><div class="emoji">💪</div><div><div class="gu-main">મહેનત</div><div class="en-sub">Hard work every single day</div></div></div>
+    <div class="card" style="padding:30px"><div class="emoji">🤝</div><div><div class="gu-main">ઈમાનદારી</div><div class="en-sub">Honesty with customers and partners</div></div></div>
+    <div class="card" style="padding:30px"><div class="emoji">⭐</div><div><div class="gu-main">કામ ની quality</div><div class="en-sub">Quality of work, not size of business</div></div></div>
+  </div>
+  <div class="note" style="right:70px; bottom:170px; transform:rotate(-3deg); text-align:right">
     ધંધો કોઈ પણ હોય,<br><span class="mark">મહેનત + ઈમાનદારી</span> = સફળતા
   </div>
   <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
@@ -363,14 +399,14 @@
 <section class="slide" id="s6">
   <div class="pager" style="z-index:2">06 / 07</div>
   <h1 class="h-g">Proof: <span class="hl2">Gopal Snacks</span></h1>
+  <p class="sub-en">From a "small" farsan business to a big brand</p>
   <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
-  <div class="ph" style="left:72px; width:470px; top:340px; height:600px; background-image:url('assets/bipin2.jpg'); background-position:center 25%"></div>
-  <div style="position:absolute; left:590px; right:72px; top:360px; display:flex; flex-direction:column; gap:22px">
-    <div class="stat"><div class="big gu" style="color:var(--red)">50 પૈસા</div><div class="lbl">નું ફરસાણ</div><div class="lbl-en">where it started</div></div>
-    <div style="text-align:center; font:900 60px 'Inter'">↓</div>
-    <div class="stat"><div class="big gu" style="color:var(--red)">₹10,000 કરોડ</div><div class="lbl">ની company</div><div class="lbl-en">where it is today</div></div>
+  <div style="margin-top:50px; display:flex; flex-direction:column; gap:20px; align-items:stretch">
+    <div class="stat" style="text-align:center"><div class="big gu" style="color:var(--red); font-size:90px">50 પૈસા</div><div class="lbl">નું ફરસાણ</div><div class="lbl-en">where it started</div></div>
+    <div style="text-align:center; font:900 70px 'Inter'">↓</div>
+    <div class="stat" style="text-align:center; background:var(--yellow)"><div class="big gu" style="color:var(--red); font-size:90px">₹10,000 કરોડ</div><div class="lbl">ની company</div><div class="lbl-en">where it is today</div></div>
   </div>
-  <div class="note" style="left:80px; bottom:170px; transform:rotate(-3deg)">
+  <div class="note" style="left:80px; bottom:160px; transform:rotate(-3deg)">
     ફરસાણ પણ "નાનો" ધંધો જ ગણાતો 😉<br><span class="mark">કોઈ ધંધો નાનો નથી હોતો</span>
   </div>
   <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
