@@ -15,3 +15,8 @@ Re-render: `NODE_PATH=$(npm root -g) node render.js`
 `slides-minimal.html` is the same content in a minimal black/white/red design (flat, no grid,
 no doodles or emojis). Render with `NODE_PATH=$(npm root -g) node render.js slides-minimal.html out-minimal`.
 Exports: `out-minimal/`, `out-minimal-jpg/`, `no-small-business-minimal-jpg.zip`.
+
+## Essence theme
+`slides-essence.html` — light grey grid/circle layout with red pill tags, page dots and arrow button
+(inspired by a reference post). Render: `node render.js slides-essence.html out-essence`.
+Exports: `out-essence/`, `out-essence-jpg/`, `no-small-business-essence-jpg.zip`.
