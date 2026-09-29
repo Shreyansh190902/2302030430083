@@ -163,6 +163,10 @@ code{font-family:var(--mono);font-size:.92em}
 .tab{display:grid;gap:20px;align-content:start}
 .sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:-8px}
 .tile.wide{grid-column:span 2}
+.tile.today{background:var(--surface);border-width:2px}
+.tile.today .v{font-size:26px}
+.tile.today.p{border-color:var(--profit-mark)} .tile.today.l{border-color:var(--loss-mark)}
+.tile .pct{font-size:.6em;font-weight:500;color:var(--ink-2)}
 .meter{position:relative}
 .meter .tick{position:absolute;top:0;bottom:0;width:2px;background:var(--surface)}
 .chip.m{background:var(--accent-soft);color:var(--accent-ink)}
@@ -534,6 +538,7 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       chips.push(`<span class="chip ${cls}">Net ${sinr(M.net)} since start</span>`);
       chips.push(`<span class="chip">Last logged: Day ${M.last.day}, ${shortDate(M.last.date)}</span>`);
     } else chips.push(`<span class="chip">No days logged yet</span>`);
+    { const ti = todayInfo(); if (ti.isToday) chips.unshift(`<span class="chip ${ti.r.pnl > 0 ? "p" : ti.r.pnl < 0 ? "l" : ""}">Today ${sinr(ti.r.pnl)} (${ti.r.pnl > 0 ? "+" : ""}${(ti.r.pnl / ti.r.open * 100).toFixed(2)}%)</span>`); }
     if (M.goalReached) chips.push(`<span class="chip p">Goal reached</span>`);
     const ms = MILESTONES.filter(m => m > s.capital && m < s.goal);
     const nextM = ms.find(m => m > M.current);
@@ -551,9 +556,23 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
   }
 
   function tile(k, v, sub, cls = ""){ return `<div class="tile ${cls}"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${sub}</div></div>`; }
+  function todayInfo(){
+    const today = iso(new Date(Date.now() + 330*60000));            // India time
+    const r = M.logged.find(x => iso(x.date) === today) || null;
+    const last = M.last;
+    return {r: r || last, isToday: !!r, today};
+  }
   function renderTiles(){
     const dash = "—", st = state.settings;
+    const ti = todayInfo(), tr = ti.r;
+    const todayTile = tr
+      ? tile(ti.isToday ? "Today's profit / loss" : `Last logged day · ${fmtDate(tr.date).slice(0,-5)}`,
+             sinr(tr.pnl) + ` <span class="pct">(${(tr.pnl / tr.open * 100 >= 0 ? "+" : "") + (tr.pnl / tr.open * 100).toFixed(2)}%)</span>`,
+             `Day ${tr.day} · opened ${inr(tr.open)} → closed ${inr(tr.close)} · ` + (tr.pnl >= tr.target ? "target hit ✓" : tr.pnl < -tr.limit ? "over loss limit ⚠" : tr.pnl < 0 ? "loss" : tr.pnl > 0 ? `${inr(r2(tr.target - tr.pnl))} short of target` : "no trade") + (ti.isToday ? "" : " · today not logged yet"),
+             "wide today " + (tr.pnl > 0 ? "p" : tr.pnl < 0 ? "l" : ""))
+      : tile("Today's profit / loss", dash, "Log today's closing balance to see it here", "wide today");
     const t = [
+      todayTile,
       tile("Total profit", inr(M.totalProfit), M.wins ? `${M.wins} profit day${M.wins>1?"s":""} · avg ${inr(M.avgWin)}` : "No profit days yet", M.totalProfit > 0 ? "p" : ""),
       tile("Total loss", inr(M.totalLoss), M.losses ? `${M.losses} loss day${M.losses>1?"s":""} · avg ${inr(M.avgLoss)}` : "No loss days yet", M.totalLoss < 0 ? "l" : ""),
       tile("Net profit / loss", sinr(M.net), M.logged.length ? `${(M.net/st.capital*100).toFixed(1)}% on starting capital` : "Log a day to start", M.net > 0 ? "p" : M.net < 0 ? "l" : ""),
@@ -562,8 +581,8 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       tile("Target hit", String(M.targetHits), `Days you made ${st.targetPct}% or more`),
       tile("Loss-limit breaches", String(M.breaches), M.breaches ? "Days you lost more than the limit" : "None so far", M.breaches ? "l" : ""),
       tile("Days done ✔", String(M.doneCount), "Ticked “Done for the day”"),
-      tile("Days left if targets met*", M.goalReached ? "0" : String(M.daysLeft), "Projection, not a promise", "wide"),
-      tile("Projected goal date*", M.goalReached ? "Reached" : M.goalDate ? fmtDate(M.goalDate) : `Beyond ${MAX_DAYS} days`, "Projection, not a promise", "wide"),
+      tile("Days left if targets met*", M.goalReached ? "0" : String(M.daysLeft), "Projection, not a promise"),
+      tile("Projected goal date*", M.goalReached ? "Reached" : M.goalDate ? fmtDate(M.goalDate) : `Beyond ${MAX_DAYS} days`, "Projection, not a promise"),
     ];
     $("tiles").innerHTML = t.join("");
   }
