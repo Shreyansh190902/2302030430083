@@ -25,6 +25,21 @@ h1{font:700 104px/1.02 'Inter','Noto Sans Gujarati';letter-spacing:-0.055em;colo
 #s7 .cta{position:absolute;left:0;right:0;top:1120px;text-align:center}
 #s7 h2{font:700 68px/1 'Inter';letter-spacing:-0.05em;color:#1b1b1b}
 #s7 .cta img{width:420px;margin-top:40px}
+
+/* Gujarati in brush-script Farsan (thickened to match the reference), English stays Inter */
+h1{font-family:'Inter','Farsan' !important;font-weight:700;letter-spacing:-0.03em !important;-webkit-text-stroke:0}
+h1 .gj, .gj{font-family:'Farsan';-webkit-text-stroke:4px currentColor;letter-spacing:.01em;font-weight:400}
+.tag{font-family:'Inter','Farsan' !important}
+.tag .gj{-webkit-text-stroke:2px currentColor}
+.body{font-family:'Inter','Farsan' !important}
+.body .gj{-webkit-text-stroke:1.6px currentColor}
+.tl .gj{-webkit-text-stroke:1.6px currentColor}
+
+h1{line-height:1.0 !important}
+.body p+p{margin-top:34px !important}
+.body{line-height:1.12 !important;margin-top:44px !important}
+#s1 h1{font-size:112px !important}
+#s1 .person{transform:translateY(90px)}
 </style></head><body>
 <section class="slide" id="s1">
 <svg class="grid" width="1080" height="1440" viewBox="0 0 1080 1440">
@@ -45,9 +60,9 @@ h1{font:700 104px/1.02 'Inter','Noto Sans Gujarati';letter-spacing:-0.055em;colo
 <div class="person" style="right:-40px; bottom:-40px; width:380px; height:563px; background-image:url('assets/person-sagar.png')"></div>
 <div class="pg"><span class="on">01</span><span class="">02</span><span class="">03</span><span class="">04</span><span class="">05</span><span class="">06</span><span class="">07</span></div>
 <div class="box">
-  <div class="tag">Gopal Snacks ની story</div>
-  <h1>કોઈ ધંધો<br>નાનો નથી<br>હોતો.</h1>
-  <div class="body"><p>લોકો કહે <b>“small business”</b>…<br>પણ Gopal ની journey <r>actually શું કહે છે?</r></p></div>
+  <div class="tag">Gopal Snacks <span class="gj">ની</span> story</div>
+  <h1><span class="gj">કોઈ ધંધો</span><br><span class="gj">નાનો નથી</span><br><span class="gj">હોતો.</span></h1>
+  <div class="body"><p><span class="gj">લોકો કહે</span> <b>“small business”</b>…<br><span class="gj">પણ</span> Gopal <span class="gj">ની</span> journey <r>actually <span class="gj">શું કહે છે?</span></r></p></div>
 </div>
 <div class="tl"></div>
 
@@ -71,14 +86,14 @@ h1{font:700 104px/1.02 'Inter','Noto Sans Gujarati';letter-spacing:-0.055em;colo
 
 <div class="pg"><span class="">01</span><span class="on">02</span><span class="">03</span><span class="">04</span><span class="">05</span><span class="">06</span><span class="">07</span></div>
 <div class="box">
-  <div class="tag">Deodorant નો ધંધો</div>
-  <h1>નાની product,<br>મોટી brand.</h1>
-  <div class="body"><p>એક સામાન્ય deodorant.<br>રોજ વપરાતી સામાન્ય વસ્તુ.</p>
-<p>પણ આજે એ <b>ઘરે ઘરે જાણીતી brand</b> છે.</p>
-<p>Product નાનું હોઈ શકે, <r>brand નહીં.</r></p>
-<p>ફરક product માં નહીં,<br><b>તમે તેને કેવી રીતે બનાવો છો</b> તેમાં છે.</p></div>
+  <div class="tag">Deodorant <span class="gj">નો ધંધો</span></div>
+  <h1><span class="gj">નાની</span> product,<br><span class="gj">મોટી</span> brand.</h1>
+  <div class="body"><p><span class="gj">એક સામાન્ય</span> deodorant.<br><span class="gj">રોજ વપરાતી સામાન્ય વસ્તુ.</span></p>
+<p><span class="gj">પણ આજે એ</span> <b><span class="gj">ઘરે ઘરે જાણીતી</span> brand</b> <span class="gj">છે.</span></p>
+<p>Product <span class="gj">નાનું હોઈ શકે,</span> <r>brand <span class="gj">નહીં.</span></r></p>
+<p><span class="gj">ફરક</span> product <span class="gj">માં નહીં,</span><br><b><span class="gj">તમે તેને કેવી રીતે બનાવો છો</span></b> <span class="gj">તેમાં છે.</span></p></div>
 </div>
-<div class="tl">નાની product. મોટી brand.</div>
+<div class="tl"><span class="gj">નાની</span> product. <span class="gj">મોટી</span> brand.</div>
 <div class="btn"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 </section>
 
@@ -100,11 +115,11 @@ h1{font:700 104px/1.02 'Inter','Noto Sans Gujarati';letter-spacing:-0.055em;colo
 
 <div class="pg"><span class="">01</span><span class="">02</span><span class="on">03</span><span class="">04</span><span class="">05</span><span class="">06</span><span class="">07</span></div>
 <div class="box">
-  <div class="tag">વિચાર</div>
-  <h1>ધંધો નાનો નથી,<br>વિચાર નાનો છે.</h1>
-  <div class="body"><p><s>“આ તો નાનો ધંધો છે”</s><br>આ છે નાની વિચારસરણી.</p>
-<p><b>“આને મોટી brand બનાવીશ”</b><br>આ છે મોટી વિચારસરણી.</p>
-<p>ધંધો કેટલો મોટો થશે,<br><r>એ product નહીં, vision નક્કી કરે છે.</r></p></div>
+  <div class="tag"><span class="gj">વિચાર</span></div>
+  <h1><span class="gj">ધંધો નાનો નથી,</span><br><span class="gj">વિચાર નાનો છે.</span></h1>
+  <div class="body"><p><s>“<span class="gj">આ તો નાનો ધંધો છે</span>”</s><br><span class="gj">આ છે નાની વિચારસરણી.</span></p>
+<p><b>“<span class="gj">આને મોટી</span> brand <span class="gj">બનાવીશ</span>”</b><br><span class="gj">આ છે મોટી વિચારસરણી.</span></p>
+<p><span class="gj">ધંધો કેટલો મોટો થશે,</span><br><r><span class="gj">એ</span> product <span class="gj">નહીં,</span> vision <span class="gj">નક્કી કરે છે.</span></r></p></div>
 </div>
 <div class="tl">Small business. Big vision.</div>
 <div class="btn"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -128,11 +143,11 @@ h1{font:700 104px/1.02 'Inter','Noto Sans Gujarati';letter-spacing:-0.055em;colo
 
 <div class="pg"><span class="">01</span><span class="">02</span><span class="">03</span><span class="on">04</span><span class="">05</span><span class="">06</span><span class="">07</span></div>
 <div class="box">
-  <div class="tag">મોટું વિચારો</div>
-  <h1>શરૂઆત નાની,<br>સપનું મોટું.</h1>
-  <div class="body"><p><r>01</r> &nbsp;<b>મોટું vision રાખો.</b><br>આજે જ્યાં છો, તેના કરતાં આગળ જુઓ.</p>
-<p><r>02</r> &nbsp;<b>નાના કામ ને પણ ગંભીરતા થી કરો.</b><br>દરેક નાનું કામ પણ brand બનાવે છે.</p>
-<p><r>03</r> &nbsp;<b>નાની શરૂઆત થી ડરો નહીં.</b><br>દરેક મોટી company ની શરૂઆત નાની જ હતી.</p></div>
+  <div class="tag"><span class="gj">મોટું વિચારો</span></div>
+  <h1><span class="gj">શરૂઆત નાની,</span><br><span class="gj">સપનું મોટું.</span></h1>
+  <div class="body"><p><r>01</r> &nbsp;<b><span class="gj">મોટું</span> vision <span class="gj">રાખો.</span></b><br><span class="gj">આજે જ્યાં છો, તેના કરતાં આગળ જુઓ.</span></p>
+<p><r>02</r> &nbsp;<b><span class="gj">નાના કામ ને પણ ગંભીરતા થી કરો.</span></b><br><span class="gj">દરેક નાનું કામ પણ</span> brand <span class="gj">બનાવે છે.</span></p>
+<p><r>03</r> &nbsp;<b><span class="gj">નાની શરૂઆત થી ડરો નહીં.</span></b><br><span class="gj">દરેક મોટી</span> company <span class="gj">ની શરૂઆત નાની જ હતી.</span></p></div>
 </div>
 <div class="tl">Start small. Think big.</div>
 <div class="btn"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -156,11 +171,11 @@ h1{font:700 104px/1.02 'Inter','Noto Sans Gujarati';letter-spacing:-0.055em;colo
 
 <div class="pg"><span class="">01</span><span class="">02</span><span class="">03</span><span class="">04</span><span class="on">05</span><span class="">06</span><span class="">07</span></div>
 <div class="box">
-  <div class="tag">માન</div>
-  <h1>માન કામ થી<br>મળે છે.</h1>
-  <div class="body"><p>ધંધા ની size થી નહીં,<br><b>કામ થી</b> માન મળે છે.</p>
-<p><b>મહેનત</b> — રોજ, પૂરા દિલ થી.<br><b>ઈમાનદારી</b> — ગ્રાહક અને વેપારી બંને સાથે.<br><b>Quality</b> — ધંધો નાનો, કામ ઉત્તમ.</p>
-<p><r>મહેનત + ઈમાનદારી = સફળતા.</r></p></div>
+  <div class="tag"><span class="gj">માન</span></div>
+  <h1><span class="gj">માન કામ થી</span><br><span class="gj">મળે છે.</span></h1>
+  <div class="body"><p><span class="gj">ધંધા ની</span> size <span class="gj">થી નહીં,</span><br><b><span class="gj">કામ થી</span></b> <span class="gj">માન મળે છે.</span></p>
+<p><b><span class="gj">મહેનત</span></b> — <span class="gj">રોજ, પૂરા દિલ થી.</span><br><b><span class="gj">ઈમાનદારી</span></b> — <span class="gj">ગ્રાહક અને વેપારી બંને સાથે.</span><br><b>Quality</b> — <span class="gj">ધંધો નાનો, કામ ઉત્તમ.</span></p>
+<p><r><span class="gj">મહેનત</span> + <span class="gj">ઈમાનદારી</span> = <span class="gj">સફળતા.</span></r></p></div>
 </div>
 <div class="tl">Work speaks louder than size.</div>
 <div class="btn"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -185,10 +200,10 @@ h1{font:700 104px/1.02 'Inter','Noto Sans Gujarati';letter-spacing:-0.055em;colo
 <div class="pg"><span class="">01</span><span class="">02</span><span class="">03</span><span class="">04</span><span class="">05</span><span class="on">06</span><span class="">07</span></div>
 <div class="box">
   <div class="tag">Proof</div>
-  <h1>50 પૈસા થી<br>₹10,000 કરોડ.</h1>
-  <div class="body"><p>શરૂઆત <b>50 પૈસા ના ફરસાણ</b> થી.<br>આજે <b>₹10,000 કરોડ ની company.</b></p>
-<p>ફરસાણ પણ “નાનો” ધંધો જ ગણાતો.</p>
-<p><r>કોઈ ધંધો નાનો નથી હોતો.</r></p></div>
+  <h1>50 <span class="gj">પૈસા થી</span><br>₹10,000 <span class="gj">કરોડ.</span></h1>
+  <div class="body"><p><span class="gj">શરૂઆત</span> <b>50 <span class="gj">પૈસા ના ફરસાણ</span></b> <span class="gj">થી.</span><br><span class="gj">આજે</span> <b>₹10,000 <span class="gj">કરોડ ની</span> company.</b></p>
+<p><span class="gj">ફરસાણ પણ “નાનો” ધંધો જ ગણાતો.</span></p>
+<p><r><span class="gj">કોઈ ધંધો નાનો નથી હોતો.</span></r></p></div>
 </div>
 <div class="tl">That's the Gopal story.</div>
 <div class="btn"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
