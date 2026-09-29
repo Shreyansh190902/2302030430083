@@ -143,6 +143,9 @@ td.p{color:var(--profit);font-weight:600} td.l{color:var(--loss);font-weight:600
 .confirm{margin-top:12px;border:1px solid var(--goal);background:var(--surface-2);border-radius:8px;padding:12px;display:grid;gap:10px}
 .confirm p{margin:0;font-size:13px}
 .btn-sm{padding:6px 12px;font-size:13px}
+#fbCfgIn{font-family:var(--mono);font-size:12px!important;min-height:96px}
+.linkish{background:none;border:0;padding:0;min-height:0;color:var(--muted);text-decoration:underline;font-size:12px;font-weight:400;cursor:pointer}
+code{font-family:var(--mono);font-size:.92em}
 .hero-note{grid-column:1/-1;margin:0}
 .recent{margin-top:10px;display:grid;gap:0}
 .recent h3{font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:6px}
@@ -366,6 +369,42 @@ details.settings summary{cursor:pointer;font-family:var(--display);font-weight:6
       </div>
     </div>
 
+    <div class="panel" id="cloudPanel" hidden>
+      <div class="chart-head"><h2>Cloud sync</h2><span class="note" id="cloudState"></span></div>
+      <div id="cloudSetup" hidden>
+        <p class="note" style="margin:0 0 8px">Connect your free Firebase project so your phone and computer share the same days. Paste the <code>firebaseConfig</code> from Firebase (Project settings → Your apps → Web app). It's not a password; your data stays private through your sign-in.</p>
+        <label for="fbCfgIn">Firebase config</label>
+        <textarea id="fbCfgIn" spellcheck="false" placeholder='const firebaseConfig = { apiKey: "…", authDomain: "…", projectId: "…", appId: "…" };'></textarea>
+        <div class="btns" style="margin-top:8px"><button type="button" class="btn-primary" id="fbCfgSave">Connect</button></div>
+      </div>
+      <form id="cloudLogin" hidden autocomplete="on">
+        <p class="note" style="margin:0 0 8px">Sign in with the same email and password on your phone and your computer.</p>
+        <div class="row2">
+          <div><label for="fbEmail">Email</label><input type="email" id="fbEmail" autocomplete="username" inputmode="email"></div>
+          <div><label for="fbPass">Password</label><input type="password" id="fbPass" autocomplete="current-password" minlength="6"></div>
+        </div>
+        <div class="btns" style="margin-top:8px">
+          <button type="submit" class="btn-primary" id="fbSignIn">Sign in</button>
+          <button type="button" class="btn-ghost" id="fbCreate">Create account</button>
+          <button type="button" class="btn-ghost btn-sm" id="fbReset">Forgot password</button>
+        </div>
+      </form>
+      <div id="cloudOn" hidden>
+        <p style="margin:0" id="cloudWho"></p>
+        <div class="btns" style="margin-top:8px"><button type="button" class="btn-ghost" id="fbSignOut">Sign out</button></div>
+      </div>
+      <div class="confirm" id="cloudConflict" hidden>
+        <p id="cloudConflictText"></p>
+        <div class="btns">
+          <button type="button" class="btn-primary" id="ccMerge">Combine both</button>
+          <button type="button" class="btn-ghost" id="ccCloud">Use cloud</button>
+          <button type="button" class="btn-ghost" id="ccLocal">Use this device</button>
+        </div>
+      </div>
+      <div class="toast" id="cloudToast" role="status"></div>
+      <p class="note" style="margin:8px 0 0" id="cloudFoot"><button type="button" class="linkish" id="fbCfgRemove" hidden>Disconnect this device from Firebase</button></p>
+    </div>
+
     <div class="panel">
       <h2>Settings &amp; NSE holidays</h2>
       <form id="setForm">
@@ -496,7 +535,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   const MILESTONES = [10000, 25000, 50000, 75000];
   // ---------- render ----------
   let M = null;
-  function render(){
+  function render(keepInput){
     M = compute();
     const s = state.settings;
     const inrShort = x => "₹" + Number(x).toLocaleString("en-IN", {maximumFractionDigits:0});
@@ -521,7 +560,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     $("progPct").textContent = (M.progress*100).toFixed(1) + "% of " + inr(s.goal, 0);
     $("remain").textContent = M.goalReached ? "Goal reached" : inr(M.remaining) + " to go";
 
-    renderTiles(); renderDaySelect(); renderEntry(); renderTable(); renderBalance(); renderPnl();
+    renderTiles(); renderDaySelect(); renderEntry(!!keepInput); renderTable(); renderBalance(); renderPnl();
   }
 
   function tile(k, v, sub, cls = ""){ return `<div class="tile ${cls}"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${sub}</div></div>`; }
@@ -694,11 +733,11 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   function queue(fn){ writeChain = writeChain.then(fn).catch(err => { flash("toast", "Couldn't save: " + (err && err.message || "try again"), true); throw err; }).catch(() => {}); return writeChain; }
   async function persistEntries(){
     if (refs) return queue(() => refs.log.set({entries: state.entries, updatedAt: new Date().toISOString()}));
-    saveLocal();
+    saveLocal(); cloudPush();
   }
   async function persistSettings(){
     if (refs) return queue(() => refs.settings.set(state.settings));
-    saveLocal();
+    saveLocal(); cloudPush();
   }
   function flash(id, msg, bad){ if (id === "syncToast") flash1("topToast", msg, bad); flash1(id, msg, bad); }
   function flash1(id, msg, bad){ const el = $(id); el.textContent = msg; el.style.color = bad ? "var(--loss)" : "var(--profit)"; clearTimeout(el._t); el._t = setTimeout(() => el.textContent = "", 3500); }
@@ -971,13 +1010,164 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   let rsT = null, lastW = 0;
   addEventListener("resize", () => { clearTimeout(rsT); rsT = setTimeout(() => { const w = $("balChart").clientWidth; if (Math.abs(w - lastW) > 20){ lastW = w; renderBalance(); renderPnl(); } }, 150); });
 
+  // ---------- cloud sync (Firebase) — used on your own domain / offline file; the claude.ai copy syncs through Claude ----------
+  // Paste your firebaseConfig here to skip pasting it on each device, e.g. {apiKey:"…", authDomain:"…", projectId:"…", appId:"…"}
+  const FIREBASE_CONFIG = null;
+  const FB_VER = "10.12.2";
+  let fb = null, cloudPending = null;
+  const fbCfg = () => { if (FIREBASE_CONFIG) return FIREBASE_CONFIG; try { return JSON.parse(localStorage.getItem("r1l-fb") || "null"); } catch(e){ return null; } };
+  function parseFbConfig(text){
+    const out = {};
+    for (const k of ["apiKey","authDomain","projectId","storageBucket","messagingSenderId","appId"]){
+      const m = text.match(new RegExp(k + "\\s*[\"']?\\s*:\\s*[\"']([^\"']+)[\"']"));
+      if (m) out[k] = m[1].trim();
+    }
+    return out.apiKey && out.projectId && out.appId ? out : null;
+  }
+  function loadScript(src){
+    return new Promise((res, rej) => { const el = document.createElement("script"); el.src = src; el.onload = res; el.onerror = () => rej(new Error("Couldn't load Firebase (are you online?)")); document.head.appendChild(el); });
+  }
+  const sorted = o => JSON.stringify(Object.keys(o || {}).sort((a,b) => a-b).map(k => [k, o[k]]));
+  const clean = o => JSON.parse(JSON.stringify(o));
+  function cloudMsg(msg, bad){ flash("cloudToast", msg, bad); }
+  function fbError(e){
+    const c = (e && e.code) || "";
+    return c.includes("wrong-password") || c.includes("invalid-credential") || c.includes("invalid-login") ? "Wrong email or password."
+      : c.includes("user-not-found") ? "No account with that email. Tap Create account."
+      : c.includes("email-already-in-use") ? "That email already has an account. Tap Sign in."
+      : c.includes("weak-password") ? "Use a password of at least 6 characters."
+      : c.includes("invalid-email") ? "That email doesn't look right."
+      : c.includes("unauthorized-domain") ? "Add this website's domain in Firebase → Authentication → Settings → Authorized domains."
+      : c.includes("operation-not-allowed") ? "Turn on Email/Password in Firebase → Authentication → Sign-in method."
+      : c.includes("network") ? "No internet connection."
+      : c.includes("permission-denied") ? "Firebase refused access. Check the Firestore rules from the setup guide."
+      : (e && e.message) || "Something went wrong.";
+  }
+  function renderCloud(){
+    const panel = $("cloudPanel"); if (!panel) return;
+    if (refs){ panel.hidden = true; return; }             // claude.ai copy already syncs through Claude
+    panel.hidden = false;
+    const cfg = fbCfg(), user = fb && fb.user;
+    $("cloudSetup").hidden = !!cfg;
+    $("cloudLogin").hidden = !cfg || !!user || !fb;
+    $("cloudOn").hidden = !user;
+    $("fbCfgRemove").hidden = !cfg || !!FIREBASE_CONFIG;
+    $("cloudState").textContent = !cfg ? "Not connected" : !fb ? "Connecting…" : user ? "On" : "Signed out";
+    if (user) $("cloudWho").innerHTML = `Signed in as <strong>${esc(user.email || "")}</strong>. Days you log here appear on your other devices within seconds.`;
+  }
+  async function fbStart(){
+    const cfg = fbCfg();
+    renderCloud();
+    if (!cfg || refs || fb) return;
+    try {
+      if (!window.firebase || !firebase.firestore){
+        for (const m of ["app", "auth", "firestore"]) await loadScript(`https://www.gstatic.com/firebasejs/${FB_VER}/firebase-${m}-compat.js`);
+      }
+      const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(cfg);
+      const db = firebase.firestore();
+      try { await db.enablePersistence({synchronizeTabs: true}); } catch(e){}   // offline logging; syncs when back online
+      fb = {app, auth: firebase.auth(), db, user: null, ref: null, unsub: null, ready: false};
+      fb.auth.onAuthStateChanged(onCloudUser);
+    } catch(e){ cloudMsg(fbError(e), true); }
+    renderCloud();
+  }
+  function onCloudUser(u){
+    if (fb.unsub){ fb.unsub(); fb.unsub = null; }
+    fb.user = u; fb.ready = false; $("cloudConflict").hidden = true;
+    renderCloud();
+    if (!u){ setSync("warn", "Saved in this browser only"); return; }
+    setSync("", "Syncing…");
+    fb.ref = fb.db.collection("users").doc(u.uid).collection("tracker").doc("main");
+    let first = true;
+    fb.unsub = fb.ref.onSnapshot({includeMetadataChanges: true}, snap => {
+      const d = snap.exists ? snap.data() : null;
+      if (cloudPending) return;                                   // waiting for you to choose what to keep
+      if (first && snap.metadata && snap.metadata.fromCache) return;   // decide only on the server's copy, never a stale offline cache
+      if (first){
+        first = false;
+        const localDays = Object.keys(state.entries).length, cloudDays = d ? Object.keys(d.entries || {}).length : 0;
+        if (!d || !cloudDays){ fb.ready = true; if (localDays || !d) cloudPush(true); setSync("ok", "Synced"); return; }
+        if (localDays && sorted(d.entries) !== sorted(state.entries)){
+          cloudPending = d;
+          $("cloudConflictText").innerHTML = `This device has <strong>${localDays}</strong> logged day${localDays===1?"":"s"}; your cloud has <strong>${cloudDays}</strong>. Which should both devices keep?`;
+          $("cloudConflict").hidden = false; setSync("warn", "Choose what to keep");
+          showTab("more");
+          return;
+        }
+      }
+      if (!fb.ready){ fb.ready = true; }
+      if (snap.metadata && snap.metadata.hasPendingWrites) return;   // our own write echoing back
+      if (d) applyCloud(d);
+      setSync("ok", "Synced");
+    }, e => { setSync("warn", "Sync stopped"); cloudMsg(fbError(e), true); });
+  }
+  function applyCloud(d){
+    const newSettings = {...DEFAULTS, ...(d.settings || {})}, newEntries = {...(d.entries || {})};
+    if (sorted(newEntries) === sorted(state.entries) && JSON.stringify(newSettings) === JSON.stringify(state.settings)) return;
+    state.settings = newSettings; state.entries = newEntries;
+    const typing = document.activeElement && document.activeElement.closest && document.activeElement.closest("#entryForm");
+    if (!typing && !$("closeIn").value) state.selected = null;   // jump to the next day to log
+    saveLocal(); fillSettings(); render(!!typing);
+  }
+  let pushT = null;
+  function cloudPush(now){
+    if (!fb || !fb.user || !fb.ref || (!fb.ready && !now)) return;
+    clearTimeout(pushT);
+    pushT = setTimeout(() => {
+      fb.ref.set({settings: clean(state.settings), entries: clean(state.entries), updatedAt: firebase.firestore.FieldValue.serverTimestamp(), device: navigator.userAgent.slice(0, 80)})
+        .then(() => setSync("ok", "Synced"))
+        .catch(e => { setSync("warn", "Not synced"); cloudMsg(fbError(e), true); });
+    }, now ? 0 : 400);
+  }
+  function resolveConflict(choice){
+    const d = cloudPending; cloudPending = null; if (!d) return;
+    if (choice === "cloud"){ state.settings = {...DEFAULTS, ...(d.settings || {})}; state.entries = {...(d.entries || {})}; }
+    else if (choice === "merge"){ state.entries = {...state.entries, ...(d.entries || {})}; }   // same day on both: cloud's value wins
+    $("cloudConflict").hidden = true; fb.ready = true;
+    saveLocal(); fillSettings(); state.selected = null; render(); cloudPush(true);
+    cloudMsg(choice === "cloud" ? "Using your cloud days on this device." : choice === "merge" ? "Combined. Both devices now have all days." : "Cloud replaced with this device's days.");
+  }
+  $("ccMerge").addEventListener("click", () => resolveConflict("merge"));
+  $("ccCloud").addEventListener("click", () => resolveConflict("cloud"));
+  $("ccLocal").addEventListener("click", () => resolveConflict("local"));
+  $("fbCfgSave").addEventListener("click", () => {
+    const cfg = parseFbConfig($("fbCfgIn").value);
+    if (!cfg){ cloudMsg("That doesn't look like a Firebase config. It needs apiKey, projectId and appId.", true); return; }
+    try { localStorage.setItem("r1l-fb", JSON.stringify(cfg)); } catch(e){ cloudMsg("This browser won't save settings (private mode?).", true); return; }
+    cloudMsg("Connected to Firebase project " + cfg.projectId + ". Now sign in.");
+    fbStart();
+  });
+  $("fbCfgRemove").addEventListener("click", async () => {
+    try { if (fb && fb.user) await fb.auth.signOut(); } catch(e){}
+    try { localStorage.removeItem("r1l-fb"); } catch(e){}
+    location.reload();
+  });
+  $("cloudLogin").addEventListener("submit", async e => {
+    e.preventDefault(); if (!fb) return;
+    try { await fb.auth.signInWithEmailAndPassword($("fbEmail").value.trim(), $("fbPass").value); $("fbPass").value = ""; cloudMsg("Signed in."); }
+    catch(err){ cloudMsg(fbError(err), true); }
+  });
+  $("fbCreate").addEventListener("click", async () => {
+    if (!fb) return;
+    try { await fb.auth.createUserWithEmailAndPassword($("fbEmail").value.trim(), $("fbPass").value); $("fbPass").value = ""; cloudMsg("Account created and signed in. Use the same email and password on your other device."); }
+    catch(err){ cloudMsg(fbError(err), true); }
+  });
+  $("fbReset").addEventListener("click", async () => {
+    if (!fb) return;
+    const em = $("fbEmail").value.trim(); if (!em){ cloudMsg("Type your email first.", true); return; }
+    try { await fb.auth.sendPasswordResetEmail(em); cloudMsg("Password reset email sent to " + em + "."); }
+    catch(err){ cloudMsg(fbError(err), true); }
+  });
+  $("fbSignOut").addEventListener("click", async () => { if (fb) await fb.auth.signOut(); cloudMsg("Signed out. Your days stay on this device too."); });
+
   // ---------- boot ----------
   loadLocal(); fillSettings(); render(); setSync("", "Connecting…");
   (async () => {
     let db = null;
     try { db = window.claude && window.claude.use ? await window.claude.use("db") : null; } catch(e){ db = null; }
-    if (!db){ setSync("warn", "Saved in this browser only"); return; }
+    if (!db){ setSync("warn", "Saved in this browser only"); fbStart(); return; }
     refs = { settings: db.doc("tracker/settings"), log: db.doc("tracker/log") };
+    renderCloud();
     setSync("ok", "Synced");
     let first = true;
     refs.settings.onSnapshot(snap => {
