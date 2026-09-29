@@ -4,7 +4,8 @@
 9 slides, 1080×1440, original grid-paper theme (yellow highlight, red text, black-bordered cards).
 
 - `slides.html` — all slides
-- `assets/thumb.jpg` — episode thumbnail (cover, fire photo and portraits are cropped from it)
+- `assets/thumb.jpg` — episode thumbnail (cover and fire photo are cropped from it)
+- `assets/outro.webp` — podcast outro artwork used on slide 09
 - `out/*.png`, `out-jpg/*.jpg`, `gopal-fire-comeback-jpg.zip` — exports
 
 Facts come from the episode description and public company updates (fire on 12 Dec 2024,
