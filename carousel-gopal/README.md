@@ -6,6 +6,7 @@
 - `slides.html` — all slides
 - `assets/thumb.jpg` — episode thumbnail (cover and fire photo are cropped from it)
 - `assets/outro.webp` — podcast outro artwork used on slide 09
+- `sources.html`, `gopal-carousel-sources.pdf` — slide-by-slide fact check with source links
 - `out/*.png`, `out-jpg/*.jpg`, `gopal-fire-comeback-jpg.zip` — exports
 
 Facts come from the episode description and public company updates (fire on 12 Dec 2024,
