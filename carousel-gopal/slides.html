@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="utf-8">
+<title>Gopal Fire Comeback</title>
+<link href="assets/fonts.css" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f2f1ec;
+    --grid: #e0dfd8;
+    --ink: #0b0b0b;
+    --red: #b10000;
+    --yellow: #ffec3d;
+    --yellow-soft: #fff27a;
+    --muted: #4a4a4a;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #777; font-family: 'Inter', 'Noto Sans Gujarati', sans-serif; color: var(--ink); }
+
+  .slide {
+    position: relative;
+    width: 1080px; height: 1440px;
+    overflow: hidden;
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1.5px, transparent 1.5px),
+      linear-gradient(90deg, var(--grid) 1.5px, transparent 1.5px);
+    background-size: 44px 44px;
+    padding: 96px 72px 0;
+    margin: 0 auto 40px;
+  }
+
+  /* ---------- type ---------- */
+  .h-en {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 104px;
+    line-height: .98;
+    letter-spacing: -0.045em;
+  }
+  .h-gu {
+    font-family: 'Noto Sans Gujarati', sans-serif;
+    font-weight: 800;
+    font-size: 54px;
+    line-height: 1.35;
+    margin-top: 22px;
+  }
+  .red { color: var(--red); }
+  .hl {
+    background: linear-gradient(transparent 12%, var(--yellow) 12%, var(--yellow) 92%, transparent 92%);
+    padding: 0 .12em;
+    margin: 0 -.06em;
+    box-decoration-break: clone; -webkit-box-decoration-break: clone;
+    transform: rotate(-1deg);
+    display: inline;
+  }
+  .hand { font-family: 'Caveat', cursive; font-weight: 700; }
+  .hand-gu { font-family: 'Baloo Bhai 2', sans-serif; font-weight: 700; }
+
+  .swoosh { display: block; margin-top: 18px; }
+
+  /* ---------- chrome ---------- */
+  .pager {
+    position: absolute; top: 40px; right: 56px;
+    font: 800 26px 'Inter'; letter-spacing: .04em;
+    background: var(--ink); color: var(--paper);
+    padding: 8px 18px; border-radius: 40px;
+  }
+  .swipe {
+    position: absolute; bottom: 44px; right: 60px;
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Caveat'; font-weight: 700; font-size: 44px;
+  }
+  .swipe .gu { font-family: 'Baloo Bhai 2'; font-size: 32px; margin-top: 6px; }
+
+  /* ---------- cards ---------- */
+  .cards { display: flex; flex-direction: column; gap: 22px; margin-top: 52px; }
+  .card {
+    display: flex; align-items: center; gap: 28px;
+    background: var(--card);
+    border: 4px solid var(--ink);
+    border-radius: 26px;
+    padding: 24px 30px;
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+  .card .num {
+    flex: 0 0 76px; height: 76px; border-radius: 50%;
+    background: var(--yellow); border: 4px solid var(--ink);
+    display: grid; place-items: center;
+    font: 900 38px 'Inter'; color: #0b0b0b;
+  }
+  .card .num.bad { background: var(--red); color: #fff; }
+  .card .en { font: 800 40px/1.12 'Inter'; letter-spacing: -0.02em; }
+  .card .gu { font: 700 32px/1.4 'Noto Sans Gujarati'; color: var(--muted); margin-top: 4px; }
+
+  .note {
+    position: absolute;
+    font-family: 'Caveat'; font-weight: 700; font-size: 50px; line-height: 1.05;
+  }
+  .note .gu { font-family: 'Baloo Bhai 2'; font-weight: 700; font-size: 36px; display: block; margin-top: 14px; }
+  .mark { background: var(--yellow-soft); padding: 0 8px; }
+
+  .sticker {
+    position: absolute;
+    background-image: url('assets/cover.webp');
+    background-repeat: no-repeat;
+    filter: drop-shadow(6px 8px 0 rgba(0,0,0,.12));
+  }
+  .eye-sticker {
+    width: 360px; height: 290px;
+    background-size: 1193px auto;          /* 1086 * 1.098 */
+    background-position: -833px -95px;
+    clip-path: polygon(4% 8%, 30% 3%, 58% 6%, 97% 2%, 100% 40%, 95% 78%, 99% 97%, 60% 93%, 34% 99%, 5% 90%, 1% 52%);
+  }
+
+  /* layered tear film */
+  .film { margin-top: 56px; display: flex; flex-direction: column; gap: 0; border: 4px solid var(--ink); border-radius: 30px; overflow: hidden; box-shadow: 10px 10px 0 var(--ink); }
+  .layer { color: #0b0b0b; display: flex; align-items: center; gap: 28px; padding: 30px 34px; border-bottom: 4px solid var(--ink); }
+  .layer:last-child { border-bottom: 0; }
+  .layer .tag { flex: 0 0 210px; font: 900 40px 'Inter'; letter-spacing: -0.02em; }
+  .layer .tag small { display: block; font: 800 30px 'Noto Sans Gujarati'; letter-spacing: 0; margin-top: 2px; }
+  .layer .what { font: 700 34px/1.2 'Inter'; letter-spacing: -0.01em; }
+  .layer .what small { display: block; font: 700 30px/1.4 'Noto Sans Gujarati'; color: #4a4a4a; margin-top: 4px; }
+  .l-oil { background: #ffe68a; }
+  .l-water { background: #cfe8ff; }
+  .l-mucus { background: #ffffff; }
+  .eyeball { background: #111; color: #fff; text-align: center; font: 800 28px 'Inter'; letter-spacing: .12em; padding: 16px; }
+  .eyeball span { font-family: 'Noto Sans Gujarati'; letter-spacing: 0; }
+
+  .alert {
+    margin-top: 44px;
+    background: var(--red); color: #fff;
+    border: 4px solid var(--ink); border-radius: 30px;
+    padding: 34px 40px;
+    box-shadow: 10px 10px 0 var(--ink);
+  }
+  .alert .en { font: 900 54px/1.05 'Inter'; letter-spacing: -0.03em; }
+  .alert .gu { font: 800 40px/1.4 'Noto Sans Gujarati'; margin-top: 8px; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 52px; }
+  .chip {
+    background: var(--card); border: 4px solid var(--ink); border-radius: 24px;
+    padding: 26px 26px; box-shadow: 7px 7px 0 var(--ink);
+  }
+  .chip .en { font: 900 42px 'Inter'; letter-spacing: -0.03em; }
+  .chip .gu { font: 700 30px/1.4 'Noto Sans Gujarati'; color: var(--muted); margin-top: 6px; }
+  .chip.wide { grid-column: span 2; }
+  .chip .ico { font: 900 42px 'Inter'; color: var(--red); margin-right: 8px; }
+
+  .big-rule {
+    margin-top: 12px; display: inline-block;
+    font: 900 40px 'Inter'; background: var(--ink); color: var(--yellow);
+    padding: 4px 16px; border-radius: 12px; letter-spacing: -0.01em;
+  }
+
+  .cta-row { display: flex; gap: 26px; margin-top: 90px; }
+  .cta {
+    flex: 1; background: var(--card); border: 4px solid var(--ink); border-radius: 28px;
+    padding: 34px 20px; text-align: center; box-shadow: 9px 9px 0 var(--ink);
+  }
+  .cta svg { display: block; margin: 0 auto 16px; }
+  .cta .en { font: 900 40px 'Inter'; letter-spacing: -0.02em; }
+  .cta .gu { font: 700 30px 'Noto Sans Gujarati'; color: var(--muted); margin-top: 4px; }
+  .disclaimer {
+    position: absolute; left: 72px; right: 72px; bottom: 110px;
+    border-top: 3px dashed var(--ink); padding-top: 22px;
+    font: 700 28px/1.4 'Inter'; color: var(--muted);
+  }
+  .disclaimer span { display: block; font-family: 'Noto Sans Gujarati'; }
+
+  /* ---------- 01: provided cover + Gujarati touches ---------- */
+
+  /* ---------- dark slides (alternate with light; matches the podcast outro) ---------- */
+  .slide.dark {
+    --paper: #050505; --grid: #1c1c1c; --ink: #f4f4f4; --muted: #b8b8b8; --card: #151515;
+    color: var(--ink);
+  }
+  .dark .h-gu .red { color: var(--yellow); }
+  .dark .card, .dark .chip, .dark .cta { box-shadow: 8px 8px 0 var(--yellow); }
+  .dark .film, .dark .alert { box-shadow: 10px 10px 0 var(--yellow); }
+  .dark .layer { border-bottom-color: #0b0b0b; }
+  .dark .eyeball { background: var(--yellow); color: #0b0b0b; }
+  .dark .big-rule { background: var(--yellow); color: #0b0b0b; }
+  .dark .mark { color: #0b0b0b; }
+  .dark .eye-sticker { filter: drop-shadow(0 0 0 transparent); }
+
+  /* ---------- 09: outro (light theme; hosts + eye artwork from the podcast outro in a card) ---------- */
+
+  /* =====================================================================
+     THEME: "Sunset" — light, built from the show logo's pink→orange.
+     Overrides the base grid-paper styles above; content is unchanged.
+     ===================================================================== */
+  :root {
+    --paper: #fff7f2; --ink: #1e1a1d; --muted: #6d6166; --card: #ffffff;
+    --red: #e8364f; --accent: #e8364f; --peach: #ffe1d1;
+    --grad: linear-gradient(120deg, #ec3462 0%, #f4714a 55%, #f9a94b 100%);
+    --soft-shadow: 0 16px 36px rgba(232, 54, 79, .14), 0 2px 6px rgba(30, 26, 29, .05);
+  }
+  .slide {
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 100% 0, rgba(249, 169, 75, .22), transparent 420px),
+      radial-gradient(circle at 0 100%, rgba(236, 52, 98, .14), transparent 480px),
+      radial-gradient(rgba(232, 54, 79, .13) 2px, transparent 2.5px);
+    background-size: auto, auto, 36px 36px;
+  }
+  .slide svg { color: var(--accent); }
+  .h-en .hl {
+    display: inline-block; color: #fff; background: var(--grad); border-radius: 20px;
+    padding: 2px 20px 12px; margin: 14px 0 0 -6px; line-height: 1;
+  }
+  .h-gu .red, .red { color: var(--accent); }
+  .pager { background: var(--grad); color: #fff; box-shadow: var(--soft-shadow); }
+  .swipe { color: var(--accent); }
+  .mark { background: var(--peach); border-radius: 6px; }
+
+  .card, .chip, .cta {
+    border: 2px solid #ffe2d6; box-shadow: var(--soft-shadow); background: var(--card);
+  }
+  .card .num { background: var(--peach); border: 0; color: var(--accent); }
+  .card .num.bad { background: var(--grad); color: #fff; }
+  .chip .ico { color: var(--accent); }
+  .cta svg path, .cta svg circle { fill: var(--peach); }
+
+  .film { border: 0; box-shadow: var(--soft-shadow); }
+  .layer { border-bottom: 2px solid #fff; }
+  .l-oil { background: #ffe8cc; }
+  .l-water { background: #dff0ff; }
+  .l-mucus { background: #fff; }
+  .eyeball { background: var(--grad); color: #fff; }
+  .alert { background: var(--grad); border: 0; box-shadow: var(--soft-shadow); }
+  .big-rule { background: var(--grad); color: #fff; }
+  .disclaimer { border-top: 3px dashed #f3b8a6; bottom: 150px; }
+
+  .brand { position: absolute; left: 56px; bottom: 34px; width: 150px; mix-blend-mode: multiply; }
+
+  /* slide 01 */
+
+  /* slide 09 */
+
+  /* ================= Gopal carousel additions ================= */
+  .h-g { font: 800 92px/1.12 'Inter', 'Baloo Bhai 2'; letter-spacing: -0.03em; letter-spacing: -0.01em; color: var(--ink); }
+  .h-g .hl2 {
+    display: inline-block; color: #fff; background: var(--grad); border-radius: 22px;
+    padding: 0 24px 4px; margin: 10px 0 6px -8px; transform: rotate(-1.2deg);
+  }
+  .sub-en { font: 800 40px/1.2 'Inter'; letter-spacing: -0.02em; color: var(--muted); margin-top: 16px; }
+  .photo-card {
+    position: absolute; border-radius: 28px; overflow: hidden;
+    box-shadow: 0 22px 50px rgba(232, 54, 79, .25);
+    background: url('assets/thumb.jpg') no-repeat;
+  }
+  .stat-row { display: flex; gap: 22px; }
+  .stat {
+    flex: 1; background: #fff; border: 2px solid #ffe2d6; border-radius: 28px;
+    box-shadow: var(--soft-shadow); padding: 26px 28px;
+  }
+  .stat .big { font: 900 72px/1 'Inter'; letter-spacing: -0.04em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .stat .big.gu { font: 800 64px/1.15 'Baloo Bhai 2'; }
+  .stat .lbl { font: 700 32px/1.3 'Inter', 'Baloo Bhai 2'; margin-top: 8px; }
+  .stat .lbl-en { font: 700 26px/1.3 'Inter'; color: var(--muted); }
+  .stat.ok .big { background: none; color: #1f9d55; }
+
+  .tl { position: relative; margin-top: 50px; padding-left: 70px; }
+  .tl::before { content: ''; position: absolute; left: 26px; top: 20px; bottom: 30px; width: 6px; border-radius: 3px; background: var(--grad); }
+  .tl .step { position: relative; margin-bottom: 26px; background: #fff; border: 2px solid #ffe2d6; border-radius: 24px; box-shadow: var(--soft-shadow); padding: 20px 26px; }
+  .tl .step::before { content: ''; position: absolute; left: -58px; top: 28px; width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 7px solid #f4714a; }
+  .tl .when { font: 900 28px 'Inter'; letter-spacing: .02em; color: var(--accent); text-transform: uppercase; }
+  .tl .what { font: 800 36px/1.3 'Inter', 'Baloo Bhai 2'; letter-spacing: -0.01em; }
+  .tl .what small { display: block; font: 700 26px/1.3 'Inter'; color: var(--muted); }
+  .tl .step.win { background: var(--grad); border: 0; color: #fff; }
+  .tl .step.win .when, .tl .step.win .what small { color: #fff; }
+
+  .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 64px; }
+  .lesson { background: #fff; border: 2px solid #ffe2d6; border-radius: 28px; box-shadow: var(--soft-shadow); padding: 30px 28px; min-height: 380px; }
+  .lesson .n { width: 70px; height: 70px; border-radius: 50%; background: var(--grad); color: #fff; display: grid; place-items: center; font: 900 36px 'Inter'; }
+  .lesson .t { font: 800 44px/1.2 'Inter', 'Baloo Bhai 2'; letter-spacing: -0.01em; margin-top: 22px; }
+  .lesson .e { font: 700 26px/1.3 'Inter'; color: var(--muted); margin-top: 8px; }
+  .card .gu-main { font: 800 38px/1.25 'Inter', 'Baloo Bhai 2'; letter-spacing: -0.01em; }
+  .card .en-sub { font: 700 27px/1.3 'Inter'; color: var(--muted); margin-top: 2px; }
+  .card .emoji { flex: 0 0 76px; height: 76px; border-radius: 50%; background: var(--peach); display: grid; place-items: center; font-size: 38px; }
+  .yt9 { display: flex; align-items: center; gap: 18px; justify-content: center; }
+  .yt9 .word { font: 900 80px/1 'Inter'; letter-spacing: -0.06em; transform: scaleY(1.12); }
+  .fine { font: 600 24px/1.4 'Inter'; color: var(--muted); }
+  .fine span { display: block; font-family: 'Noto Sans Gujarati'; }
+</style>
+</head>
+<body>
+
+<!-- reusable doodles -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="brandgrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ec3462"/><stop offset=".55" stop-color="#f4714a"/><stop offset="1" stop-color="#f9a94b"/>
+    </linearGradient>
+    <symbol id="arrow-curve" viewBox="0 0 160 120">
+      <path d="M10 10 C 10 70, 60 100, 140 96" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+      <path d="M118 78 L 142 96 L 116 112" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="arrow-right" viewBox="0 0 120 40">
+      <path d="M6 22 C 40 12, 70 30, 104 18" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+      <path d="M88 6 L 108 18 L 90 34" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="burst" viewBox="0 0 80 80">
+      <path d="M40 6 L 44 28 M 70 18 L 54 34 M 74 50 L 54 48" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="burst-y" viewBox="0 0 80 80">
+      <path d="M40 6 L 44 28 M 70 18 L 54 34 M 74 50 L 54 48" stroke="url(#brandgrad)" stroke-width="7" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="underline" viewBox="0 0 600 30">
+      <path d="M6 20 C 150 6, 350 8, 594 14" fill="none" stroke="url(#brandgrad)" stroke-width="12" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="drop" viewBox="0 0 40 56">
+      <path d="M20 4 C 30 20, 36 30, 36 38 A 16 16 0 0 1 4 38 C 4 30, 10 20, 20 4 Z" fill="#cfe8ff" stroke="currentColor" stroke-width="4"/>
+    </symbol>
+  </defs>
+</svg>
+
+<section class="slide" id="s1">
+  <h1 class="h-g">₹400 કરોડ ની આગ 🔥<br>પછી… કેવી રીતે<br><span class="hl2">બદલી નસીબની બાજી?</span></h1>
+  <div class="photo-card" style="left:60px; right:60px; top:500px; height:480px; background-size:960px 540px; background-position:0 0;"></div>
+  <div style="position:absolute; left:72px; right:72px; top:1016px">
+    <div style="font:900 44px 'Inter'; letter-spacing:-0.02em">Bipinbhai Hadvani</div>
+    <div class="fine" style="font-size:28px">Founder, Chairman &amp; MD – Gopal Snacks</div>
+  </div>
+  <div class="note" style="right:70px; bottom:150px; transform:rotate(-4deg); text-align:right; font-size:50px">
+    Full <span class="mark">comeback story</span> 👉
+    <span class="gu">આખી કહાની જાણો</span>
+  </div>
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
+  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+</section>
+
+<section class="slide" id="s2">
+  <div class="pager">02 / 09</div>
+  <h1 class="h-g"><span class="hl2">12 ડિસેમ્બર 2024</span></h1>
+  <p class="sub-en" style="margin-top:6px">Rajkot (Metoda GIDC) plant માં ભયંકર આગ 🔥</p>
+  <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
+  <div class="photo-card" style="left:190px; width:700px; top:440px; height:440px; background-size:1600px 900px; background-position:-500px -470px;"></div>
+  <div class="stat-row" style="position:absolute; left:72px; right:72px; top:950px">
+    <div class="stat"><div class="big">₹400 Cr</div><div class="lbl">કરોડ નું નુકસાન</div><div class="lbl-en">loss in one fire</div></div>
+    <div class="stat ok"><div class="big">0</div><div class="lbl">સદ્ભાગ્યે કોઈ જાનહાનિ નહીં ✅</div><div class="lbl-en">no one was hurt</div></div>
+  </div>
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
+  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+</section>
+
+<section class="slide" id="s3">
+  <div class="pager">03 / 09</div>
+  <h1 class="h-g">માત્ર <span class="hl2">4 દિવસ</span> માં…</h1>
+  <p class="sub-en">50% supply was back on track</p>
+  <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
+  <div class="stat-row" style="margin-top:40px">
+    <div class="stat" style="text-align:center"><div class="big" style="font-size:150px">50%</div><div class="lbl">supply પાછો શરૂ</div></div>
+  </div>
+  <div class="cards" style="margin-top:36px">
+    <div class="card"><div class="emoji">🏭</div><div><div class="gu-main">Modasa plant માં production વધાર્યું</div><div class="en-sub">Scaled up the Modasa plant</div></div></div>
+    <div class="card"><div class="emoji">🏭</div><div><div class="gu-main">Nagpur plant માં production વધાર્યું</div><div class="en-sub">Scaled up the Nagpur plant</div></div></div>
+    <div class="card"><div class="emoji">🤝</div><div><div class="gu-main">Third-party manufacturers ની મદદ</div><div class="en-sub">Partnered with outside manufacturers</div></div></div>
+  </div>
+  <div class="note" style="left:80px; bottom:170px; transform:rotate(-3deg)">
+    <span class="mark">Plan B</span> ready હતો 💡
+  </div>
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
+  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+</section>
+
+<section class="slide" id="s4">
+  <div class="pager">04 / 09</div>
+  <h1 class="h-g">Insurance =<br><span class="hl2">સુરક્ષા કવચ 🛡️</span></h1>
+  <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
+  <div class="alert" style="margin-top:44px">
+    <div class="gu" style="font:800 50px/1.3 'Inter', 'Baloo Bhai 2'; letter-spacing:-0.01em">બધી assets fully insured હતી</div>
+    <div class="en" style="font:700 34px 'Inter'; opacity:.95; margin-top:6px">All assets were fully insured</div>
+  </div>
+  <div class="cards" style="margin-top:40px">
+    <div class="card"><div class="emoji">🔥</div><div><div class="gu-main">આગ, અકસ્માત… risk ગમે ત્યારે આવી શકે</div><div class="en-sub">Disasters don't send a warning</div></div></div>
+    <div class="card"><div class="emoji">💰</div><div><div class="gu-main">વીમો ખર્ચ નથી, સુરક્ષા છે</div><div class="en-sub">Insurance is protection, not an expense</div></div></div>
+  </div>
+  <div class="note" style="right:80px; bottom:170px; transform:rotate(-3deg); text-align:right">
+    Lesson: ધંધાનો <span class="mark">વીમો</span><br>ક્યારેય skip ન કરો!
+  </div>
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
+  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+</section>
+
+<section class="slide" id="s5">
+  <div class="pager">05 / 09</div>
+  <h1 class="h-g">Comeback <span class="hl2">Timeline</span></h1>
+  <div class="tl">
+    <div class="step"><div class="when">Dec 2024</div><div class="what">Rajkot plant માં આગ 🔥<small>Fire at the main plant</small></div></div>
+    <div class="step"><div class="when">+4 days</div><div class="what">50% supply પાછો<small>Half of supply restored</small></div></div>
+    <div class="step"><div class="when">Jan 2025</div><div class="what">નવા plant માં trial production<small>Trial runs at a new plant</small></div></div>
+    <div class="step"><div class="when">May 2026</div><div class="what">Rajkot plant ફરી શરૂ 🏭<small>Main plant restarted · 1,05,233 MTPA</small></div></div>
+    <div class="step win"><div class="when">FY26</div><div class="what">₹73.7 કરોડ નો profit 📈<small>Reported net profit</small></div></div>
+  </div>
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
+  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+</section>
+
+<section class="slide" id="s6">
+  <div class="pager">06 / 09</div>
+  <h1 class="h-g">Smart <span class="hl2">Move 🧠</span></h1>
+  <p class="sub-en">Gondal નું production Rajkot માં ભેગું કર્યું</p>
+  <svg class="swoosh" width="420" height="26"><use href="#underline"/></svg>
+  <div class="grid2" style="margin-top:64px; gap:26px">
+    <div class="chip" style="padding:40px 30px; min-height:250px"><div class="en">⚡ Power</div><div class="gu">Boiler system થી વીજળી ખર્ચ ઓછો</div></div>
+    <div class="chip" style="padding:40px 30px; min-height:250px"><div class="en">🚚 Transport</div><div class="gu">Saurashtra ના dealers નજીક</div></div>
+    <div class="chip" style="padding:40px 30px; min-height:250px"><div class="en">👷 Labour</div><div class="gu">Labour અને manufacturing ખર્ચ માં બચત</div></div>
+    <div class="chip" style="padding:40px 30px; min-height:250px"><div class="en">🏭 Capacity</div><div class="gu">1,05,233 MTPA</div></div>
+  </div>
+  <div class="note" style="left:80px; bottom:170px; transform:rotate(-3deg)">
+    ઓછો ખર્ચ = <span class="mark">વધુ નફો</span> 📈
+    <span class="gu">Lower cost, higher profit</span>
+  </div>
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
+  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+</section>
+
+<section class="slide" id="s7">
+  <div class="pager">07 / 09</div>
+  <h1 class="h-g">Comeback ના <span class="hl2">4 Lessons</span></h1>
+  <div class="lesson-grid">
+    <div class="lesson"><div class="n">1</div><div class="t">Plan B તૈયાર રાખો</div><div class="e">More than one plant kept supply alive</div></div>
+    <div class="lesson"><div class="n">2</div><div class="t">વીમો ક્યારેય skip ન કરો</div><div class="e">Insurance cushions the blow</div></div>
+    <div class="lesson"><div class="n">3</div><div class="t">આબરૂ &gt; પૈસા</div><div class="e">Trust with dealers is the real asset</div></div>
+    <div class="lesson"><div class="n">4</div><div class="t">Setback એ અંત નથી</div><div class="e">Rebuild smarter, not just again</div></div>
+  </div>
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
+  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+</section>
+
+<section class="slide" id="s8">
+  <div class="pager">08 / 09</div>
+  <h1 class="h-g">આ પહેલી<br><span class="hl2">લડાઈ નહોતી 💪</span></h1>
+  <div class="cards" style="margin-top:56px; gap:30px">
+    <div class="card" style="padding:34px 30px"><div class="emoji">📚</div><div><div class="gu-main">10મું fail, 12મું fail</div><div class="en-sub">Left studies, started a farsan business</div></div></div>
+    <div class="card" style="padding:34px 30px"><div class="emoji">🏦</div><div><div class="gu-main">ભાઈઓ થી અલગ થઈ ₹500 કરોડ ની લોન, 17% વ્યાજે</div><div class="en-sub">A huge bet at a high interest rate</div></div></div>
+    <div class="card" style="padding:34px 30px"><div class="emoji">🥨</div><div><div class="gu-main">50 પૈસા ના ફરસાણ થી ₹10,000 કરોડ ની company</div><div class="en-sub">From a small shop to a listed company</div></div></div>
+  </div>
+  <div class="note" style="right:80px; bottom:170px; transform:rotate(-3deg); text-align:right">
+    Gopal ની story = <span class="mark">હિંમત</span> ની story
+  </div>
+  <img class="brand" src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show">
+  <div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div>
+</section>
+
+<section class="slide" id="s9" style="padding-top:40px; text-align:center">
+  <div class="pager">09 / 09</div>
+  <img src="assets/show-logo.jpg" alt="The Sagar Kathrotiya Show" style="width:230px; mix-blend-mode:multiply">
+  <div style="font:700 104px/1 'Caveat'; margin-top:6px"><span style="background:linear-gradient(transparent 58%, var(--peach) 58%, var(--peach) 92%, transparent 92%); padding:0 12px">Bipinbhai Hadvani</span></div>
+  <div style="font:700 36px 'Baloo Bhai 2'; color:var(--accent); margin-top:4px">બિપિનભાઈ હડવાણી · Gopal Snacks</div>
+  <div class="photo-card" style="left:140px; width:380px; top:410px; height:560px; background-size:1664px 936px; background-position:0 0;"></div>
+  <div class="photo-card" style="right:140px; width:380px; top:410px; height:560px; background-size:1664px 936px; background-position:-1282px 0;"></div>
+  <div style="position:absolute; left:0; right:0; top:1010px">
+    <div style="font:700 88px/1 'Caveat'">Watch Full Podcast On</div>
+    <div style="font:700 36px 'Baloo Bhai 2'; color:var(--accent); margin-top:4px">આખો પોડકાસ્ટ YouTube પર જુઓ</div>
+    <div class="yt9" style="margin-top:22px">
+      <svg width="120" height="85" viewBox="0 0 96 68" aria-label="YouTube"><rect width="96" height="68" rx="18" fill="#ff0033"/><path d="M38 19 L 66 34 L 38 49 Z" fill="#fff"/></svg>
+      <div class="word">YouTube</div>
+    </div>
+  </div>
+  <div class="fine" style="position:absolute; left:72px; right:72px; bottom:40px">
+    Views shared are the guest's own. Not investment advice.
+    <span>આ વિચારો મહેમાનના અંગત છે. રોકાણ સલાહ નથી.</span>
+  </div>
+</section>
+
+</body>
+</html>

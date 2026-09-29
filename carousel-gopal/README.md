@@ -1,0 +1,13 @@
+# Gopal Snacks fire comeback — Instagram carousel (Gujarati + English)
+
+"₹400 કરોડ ની આગ પછી Bipinbhai Hadvani એ કેવી રીતે બદલી નાખી નસીબની બાજી?" —
+9 slides, 1080×1440, Sunset theme (same as `../carousel`).
+
+- `slides.html` — all slides
+- `assets/thumb.jpg` — episode thumbnail (cover, fire photo and portraits are cropped from it)
+- `out/*.png`, `out-jpg/*.jpg`, `gopal-fire-comeback-jpg.zip` — exports
+
+Facts come from the episode description and public company updates (fire on 12 Dec 2024,
+50% supply in 4 days, insured assets, Rajkot plant restart May 2026, FY26 profit).
+
+Re-render: `NODE_PATH=$(npm root -g) node render.js`
