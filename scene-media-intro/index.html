@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scene Media Intro</title>
+<style>
+  /* fonts are bundled in ./fonts so the intro also plays offline */
+  @font-face { font-family: 'Archivo Black'; src: url(fonts/ArchivoBlack.woff2) format('woff2'); font-display: block; }
+  @font-face { font-family: 'Poppins'; font-weight: 400; src: url(fonts/Poppins-400.woff2) format('woff2'); font-display: block; }
+  @font-face { font-family: 'Poppins'; font-weight: 600; src: url(fonts/Poppins-600.woff2) format('woff2'); font-display: block; }
+  /*
+    Scene Media – 20 second motion graphic intro.
+    Logo files: logo-icon.png (red "S" mark) and logo-full.png (mark + wordmark), both transparent.
+    Timeline (seconds):
+      0–3     Film-leader countdown 3·2·1, letterbox bars slide in
+      3–7.5   Kinetic words: CREATE · CAPTURE · INSPIRE
+      7.5–10  The two halves of the "S" mark slam together – flash, shake, shockwave
+      10–12.5 Mark holds with glow + light rays
+      12.5–15 Mark slides left, "SCENE MEDIA." wipes in, shine sweep
+      15–19   Tagline + red underline
+      19–20   Fade to black
+  */
+  :root {
+    --red: #e50000;
+    --black: #000;
+    --white: #fff;
+    --ease: cubic-bezier(.22,1,.36,1);
+    --snap: cubic-bezier(.7,0,.2,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--black); overflow: hidden; }
+  body { display: grid; place-items: center; font-family: 'Poppins', sans-serif; color: var(--white); }
+
+  .stage {
+    position: relative; width: min(100vw, 177.78vh); aspect-ratio: 16 / 9;
+    background: var(--black); overflow: hidden; font-size: min(1vw, 1.78vh);
+  }
+  /* keep each element's first/last keyframe outside its active time */
+  #stage * { animation-fill-mode: both; }
+  #stage .mark { animation-fill-mode: both, both, forwards; }
+  #stage .full { animation-fill-mode: forwards, forwards; }
+  #stage .shock { animation-fill-mode: forwards; }
+
+  .center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+
+  /* ---------- background ---------- */
+  .bg-glow {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(229,0,0,.28), transparent 55%);
+    opacity: 0; animation: bgGlow 20s linear;
+  }
+  @keyframes bgGlow { 0%, 35% { opacity: 0; } 42% { opacity: 1; } 90% { opacity: .6; } 100% { opacity: 0; } }
+
+  .grain {
+    position: absolute; inset: -50%; opacity: .06; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain .4s steps(4) infinite;
+  }
+  @keyframes grain { 0% { transform: translate(0,0); } 25% { transform: translate(-3%,2%); } 50% { transform: translate(2%,-3%); } 75% { transform: translate(-2%,-1%); } }
+
+  .bar { position: absolute; left: 0; right: 0; height: 9%; background: #000; z-index: 5; }
+  .bar.top { top: 0; animation: barTop 1s .2s var(--ease); }
+  .bar.bot { bottom: 0; animation: barBot 1s .2s var(--ease); }
+  @keyframes barTop { from { transform: translateY(-100%); } }
+  @keyframes barBot { from { transform: translateY(100%); } }
+
+  /* ---------- 0–3s : film leader countdown ---------- */
+  .leader { width: 34em; height: 34em; opacity: 0; animation: leader 3.1s linear; }
+  @keyframes leader { 0%, 95% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.6); } }
+  .leader .ring { position: absolute; inset: 0; border-radius: 50%; border: .35em solid rgba(255,255,255,.5); }
+  .leader .ring.inner { inset: 3em; border-width: .2em; }
+  .leader .sweep {
+    position: absolute; inset: 0; border-radius: 50%;
+    background: conic-gradient(rgba(229,0,0,.55) var(--a, 0deg), transparent 0);
+    animation: sweep 1s linear 3;
+  }
+  @property --a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+  @keyframes sweep { from { --a: 0deg; } to { --a: 360deg; } }
+  .leader .cross { position: absolute; background: rgba(255,255,255,.35); }
+  .leader .cross.h { left: -30%; right: -30%; top: 50%; height: .15em; }
+  .leader .cross.v { top: -10%; bottom: -10%; left: 50%; width: .15em; }
+  .num {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    font: 14em 'Archivo Black', 'Arial Black', sans-serif; opacity: 0;
+  }
+  .n3 { animation: num 1s 0s steps(1); }
+  .n2 { animation: num 1s 1s steps(1); }
+  .n1 { animation: num 1s 2s steps(1); }
+  @keyframes num { 0% { opacity: 1; } 100% { opacity: 0; } }
+
+  /* ---------- 3–7.5s : kinetic words ---------- */
+  .word {
+    font: 12em 'Archivo Black', 'Arial Black', sans-serif; letter-spacing: .02em;
+    white-space: nowrap; opacity: 0;
+  }
+  .word span { color: var(--red); }
+  .w1 { animation: word 1.5s 3.1s var(--ease); }
+  .w2 { animation: word 1.5s 4.6s var(--ease); }
+  .w3 { animation: word 1.5s 6.1s var(--ease); }
+  @keyframes word {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(2.2); filter: blur(.06em); text-shadow: -.12em 0 var(--red), .12em 0 #0ff; }
+    18%  { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); text-shadow: -.03em 0 var(--red), .03em 0 #0ff; }
+    26%  { text-shadow: 0 0 transparent, 0 0 transparent; }
+    80%  { opacity: 1; transform: translate(-50%, -50%) scale(.94); filter: blur(0); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(.85); filter: blur(.03em); }
+  }
+
+  /* ---------- 7.5–12.5s : mark assembles ---------- */
+  .mark {
+    width: 19.6em; aspect-ratio: 1036 / 1072;
+    transform: translate(-50%, -50%) scale(1.55);
+    animation: shake .45s 8.3s linear, glowPulse 2.4s 9.6s ease-in-out, markMove 1.2s 12.5s var(--snap);
+  }
+  .half { position: absolute; inset: 0; background: url(logo-icon.png) center / contain no-repeat; }
+  .half.top { clip-path: inset(0 0 49.6% 0); animation: topIn .8s 7.5s var(--snap); }
+  .half.bot { clip-path: inset(50% 0 0 0); animation: botIn .8s 7.5s var(--snap); }
+  @keyframes topIn { from { transform: translate(-60em, -45em); opacity: 0; } 20% { opacity: 1; } to { transform: none; opacity: 1; } }
+  @keyframes botIn { from { transform: translate(60em, 45em); opacity: 0; } 20% { opacity: 1; } to { transform: none; opacity: 1; } }
+  @keyframes shake {
+    0%, 100% { transform: translate(-50%, -50%) scale(1.55); }
+    20% { transform: translate(-51.5%, -48.5%) scale(1.6); }
+    40% { transform: translate(-48.5%, -51%) scale(1.53); }
+    60% { transform: translate(-50.8%, -49.4%) scale(1.56); }
+    80% { transform: translate(-49.6%, -50.4%) scale(1.55); }
+  }
+  @keyframes glowPulse {
+    0%, 100% { filter: drop-shadow(0 0 0 rgba(229,0,0,0)); }
+    50% { filter: drop-shadow(0 0 2.5em rgba(229,0,0,.9)); }
+  }
+  /* 1370px wide full logo shown at 64em → icon centre sits 21.9em left of the logo centre */
+  @keyframes markMove {
+    from { transform: translate(-50%, -50%) scale(1.55); opacity: 1; }
+    95%  { transform: translate(calc(-50% - 21.9em), -50%) scale(1); opacity: 1; }
+    to   { transform: translate(calc(-50% - 21.9em), -50%) scale(1); opacity: 0; }
+  }
+
+  .streak {
+    position: absolute; height: .3em; width: 40em; border-radius: 1em; opacity: 0;
+    background: linear-gradient(90deg, transparent, var(--red), #fff);
+  }
+  .s1 { top: 38%; left: -45%; animation: streakR .7s 7.4s ease-in; }
+  .s2 { top: 44%; left: -45%; animation: streakR .7s 7.5s ease-in; width: 25em; }
+  .s3 { top: 58%; right: -45%; animation: streakL .7s 7.45s ease-in; transform: scaleX(-1); }
+  .s4 { top: 63%; right: -45%; animation: streakL .7s 7.55s ease-in; transform: scaleX(-1); width: 25em; }
+  @keyframes streakR { 0% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; transform: translateX(160em); } }
+  @keyframes streakL { 0% { opacity: 1; transform: scaleX(-1) translateX(0); } 100% { opacity: 0; transform: scaleX(-1) translateX(160em); } }
+
+  .flash { position: absolute; inset: 0; background: #fff; opacity: 0; animation: flash .5s 8.3s ease-out; mix-blend-mode: overlay; }
+  @keyframes flash { 0% { opacity: .95; } 100% { opacity: 0; } }
+
+  .shock {
+    width: 10em; height: 10em; border-radius: 50%; border: .6em solid var(--red); opacity: 0;
+    animation: shock 1s 8.3s var(--ease);
+  }
+  @keyframes shock { 0% { opacity: 1; transform: translate(-50%, -50%) scale(.5); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(9); border-width: .1em; } }
+
+  .rays {
+    width: 120em; height: 120em; opacity: 0;
+    background: repeating-conic-gradient(rgba(229,0,0,.16) 0 4deg, transparent 4deg 14deg);
+    -webkit-mask: radial-gradient(circle, #000 0, transparent 45%); mask: radial-gradient(circle, #000 0, transparent 45%);
+    animation: rays 5.5s 8.4s linear;
+  }
+  @keyframes rays {
+    0% { opacity: 0; transform: translate(-50%, -50%) rotate(0); }
+    15% { opacity: 1; }
+    75% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -50%) rotate(40deg); }
+  }
+
+  /* ---------- 12.5–15s : full logo reveal ---------- */
+  .full, .mark, .shine { top: 45%; }
+  .full { width: 64em; aspect-ratio: 1370 / 447; opacity: 0; }
+  .full img { width: 100%; display: block; }
+  .full { animation: fullIn 1.1s 13.6s var(--ease), fullOut 1s 19s ease-in; }
+  /* first 31% of the image is the mark, already on screen – reveal the wordmark from there */
+  @keyframes fullIn { from { opacity: 1; clip-path: inset(0 69% 0 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
+  @keyframes fullOut { from { opacity: 1; clip-path: inset(0 0 0 0); } to { opacity: 0; clip-path: inset(0 0 0 0); transform: translate(-50%, -50%) scale(1.08); } }
+
+  .shine { width: 64em; height: 22em; overflow: hidden; pointer-events: none; mix-blend-mode: overlay; }
+  .shine::after {
+    content: ""; position: absolute; top: -50%; left: -40%; width: 18%; height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.95), transparent);
+    transform: rotate(18deg); opacity: 0; animation: shine 1s 15s ease-in-out;
+  }
+  @keyframes shine { 0% { left: -40%; opacity: 1; } 100% { left: 140%; opacity: 1; } }
+
+  /* ---------- 15–19s : tagline ---------- */
+  .tagline {
+    top: 78%; font-weight: 600; font-size: 2em; letter-spacing: .45em; white-space: nowrap;
+    opacity: 0; animation: rise 4s 15.4s var(--ease);
+  }
+  .underline {
+    top: 84%; height: .3em; width: 0; background: var(--red); border-radius: 1em;
+    animation: underline 3.6s 15.8s var(--ease);
+  }
+  @keyframes rise {
+    0% { opacity: 0; transform: translate(-50%, 1.2em); letter-spacing: 1.2em; }
+    25% { opacity: 1; transform: translate(-50%, -50%); letter-spacing: .45em; }
+    85% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -50%); }
+  }
+  @keyframes underline { 0% { width: 0; opacity: 1; } 30% { width: 30em; } 85% { opacity: 1; width: 30em; } 100% { width: 30em; opacity: 0; } }
+
+  .fade { position: absolute; inset: 0; background: #000; opacity: 0; z-index: 6; animation: fade 1s 19s forwards; pointer-events: none; }
+  @keyframes fade { to { opacity: 1; } }
+
+  .replay {
+    position: fixed; right: 16px; bottom: 16px; padding: .6em 1.2em; border: 0; border-radius: 2em;
+    background: var(--red); color: #fff; font: 600 14px 'Poppins', sans-serif; cursor: pointer; opacity: .8; z-index: 10;
+  }
+  .replay:hover { opacity: 1; }
+  .clean .replay { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage * { animation-duration: .01s !important; animation-delay: 0s !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="bg-glow"></div>
+    <div class="rays center"></div>
+
+    <div class="leader center">
+      <div class="sweep"></div>
+      <div class="ring"></div><div class="ring inner"></div>
+      <div class="cross h"></div><div class="cross v"></div>
+      <div class="num n3">3</div><div class="num n2">2</div><div class="num n1">1</div>
+    </div>
+
+    <div class="word w1 center">CREATE<span>.</span></div>
+    <div class="word w2 center">CAPTURE<span>.</span></div>
+    <div class="word w3 center">INSPIRE<span>.</span></div>
+
+    <div class="streak s1"></div><div class="streak s2"></div>
+    <div class="streak s3"></div><div class="streak s4"></div>
+
+    <div class="shock center"></div>
+    <div class="mark center">
+      <div class="half top"></div>
+      <div class="half bot"></div>
+    </div>
+
+    <div class="full center"><img src="logo-full.png" alt="Scene Media logo"></div>
+    <div class="shine center"></div>
+
+    <div class="tagline center">EVERY STORY DESERVES A SCENE</div>
+    <div class="underline center"></div>
+
+    <div class="flash"></div>
+    <div class="grain"></div>
+    <div class="bar top"></div><div class="bar bot"></div>
+    <div class="fade"></div>
+  </div>
+
+  <button class="replay" id="replay">↻ Replay</button>
+
+<script>
+  // Replay: clone the stage so every CSS animation restarts from 0
+  document.getElementById('replay').onclick = () => {
+    const stage = document.getElementById('stage');
+    stage.replaceWith(stage.cloneNode(true));
+  };
+  if (new URLSearchParams(location.search).has('clean')) document.body.classList.add('clean');
+</script>
+</body>
+</html>
