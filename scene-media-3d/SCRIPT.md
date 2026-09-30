@@ -1,6 +1,6 @@
 # Scene Media – 20 Second 3D Logo Intro (Blender)
 
-**Made in:** Blender 4.2 (Cycles renderer), 1280×720, 24 fps, 480 frames
+**Made in:** Blender 4.2 (Cycles renderer). Scripts default to **4K (3840×2160) at 60 fps** (1200 frames); change `FPS`, `RES`, `SAMPLES` at the top of the script.
 **Look:** dark cinematic studio, glossy mirror floor, brand-red metallic "S" mark, bright white 3D letters, red rim lights and glow.
 
 ## Files in this folder
@@ -8,6 +8,7 @@
 |------|------------|
 | `scene-media-3d-intro.mp4` | The final rendered 20-second video |
 | `scene.blend` | The Blender project – open it in Blender 4.2+ to tweak and re-render (fonts are packed inside) |
+| `scene_media_blender.py` | **Single file to paste into Blender's Scripting tab → Run Script.** Logo is built in. Defaults to 4K 60 fps and uses your GPU if found |
 | `scene.py` | Script that builds the whole scene from scratch (geometry, materials, lights, camera, animation) |
 | `trace.py` + `logo-black.jpg` → `logo.json` | Traces your logo into vector outlines used for the 3D icon, letters and dot |
 | `encode.py` | Joins rendered frames into the MP4 |

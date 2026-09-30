@@ -3,7 +3,7 @@
 Run:  python scene.py scene.blend
   or: blender --background --python scene.py -- scene.blend
   or: open scene.py in Blender's Scripting tab and press Run Script
-Timeline @24 fps (480 frames):
+Timeline (seconds; any frame rate):
   0–3 s    darkness, spotlight clicks on, red light streaks fly past, dust
   3–7.5 s  3D words CREATE. / CAPTURE. / INSPIRE. flip in and fly out
   7.5–10 s the two halves of the S mark slam together – flash, shake, shockwave
@@ -28,13 +28,22 @@ def _find_here():
                             'and save/open scene.py from that folder. Looked in: ' + ', '.join(cands))
 
 HERE = _find_here()
-FPS, END = 24, 480
+# ---- output settings: change these -------------------------------------------
+FPS = 60                     # 24 = film look, 60 = extra smooth
+RES = (3840, 2160)           # 4K UHD. (1920, 1080) = Full HD, (1280, 720) = HD
+SAMPLES = 64                 # render quality; lower = faster but grainier
+# -----------------------------------------------------------------------------
+END = 20 * FPS               # 20 seconds
 Z0 = 3.4                                  # height of the logo centre above the floor
 ICON_C = Vector((-4.68, 0.0))              # icon centre in traced logo coords
 random.seed(7)
 
 def F(sec):
     return int(round(sec * FPS)) + 1
+
+def D(frames24):
+    """a duration written in 24 fps frames, converted to the current frame rate"""
+    return max(1, int(round(frames24 * FPS / 24)))
 
 # ---------------------------------------------------------------- reset scene
 if bpy.app.background:
@@ -192,12 +201,12 @@ def word(text, start, dur):
     kf(ob, 'location', a, (0, 3, Z0), 'BACK', 'EASE_OUT')
     kf(ob, 'rotation_euler', a, (0, 0, math.radians(-10)), 'BACK', 'EASE_OUT')
     kf(ob, 'scale', a, (0.3, 0.3, 0.3), 'BACK', 'EASE_OUT')
-    kf(ob, 'location', a + 9, (0, 0, Z0), 'LINEAR')
-    kf(ob, 'rotation_euler', a + 9, (math.radians(90), 0, 0), 'LINEAR')
-    kf(ob, 'scale', a + 9, (1, 1, 1), 'LINEAR')
-    kf(ob, 'location', b - 7, (0, -0.8, Z0), 'EXPO', 'EASE_IN')
-    kf(ob, 'rotation_euler', b - 7, (math.radians(90), 0, math.radians(3)), 'EXPO', 'EASE_IN')
-    kf(ob, 'scale', b - 7, (1.03, 1.03, 1.03), 'EXPO', 'EASE_IN')
+    kf(ob, 'location', a + D(9), (0, 0, Z0), 'LINEAR')
+    kf(ob, 'rotation_euler', a + D(9), (math.radians(90), 0, 0), 'LINEAR')
+    kf(ob, 'scale', a + D(9), (1, 1, 1), 'LINEAR')
+    kf(ob, 'location', b - D(7), (0, -0.8, Z0), 'EXPO', 'EASE_IN')
+    kf(ob, 'rotation_euler', b - D(7), (math.radians(90), 0, math.radians(3)), 'EXPO', 'EASE_IN')
+    kf(ob, 'scale', b - D(7), (1.03, 1.03, 1.03), 'EXPO', 'EASE_IN')
     kf(ob, 'location', b, (0, -9, Z0 + 0.4))
     kf(ob, 'rotation_euler', b, (math.radians(90), 0, math.radians(12)))
     kf(ob, 'scale', b, (1.5, 1.5, 1.5))
@@ -230,7 +239,7 @@ IMPACT = F(8.3)
 kf(icon_root, 'location', 1, HERO, 'CONSTANT')
 kf(icon_root, 'scale', 1, (1.35, 1.35, 1.35), 'CONSTANT')
 kf(icon_root, 'rotation_euler', 1, (math.radians(90), 0, 0), 'CONSTANT')
-kf(icon_root, 'rotation_euler', IMPACT + 6, (math.radians(90), 0, 0), 'SINE', 'EASE_IN_OUT')
+kf(icon_root, 'rotation_euler', IMPACT + D(6), (math.radians(90), 0, 0), 'SINE', 'EASE_IN_OUT')
 kf(icon_root, 'rotation_euler', F(11.2), (math.radians(90), 0, math.radians(-28)), 'SINE', 'EASE_IN_OUT')
 kf(icon_root, 'rotation_euler', F(12.5), (math.radians(90), 0, math.radians(8)), 'BACK', 'EASE_OUT')
 kf(icon_root, 'location', F(12.5), HERO, 'EXPO', 'EASE_IN_OUT')
@@ -250,12 +259,12 @@ for ob, start in ((top, Vector((-14, 6, 4))), (bot, Vector((14, -2.3, 4)))):
 
 # letters flip up one by one, dot pops last
 for i, ob in enumerate(letters):
-    s = F(13.3) + i * 2
+    s = F(13.3) + i * D(2)
     kf(ob, 'rotation_euler', 1, (0, 0, 0), 'CONSTANT')
     kf(ob, 'scale', 1, (0, 0, 0), 'CONSTANT')
     kf(ob, 'scale', s, (1, 1, 1), 'CONSTANT')
     kf(ob, 'rotation_euler', s, (0, 0, 0), 'BACK', 'EASE_OUT')
-    kf(ob, 'rotation_euler', s + 12, (math.radians(90), 0, 0))
+    kf(ob, 'rotation_euler', s + D(12), (math.radians(90), 0, 0))
 kf(dot, 'scale', 1, (0, 0, 0), 'CONSTANT')
 kf(dot, 'scale', F(14.6), (0, 0, 0), 'ELASTIC', 'EASE_OUT')
 kf(dot, 'scale', F(15.4), (1, 1, 1))
@@ -264,11 +273,11 @@ kf(dot, 'scale', F(15.4), (1, 1, 1))
 bpy.ops.mesh.primitive_torus_add(major_radius=1, minor_radius=0.025, major_segments=96, minor_segments=8,
                                  location=(0, 0.3, Z0), rotation=(math.radians(90), 0, 0))
 ring = bpy.context.object; ring.name = 'Shock'; ring.data.materials.append(m_shock)
-vis(ring, (IMPACT, IMPACT + 22))
+vis(ring, (IMPACT, IMPACT + D(22)))
 kf(ring, 'scale', IMPACT, (0.6, 0.6, 0.6), 'EXPO', 'EASE_OUT')
-kf(ring, 'scale', IMPACT + 22, (14, 14, 14))
+kf(ring, 'scale', IMPACT + D(22), (14, 14, 14))
 kf(shock_strength, 'default_value', IMPACT, 80, 'SINE', 'EASE_IN')
-kf(shock_strength, 'default_value', IMPACT + 22, 0)
+kf(shock_strength, 'default_value', IMPACT + D(22), 0)
 
 # ---------------------------------------------------------------- light streaks + dust
 bpy.ops.mesh.primitive_cylinder_add(radius=0.03, depth=7, vertices=8, rotation=(0, math.radians(90), 0))
@@ -318,7 +327,7 @@ sweep = light('Sweep', 'AREA', (-14, -3.5, Z0), 0, size=0.4, target=(0, 0, Z0))
 sweep.data.shape = 'RECTANGLE'; sweep.data.size, sweep.data.size_y = 0.3, 9
 
 # spotlight "clicks" on with a flicker
-for f, e in ((1, 0), (F(0.5), 0), (F(0.5) + 1, 5000), (F(0.5) + 3, 800), (F(0.5) + 5, 4500), (F(0.5) + 8, 3500)):
+for f, e in ((1, 0), (F(0.5), 0), (F(0.5) + D(1), 5000), (F(0.5) + D(3), 800), (F(0.5) + D(5), 4500), (F(0.5) + D(8), 3500)):
     kf(spot.data, 'energy', f, e, 'CONSTANT')
 for f, e in ((F(19), 3500), (END, 0)):
     kf(spot.data, 'energy', f, e, 'SINE')
@@ -327,7 +336,7 @@ for ob in (rim_l, rim_r):
     for f, e in ((1, 1200), (F(7.4), 1200), (IMPACT, 6000), (F(10), 2600), (F(11.2), 4200), (F(12.5), 2600)):
         kf(ob.data, 'energy', f, e, 'SINE', 'EASE_IN_OUT')
 # impact flash
-for f, e in ((1, 0), (IMPACT - 1, 0), (IMPACT, 22000), (IMPACT + 10, 0)):
+for f, e in ((1, 0), (IMPACT - D(1), 0), (IMPACT, 22000), (IMPACT + D(10), 0)):
     kf(flash.data, 'energy', f, e, 'EXPO' if f == IMPACT else 'CONSTANT', 'EASE_OUT')
 # light sweep across the finished logo
 kf(sweep.data, 'energy', 1, 0, 'CONSTANT'); kf(sweep.data, 'energy', F(15), 9000, 'CONSTANT')
@@ -357,19 +366,38 @@ for sec, loc, tgt, it, ea in cam_keys:
 # camera shake on impact
 for fc in cam.animation_data.action.fcurves:
     if fc.data_path == 'location' and fc.array_index in (0, 2):
-        m = fc.modifiers.new('NOISE'); m.scale = 1.5; m.strength = 0.9; m.phase = fc.array_index * 13
-        m.use_restricted_range = True; m.frame_start = IMPACT; m.frame_end = IMPACT + 14; m.blend_out = 10
+        m = fc.modifiers.new('NOISE'); m.scale = 1.5 * FPS / 24; m.strength = 0.9; m.phase = fc.array_index * 13
+        m.use_restricted_range = True; m.frame_start = IMPACT; m.frame_end = IMPACT + D(14); m.blend_out = D(10)
 
 # ---------------------------------------------------------------- render + colour
 sc.render.engine = 'CYCLES'
 sc.cycles.device = 'CPU'
-sc.cycles.samples = 12
+# use the graphics card if Blender can find one (much faster)
+try:
+    cprefs = bpy.context.preferences.addons['cycles'].preferences
+    for backend in ('OPTIX', 'CUDA', 'HIP', 'METAL', 'ONEAPI'):
+        try:
+            cprefs.compute_device_type = backend
+        except TypeError:
+            continue
+        cprefs.get_devices()
+        gpus = [d for d in cprefs.devices if d.type != 'CPU']
+        if gpus:
+            for d in gpus:
+                d.use = True
+            sc.cycles.device = 'GPU'
+            print('Rendering on GPU:', backend, [d.name for d in gpus])
+            break
+except Exception as ex:
+    print('GPU not available, using CPU:', ex)
+sc.cycles.samples = SAMPLES
 sc.cycles.use_adaptive_sampling = True; sc.cycles.adaptive_threshold = 0.05
 sc.cycles.use_denoising = True
 sc.cycles.max_bounces = 4; sc.cycles.diffuse_bounces = 2; sc.cycles.glossy_bounces = 3; sc.cycles.transparent_max_bounces = 2
 sc.cycles.caustics_reflective = False; sc.cycles.caustics_refractive = False
 sc.render.use_motion_blur = True; sc.render.motion_blur_shutter = 0.5
-sc.render.resolution_x, sc.render.resolution_y = 1280, 720
+sc.render.resolution_x, sc.render.resolution_y = RES
+sc.render.resolution_percentage = 100
 sc.view_settings.view_transform = 'Khronos PBR Neutral'; sc.view_settings.look = 'None'
 for f, v, it in ((1, -8, 'SINE'), (F(0.6), 0, 'CONSTANT'), (F(19), 0, 'SINE'), (END, -10, 'CONSTANT')):
     kf(sc.view_settings, 'exposure', f, v, it, 'EASE_IN_OUT')
