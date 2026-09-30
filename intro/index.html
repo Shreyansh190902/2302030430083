@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foodeiblog Intro</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<style>
+  /*
+    Foodeiblog – 20 second motion graphic intro.
+    To use a different logo, replace logo.png (any size, transparent PNG works best).
+    Timeline (seconds):
+      0–3   Warm open: background glow, floating spice dots, drawn line
+      3–8   Kinetic words: TASTE · COOK · SHARE
+      8–12  Plate draws in, fork & spoon slide in, steam rises
+      12–16 Logo reveal (wipe + bounce) inside the plate
+      16–20 Tagline + website, then fade to cream
+  */
+  :root {
+    --cream: #fff8ef;
+    --orange: #f39c32;
+    --deep: #2b1d12;
+    --soft: #f7e3c8;
+    --ease: cubic-bezier(.22,1,.36,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--cream); overflow: hidden; }
+  body { display: grid; place-items: center; font-family: 'Poppins', sans-serif; color: var(--deep); }
+
+  /* 16:9 stage that scales to fit any screen */
+  .stage {
+    position: relative;
+    width: min(100vw, 177.78vh);
+    aspect-ratio: 16 / 9;
+    background: radial-gradient(circle at 50% 50%, #fffdf8 0%, var(--cream) 55%, var(--soft) 100%);
+    overflow: hidden;
+    font-size: min(1vw, 1.78vh);
+  }
+  /* keep every element's start/end state; declared with extra specificity so the
+     per-element `animation` shorthands below don't reset it */
+  html .stage * { animation-fill-mode: both; }
+  html .stage .logo-wrap { animation-fill-mode: both, forwards; }
+
+  /* ---------- 0–3s : open ---------- */
+  .glow {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(243,156,50,.35), transparent 60%);
+    animation: glow 20s linear;
+  }
+  @keyframes glow {
+    0% { opacity: 0; transform: scale(.6); }
+    12% { opacity: 1; transform: scale(1); }
+    85% { opacity: 1; }
+    100% { opacity: 0; transform: scale(1.3); }
+  }
+  .dot {
+    position: absolute; border-radius: 50%; background: var(--orange); opacity: 0;
+    animation: float 20s ease-in-out;
+  }
+  @keyframes float {
+    0% { opacity: 0; transform: translateY(20em) scale(.2); }
+    10% { opacity: .7; }
+    80% { opacity: .5; }
+    100% { opacity: 0; transform: translateY(-30em) scale(1); }
+  }
+  .line {
+    position: absolute; left: 50%; top: 50%; height: .25em; width: 0;
+    background: var(--orange); transform: translate(-50%, -50%); border-radius: 1em;
+    animation: line 3.2s .4s var(--ease);
+  }
+  @keyframes line {
+    0% { width: 0; opacity: 1; }
+    60% { width: 60em; opacity: 1; }
+    100% { width: 60em; opacity: 0; }
+  }
+
+  /* ---------- 3–8s : kinetic words ---------- */
+  .word {
+    position: absolute; left: 50%; top: 50%;
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 11em; letter-spacing: .08em; opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+  .word span { color: var(--orange); }
+  .w1 { animation: word 1.7s 3s var(--ease); }
+  .w2 { animation: word 1.7s 4.6s var(--ease); }
+  .w3 { animation: word 1.9s 6.2s var(--ease); }
+  @keyframes word {
+    0%   { opacity: 0; transform: translate(-50%, -20%) scale(1.4); filter: blur(.4em); letter-spacing: .5em; }
+    25%  { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); letter-spacing: .08em; }
+    75%  { opacity: 1; transform: translate(-50%, -50%) scale(1.03); }
+    100% { opacity: 0; transform: translate(-50%, -85%) scale(.9); filter: blur(.3em); }
+  }
+
+  /* ---------- 8–12s : plate, cutlery, steam ---------- */
+  .plate {
+    position: absolute; left: 50%; top: 46%; width: 40em; height: 40em;
+    transform: translate(-50%, -50%); opacity: 0;
+    animation: plateIn 12s 8s var(--ease);
+  }
+  @keyframes plateIn {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(.6) rotate(-90deg); }
+    10% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0); }
+    90% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.1); }
+  }
+  .plate circle { fill: none; stroke-linecap: round; }
+  .ring1 { stroke: var(--orange); stroke-width: 1.2; stroke-dasharray: 315; stroke-dashoffset: 315; animation: draw 1.6s 8.2s var(--ease); }
+  .ring2 { stroke: var(--deep); stroke-width: .4; stroke-dasharray: 252; stroke-dashoffset: 252; animation: draw 1.6s 8.6s var(--ease); opacity: .35; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  .cutlery {
+    position: absolute; top: 46%; height: 30em; width: 4em; opacity: 0;
+    transform: translateY(-50%);
+  }
+  .fork  { left: calc(50% - 27em); animation: slideL 11s 9s var(--ease); }
+  .spoon { left: calc(50% + 23em); animation: slideR 11s 9s var(--ease); }
+  @keyframes slideL { 0% { opacity: 0; transform: translate(-10em, -50%); } 12% { opacity: 1; transform: translate(0, -50%); } 90% { opacity: 1; } 100% { opacity: 0; } }
+  @keyframes slideR { 0% { opacity: 0; transform: translate(10em, -50%); } 12% { opacity: 1; transform: translate(0, -50%); } 90% { opacity: 1; } 100% { opacity: 0; } }
+  .cutlery path { fill: var(--deep); opacity: .85; }
+
+  .steam {
+    position: absolute; left: 50%; top: 4%; width: 14em; height: 10em;
+    transform: translateX(-50%); opacity: 0; animation: steamShow 8s 10s;
+  }
+  @keyframes steamShow { 0%, 100% { opacity: 0; } 15%, 85% { opacity: 1; } }
+  .steam path {
+    fill: none; stroke: var(--orange); stroke-width: 1.4; stroke-linecap: round; opacity: .6;
+    stroke-dasharray: 60; animation: steam 2.4s linear infinite;
+  }
+  .steam path:nth-child(2) { animation-delay: .8s; }
+  .steam path:nth-child(3) { animation-delay: 1.6s; }
+  @keyframes steam {
+    0% { stroke-dashoffset: 60; transform: translateY(2em); opacity: 0; }
+    40% { opacity: .7; }
+    100% { stroke-dashoffset: -60; transform: translateY(-2em); opacity: 0; }
+  }
+
+  /* ---------- 12–16s : logo reveal ---------- */
+  .logo-wrap {
+    position: absolute; left: 50%; top: 46%; width: 30em;
+    transform: translate(-50%, -50%);
+    clip-path: inset(0 100% 0 0); opacity: 0;
+    animation: wipe 1.4s 12s var(--ease), logoOut 1s 19s;
+  }
+  .logo-wrap img { width: 100%; display: block; animation: bounce 1s 13.3s var(--ease); }
+  @keyframes wipe {
+    0% { clip-path: inset(0 100% 0 0); opacity: 1; }
+    100% { clip-path: inset(0 0 0 0); opacity: 1; }
+  }
+  @keyframes bounce {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.12); }
+    70% { transform: scale(.97); }
+    100% { transform: scale(1); }
+  }
+  @keyframes logoOut { from { opacity: 1; clip-path: inset(0 0 0 0); } to { opacity: 0; clip-path: inset(0 0 0 0); transform: translate(-50%, -50%) scale(1.15); } }
+
+  .shine {
+    position: absolute; left: 50%; top: 46%; width: 30em; height: 8em;
+    transform: translate(-50%, -50%); overflow: hidden; pointer-events: none;
+  }
+  .shine::after {
+    content: ""; position: absolute; top: -50%; left: -40%; width: 25%; height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.9), transparent);
+    transform: rotate(20deg); opacity: 0;
+    animation: shine 1.2s 14.2s;
+  }
+  @keyframes shine { 0% { left: -40%; opacity: 1; } 100% { left: 140%; opacity: 1; } }
+
+  /* ---------- 16–20s : tagline + fade ---------- */
+  .tagline, .url {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    white-space: nowrap; text-align: center; opacity: 0;
+  }
+  .tagline { top: 76%; font-family: 'Playfair Display', serif; font-style: italic; font-size: 3.4em; animation: rise 4s 16s var(--ease); }
+  .url { top: 85%; font-size: 1.8em; font-weight: 500; letter-spacing: .5em; color: var(--orange); animation: rise 3.4s 16.6s var(--ease); }
+  @keyframes rise {
+    0% { opacity: 0; transform: translate(-50%, 1.5em); }
+    25% { opacity: 1; transform: translate(-50%, 0); }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  .fade { position: absolute; inset: 0; background: var(--cream); opacity: 0; animation: fade 1s 19s forwards; pointer-events: none; }
+  @keyframes fade { to { opacity: 1; } }
+
+  /* replay control (hidden during recording with ?clean) */
+  .replay {
+    position: fixed; right: 16px; bottom: 16px; padding: .6em 1.2em;
+    border: 0; border-radius: 2em; background: var(--deep); color: var(--cream);
+    font: 500 14px 'Poppins', sans-serif; cursor: pointer; opacity: .75;
+  }
+  .replay:hover { opacity: 1; }
+  .clean .replay { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stage * { animation-duration: .01s !important; animation-delay: 0s !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="glow"></div>
+    <div id="dots"></div>
+    <div class="line"></div>
+
+    <div class="word w1">TASTE<span>.</span></div>
+    <div class="word w2">COOK<span>.</span></div>
+    <div class="word w3">SHARE<span>.</span></div>
+
+    <svg class="plate" viewBox="0 0 110 110" aria-hidden="true">
+      <circle class="ring1" cx="55" cy="55" r="50"/>
+      <circle class="ring2" cx="55" cy="55" r="40"/>
+    </svg>
+
+    <svg class="cutlery fork" viewBox="0 0 20 150" aria-hidden="true">
+      <path d="M2 0h2v35h2V0h2v35h2V0h2v35h2V0h2v40q0 10-5 12v92q0 6-3 6t-3-6V52q-5-2-5-12z"/>
+    </svg>
+    <svg class="cutlery spoon" viewBox="0 0 20 150" aria-hidden="true">
+      <path d="M10 0c6 0 10 10 10 22s-4 20-7 22v100q0 6-3 6t-3-6V44c-3-2-7-10-7-22S4 0 10 0z"/>
+    </svg>
+
+    <svg class="steam" viewBox="0 0 60 40" aria-hidden="true">
+      <path d="M18 38c-6-8 6-12 0-20s6-12 0-18"/>
+      <path d="M30 38c-6-8 6-12 0-20s6-12 0-18"/>
+      <path d="M42 38c-6-8 6-12 0-20s6-12 0-18"/>
+    </svg>
+
+    <div class="logo-wrap"><img src="logo.png" alt="Foodeiblog logo"></div>
+    <div class="shine"></div>
+
+    <div class="tagline">Recipes, stories &amp; flavours from every kitchen</div>
+    <div class="url">FOODEIBLOG.COM</div>
+
+    <div class="fade"></div>
+  </div>
+
+  <button class="replay" id="replay">↻ Replay</button>
+
+<script>
+  // Floating spice dots with random size/position/delay
+  const dots = document.getElementById('dots');
+  for (let i = 0; i < 28; i++) {
+    const d = document.createElement('div');
+    const s = 0.4 + Math.random() * 1.2;
+    d.className = 'dot';
+    d.style.cssText = `width:${s}em;height:${s}em;left:${Math.random() * 100}%;top:${40 + Math.random() * 60}%;` +
+      `animation-delay:${Math.random() * 1.5}s;animation-duration:${14 + Math.random() * 6}s;`;
+    dots.appendChild(d);
+  }
+
+  // Replay: clone the stage so every CSS animation restarts from 0
+  document.getElementById('replay').onclick = () => {
+    const stage = document.getElementById('stage');
+    stage.replaceWith(stage.cloneNode(true));
+  };
+
+  if (new URLSearchParams(location.search).has('clean')) document.body.classList.add('clean');
+</script>
+</body>
+</html>
