@@ -29,3 +29,8 @@ Exports: `out-essence-rbw/`, `out-essence-rbw-jpg/`, `no-small-business-red-blac
 `slides-poster.html` — black background, big red slide numbers, white headlines, red bottom band.
 Font: Hind Vadodara (Gujarati + Latin). Exports: `out-poster/`, `out-poster-jpg/`, `no-small-business-poster-jpg.zip`.
 Light version: `slides-poster-light.html` → `out-poster-light/`, `out-poster-light-jpg/`, `no-small-business-poster-light-jpg.zip`.
+
+## Editorial theme (newspaper style, Rasa serif)
+`slides-editorial.html` — cream paper, masthead with double rules, red kickers, serif headlines,
+drop caps, pull quotes, B/W framed photos. Exports: `out-editorial/`, `out-editorial-jpg/`,
+`no-small-business-editorial-jpg.zip`.
