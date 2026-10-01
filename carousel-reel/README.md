@@ -20,3 +20,7 @@ Exports: `out-minimal/`, `out-minimal-jpg/`, `no-small-business-minimal-jpg.zip`
 `slides-essence.html` — light grey grid/circle layout with red pill tags, page dots and arrow button
 (inspired by a reference post). Render: `node render.js slides-essence.html out-essence`.
 Exports: `out-essence/`, `out-essence-jpg/`, `no-small-business-essence-jpg.zip`.
+
+## Essence theme — red / black / white
+`slides-essence-rbw.html` — same layout on pure white with solid red tags/button and black text.
+Exports: `out-essence-rbw/`, `out-essence-rbw-jpg/`, `no-small-business-red-black-white-jpg.zip`.
