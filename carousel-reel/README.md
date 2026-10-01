@@ -28,3 +28,4 @@ Exports: `out-essence-rbw/`, `out-essence-rbw-jpg/`, `no-small-business-red-blac
 ## Poster theme (red / black / white, Hind Vadodara)
 `slides-poster.html` — black background, big red slide numbers, white headlines, red bottom band.
 Font: Hind Vadodara (Gujarati + Latin). Exports: `out-poster/`, `out-poster-jpg/`, `no-small-business-poster-jpg.zip`.
+Light version: `slides-poster-light.html` → `out-poster-light/`, `out-poster-light-jpg/`, `no-small-business-poster-light-jpg.zip`.
