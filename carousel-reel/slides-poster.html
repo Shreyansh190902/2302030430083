@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="utf-8">
+<title>No Small Business</title>
+<link href="assets/fonts.css" rel="stylesheet">
+<style>
+  :root { --bg:#0b0b0b; --ink:#fff; --muted:#b3b3b3; --line:#2a2a2a; --red:#e10600; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#555; font-family:'Hind Vadodara',sans-serif; }
+  .slide { position:relative; width:1080px; height:1440px; margin:0 auto 40px; overflow:hidden; background:var(--bg); color:var(--ink); padding:80px 80px 0; }
+
+  .top { display:flex; justify-content:space-between; align-items:flex-start; }
+  .num { font:700 180px/0.8 'Hind Vadodara'; color:var(--red); letter-spacing:-0.04em; }
+  .show { font:600 22px 'Hind Vadodara'; letter-spacing:.2em; color:var(--muted); text-transform:uppercase; text-align:right; line-height:1.5; padding-top:6px; }
+
+  h1 { font:700 100px/1.08 'Hind Vadodara'; letter-spacing:-0.02em; margin-top:70px; }
+  h1 em { font-style:normal; color:var(--red); }
+  .sub { font:500 36px/1.4 'Hind Vadodara'; color:var(--muted); margin-top:28px; max-width:880px; }
+
+  .list { margin-top:60px; }
+  .item { display:grid; grid-template-columns:90px 1fr; padding:30px 0; border-top:2px solid var(--line); }
+  .item:last-child { border-bottom:2px solid var(--line); }
+  .item .n { font:700 34px 'Hind Vadodara'; color:var(--red); padding-top:6px; }
+  .item .g { font:700 46px/1.25 'Hind Vadodara'; }
+  .item .e { font:500 32px/1.35 'Hind Vadodara'; color:var(--muted); margin-top:4px; }
+  .item .g.dim { color:#6d6d6d; text-decoration:line-through; text-decoration-color:var(--red); text-decoration-thickness:4px; }
+
+  .band { position:absolute; left:0; right:0; bottom:0; height:230px; background:var(--red); padding:0 80px;
+          display:flex; align-items:center; justify-content:space-between; gap:40px; }
+  .band .t { font:700 46px/1.25 'Hind Vadodara'; color:#fff; }
+  .band .a { flex:0 0 96px; height:96px; border-radius:50%; background:#0b0b0b; display:grid; place-items:center; }
+
+  .big { font:700 150px/1 'Hind Vadodara'; letter-spacing:-0.03em; color:#fff; }
+  .big.red { color:var(--red); }
+  .bl { font:500 38px 'Hind Vadodara'; color:var(--muted); margin-top:8px; }
+
+  .person { position:absolute; bottom:0; background-repeat:no-repeat; background-size:100% 100%; }
+  #s1 h1 { font-size:124px; margin-top:60px; }
+  #s7 .art { position:absolute; left:80px; right:80px; top:300px; height:760px; border:6px solid var(--red);
+             background:url('assets/outro.webp') no-repeat 0 -6px / 908px 1378px; }
+  #s7 .cta { position:absolute; left:0; right:0; top:1110px; text-align:center; }
+  #s7 .cta h2 { font:700 72px/1 'Hind Vadodara'; letter-spacing:-0.02em; }
+  #s7 .cta img { width:440px; margin-top:44px; }
+  #s2 .item,#s3 .item{padding:56px 0}
+  #s2 .item .g,#s3 .item .g{font-size:56px}
+  #s2 .list,#s3 .list{margin-top:80px !important}
+  #s4 .item,#s5 .item{padding:40px 0}
+  #s4 .list{margin-top:40px}
+  #s4 h1{margin-top:60px}
+  #s4 .item .g,#s5 .item .g{font-size:52px}
+  #s4 .item .e,#s5 .item .e{font-size:34px}
+  #s5 .list{margin-top:80px}
+  .item .e{font-size:34px}
+  #s6 .big{font-size:150px}
+</style>
+</head>
+<body>
+
+<section class="slide" id="s1">
+  <div class="top"><div class="num">01</div><div class="show">The Sagar<br>Kathrotiya Show</div></div>
+  <h1>કોઈ <em>ધંધો</em><br>નાનો નથી<br>હોતો.</h1>
+  <p class="sub">લોકો કહે “small business”… પણ Gopal ની journey શું કહે છે?</p>
+  <div class="person" style="left:-90px; bottom:-70px; width:620px; height:694px; background-image:url('assets/person-bipin.png')"></div>
+  <div class="person" style="left:600px; width:470px; height:697px; background-image:url('assets/person-sagar.png')"></div>
+</section>
+
+<section class="slide" id="s2">
+  <div class="top"><div class="num">02</div><div class="show">The Sagar<br>Kathrotiya Show</div></div>
+  <h1>નાની product,<br><em>મોટી brand.</em></h1>
+  <p class="sub">એક સામાન્ય deodorant આજે ઘરે ઘરે જાણીતી brand છે.</p>
+  <div class="list">
+    <div class="item"><div class="n">✕</div><div><div class="g dim">“આ તો નાની product છે”</div></div></div>
+    <div class="item"><div class="n">✓</div><div><div class="g">Product નાનું હોઈ શકે, brand નહીં.</div><div class="e">ફરક તમે તેને કેવી રીતે બનાવો છો તેમાં છે.</div></div></div>
+  </div>
+  <div class="band"><div class="t">નાની product. મોટી brand.</div><div class="a"><svg width="40" height="40" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</section>
+
+<section class="slide" id="s3">
+  <div class="top"><div class="num">03</div><div class="show">The Sagar<br>Kathrotiya Show</div></div>
+  <h1>ધંધો નાનો નથી,<br><em>વિચાર નાનો છે.</em></h1>
+  <div class="list" style="margin-top:70px">
+    <div class="item"><div class="n">✕</div><div><div class="g dim">“આ તો નાનો ધંધો છે”</div><div class="e">નાની વિચારસરણી</div></div></div>
+    <div class="item"><div class="n">✓</div><div><div class="g">“આને મોટી brand બનાવીશ”</div><div class="e">મોટી વિચારસરણી</div></div></div>
+  </div>
+  <div class="band"><div class="t">Product નહીં, vision નક્કી કરે છે.</div><div class="a"><svg width="40" height="40" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</section>
+
+<section class="slide" id="s4">
+  <div class="top"><div class="num">04</div><div class="show">The Sagar<br>Kathrotiya Show</div></div>
+  <h1>શરૂઆત નાની,<br><em>સપનું મોટું.</em></h1>
+  <div class="list">
+    <div class="item"><div class="n">01</div><div><div class="g">મોટું vision રાખો</div><div class="e">આજે જ્યાં છો, તેના કરતાં આગળ જુઓ</div></div></div>
+    <div class="item"><div class="n">02</div><div><div class="g">નાના કામ ને પણ ગંભીરતા થી કરો</div><div class="e">દરેક નાનું કામ પણ brand બનાવે છે</div></div></div>
+    <div class="item"><div class="n">03</div><div><div class="g">નાની શરૂઆત થી ડરો નહીં</div><div class="e">દરેક મોટી company ની શરૂઆત નાની જ હતી</div></div></div>
+  </div>
+  <div class="band"><div class="t">Start small. Think big.</div><div class="a"><svg width="40" height="40" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</section>
+
+<section class="slide" id="s5">
+  <div class="top"><div class="num">05</div><div class="show">The Sagar<br>Kathrotiya Show</div></div>
+  <h1>માન <em>કામ થી</em><br>મળે છે.</h1>
+  <div class="list">
+    <div class="item"><div class="n">01</div><div><div class="g">મહેનત</div><div class="e">રોજ, પૂરા દિલ થી</div></div></div>
+    <div class="item"><div class="n">02</div><div><div class="g">ઈમાનદારી</div><div class="e">ગ્રાહક અને વેપારી બંને સાથે</div></div></div>
+    <div class="item"><div class="n">03</div><div><div class="g">કામ ની quality</div><div class="e">ધંધો નાનો, કામ ઉત્તમ</div></div></div>
+  </div>
+  <div class="band"><div class="t">મહેનત + ઈમાનદારી = સફળતા</div><div class="a"><svg width="40" height="40" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</section>
+
+<section class="slide" id="s6">
+  <div class="top"><div class="num">06</div><div class="show">The Sagar<br>Kathrotiya Show</div></div>
+  <h1>Proof:<br><em>Gopal Snacks.</em></h1>
+  <div style="margin-top:70px">
+    <div class="big">50 પૈસા</div><div class="bl">નું ફરસાણ, અહીં થી શરૂઆત</div>
+    <div style="font:300 80px/1 'Hind Vadodara'; color:var(--red); margin:26px 0">↓</div>
+    <div class="big red">₹10,000 કરોડ</div><div class="bl">ની company, આજે</div>
+  </div>
+  <div class="band"><div class="t">કોઈ ધંધો નાનો નથી હોતો.</div><div class="a"><svg width="40" height="40" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</section>
+
+<section class="slide" id="s7">
+  <div class="top"><div class="num">07</div><div class="show">The Sagar<br>Kathrotiya Show</div></div>
+  <div class="art"></div>
+  <div class="cta"><h2>Watch Full Podcast On</h2><img src="assets/youtube-logo-white.png" alt="YouTube"></div>
+</section>
+
+</body>
+</html>

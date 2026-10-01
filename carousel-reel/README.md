@@ -24,3 +24,7 @@ Exports: `out-essence/`, `out-essence-jpg/`, `no-small-business-essence-jpg.zip`
 ## Essence theme — red / black / white
 `slides-essence-rbw.html` — same layout on pure white with solid red tags/button and black text.
 Exports: `out-essence-rbw/`, `out-essence-rbw-jpg/`, `no-small-business-red-black-white-jpg.zip`.
+
+## Poster theme (red / black / white, Hind Vadodara)
+`slides-poster.html` — black background, big red slide numbers, white headlines, red bottom band.
+Font: Hind Vadodara (Gujarati + Latin). Exports: `out-poster/`, `out-poster-jpg/`, `no-small-business-poster-jpg.zip`.
