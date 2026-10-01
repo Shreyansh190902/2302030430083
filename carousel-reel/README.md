@@ -34,3 +34,7 @@ Light version: `slides-poster-light.html` → `out-poster-light/`, `out-poster-l
 `slides-editorial.html` — cream paper, masthead with double rules, red kickers, serif headlines,
 drop caps, pull quotes, B/W framed photos. Exports: `out-editorial/`, `out-editorial-jpg/`,
 `no-small-business-editorial-jpg.zip`.
+
+## Split theme (Mukta Vaani)
+`slides-split.html` — red top block with big white headline and outlined slide number, white bottom
+with icon rows, red arrow button. Exports: `out-split/`, `out-split-jpg/`, `no-small-business-split-jpg.zip`.
