@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>@_risewithsk theme options</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #777; display: flex; flex-direction: column; gap: 40px; padding: 40px; align-items: center; }
+  .slide { width: 1080px; height: 1350px; position: relative; overflow: hidden; }
+  .grain::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .12; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ============ A. NEON ============ */
+  .neon { background: #0c0c0c; color: #f4f4f0; font-family: 'Inter', sans-serif; padding: 84px; }
+  .neon .top { display: flex; justify-content: space-between; align-items: center; }
+  .neon .pill { border: 2px solid #c8ff2e; color: #c8ff2e; border-radius: 40px; padding: 12px 26px; font-weight: 600; font-size: 26px; }
+  .neon .tag { font-size: 24px; color: #8b8b85; letter-spacing: 4px; text-transform: uppercase; font-weight: 500; }
+  .neon h1 { margin-top: 170px; font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; font-size: 190px; line-height: .95; letter-spacing: -1px; }
+  .neon h1 mark { background: #c8ff2e; color: #0c0c0c; padding: 0 22px; display: inline-block; transform: rotate(-2.5deg); margin: 14px 0; }
+  .neon .sub { margin-top: 56px; font-size: 36px; color: #b9b9b2; max-width: 900px; line-height: 1.35; }
+  .neon .bottom { position: absolute; left: 84px; right: 84px; bottom: 84px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .neon .big { font-family: 'Anton', sans-serif; font-size: 170px; line-height: .8; color: transparent; -webkit-text-stroke: 2px #3a3a36; }
+  .neon .swipe { background: #c8ff2e; color: #0c0c0c; font-weight: 700; font-size: 30px; padding: 22px 38px; border-radius: 60px; }
+
+  /* ============ B. NOTEBOOK ============ */
+  .note {
+    font-family: 'Inter', sans-serif; color: #1d2a44;
+    background:
+      linear-gradient(90deg, transparent 128px, #e58b8b 128px 131px, transparent 131px),
+      repeating-linear-gradient(180deg, transparent 0 63px, #c9d6ea 63px 65px),
+      #fbf8f1;
+    background-position: 0 0, 0 40px, 0 0;
+  }
+  .note .tape { position: absolute; top: 40px; left: 50%; width: 260px; height: 64px; margin-left: -130px; background: rgba(231,214,170,.75); transform: rotate(-3deg); box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+  .note .top { position: absolute; top: 150px; left: 170px; right: 90px; display: flex; justify-content: space-between; align-items: center; }
+  .note .who { display: flex; gap: 16px; align-items: center; font-weight: 600; font-size: 26px; }
+  .note .av { width: 60px; height: 60px; border-radius: 50%; background: #1d2a44; color: #fbf8f1; display: grid; place-items: center; font-family: 'Caveat', cursive; font-size: 32px; font-weight: 700; }
+  .note .date { font-family: 'Caveat', cursive; font-size: 40px; color: #7a869c; }
+  .note h1 { position: absolute; top: 320px; left: 170px; right: 90px; font-family: 'Caveat', cursive; font-weight: 700; font-size: 168px; line-height: .98; }
+  .note h1 mark { background: linear-gradient(transparent 52%, #ffe14d 52% 90%, transparent 90%); color: inherit; padding: 0 8px; }
+  .note .sub { text-wrap: balance; position: absolute; top: 820px; left: 170px; right: 120px; font-size: 38px; line-height: 1.7; color: #3c4a66; }
+  .note .circle { position: absolute; top: 300px; right: 70px; width: 170px; height: 170px; border: 4px solid #e2533a; border-radius: 50%; transform: rotate(-12deg); display: grid; place-items: center; font-family: 'Caveat', cursive; font-weight: 700; font-size: 40px; color: #e2533a; text-align: center; line-height: .9; }
+  .note .bottom { position: absolute; left: 170px; right: 90px; bottom: 90px; display: flex; justify-content: space-between; align-items: center; font-family: 'Caveat', cursive; font-size: 46px; font-weight: 700; }
+  .note .bottom svg { width: 120px; height: 40px; vertical-align: middle; margin-left: 10px; }
+
+  /* ============ C. ROYAL ============ */
+  .royal {
+    color: #f6e7cc; font-family: 'Inter', sans-serif; text-align: center;
+    background: radial-gradient(ellipse at 50% 40%, #7d1a2c, #4a0b17 70%);
+  }
+  .royal .frame { position: absolute; inset: 44px; border: 2px solid rgba(217,164,65,.7); }
+  .royal .frame::before { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(217,164,65,.4); }
+  .royal .dots {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(217,164,65,.28) 3px, transparent 3.5px);
+    background-size: 36px 36px;
+    -webkit-mask: linear-gradient(#000, #000) top / 100% 44px no-repeat, linear-gradient(#000, #000) bottom / 100% 44px no-repeat,
+                  linear-gradient(#000, #000) left / 44px 100% no-repeat, linear-gradient(#000, #000) right / 44px 100% no-repeat;
+  }
+  .royal .kick { position: absolute; top: 130px; left: 0; right: 0; font-size: 24px; letter-spacing: 10px; color: #d9a441; font-weight: 600; }
+  .royal .orn { display: flex; align-items: center; justify-content: center; gap: 18px; color: #d9a441; font-size: 26px; }
+  .royal .orn::before, .royal .orn::after { content: ""; width: 120px; height: 1px; background: #d9a441; }
+  .royal .orn.top { position: absolute; top: 190px; left: 0; right: 0; }
+  .royal h1 { position: absolute; top: 330px; left: 110px; right: 110px; font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 150px; line-height: .98; letter-spacing: -1px; }
+  .royal h1 em { font-style: italic; font-weight: 600; color: #e6b354; }
+  .royal .sub { position: absolute; top: 780px; left: 160px; right: 160px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 44px; color: #e9d3ae; line-height: 1.3; }
+  .royal .orn.mid { position: absolute; top: 930px; left: 0; right: 0; }
+  .royal .bottom { position: absolute; bottom: 130px; left: 0; right: 0; }
+  .royal .handle { font-size: 30px; font-weight: 600; letter-spacing: 2px; }
+  .royal .show { margin-top: 10px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 30px; color: #d9a441; }
+  .royal .swipe { position: absolute; bottom: 74px; right: 80px; font-size: 22px; letter-spacing: 6px; color: #d9a441; }
+</style>
+</head>
+<body>
+
+<!-- A. NEON -->
+<section class="slide neon grain" data-name="themes/A-neon">
+  <div class="top"><div class="pill">@_risewithsk</div><div class="tag">Daily motivation</div></div>
+  <h1>You can't<br><mark>prompt</mark><br>a life.</h1>
+  <p class="sub">Sagar Kathrotiya's first TEDx talk, in 5 slides.</p>
+  <div class="bottom"><div class="big">01</div><div class="swipe">Swipe &rarr;</div></div>
+</section>
+
+<!-- B. NOTEBOOK -->
+<section class="slide note" data-name="themes/B-notebook">
+  <div class="tape"></div>
+  <div class="top"><div class="who"><div class="av">SK</div>@_risewithsk</div><div class="date">lesson #01</div></div>
+  <div class="circle">TEDx<br>talk</div>
+  <h1>You can't <mark>prompt</mark> a life.</h1>
+  <p class="sub">Notes from Sagar Kathrotiya's first TEDx talk.</p>
+  <div class="bottom"><span>swipe <svg viewBox="0 0 120 40" fill="none" stroke="#1d2a44" stroke-width="4" stroke-linecap="round"><path d="M4 24c30-10 60-12 104-4M92 8l18 12-16 14"/></svg></span><span style="font-size:36px;color:#7a869c">The Sagar Kathrotiya Show</span></div>
+</section>
+
+<!-- C. ROYAL -->
+<section class="slide royal grain" data-name="themes/C-royal">
+  <div class="dots"></div><div class="frame"></div>
+  <div class="kick">RISE WITH SK</div>
+  <div class="orn top">&#10022;</div>
+  <h1>You can't <em>prompt</em> a life.</h1>
+  <p class="sub">From Sagar Kathrotiya's first TEDx talk</p>
+  <div class="orn mid">&#10022;</div>
+  <div class="bottom"><div class="handle">@_risewithsk</div><div class="show">The Sagar Kathrotiya Show</div></div>
+  <div class="swipe">SWIPE &rarr;</div>
+</section>
+
+</body>
+</html>

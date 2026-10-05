@@ -16,3 +16,8 @@
 @font-face { font-family: 'Bricolage Grotesque'; font-weight: 800; font-style: normal; src: url(BricolageGrotesque-800.woff2) format('woff2'); }
 @font-face { font-family: 'Instrument Serif'; font-weight: 400; font-style: italic; src: url(InstrumentSerif-400i.woff2) format('woff2'); }
 @font-face { font-family: 'Instrument Serif'; font-weight: 400; font-style: normal; src: url(InstrumentSerif-400.woff2) format('woff2'); }
+@font-face { font-family: 'Caveat'; font-weight: 600; font-style: normal; src: url(Caveat-600.woff2) format('woff2'); }
+@font-face { font-family: 'Caveat'; font-weight: 700; font-style: normal; src: url(Caveat-700.woff2) format('woff2'); }
+@font-face { font-family: 'Cormorant Garamond'; font-weight: 600; font-style: italic; src: url(CormorantGaramond-600i.woff2) format('woff2'); }
+@font-face { font-family: 'Cormorant Garamond'; font-weight: 600; font-style: normal; src: url(CormorantGaramond-600.woff2) format('woff2'); }
+@font-face { font-family: 'Cormorant Garamond'; font-weight: 700; font-style: normal; src: url(CormorantGaramond-700.woff2) format('woff2'); }
