@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>@_risewithsk minimal carousel</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<style>
+  :root {
+    --paper: #efeeec;
+    --stripe: #e5e4e2;
+    --band: #dddcda;
+    --ink: #0d0d0d;
+    --soft: #55534f;
+    --m: 112px;            /* side margin = first grid line */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #bbb; display: flex; flex-direction: column; gap: 40px; padding: 40px; align-items: center; }
+
+  .slide {
+    width: 1080px; height: 1350px; position: relative; overflow: hidden;
+    color: var(--ink); font-family: 'Inter', sans-serif;
+    background: var(--paper);
+  }
+  /* layout grid shown as soft columns + top/bottom bands, like the reference */
+  .grid {
+    position: absolute; inset: 0; z-index: 0;
+    display: flex; gap: 26px; padding: 0 var(--m);
+  }
+  .grid i { flex: 1; background: rgba(0,0,0,.045); }
+  .slide::before, .slide::after {
+    content: ""; position: absolute; left: 0; right: 0; height: 110px; z-index: 0;
+    background: rgba(0,0,0,.055);
+  }
+  .slide::before { top: 0; }
+  .slide::after { bottom: 0; }
+
+  .num {
+    position: absolute; top: 44px; right: var(--m); z-index: 2;
+    font-size: 22px; font-weight: 500; color: var(--soft); letter-spacing: 1px;
+  }
+  .content { position: absolute; left: var(--m); right: var(--m); top: 120px; z-index: 2; }
+
+  h1 {
+    font-family: 'Playfair Display', serif; font-weight: 400;
+    font-size: 132px; line-height: 1.0; letter-spacing: -3px;
+  }
+  h1 em { font-style: italic; font-weight: 400; }
+  h1.small { font-size: 112px; }
+
+  .sub {
+    position: absolute; left: var(--m); right: var(--m); top: 830px; z-index: 2;
+    font-size: 42px; line-height: 1.22; letter-spacing: -.5px; font-weight: 400; max-width: 640px;
+  }
+
+  .footer {
+    position: absolute; left: var(--m); right: var(--m); bottom: 66px; z-index: 2;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .by { display: flex; align-items: center; gap: 28px; }
+  .avatar {
+    width: 92px; height: 92px; border-radius: 50%; background: #fff;
+    display: grid; place-items: center; overflow: hidden;
+    font-family: 'Playfair Display', serif; font-style: italic; font-size: 40px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.06);
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .by-text { font-size: 18px; line-height: 1.35; }
+  .by-text b { display: block; font-weight: 600; font-size: 19px; }
+  .toggle {
+    width: 78px; height: 34px; border: 2px solid var(--ink); border-radius: 20px;
+    position: relative;
+  }
+  .toggle::after {
+    content: ""; position: absolute; right: 2px; top: 2px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center / 16px no-repeat;
+  }
+
+  /* CTA list */
+  .list { position: absolute; left: var(--m); right: var(--m); top: 720px; z-index: 2; }
+  .list div {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-top: 2px solid var(--ink); padding: 26px 0;
+    font-size: 40px; letter-spacing: -.5px;
+  }
+  .list div:last-child { border-bottom: 2px solid var(--ink); }
+  .list span { font-family: 'Playfair Display', serif; font-style: italic; font-size: 30px; color: var(--soft); }
+</style>
+</head>
+<body>
+
+<!-- To use Sagar's photo, replace the "SK" inside .avatar with: <img src="sagar.jpg"> -->
+
+<!-- ===================== SLIDE 1 ===================== -->
+<section class="slide">
+  <div class="num">01 / 05</div>
+  <div class="content"><h1>Nobody is coming to <em>save</em> you.</h1></div>
+  <p class="sub">Read this twice.<br>Then read it again tomorrow.</p>
+  <div class="footer">
+    <div class="by"><div class="avatar">SK</div><div class="by-text">Made by<b>@_risewithsk</b></div></div>
+    <div class="toggle"></div>
+  </div>
+</section>
+
+<!-- ===================== SLIDE 2 ===================== -->
+<section class="slide">
+  <div class="num">02 / 05</div>
+  <div class="content"><h1 class="small">Not your parents. Not your friends. Not <em>luck.</em></h1></div>
+  <p class="sub">Everyone is busy fighting their own battles. Nobody can live your life for you.</p>
+  <div class="footer">
+    <div class="by"><div class="avatar">SK</div><div class="by-text">Made by<b>@_risewithsk</b></div></div>
+    <div class="toggle"></div>
+  </div>
+</section>
+
+<!-- ===================== SLIDE 3 ===================== -->
+<section class="slide">
+  <div class="num">03 / 05</div>
+  <div class="content"><h1>It's you. It was <em>always</em> you.</h1></div>
+  <p class="sub">Your habits. Your choices. Your 5 AM. That's where change begins.</p>
+  <div class="footer">
+    <div class="by"><div class="avatar">SK</div><div class="by-text">Made by<b>@_risewithsk</b></div></div>
+    <div class="toggle"></div>
+  </div>
+</section>
+
+<!-- ===================== SLIDE 4 ===================== -->
+<section class="slide">
+  <div class="num">04 / 05</div>
+  <div class="content"><h1>So stop waiting.<br>Wake up.<br><em>Rise.</em></h1></div>
+  <p class="sub">A little every day.<br>That's all it takes.</p>
+  <div class="footer">
+    <div class="by"><div class="avatar">SK</div><div class="by-text">Made by<b>@_risewithsk</b></div></div>
+    <div class="toggle"></div>
+  </div>
+</section>
+
+<!-- ===================== SLIDE 5 : CTA ===================== -->
+<section class="slide">
+  <div class="num">05 / 05</div>
+  <div class="content"><h1 class="small">Send this to someone who <em>needs</em> it.</h1></div>
+  <div class="list">
+    <div>Save it <span>for hard days</span></div>
+    <div>Share it <span>with a friend</span></div>
+    <div>Follow <span>@_risewithsk</span></div>
+  </div>
+  <div class="footer">
+    <div class="by"><div class="avatar">SK</div><div class="by-text">From Sagar Kathrotiya Show<b>@sagarkathrotiyashow</b></div></div>
+  </div>
+</section>
+
+<script>
+  // add the column grid behind every slide
+  document.querySelectorAll('.slide').forEach(sl => {
+    const g = document.createElement('div'); g.className = 'grid';
+    g.innerHTML = '<i></i>'.repeat(6); sl.prepend(g);
+  });
+</script>
+</body>
+</html>
