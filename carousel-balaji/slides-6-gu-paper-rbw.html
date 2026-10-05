@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="gu"><head><meta charset="utf-8"><title>Balaji x Haldiram</title>
+<link href="assets/fonts.css" rel="stylesheet"><style>
+:root{--ink:#0b0b0b;--red:#b10000;--yellow:#d0021b;--paper:#f2f1ec;--grid:#e0dfd8;--muted:#4a4a4a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#777;font-family:'Inter','Noto Sans Gujarati',sans-serif;color:var(--ink)}
+.slide{position:relative;width:1080px;height:1440px;margin:0 auto 40px;overflow:hidden;padding:110px 72px 0;background-color:var(--paper);
+ background-image:linear-gradient(var(--grid) 1.5px,transparent 1.5px),linear-gradient(90deg,var(--grid) 1.5px,transparent 1.5px);background-size:44px 44px}
+.pager{position:absolute;top:40px;right:56px;font:800 26px 'Inter';background:var(--ink);color:var(--paper);padding:8px 18px;border-radius:40px}
+.h-big{font:800 100px/1.14 'Baloo Bhai 2','Inter';letter-spacing:-0.02em;margin-top:30px}
+.h-big .en,.h .en{font-family:'Inter';font-weight:900;letter-spacing:-0.05em}
+.h{font:800 82px/1.18 'Inter','Baloo Bhai 2';letter-spacing:-0.02em}
+.hl{color:var(--red);background:linear-gradient(transparent 10%,var(--yellow) 10%,var(--yellow) 92%,transparent 92%);padding:0 12px;margin-left:-8px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.swoosh{display:block;margin-top:14px}
+.note{position:absolute;line-height:1.25;font-size:40px}
+.note .gu{font:700 38px 'Baloo Bhai 2'}
+.note .en2{font:700 46px 'Caveat'}
+.note .mk{font:700 40px 'Baloo Bhai 2';background:#fff27a;padding:0 8px}
+.note .ul{background:linear-gradient(transparent 76%,var(--yellow) 76%,var(--yellow) 94%,transparent 94%)}
+.swipe{position:absolute;bottom:44px;right:60px;display:flex;align-items:center;gap:10px;font:700 44px 'Caveat'}
+.sticker{position:absolute;width:380px;height:202px;background:url('assets/sticker-balaji.jpg') no-repeat center/cover;
+ clip-path:polygon(3% 8%,30% 2%,58% 7%,97% 1%,100% 40%,96% 80%,99% 97%,60% 92%,34% 99%,4% 92%,1% 50%);filter:drop-shadow(6px 8px 0 rgba(0,0,0,.14))}
+.person{position:absolute;bottom:0;background-repeat:no-repeat;background-size:100% 100%;
+ filter:drop-shadow(6px 0 0 var(--yellow)) drop-shadow(-6px 0 0 var(--yellow)) drop-shadow(0 6px 0 var(--yellow)) drop-shadow(0 -6px 0 var(--yellow))}
+.cards{display:flex;flex-direction:column;gap:26px;margin-top:50px}
+.card{display:flex;align-items:center;gap:28px;background:#fff;border:4px solid var(--ink);border-radius:26px;padding:28px 30px;box-shadow:8px 8px 0 var(--ink)}
+.card .num{flex:0 0 78px;height:78px;border-radius:50%;background:var(--yellow);border:4px solid var(--ink);display:grid;place-items:center;font:900 38px 'Inter'}
+.card .g{font:800 44px/1.25 'Inter','Baloo Bhai 2'}
+.card .e{font:600 32px/1.35 'Inter','Noto Sans Gujarati';color:var(--muted);margin-top:4px}
+.qcard{margin-top:50px;background:#fff;border:4px solid var(--ink);border-radius:26px;padding:36px 40px;box-shadow:8px 8px 0 var(--ink);font:800 58px/1.25 'Baloo Bhai 2'}
+.qcard span{display:block;font:700 34px 'Baloo Bhai 2';color:var(--muted);margin-top:14px}
+.stat{margin-top:40px;background:var(--ink);color:#fff;border-radius:26px;padding:36px 40px;box-shadow:8px 8px 0 var(--yellow)}
+.stat .big{font:900 130px/1 'Inter','Noto Sans Gujarati';color:var(--yellow)}
+.stat .bl{font:600 34px/1.4 'Inter','Noto Sans Gujarati';margin-top:12px}
+.bigq{font:900 300px/0.8 'Inter';color:var(--red);height:170px;margin-top:90px}
+.qt{font:800 86px/1.22 'Inter','Baloo Bhai 2';letter-spacing:-0.01em}
+.by{font:700 40px 'Baloo Bhai 2';color:var(--muted);margin-top:36px}
+.ocard{position:absolute;left:127px;top:130px;width:826px;height:783px;border:5px solid var(--ink);border-radius:28px;box-shadow:12px 12px 0 var(--ink);background:url('assets/outro-nologo.jpg') no-repeat 0 0/100% 100%}
+.ocap{position:absolute;left:0;right:0;top:980px;text-align:center}
+.ocap .w{font:700 100px/1 'Caveat'}
+.ocap .gu{font:700 40px 'Baloo Bhai 2';color:var(--red);margin-top:14px}
+.ocap img{width:420px;margin-top:30px}
+
+#s2 .cards,#s5 .cards{gap:34px;margin-top:64px}
+#s2 .card,#s5 .card{padding:40px 34px}
+#s2 .card .g,#s5 .card .g{font-size:48px}
+#s2 .card .e,#s5 .card .e{font-size:34px}
+#s3 .qcard{margin-top:56px;padding:42px 44px;font-size:62px}
+#s3 .stat{margin-top:44px;padding:40px 44px}
+#s3 .stat .big{font-size:150px}
+#s3 .stat .bl{font-size:38px}
+.logo-st{filter:drop-shadow(0 0 0 #fff) drop-shadow(5px 0 0 #fff) drop-shadow(-5px 0 0 #fff) drop-shadow(0 5px 0 #fff) drop-shadow(0 -5px 0 #fff) drop-shadow(6px 8px 0 rgba(0,0,0,.15))}
+
+/* ===== black / white / red only ===== */
+:root{--yellow:#d0021b;--red:#d0021b}
+.hl{color:#fff !important;background:#d0021b !important;padding:0 14px 4px !important}
+.note .mk{background:none !important;color:#d0021b;border-bottom:4px solid #d0021b;padding:0 2px !important}
+.note .ul{background:none !important;border-bottom:4px solid #d0021b}
+.card .num{background:#d0021b !important;color:#fff;border-color:#0b0b0b}
+.stat .big{color:#d0021b !important}
+.stat{box-shadow:8px 8px 0 #d0021b !important}
+.logo-st{filter:grayscale(1) contrast(1.15) drop-shadow(5px 0 0 #fff) drop-shadow(-5px 0 0 #fff) drop-shadow(0 5px 0 #fff) drop-shadow(0 -5px 0 #fff) drop-shadow(6px 8px 0 rgba(0,0,0,.15)) !important}
+.ocard{box-shadow:12px 12px 0 #d0021b !important}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="arrow-curve" viewBox="0 0 160 120"><path d="M10 10 C 10 70, 60 100, 140 96" fill="none" stroke="#0b0b0b" stroke-width="6" stroke-linecap="round"/><path d="M118 78 L 142 96 L 116 112" fill="none" stroke="#0b0b0b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="arrow-y" viewBox="0 0 160 120"><path d="M10 110 C 20 50, 70 20, 140 16" fill="none" stroke="#d0021b" stroke-width="7" stroke-linecap="round"/><path d="M116 4 L 142 16 L 120 34" fill="none" stroke="#d0021b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="arrow-right" viewBox="0 0 120 40"><path d="M6 22 C 40 12, 70 30, 104 18" fill="none" stroke="#0b0b0b" stroke-width="6" stroke-linecap="round"/><path d="M88 6 L 108 18 L 90 34" fill="none" stroke="#0b0b0b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="burst" viewBox="0 0 80 80"><path d="M40 6 L 44 28 M 70 18 L 54 34 M 74 50 L 54 48" stroke="#0b0b0b" stroke-width="6" stroke-linecap="round"/></symbol>
+<symbol id="burst-y" viewBox="0 0 80 80"><path d="M40 6 L 44 28 M 70 18 L 54 34 M 74 50 L 54 48" stroke="#d0021b" stroke-width="7" stroke-linecap="round"/></symbol>
+<symbol id="underline" viewBox="0 0 600 30"><path d="M6 20 C 150 6, 350 8, 594 14" fill="none" stroke="#d0021b" stroke-width="12" stroke-linecap="round"/></symbol>
+<symbol id="qmark" viewBox="0 0 120 150"><path d="M20 40 C 20 5, 100 5, 100 45 C 100 80, 60 75, 60 105" fill="none" stroke="#d0021b" stroke-width="16" stroke-linecap="round"/><path d="M20 40 C 20 5, 100 5, 100 45 C 100 80, 60 75, 60 105" fill="none" stroke="#0b0b0b" stroke-width="6" stroke-linecap="round"/><circle cx="60" cy="132" r="10" fill="#0b0b0b"/></symbol>
+</defs></svg>
+<section class="slide" id="s1">
+<h1 class="h-big">તમારો<br><span class="en">Competitor</span><br><span class="hl">દુશ્મન નથી!</span></h1>
+<svg style="position:absolute; left:56px; top:500px" width="560" height="30"><use href="#underline"/></svg>
+<img class="logo-st" src="assets/balaji-logo.png" alt="Balaji Wafers" style="position:absolute; right:56px; top:90px; width:320px; transform:rotate(5deg)">
+<svg style="position:absolute; right:340px; top:70px" width="70" height="70"><use href="#burst"/></svg>
+<svg style="position:absolute; right:200px; top:320px; transform:rotate(-10deg)" width="120" height="96"><use href="#arrow-y"/></svg>
+<svg style="position:absolute; left:100px; top:530px" width="110" height="84"><use href="#arrow-curve"/></svg>
+<div class="note" style="left:230px; top:540px; transform:rotate(-3deg)">
+  <span class="gu">Haldiram ની factory માં</span> <span class="mk">આગ લાગી...</span><br>
+  <span class="gu" style="padding-left:70px">પછી Balaji એ</span> <span class="en2">actually</span> <span class="gu ul">શું કર્યું?</span>
+</div>
+<svg style="position:absolute; left:870px; top:420px; transform:rotate(12deg)" width="96" height="124"><use href="#qmark"/></svg>
+<div class="person" style="left:0; bottom:-215px; width:1080px; height:1140px; background-image:url('assets/cut-both.png')"></div>
+</section>
+
+<section class="slide" id="s2"><div class="pager">02 / 06</div>
+<h1 class="h">Haldiram ની factory માં<br><span class="hl">આગ લાગી.</span></h1><svg class="swoosh" width="520" height="26"><use href="#underline"/></svg>
+<div class="cards">
+<div class="card"><div class="num">1</div><div><div class="g">Noida ની factory માં ભયંકર આગ.</div><div class="e">Production બંધ થઈ ગયું.</div></div></div>
+<div class="card"><div class="num">2</div><div><div class="g">Market અચાનક ખાલી થઈ ગયું.</div><div class="e">દુકાનો માં નાસ્તા જોઈતા હતા.</div></div></div>
+<div class="card"><div class="num">3</div><div><div class="g">Balaji એ જ market માં આવવાનું હતું.</div><div class="e">ધંધા માટે સૌથી મોટો મોકો.</div></div></div>
+</div>
+<svg style="position:absolute; left:110px; bottom:200px" width="120" height="90"><use href="#arrow-curve"/></svg>
+<div class="note" style="left:260px; bottom:170px; transform:rotate(-3deg)"><span class="gu">તમે હોત તો</span> <span class="mk">શું કરત?</span></div>
+<div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div></section>
+
+<section class="slide" id="s3"><div class="pager">03 / 06</div>
+<h1 class="h">એમણે <span class="hl">મદદ</span><br>પસંદ કરી.</h1><svg class="swoosh" width="520" height="26"><use href="#underline"/></svg>
+<div class="qcard">“પહેલા આપણે માણસ છીએ,<br>વેપારી પછી.”<span>— ચંદુભાઈ વિરાણી</span></div>
+<div class="stat"><div class="big">2 વર્ષ</div><div class="bl">Balaji એ Haldiram માટે products બનાવ્યા, જેથી એમની brand જીવંત રહે.</div></div>
+<div class="note" style="right:70px; bottom:120px; transform:rotate(-3deg); text-align:right"><span class="gu">Market માં હરીફ,</span><br><span class="mk">પણ પહેલા માણસ.</span></div>
+<div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div></section>
+
+<section class="slide" id="s4"><div class="pager">04 / 06</div>
+<div class="bigq">“</div>
+<h1 class="qt"><span style="white-space:nowrap">Competitor વગર નો ધંધો</span><br>તમને <span class="hl">રાવણ</span> બનાવે.</h1>
+<h1 class="qt" style="margin-top:40px">Competitor તમને<br><span class="hl">રામ</span> બનાવે.</h1>
+<div class="by">— ચંદુભાઈ વિરાણી</div>
+<svg style="position:absolute; left:270px; top:150px" width="90" height="90"><use href="#burst"/></svg>
+<svg style="position:absolute; left:100px; bottom:250px" width="120" height="90"><use href="#arrow-curve"/></svg><div class="note" style="left:250px; bottom:200px; transform:rotate(-3deg)"><span class="gu">Competition તમને</span> <span class="mk">નમ્ર રાખે છે.</span></div>
+<div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div></section>
+
+<section class="slide" id="s5"><div class="pager">05 / 06</div>
+<h1 class="h">દરેક ધંધા માટે<br><span class="hl">શીખવા જેવું.</span></h1><svg class="swoosh" width="520" height="26"><use href="#underline"/></svg>
+<div class="cards">
+<div class="card"><div class="num">1</div><div><div class="g">Competition લડાઈ નહીં, બળતણ છે.</div><div class="e">એનાથી સુધરો, નવું બનાવો અને આગળ વધો.</div></div></div>
+<div class="card"><div class="num">2</div><div><div class="g">ધંધો માત્ર નફો નથી, માન પણ છે.</div><div class="e">નૈતિકતા અને માણસાઈ પેઢીઓ સુધી ચાલે એવી brand બનાવે છે.</div></div></div>
+</div>
+<svg style="position:absolute; left:110px; bottom:210px" width="120" height="90"><use href="#arrow-curve"/></svg>
+<div class="note" style="left:260px; bottom:170px; transform:rotate(-3deg)"><span class="gu">Market જીતો,</span><br><span class="mk">પણ સંસ્કાર ન છોડો.</span></div>
+<div class="swipe">swipe <svg width="90" height="30"><use href="#arrow-right"/></svg></div></section>
+
+<section class="slide" id="s6"><div class="pager">06 / 06</div>
+<div class="ocard"></div>
+<div class="ocap"><div class="w">Watch Full Podcast On</div><div class="gu">આખો પોડકાસ્ટ YouTube પર જુઓ</div><img src="assets/youtube-logo.png" alt="YouTube"></div>
+</section>
+</body></html>
