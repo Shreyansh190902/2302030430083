@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>@_risewithsk carousel</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --gold: #f5b942;
+    --orange: #ff7a1a;
+    --white: #f7f3ea;
+    --muted: #9a9387;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #222; font-family: 'Poppins', sans-serif; display: flex; flex-direction: column; gap: 40px; padding: 40px; align-items: center; }
+
+  .slide {
+    width: 1080px; height: 1350px; position: relative; overflow: hidden;
+    background:
+      radial-gradient(ellipse 90% 45% at 50% 108%, rgba(255,122,26,.55), rgba(255,122,26,0) 70%),
+      radial-gradient(ellipse 60% 30% at 50% 100%, rgba(245,185,66,.35), rgba(245,185,66,0) 70%),
+      var(--bg);
+    color: var(--white);
+    padding: 90px 96px;
+    display: flex; flex-direction: column;
+  }
+  /* sun arc on the horizon */
+  .slide::after {
+    content: ""; position: absolute; left: 50%; bottom: -520px; transform: translateX(-50%);
+    width: 620px; height: 620px; border-radius: 50%;
+    border: 3px solid rgba(245,185,66,.25);
+  }
+
+  .top { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+  .brand { display: flex; align-items: center; gap: 18px; }
+  .logo {
+    width: 76px; height: 76px; border-radius: 50%;
+    background: linear-gradient(160deg, var(--gold), var(--orange));
+    display: grid; place-items: center;
+    font-family: 'Anton', sans-serif; font-size: 40px; color: var(--bg);
+  }
+  .handle { font-size: 32px; font-weight: 600; letter-spacing: .5px; }
+  .handle small { display: block; font-size: 22px; font-weight: 400; color: var(--muted); }
+  .count { font-size: 26px; font-weight: 500; color: var(--muted); border: 2px solid #333; border-radius: 40px; padding: 8px 22px; }
+
+  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+  .kicker { font-size: 30px; font-weight: 600; color: var(--gold); letter-spacing: 6px; text-transform: uppercase; margin-bottom: 36px; }
+  .bar { width: 120px; height: 10px; background: linear-gradient(90deg, var(--gold), var(--orange)); border-radius: 6px; margin-bottom: 48px; }
+  h1 { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; font-size: 170px; line-height: 1.02; letter-spacing: 1px; }
+  h2 { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; font-size: 112px; line-height: 1.08; }
+  .hl { color: var(--gold); }
+  .line { display: block; }
+  .line.dim { color: #5c574f; }
+  p.sub { font-size: 38px; line-height: 1.5; color: #d8d1c4; margin-top: 44px; max-width: 820px; }
+
+  .bottom { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+  .tag { font-size: 24px; color: var(--muted); }
+  .swipe { font-size: 30px; font-weight: 600; color: var(--bg); background: var(--gold); padding: 16px 34px; border-radius: 50px; }
+
+  /* CTA slide */
+  .cta-actions { display: flex; gap: 28px; margin-top: 64px; }
+  .action { flex: 1; border: 2px solid #3a342b; background: rgba(255,255,255,.03); border-radius: 28px; padding: 34px 20px; text-align: center; }
+  .action svg { width: 64px; height: 64px; stroke: var(--gold); fill: none; stroke-width: 2; }
+  .action span { display: block; margin-top: 16px; font-size: 30px; font-weight: 600; }
+  .follow { margin-top: 56px; font-size: 38px; font-weight: 700; }
+  .slide.cta::after { display: none; }
+  .follow b { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- ===================== SLIDE 1 : HOOK ===================== -->
+<section class="slide">
+  <div class="top">
+    <div class="brand"><div class="logo">R</div><div class="handle">@_risewithsk<small>Rise with SK</small></div></div>
+    <div class="count">1 / 5</div>
+  </div>
+  <div class="body">
+    <div class="kicker">Read this twice</div>
+    <div class="bar"></div>
+    <h1><span class="line">Nobody</span><span class="line">is coming</span><span class="line">to <span class="hl">save you.</span></span></h1>
+  </div>
+  <div class="bottom">
+    <div class="tag">Motivation by SK</div>
+    <div class="swipe">Swipe &rarr;</div>
+  </div>
+</section>
+
+<!-- ===================== SLIDE 2 ===================== -->
+<section class="slide">
+  <div class="top">
+    <div class="brand"><div class="logo">R</div><div class="handle">@_risewithsk<small>Rise with SK</small></div></div>
+    <div class="count">2 / 5</div>
+  </div>
+  <div class="body">
+    <h2><span class="line">Not your parents.</span><span class="line">Not your friends.</span><span class="line hl">Not luck.</span></h2>
+    <p class="sub">Everyone has their own battles. Waiting for someone to fix your life is the slowest way to live it.</p>
+  </div>
+  <div class="bottom">
+    <div class="tag">Motivation by SK</div>
+    <div class="swipe">Swipe &rarr;</div>
+  </div>
+</section>
+
+<!-- ===================== SLIDE 3 ===================== -->
+<section class="slide">
+  <div class="top">
+    <div class="brand"><div class="logo">R</div><div class="handle">@_risewithsk<small>Rise with SK</small></div></div>
+    <div class="count">3 / 5</div>
+  </div>
+  <div class="body">
+    <h1><span class="line">It's you.</span><span class="line hl">It was</span><span class="line hl">always you.</span></h1>
+    <p class="sub">Your habits. Your choices. Your 5 AM. That's where the change starts.</p>
+  </div>
+  <div class="bottom">
+    <div class="tag">Motivation by SK</div>
+    <div class="swipe">Swipe &rarr;</div>
+  </div>
+</section>
+
+<!-- ===================== SLIDE 4 ===================== -->
+<section class="slide">
+  <div class="top">
+    <div class="brand"><div class="logo">R</div><div class="handle">@_risewithsk<small>Rise with SK</small></div></div>
+    <div class="count">4 / 5</div>
+  </div>
+  <div class="body">
+    <h2><span class="line dim">So stop waiting.</span><span class="line">Wake up.</span></h2>
+    <h1 style="font-size:240px; margin-top:10px;"><span class="hl">Rise.</span></h1>
+    <p class="sub">A little every day. That's all it takes.</p>
+  </div>
+  <div class="bottom">
+    <div class="tag">Motivation by SK</div>
+    <div class="swipe">Swipe &rarr;</div>
+  </div>
+</section>
+
+<!-- ===================== SLIDE 5 : CTA ===================== -->
+<section class="slide cta">
+  <div class="top">
+    <div class="brand"><div class="logo">R</div><div class="handle">@_risewithsk<small>Rise with SK</small></div></div>
+    <div class="count">5 / 5</div>
+  </div>
+  <div class="body">
+    <div class="kicker">If this hit you</div>
+    <div class="bar"></div>
+    <h2><span class="line">Send this to</span><span class="line hl">someone who</span><span class="line hl">needs it.</span></h2>
+    <div class="cta-actions">
+      <div class="action"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span>Save</span></div>
+      <div class="action"><svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg><span>Share</span></div>
+      <div class="action"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-7 7-7s7 3 7 7"/><path d="M19 8v6M16 11h6"/></svg><span>Follow</span></div>
+    </div>
+    <div class="follow">Follow <b>@_risewithsk</b> for daily motivation</div>
+  </div>
+  <div class="bottom">
+    <div class="tag">From Sagar Kathrotiya Show &middot; @sagarkathrotiyashow</div>
+  </div>
+</section>
+
+</body>
+</html>
