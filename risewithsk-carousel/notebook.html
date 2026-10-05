@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>@_risewithsk notebook posts</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<link href="notebook.css" rel="stylesheet">
+</head>
+<body>
+<script>
+// ------------------------------------------------------------------
+// "Notebook" theme for @_risewithsk. Content written from reels on
+// @sagarkathrotiyashow. Edit text here, then: node render.js notebook.html
+//   *word*  -> yellow marker highlight      |  -> line break
+//   note    -> red circled note on that slide (optional)
+// Slide types: { h, sub, note? }  or  { cta: true, h, items: [[label, detail], ...] }
+// To use a photo instead of "SK", set AVATAR = '<img src="photo.jpg">'.
+// ------------------------------------------------------------------
+const AVATAR = 'SK';
+const POSTS = [
+  { id: '01-balaji', slides: [
+    { note: 'Balaji|story', h: 'Your competitor is not your *enemy.*', sub: 'A lesson from Chandubhai Virani, founder of Balaji Wafers.' },
+    { h: "When Haldiram's factory caught fire, Balaji *helped.*", sub: 'Rivals in the market. Humans first.' },
+    { h: 'Competition is *fuel,* not a fight.', sub: 'Use it to improve, innovate and grow.' },
+    { h: "Business isn't only profit. It's *respect.*", sub: 'Ethics and humanity build brands that last for generations.' },
+    { cta: true, h: 'Watch the full *story.*', items: [['Full episode', '@sagarkathrotiyashow'], ['Share it', 'with a founder friend'], ['Follow', '@_risewithsk']] },
+  ]},
+  { id: '02-savjibhai', slides: [
+    { note: 'focus|lesson', h: "See only the bird's *eye.*", sub: 'The focus lesson from Savjibhai Dholakia.' },
+    { h: 'A village boy became a *global* entrepreneur.', sub: 'No shortcut. Just one clear goal.' },
+    { h: 'Arjuna saw only the eye. *Nothing* else.', sub: "That's what a clear goal looks like." },
+    { h: 'When your vision is strong, distractions *disappear.*', sub: 'When your purpose is clear, success follows.' },
+    { h: 'Clarity. Dedication. *Focus.*', sub: 'Non-negotiable if you want something extraordinary.' },
+    { cta: true, h: 'Save this for when you lose *focus.*', items: [['Full episode', '@sagarkathrotiyashow'], ['Share it', 'with someone distracted'], ['Follow', '@_risewithsk']] },
+  ]},
+  { id: '03-govindbhai', slides: [
+    { note: 'true|story', h: 'What does *poverty* really look like?', sub: 'A real story shared by Govindbhai Dholakia.' },
+    { h: 'No grain to cook. Not even *fuel* to light the stove.', sub: 'That was home.' },
+    { h: "And still, he didn't *quit.*", sub: 'He kept his courage. He kept working.' },
+    { h: "Hard times don't decide your *ending.*", sub: 'Courage and hard work do.' },
+    { cta: true, h: 'Send this to someone going through a *hard* time.', items: [['Full story', '@sagarkathrotiyashow'], ['Share it', 'it might help someone'], ['Follow', '@_risewithsk']] },
+  ]},
+  { id: '04-tedx', slides: [
+    { note: 'TEDx|talk', h: "You can't *prompt* a life.", sub: "Notes from Sagar Kathrotiya's first TEDx talk." },
+    { h: 'Two years ago: a podcast and *no* big plan.', sub: 'Just a wish to meet people and learn something new.' },
+    { h: '57 emails.|1 big *yes.*', sub: 'Most doors stay closed. You only need one to open.' },
+    { h: '100+ conversations. Countless *lessons.*', sub: 'And a journey that led to the TEDx stage.' },
+    { h: "You don't need the full map. Take the next *step.*", sub: "That's how every journey starts." },
+    { cta: true, h: 'What is your next *step?*', items: [['Comment', 'your next step'], ['Share it', 'with a dreamer'], ['Follow', '@_risewithsk']] },
+  ]},
+];
+
+const esc = t => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const fmt = t => esc(t).replace(/\*(.+?)\*/g, '<mark>$1</mark>').replace(/\|/g, '<br>');
+const size = t => { const l = t.replace(/[|*]/g, '').length; return l > 42 ? 'xs' : l > 26 ? 'small' : ''; };
+const pad = n => String(n).padStart(2, '0');
+const arrow = '<svg viewBox="0 0 120 40" fill="none" stroke="#1d2a44" stroke-width="4" stroke-linecap="round"><path d="M4 24c30-10 60-12 104-4M92 8l18 12-16 14"/></svg>';
+const box = '<svg viewBox="0 0 64 64" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12c14-2 30-2 44 0 2 14 2 28 0 42-14 2-30 2-44 0-2-14-2-28 0-42z" stroke="#1d2a44" stroke-width="4"/><path d="M18 34l10 10 22-28" stroke="#e2533a" stroke-width="6"/></svg>';
+
+let html = '';
+for (const post of POSTS) {
+  const n = post.slides.length;
+  post.slides.forEach((s, i) => {
+    const name = `posts/notebook/${post.id}/slide-${i + 1}`;
+    const body = s.cta
+      ? `<h1 class="${size(s.h)}">${fmt(s.h)}</h1><div class="checks">${s.items.map(([a, b]) => `<div>${box}${esc(a)}<span>${esc(b)}</span></div>`).join('')}</div>`
+      : `<h1 class="${size(s.h)}">${fmt(s.h)}</h1><p class="sub">${fmt(s.sub)}</p>`;
+    const bottom = s.cta
+      ? `<span class="show" style="color:#1d2a44">From @sagarkathrotiyashow</span><span class="show">The Sagar Kathrotiya Show</span>`
+      : `<span>swipe ${arrow}</span><span class="show">The Sagar Kathrotiya Show</span>`;
+    html += `<section class="slide" data-name="${name}">
+      <div class="tape"></div>
+      <div class="top"><div class="who"><div class="av">${AVATAR}</div>@_risewithsk</div><div class="page">page ${pad(i + 1)}/${pad(n)}</div></div>
+      ${s.note ? `<div class="circle">${fmt(s.note)}</div>` : ''}
+      <div class="content">${body}</div>
+      <div class="bottom">${bottom}</div>
+    </section>`;
+  });
+}
+document.write(html);
+</script>
+</body>
+</html>
