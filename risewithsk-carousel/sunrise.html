@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>@_risewithsk sunrise theme</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<link href="sunrise.css" rel="stylesheet">
+</head>
+<body>
+<script>
+// ------------------------------------------------------------------
+// "Sunrise" theme for @_risewithsk. The sun climbs higher on each slide.
+// Wrap a word in *stars* for the orange italic accent; | = line break.
+// Slide types: { kicker?, h, sub }  or  { cta: true, h, items: [[label, detail], ...] }
+// ------------------------------------------------------------------
+const POSTS = [
+  { id: 'preview', slides: [
+    { kicker: 'From the TEDx stage', h: "You can't *prompt* a life.", sub: "Sagar Kathrotiya's first TEDx talk, in 5 slides." },
+    { h: 'Two years ago: a podcast and *no* big plan.', sub: 'Just a wish to meet people and learn something new.' },
+    { h: '57 emails.|1 big *yes.*', sub: 'Most doors stay closed. You only need one to open.' },
+    { h: '100+ conversations. Countless *lessons.*', sub: 'And a journey that led to the TEDx stage.' },
+    { h: "You don't need the full map. Take the next *step.*", sub: "That's how every journey starts." },
+    { cta: true, h: 'What is your next *step?*', items: [['Comment', 'your next step'], ['Share', 'with a dreamer'], ['Follow', '@_risewithsk']] },
+  ]},
+];
+
+const esc = t => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const fmt = t => esc(t).replace(/\*(.+?)\*/g, '<em>$1</em>').replace(/\|/g, '<br>');
+const size = t => { const l = t.replace(/[|*]/g, '').length; return l > 44 ? 'xs' : l > 28 ? 'small' : ''; };
+const logo = '<svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="25" fill="#1c1814"/><path d="M12 31a14 14 0 0 1 28 0z" fill="#e2622a"/><rect x="9" y="33" width="34" height="3" rx="1.5" fill="#f3ebdf"/></svg>';
+const pad = n => String(n).padStart(2, '0');
+
+let html = '';
+for (const post of POSTS) {
+  const n = post.slides.length;
+  post.slides.forEach((s, i) => {
+    const p = n > 1 ? i / (n - 1) : 1;           // 0 on the first slide, 1 on the last
+    const rise = Math.round(46 + p * (300 - 46)); // how much sun shows above the horizon (px)
+    const refl = [0, 1, 2, 3].map(k => {
+      const w = Math.round((120 + p * 520) * (1 - k * 0.24));
+      return `<div class="ref" style="top:${22 + k * 18}px;width:${w}px;opacity:${(1 - k * .22).toFixed(2)}"></div>`;
+    }).join('');
+    const name = `posts/${post.id}/sunrise-${i + 1}`;
+    const body = s.cta
+      ? `<h1 class="${size(s.h)}">${fmt(s.h)}</h1><div class="rows">${s.items.map(([a, b], k) => `<div><b>${k + 1}</b>${esc(a)}<span>${esc(b)}</span></div>`).join('')}</div>`
+      : `${s.kicker ? `<div class="kicker">${esc(s.kicker)}</div>` : ''}<h1 class="${size(s.h)}">${fmt(s.h)}</h1><p class="sub">${fmt(s.sub)}</p>`;
+    const foot = s.cta
+      ? `<div class="swipe">@sagarkathrotiyashow</div><div class="show">The Sagar Kathrotiya Show</div>`
+      : `<div class="swipe">Swipe to rise <i>&rarr;</i></div><div class="show">The Sagar Kathrotiya Show</div>`;
+    html += `<section class="slide" data-name="${name}">
+      <div class="sky"><div class="sun" style="top:${1350 - 200 - rise}px"></div></div>
+      <div class="ground">${refl}</div>
+      <div class="top"><div class="brand">${logo}@_risewithsk</div><div class="count">${pad(i + 1)} &mdash; ${pad(n)}</div></div>
+      <div class="content">${body}</div>
+      <div class="foot">${foot}</div>
+    </section>`;
+  });
+}
+document.write(html);
+</script>
+</body>
+</html>

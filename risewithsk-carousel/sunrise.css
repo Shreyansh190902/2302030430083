@@ -1,0 +1,73 @@
+/* "Sunrise" theme for @_risewithsk: the sun rises a little on every slide. */
+:root {
+  --paper: #f3ebdf;
+  --ink: #1c1814;
+  --soft: #5f544b;
+  --sun: #e2622a;
+  --sun-light: #f39a4c;
+  --cream: #f3ebdf;
+  --horizon: 200px;   /* height of the dark ground band */
+  --pad: 88px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #8a8178; display: flex; flex-direction: column; gap: 40px; padding: 40px; align-items: center; }
+
+.slide {
+  width: 1080px; height: 1350px; position: relative; overflow: hidden;
+  background: var(--paper); color: var(--ink);
+  font-family: 'Bricolage Grotesque', sans-serif;
+}
+/* paper grain */
+.slide::before {
+  content: ""; position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: .09; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* sky + sun */
+.sky { position: absolute; left: 0; right: 0; top: 0; bottom: var(--horizon); overflow: hidden; z-index: 1; }
+.sun {
+  position: absolute; left: 50%; width: 760px; height: 760px; margin-left: -380px; border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, var(--sun-light), var(--sun) 62%);
+  box-shadow: 0 0 0 46px rgba(226,98,42,.10), 0 0 0 100px rgba(226,98,42,.05);
+}
+
+/* ground + reflection */
+.ground { position: absolute; left: 0; right: 0; bottom: 0; height: var(--horizon); background: var(--ink); z-index: 2; }
+.ground .ref { position: absolute; left: 50%; height: 6px; border-radius: 3px; background: var(--sun); transform: translateX(-50%); }
+
+/* top bar */
+.top { position: absolute; top: 76px; left: var(--pad); right: var(--pad); z-index: 3; display: flex; justify-content: space-between; align-items: center; }
+.brand { display: flex; align-items: center; gap: 16px; font-weight: 700; font-size: 28px; letter-spacing: -.3px; }
+.brand svg { width: 52px; height: 52px; }
+.count { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 38px; color: var(--soft); }
+
+/* text */
+.content { position: absolute; top: 236px; left: var(--pad); right: var(--pad); z-index: 3; }
+.kicker { font-size: 24px; font-weight: 500; letter-spacing: 5px; text-transform: uppercase; color: var(--sun); margin-bottom: 30px; }
+h1 {
+  font-weight: 800; font-size: 118px; line-height: .98; letter-spacing: -4px;
+  font-variant-numeric: lining-nums; text-wrap: balance;
+}
+h1.small { font-size: 100px; letter-spacing: -3px; }
+h1.xs { font-size: 86px; letter-spacing: -2.5px; }
+h1 em {
+  font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+  color: var(--sun); font-size: 1.14em; letter-spacing: -1px; line-height: .8;
+}
+.sub { margin-top: 44px; font-size: 38px; line-height: 1.32; color: var(--soft); max-width: 800px; text-wrap: pretty; letter-spacing: -.3px; }
+
+/* CTA rows */
+.rows { margin-top: 56px; }
+.rows div {
+  display: flex; align-items: baseline; gap: 22px;
+  padding: 22px 0; border-top: 2px solid rgba(28,24,20,.15); font-size: 38px; font-weight: 700; letter-spacing: -.5px;
+}
+.rows div:last-child { border-bottom: 2px solid rgba(28,24,20,.15); }
+.rows b { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--sun); font-size: 44px; min-width: 40px; }
+.rows span { margin-left: auto; font-weight: 400; color: var(--soft); font-size: 30px; }
+
+/* footer on the dark ground */
+.foot { position: absolute; left: var(--pad); right: var(--pad); bottom: 74px; z-index: 4; display: flex; justify-content: space-between; align-items: center; color: var(--cream); }
+.foot .swipe { font-size: 28px; font-weight: 500; display: flex; align-items: center; gap: 14px; }
+.foot .swipe i { font-style: normal; display: inline-grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--sun); color: var(--ink); font-size: 26px; }
+.foot .show { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 32px; color: rgba(243,235,223,.7); }
