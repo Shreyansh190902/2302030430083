@@ -21,3 +21,7 @@
 @font-face { font-family: 'Cormorant Garamond'; font-weight: 600; font-style: italic; src: url(CormorantGaramond-600i.woff2) format('woff2'); }
 @font-face { font-family: 'Cormorant Garamond'; font-weight: 600; font-style: normal; src: url(CormorantGaramond-600.woff2) format('woff2'); }
 @font-face { font-family: 'Cormorant Garamond'; font-weight: 700; font-style: normal; src: url(CormorantGaramond-700.woff2) format('woff2'); }
+@font-face { font-family: 'Permanent Marker'; font-weight: 400; font-style: normal; src: url(PermanentMarker-400.woff2) format('woff2'); }
+@font-face { font-family: 'Playfair Display'; font-weight: 800; font-style: normal; src: url(PlayfairDisplay-800.woff2) format('woff2'); }
+@font-face { font-family: 'Playfair Display'; font-weight: 900; font-style: normal; src: url(PlayfairDisplay-900.woff2) format('woff2'); }
+@font-face { font-family: 'UnifrakturMaguntia'; font-weight: 400; font-style: normal; src: url(UnifrakturMaguntia-400.woff2) format('woff2'); }
