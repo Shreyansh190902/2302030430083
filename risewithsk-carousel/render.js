@@ -15,7 +15,9 @@ const prefix = process.argv[3] || 'slide';
   await page.evaluate(() => document.fonts.ready);
   const slides = await page.$$('.slide');
   for (let i = 0; i < slides.length; i++) {
-    const out = path.join(__dirname, `${prefix}-${i + 1}.png`);
+    const name = await slides[i].getAttribute('data-name');
+    const out = path.join(__dirname, name ? name + '.png' : `${prefix}-${i + 1}.png`);
+    require('fs').mkdirSync(path.dirname(out), { recursive: true });
     await slides[i].screenshot({ path: out });
     console.log('saved', out);
   }
