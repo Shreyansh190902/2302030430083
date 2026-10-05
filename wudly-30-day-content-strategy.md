@@ -137,3 +137,76 @@ Track: reel plays, saves, shares, comments per post, profile visits and link cli
 - [ ] Confirm age ranges and exact product names, e.g. Barrier Minds vs Memory Chess, and Dot Match.
 - [ ] Confirm the exact brand red hex and mascot file.
 - [ ] Confirm festival dates and ESFE stall details.
+
+---
+
+## 10. Informative content pack (post + video + carousel)
+
+Skill claims below come from Wudly's own captions (easel, Step Bloom, Shut The Box, Dot Match, Memory Chess). Confirm age ranges and product names before publishing. Avoid medical or "guaranteed development" claims.
+
+**Where they go in the calendar (swap into existing slots):**
+- Informative post: Wed 14 Oct (replaces the parent tip)
+- Informative carousel: Wed 21 Oct (replaces the board-games tip)
+- Informative video: Fri 23 Oct (replaces the Crack Code review post; move that post to 30 Oct)
+
+### A. Informative post (static): "What can one easel teach?"
+
+**Visual:** 3-in-1 Easel photo on cream. Wudly red badge headline: "One easel. 4 skills." Four short icons or labels around the product: Drawing · Letters · Writing · Confidence.
+
+**On-image text:**
+- Headline: One easel. 4 skills.
+- Draw and doodle → creativity
+- Learn letters → early literacy
+- Write and practise → fine motor skills
+- Own space to create → confidence
+- Footer: @wudly_toys · wudlytoys.com
+
+**Caption:**
+> Drawing is more than a pastime. 🎨
+> A simple easel gives little hands a place to scribble, learn letters and practise writing, all without a screen.
+> ✏️ Draw → creativity
+> 🔤 Letters → early learning
+> ✍️ Write → fine motor skills
+> Which one does your child love most? Tell us below 👇
+> Save this for your next gift idea.
+> #WudlyToys #PlayNaturally #WoodenToys #EaselBoard #ScreenFreePlay #LearningThroughPlay
+
+### B. Informative video (reel, 30 seconds): "Wooden vs plastic toys: what's the difference?"
+
+**Format:** 9:16, voice-over plus on-screen text, upbeat trending audio at low volume. Keep to claims you can stand behind (feel, durability, look, natural material).
+
+| Time | Visual | On-screen text | Voice-over |
+|---|---|---|---|
+| 0–3s | Mascot pops up holding a wooden block | "Wooden vs plastic toys? 🤔" | "Wooden or plastic: what's the difference?" |
+| 3–8s | Close-up of wood grain and finish | "1. Natural material" | "Wooden toys are made from natural wood with child-safe finishes." |
+| 8–13s | Hands stacking and building | "2. Built to last" | "They're sturdy, so they last through years of play, even for siblings." |
+| 13–19s | Child playing with an easel or walker | "3. Open-ended play" | "Simple toys let kids invent the game: building, drawing, pretending." |
+| 19–25s | Toys laid out neatly on a shelf | "4. Calm, screen-free" | "No batteries, no screens, just hands-on play." |
+| 25–30s | Logo + red button | "Play Naturally · wudlytoys.com" | "Play naturally with Wudly. Link in bio." |
+
+**Caption:**
+> Wooden vs plastic: here are 4 things we love about wood. 🪵
+> Which do you have more of at home? Comment "wood" or "plastic" 👇
+> #WudlyToys #PlayNaturally #WoodenToys #ScreenFreePlay #MontessoriToys
+
+**Cover text:** "Wood vs plastic toys?"
+
+### C. Informative carousel (8 slides): "What does each toy teach?"
+
+Style: alternate cream and red slides, one idea per slide, product photo from the website on each skill slide, mascot on slide 1 and 8.
+
+1. **Hook (red):** "Play is learning. Here's what each Wudly toy teaches 👇"
+2. **3-in-1 Easel:** Drawing, letters, writing. Builds creativity and fine motor skills.
+3. **Step Bloom Walker:** First steps. Supports balance, strength and confidence.
+4. **Shut The Box:** Number sense, counting and focus. Screen-free play for family and friends.
+5. **Dot Match:** Concentration, memory, logic and problem solving (15 challenge cards, 5 levels).
+6. **Memory Chess / Barrier Minds:** Memory, focus and color recognition. Confirm which name and age range to use.
+7. **Why it works (cream):** "Kids learn best when they're having fun. Hands-on play beats screens for focus and imagination."
+8. **Call to action (red):** "Save this and pick a toy for your child's age. Shop at wudlytoys.com · @wudly_toys"
+
+**Caption:**
+> Every Wudly toy is a learning opportunity in disguise. ✨
+> Swipe to see what each one teaches 👉
+> Which skill matters most at your house? Comment below.
+> Save this for gifting season. 🎁
+> #WudlyToys #PlayNaturally #LearningThroughPlay #WoodenToys #EducationalToys
