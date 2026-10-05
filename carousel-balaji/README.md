@@ -8,3 +8,4 @@ manufacturing for Haldiram's for two years; "Ravan / Ram" quote).
 - Re-render: `NODE_PATH=$(npm root -g) node render.js slides.html out`
 - `slides-6.html` — 6-slide version → `out-6/`, `out-6-jpg/`, `balaji-haldiram-6-slides-jpg.zip`
 - `slides-6-gu.html` — Gujarati 6-slide version → `out-6-gu/`, `out-6-gu-jpg/`, `balaji-haldiram-6-slides-gujarati-jpg.zip`
+- `slides-6-gu-paper.html` — Gujarati, grid-paper theme (like the eye-care cover) → `out-6-gu-paper/`, `out-6-gu-paper-jpg/`, `balaji-haldiram-gujarati-paper-theme-jpg.zip`
