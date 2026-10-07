@@ -1,0 +1,486 @@
+<title>Wudly Toys Posting Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: toy-shelf header with today's counts, then a month grid beside a day drawer (stacks on phones). */
+:root {
+  --bg: #f5f6f1;
+  --surface: #ffffff;
+  --sunk: #eceee6;
+  --line: #dcdfd4;
+  --fg: #1f2620;
+  --muted: #5f6a60;
+  --accent: #2f7d4f;        /* wood-stain green */
+  --accent-ink: #ffffff;
+  --today: #f0b429;
+  --ig: #c2307a;
+  --ig-soft: #f8e1ec;
+  --li: #0a66c2;
+  --li-soft: #dceafa;
+  --danger: #b3261e;
+  --font-display: "Fredoka", "Trebuchet MS", system-ui, sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141815; --surface: #1c221d; --sunk: #232a24; --line: #333c34;
+    --fg: #e8ece6; --muted: #9aa69b; --accent: #5cb784; --accent-ink: #0d1a12;
+    --today: #f0b429; --ig: #ec6aa9; --ig-soft: #3a2030; --li: #5aa2ec; --li-soft: #1b2b3d;
+    --danger: #f2877f; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141815; --surface: #1c221d; --sunk: #232a24; --line: #333c34;
+  --fg: #e8ece6; --muted: #9aa69b; --accent: #5cb784; --accent-ink: #0d1a12;
+  --today: #f0b429; --ig: #ec6aa9; --ig-soft: #3a2030; --li: #5aa2ec; --li-soft: #1b2b3d;
+  --danger: #f2877f; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.45; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 48px; display: grid; gap: 20px; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; margin: 0; text-wrap: balance; }
+button, select, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* header */
+header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.blocks { display: grid; grid-template-columns: 14px 14px; gap: 3px; }
+.blocks i { width: 14px; height: 14px; border-radius: 3px; display: block; }
+.blocks i:nth-child(1) { background: var(--accent); }
+.blocks i:nth-child(2) { background: var(--today); }
+.blocks i:nth-child(3) { background: var(--ig); }
+.blocks i:nth-child(4) { background: var(--li); }
+.brand h1 { font-size: 1.7rem; line-height: 1.1; }
+.brand p { margin: 2px 0 0; color: var(--muted); font-size: .9rem; }
+.status { font-size: .82rem; color: var(--muted); }
+
+/* today */
+.today { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.tcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: grid; gap: 10px; }
+.tcard .lbl { font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none; }
+.dot.ig { background: var(--ig); } .dot.li { background: var(--li); } .dot.all { background: var(--today); }
+.tnums { display: flex; flex-wrap: wrap; gap: 18px; }
+.tnums div { display: grid; }
+.tnums b { font-family: var(--font-display); font-size: 1.9rem; font-weight: 600; line-height: 1; }
+.tnums span { font-size: .8rem; color: var(--muted); }
+.quick { display: flex; flex-wrap: wrap; gap: 6px; }
+.qbtn { border: 1px solid var(--line); background: var(--sunk); border-radius: 999px; padding: 4px 10px; font-size: .8rem; font-weight: 600; }
+.qbtn:hover { border-color: var(--accent); }
+.qbtn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* month bar */
+.monthbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+.nav { display: flex; align-items: center; gap: 8px; }
+.nav h2 { font-size: 1.45rem; min-width: 10ch; }
+.iconbtn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; width: 34px; height: 34px; display: grid; place-items: center; font-size: 1.1rem; line-height: 1; }
+.textbtn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 6px 12px; font-weight: 600; font-size: .85rem; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--surface); }
+.seg button { border: 0; background: transparent; padding: 6px 14px; font-weight: 600; font-size: .85rem; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+
+/* month stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.stat { background: var(--surface); padding: 12px 14px; display: grid; gap: 2px; }
+.stat b { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; }
+.stat span { font-size: .78rem; color: var(--muted); }
+
+/* main */
+.main { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 20px; align-items: start; }
+@media (max-width: 900px) { .main { grid-template-columns: minmax(0, 1fr); } }
+
+.cal { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 10px; }
+.dow, .grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.dow div { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 4px 6px 8px; }
+.day { min-height: 96px; border: 1px solid transparent; background: var(--sunk); border-radius: 8px; padding: 6px; text-align: left; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.day:hover { border-color: var(--line); }
+.day.out { background: transparent; color: var(--muted); opacity: .5; }
+.day .dn { font-weight: 700; font-size: .85rem; display: flex; justify-content: space-between; align-items: center; gap: 4px; }
+.day .tot { font-size: .72rem; font-weight: 600; color: var(--muted); }
+.day.is-today .dn span:first-child { background: var(--today); color: #1f2620; border-radius: 999px; padding: 0 7px; }
+.day.sel { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.day.empty-past .dn span:first-child { color: var(--muted); }
+.badges { display: flex; flex-wrap: wrap; gap: 3px; }
+.b { font-size: .7rem; font-weight: 700; border-radius: 5px; padding: 1px 5px; white-space: nowrap; }
+.b.ig { background: var(--ig-soft); color: var(--ig); }
+.b.li { background: var(--li-soft); color: var(--li); }
+.dots { display: none; gap: 3px; flex-wrap: wrap; }
+@media (max-width: 560px) {
+  .day { min-height: 58px; padding: 4px; }
+  .badges { display: none; }
+  .dots { display: flex; }
+  .day .tot { display: none; }
+}
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: .78rem; color: var(--muted); padding: 10px 4px 2px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+/* drawer */
+.drawer { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: grid; gap: 14px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); }
+@media (max-width: 900px) { .drawer { position: static; } }
+.drawer h3 { font-size: 1.2rem; }
+.drawer .sub { color: var(--muted); font-size: .85rem; margin-top: 2px; }
+.list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 10px; border-radius: 8px; background: var(--sunk); }
+.item .k { font-weight: 700; font-size: .85rem; }
+.item .note { font-size: .85rem; color: var(--muted); overflow-wrap: anywhere; }
+.item .note a { color: var(--accent); }
+.del { border: 1px solid transparent; background: transparent; color: var(--muted); border-radius: 6px; font-size: .78rem; padding: 2px 6px; }
+.del:hover { border-color: var(--line); }
+.del.confirm { color: var(--danger); border-color: var(--danger); }
+.emptyday { color: var(--muted); font-size: .9rem; padding: 10px; border: 1px dashed var(--line); border-radius: 8px; }
+form { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 14px; }
+form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+label { display: grid; gap: 4px; font-size: .78rem; font-weight: 600; color: var(--muted); }
+select, input[type=text], input[type=time] { border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 8px 10px; font-size: .9rem; width: 100%; min-width: 0; }
+.primary { border: 0; background: var(--accent); color: var(--accent-ink); border-radius: 8px; padding: 10px 14px; font-weight: 700; }
+.primary:disabled { opacity: .5; cursor: not-allowed; }
+.msg { font-size: .82rem; color: var(--danger); min-height: 1em; }
+.ro { font-size: .85rem; color: var(--muted); background: var(--sunk); padding: 10px; border-radius: 8px; }
+@media (prefers-reduced-motion: no-preference) { .day, .qbtn { transition: border-color .15s, box-shadow .15s; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="blocks" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div>
+        <h1>Wudly Toys</h1>
+        <p>Posting calendar · Instagram &amp; LinkedIn</p>
+      </div>
+    </div>
+    <div class="status" id="status">Connecting to the shared calendar…</div>
+  </header>
+
+  <section class="today" aria-label="Today">
+    <div class="tcard">
+      <div class="lbl"><span class="dot ig"></span>Instagram today</div>
+      <div class="tnums num">
+        <div><b id="t-ig-post">0</b><span>posts</span></div>
+        <div><b id="t-ig-story">0</b><span>stories</span></div>
+        <div><b id="t-ig-reel">0</b><span>reels</span></div>
+      </div>
+      <div class="quick">
+        <button class="qbtn" data-q="instagram|story" disabled>+ Story</button>
+        <button class="qbtn" data-q="instagram|post" disabled>+ Post</button>
+        <button class="qbtn" data-q="instagram|reel" disabled>+ Reel</button>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="lbl"><span class="dot li"></span>LinkedIn today</div>
+      <div class="tnums num">
+        <div><b id="t-li-post">0</b><span>posts</span></div>
+        <div><b id="t-li-article">0</b><span>articles</span></div>
+      </div>
+      <div class="quick">
+        <button class="qbtn" data-q="linkedin|post" disabled>+ Post</button>
+        <button class="qbtn" data-q="linkedin|article" disabled>+ Article</button>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="lbl"><span class="dot all"></span><span id="t-date">Today</span></div>
+      <div class="tnums num">
+        <div><b id="t-total">0</b><span>pieces published today</span></div>
+      </div>
+      <div class="status" id="t-hint">Tap a quick button each time the team publishes something.</div>
+    </div>
+  </section>
+
+  <div class="monthbar">
+    <div class="nav">
+      <button class="iconbtn" id="prev" aria-label="Previous month">‹</button>
+      <h2 id="mtitle">Month</h2>
+      <button class="iconbtn" id="next" aria-label="Next month">›</button>
+      <button class="textbtn" id="gotoday">Today</button>
+    </div>
+    <div class="seg" role="group" aria-label="Platform filter">
+      <button data-f="all" aria-pressed="true">All</button>
+      <button data-f="instagram" aria-pressed="false">Instagram</button>
+      <button data-f="linkedin" aria-pressed="false">LinkedIn</button>
+    </div>
+  </div>
+
+  <section class="stats num" id="stats" aria-label="Month summary"></section>
+
+  <div class="main">
+    <section class="cal" aria-label="Calendar">
+      <div class="dow"><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div></div>
+      <div class="grid" id="grid"></div>
+      <div class="legend">
+        <span><span class="dot ig"></span>Instagram</span>
+        <span><span class="dot li"></span>LinkedIn</span>
+        <span>P post · S story · R reel · A article</span>
+      </div>
+    </section>
+
+    <aside class="drawer" aria-live="polite">
+      <div>
+        <h3 id="d-title">Day</h3>
+        <div class="sub" id="d-sub"></div>
+      </div>
+      <ul class="list" id="d-list"></ul>
+      <form id="addform" hidden>
+        <div class="row">
+          <label for="f-platform">Platform
+            <select id="f-platform">
+              <option value="instagram">Instagram</option>
+              <option value="linkedin">LinkedIn</option>
+            </select>
+          </label>
+          <label for="f-kind">Type
+            <select id="f-kind"></select>
+          </label>
+        </div>
+        <div class="row">
+          <label for="f-time">Time (optional)
+            <input type="time" id="f-time">
+          </label>
+          <label for="f-date">Date
+            <input type="text" id="f-date" readonly>
+          </label>
+        </div>
+        <label for="f-note">Caption, topic or link (optional)
+          <input type="text" id="f-note" maxlength="300" placeholder="e.g. New wooden train set reel">
+        </label>
+        <button class="primary" type="submit" id="f-submit">Add to this day</button>
+        <div class="msg" id="f-msg"></div>
+      </form>
+      <div class="ro" id="ro" hidden>You can view this calendar. Ask the owner for Contributor access to log posts.</div>
+    </aside>
+  </div>
+</div>
+
+<script>
+(() => {
+  const KINDS = {
+    instagram: [["post","Post","P"],["story","Story","S"],["reel","Reel","R"]],
+    linkedin:  [["post","Post","P"],["article","Article","A"]]
+  };
+  const PNAME = { instagram: "Instagram", linkedin: "LinkedIn" };
+  const pad = n => String(n).padStart(2, "0");
+  const keyOf = d => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+  const parseKey = k => { const [y,m,d] = k.split("-").map(Number); return new Date(y, m - 1, d); };
+  const $ = id => document.getElementById(id);
+
+  let entries = [];               // [{id, date, platform, kind, time, note, createdAt}]
+  let db = null, canWrite = false;
+  let filter = "all";
+  try { filter = localStorage.getItem("wudly-filter") || "all"; } catch (e) {}
+  const now = new Date();
+  let todayKey = keyOf(now);
+  let view = new Date(now.getFullYear(), now.getMonth(), 1);
+  let selKey = todayKey;
+
+  const kindLabel = (p, k) => (KINDS[p] || []).find(x => x[0] === k)?.[1] || k;
+  const kindLetter = (p, k) => (KINDS[p] || []).find(x => x[0] === k)?.[2] || "?";
+  const shown = () => entries.filter(e => filter === "all" || e.platform === filter);
+  const byDay = list => { const m = {}; for (const e of list) (m[e.date] ||= []).push(e); return m; };
+
+  function renderToday() {
+    todayKey = keyOf(new Date());
+    const t = entries.filter(e => e.date === todayKey);
+    const c = (p, k) => t.filter(e => e.platform === p && e.kind === k).length;
+    $("t-ig-post").textContent = c("instagram","post");
+    $("t-ig-story").textContent = c("instagram","story");
+    $("t-ig-reel").textContent = c("instagram","reel");
+    $("t-li-post").textContent = c("linkedin","post");
+    $("t-li-article").textContent = c("linkedin","article");
+    $("t-total").textContent = t.length;
+    $("t-date").textContent = "Today · " + new Date().toLocaleDateString(undefined, { weekday: "short", day: "numeric", month: "short" });
+  }
+
+  function renderStats() {
+    const y = view.getFullYear(), m = view.getMonth();
+    const prefix = y + "-" + pad(m + 1) + "-";
+    const list = shown().filter(e => e.date.startsWith(prefix));
+    const days = new Date(y, m + 1, 0).getDate();
+    const map = byDay(list);
+    const active = Object.keys(map).length;
+    let busiest = null;
+    for (const [k, v] of Object.entries(map)) if (!busiest || v.length > busiest[1]) busiest = [k, v.length];
+    const cnt = (p, k) => list.filter(e => e.platform === p && e.kind === k).length;
+    const isPastOrNow = new Date(y, m, 1) <= new Date(now.getFullYear(), now.getMonth(), 1);
+    const elapsed = (y === now.getFullYear() && m === now.getMonth()) ? now.getDate() : days;
+    const tiles = [[list.length, "total this month"]];
+    if (filter !== "linkedin") tiles.push([cnt("instagram","post"), "IG posts"], [cnt("instagram","story"), "IG stories"], [cnt("instagram","reel"), "IG reels"]);
+    if (filter !== "instagram") tiles.push([cnt("linkedin","post") + cnt("linkedin","article"), "LinkedIn posts"]);
+    tiles.push([active + "/" + (isPastOrNow ? elapsed : days), "days with posts"]);
+    tiles.push([busiest ? parseKey(busiest[0]).getDate() + " " + view.toLocaleDateString(undefined,{month:"short"}) : "–", busiest ? "busiest day (" + busiest[1] + ")" : "busiest day"]);
+    $("stats").replaceChildren(...tiles.map(([v, l]) => {
+      const d = document.createElement("div"); d.className = "stat";
+      const b = document.createElement("b"); b.textContent = v;
+      const s = document.createElement("span"); s.textContent = l;
+      d.append(b, s); return d;
+    }));
+  }
+
+  function renderGrid() {
+    $("mtitle").textContent = view.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+    const map = byDay(shown());
+    const first = new Date(view);
+    const offset = (first.getDay() + 6) % 7;             // Monday first
+    const start = new Date(first); start.setDate(1 - offset);
+    const cells = [];
+    const lastDay = new Date(view.getFullYear(), view.getMonth() + 1, 0);
+    const totalCells = Math.ceil((offset + lastDay.getDate()) / 7) * 7;
+    for (let i = 0; i < totalCells; i++) {
+      const d = new Date(start); d.setDate(start.getDate() + i);
+      const k = keyOf(d);
+      const list = map[k] || [];
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "day" + (d.getMonth() !== view.getMonth() ? " out" : "") + (k === todayKey ? " is-today" : "") + (k === selKey ? " sel" : "");
+      btn.setAttribute("aria-label", d.toDateString() + ", " + list.length + " published");
+      const dn = document.createElement("div"); dn.className = "dn num";
+      const n = document.createElement("span"); n.textContent = d.getDate();
+      const tot = document.createElement("span"); tot.className = "tot"; tot.textContent = list.length ? list.length : "";
+      dn.append(n, tot);
+      const badges = document.createElement("div"); badges.className = "badges num";
+      const dots = document.createElement("div"); dots.className = "dots";
+      for (const p of ["instagram","linkedin"]) {
+        for (const [k2,, letter] of KINDS[p]) {
+          const c = list.filter(e => e.platform === p && e.kind === k2).length;
+          if (!c) continue;
+          const b = document.createElement("span");
+          b.className = "b " + (p === "instagram" ? "ig" : "li");
+          b.textContent = letter + c;
+          b.title = c + " " + PNAME[p] + " " + kindLabel(p, k2).toLowerCase() + (c > 1 ? "s" : "");
+          badges.append(b);
+        }
+        const pc = list.filter(e => e.platform === p).length;
+        for (let j = 0; j < Math.min(pc, 4); j++) { const dt = document.createElement("span"); dt.className = "dot " + (p === "instagram" ? "ig" : "li"); dots.append(dt); }
+      }
+      btn.append(dn, badges, dots);
+      btn.addEventListener("click", () => { selKey = k; if (d.getMonth() !== view.getMonth()) view = new Date(d.getFullYear(), d.getMonth(), 1); render(); });
+      cells.push(btn);
+    }
+    $("grid").replaceChildren(...cells);
+  }
+
+  function renderDrawer() {
+    const d = parseKey(selKey);
+    $("d-title").textContent = d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" });
+    const list = entries.filter(e => e.date === selKey).sort((a, b) => (a.time || "99").localeCompare(b.time || "99") || (a.createdAt || 0) - (b.createdAt || 0));
+    const ig = list.filter(e => e.platform === "instagram").length, li = list.length - ig;
+    $("d-sub").textContent = list.length ? `${list.length} published · ${ig} Instagram · ${li} LinkedIn` : (selKey === todayKey ? "Nothing logged yet today" : "Nothing logged on this day");
+    $("f-date").value = selKey;
+    const ul = $("d-list");
+    if (!list.length) {
+      const li0 = document.createElement("li"); li0.className = "emptyday";
+      li0.textContent = db ? (canWrite ? "Add each post, story or reel below, or use the quick buttons at the top for today." : "No posts logged for this day.") : "Posts appear here once the shared calendar loads.";
+      ul.replaceChildren(li0); return;
+    }
+    ul.replaceChildren(...list.map(e => {
+      const li = document.createElement("li"); li.className = "item";
+      const dot = document.createElement("span"); dot.className = "dot " + (e.platform === "instagram" ? "ig" : "li"); dot.style.marginTop = "6px";
+      const body = document.createElement("div");
+      const k = document.createElement("div"); k.className = "k";
+      k.textContent = PNAME[e.platform] + " " + kindLabel(e.platform, e.kind).toLowerCase() + (e.time ? " · " + e.time : "");
+      body.append(k);
+      if (e.note) {
+        const n = document.createElement("div"); n.className = "note";
+        if (/^https?:\/\/\S+$/.test(e.note)) { const a = document.createElement("a"); a.href = e.note; a.target = "_blank"; a.rel = "noopener"; a.textContent = e.note; n.append(a); }
+        else n.textContent = e.note;
+        body.append(n);
+      }
+      li.append(dot, body);
+      if (canWrite) {
+        const del = document.createElement("button"); del.type = "button"; del.className = "del"; del.textContent = "Remove";
+        del.addEventListener("click", async () => {
+          if (!del.classList.contains("confirm")) { del.classList.add("confirm"); del.textContent = "Confirm"; setTimeout(() => { del.classList.remove("confirm"); del.textContent = "Remove"; }, 3000); return; }
+          del.disabled = true;
+          try { await db.collection("posts").doc(e.id).delete(); } catch (err) { del.disabled = false; $("f-msg").textContent = "Couldn't remove it. Try again."; }
+        });
+        li.append(del);
+      } else li.append(document.createElement("span"));
+      return li;
+    }));
+  }
+
+  function fillKinds() {
+    const p = $("f-platform").value;
+    $("f-kind").replaceChildren(...KINDS[p].map(([v, l]) => { const o = document.createElement("option"); o.value = v; o.textContent = l; return o; }));
+  }
+
+  function render() { renderToday(); renderStats(); renderGrid(); renderDrawer(); }
+
+  async function addEntry(date, platform, kind, time, note) {
+    const id = date.replace(/-/g, "") + "-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    await db.collection("posts").doc(id).set({ date, platform, kind, time: time || "", note: note || "", createdAt: Date.now() });
+  }
+
+  // controls
+  $("prev").onclick = () => { view = new Date(view.getFullYear(), view.getMonth() - 1, 1); render(); };
+  $("next").onclick = () => { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); render(); };
+  $("gotoday").onclick = () => { const t = new Date(); view = new Date(t.getFullYear(), t.getMonth(), 1); selKey = keyOf(t); render(); };
+  document.querySelectorAll(".seg button").forEach(b => {
+    b.setAttribute("aria-pressed", String(b.dataset.f === filter));
+    b.onclick = () => {
+      filter = b.dataset.f;
+      try { localStorage.setItem("wudly-filter", filter); } catch (e) {}
+      document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      render();
+    };
+  });
+  $("f-platform").onchange = fillKinds;
+  fillKinds();
+  $("addform").addEventListener("submit", async ev => {
+    ev.preventDefault();
+    if (!db || !canWrite) return;
+    const btn = $("f-submit"); btn.disabled = true; $("f-msg").textContent = "";
+    try {
+      await addEntry(selKey, $("f-platform").value, $("f-kind").value, $("f-time").value, $("f-note").value.trim());
+      $("f-note").value = ""; $("f-time").value = "";
+    } catch (err) {
+      $("f-msg").textContent = err?.code === "quota_exceeded" ? "The calendar is full. Remove old entries to add more." : "Couldn't save. Check your connection and try again.";
+      if (err?.code === "invalid_argument") setReadOnly();
+    }
+    btn.disabled = false;
+  });
+  document.querySelectorAll(".qbtn").forEach(b => b.addEventListener("click", async () => {
+    if (!db || !canWrite) return;
+    const [p, k] = b.dataset.q.split("|");
+    b.disabled = true;
+    const t = new Date();
+    try { await addEntry(keyOf(t), p, k, pad(t.getHours()) + ":" + pad(t.getMinutes()), ""); $("t-hint").textContent = "Logged " + PNAME[p] + " " + kindLabel(p, k).toLowerCase() + " at " + pad(t.getHours()) + ":" + pad(t.getMinutes()) + "."; }
+    catch (err) { $("t-hint").textContent = "Couldn't save that one. Try again."; if (err?.code === "invalid_argument") setReadOnly(); }
+    b.disabled = !canWrite;
+  }));
+
+  function setReadOnly() {
+    canWrite = false;
+    $("addform").hidden = true; $("ro").hidden = false;
+    document.querySelectorAll(".qbtn").forEach(b => b.disabled = true);
+    $("t-hint").textContent = "View only.";
+    renderDrawer();
+  }
+  function setWritable() {
+    canWrite = true;
+    $("addform").hidden = false; $("ro").hidden = true;
+    document.querySelectorAll(".qbtn").forEach(b => b.disabled = false);
+  }
+
+  render();
+
+  // live data
+  (async () => {
+    if (!window.claude?.use) { $("status").textContent = "Open this page on claude.ai to load the shared calendar."; return; }
+    const [dbNs, user] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+    if (!dbNs) { $("status").textContent = "Sign in to see the shared calendar."; setReadOnly(); return; }
+    db = dbNs;
+    const w = user ? await user.can("data.write") : null;
+    if (w === false) setReadOnly(); else setWritable();
+    db.collection("posts").onSnapshot(snap => {
+      entries = snap.docs.map(d => ({ id: d.id, ...d.data() })).filter(e => typeof e.date === "string" && KINDS[e.platform]);
+      $("status").textContent = entries.length + " entries logged · updates live";
+      render();
+    }, err => {
+      $("status").textContent = err.code === "revoked" ? "Calendar unavailable." : "Lost connection to the calendar. Reload to reconnect.";
+    });
+  })();
+})();
+</script>
