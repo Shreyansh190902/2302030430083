@@ -59,3 +59,14 @@ Swipe for 5 simple Montessori steps you can start today 👉
 Save this for your child's play corner, and tell us which step you'll try first 👇
 🔗 wudlytoys.com (link in bio)
 #WudlyToys #PlayNaturally #MontessoriAtHome #MontessoriToys #LearningThroughPlay #ParentingTips #WoodenToys
+
+## Educational carousel: What kids learn from board games (9 slides)
+Folder: board-games-learn-carousel/
+
+Board games are more than fun. 🎲
+Swipe for 6 skills children build every time they play, with a parent tip for each 👉
+1️⃣ Memory & focus 2️⃣ Shapes & spatial thinking 3️⃣ Steady hands & patience
+4️⃣ Numbers & counting 5️⃣ Problem solving 6️⃣ Taking turns & losing kindly
+Save this for your next family game night, and tell us which skill your child enjoys most 👇
+🔗 wudlytoys.com (link in bio)
+#WudlyToys #PlayNaturally #BoardGames #FamilyGameNight #LearningThroughPlay #ParentingTips #WoodenToys
