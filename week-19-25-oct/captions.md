@@ -45,3 +45,17 @@ Which one are you trying this weekend? 👇
 #WudlyToys #PlayNaturally #ScreenFreeWeekend #KidsActivities #WoodenToys
 
 Before posting: confirm the Dussehra date for 2026, and check prices and stock on wudlytoys.com.
+
+## Educational carousel: Montessori at home (8 slides)
+Folder: montessori-at-home-carousel/ (suggested: post Wed 21 Oct instead of, or as well as, the board-games post)
+
+Want a calmer, more independent play time at home? 🧸
+Swipe for 5 simple Montessori steps you can start today 👉
+1️⃣ A low, open shelf
+2️⃣ Fewer toys, rotated often
+3️⃣ Let them do it themselves
+4️⃣ Follow their interest
+5️⃣ Simple, natural toys
+Save this for your child's play corner, and tell us which step you'll try first 👇
+🔗 wudlytoys.com (link in bio)
+#WudlyToys #PlayNaturally #MontessoriAtHome #MontessoriToys #LearningThroughPlay #ParentingTips #WoodenToys
