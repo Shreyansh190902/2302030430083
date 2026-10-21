@@ -19,3 +19,13 @@ All topics use real catalogue toys, the ReWamp red style, and no kids.
 | 13 | Travel-friendly wooden toys | "Small toys for big trips" | Spinning tops · Beads · Memory chess |
 | 14 | Festive gift sets | "Gifts that last longer than the festival" | Diwali / Christmas bundles |
 | 15 | Parent FAQs | "You asked, we answered" | Is it safe? Is it worth it? Which age? How to clean? Where to buy? |
+
+## Chosen theme (client-approved)
+All new carousels use the **ReWamp red theme** (as in `carousel-toy-rotation/`):
+- Brand-red studio wall + floor, no background pattern
+- White-badge logo top-right, full and uncut
+- Bold wide headline, Montserrat body text
+- Pastel tilted pills (blue / yellow / lavender), yellow tag top-left
+- Real catalogue toys standing on the floor with soft shadows, mascot on cover and outro
+- White tip / product card at the bottom, slide numbers bottom-right
+- No kids, prices in "Rs."
