@@ -36,3 +36,25 @@ No talking, no music at first – just real wooden sounds. Hands only (no faces,
 
 ## Posting plan (suggested)
 2 ASMR Reels a week: Mon = one-toy close-up, Thu = satisfying build/knock-down.
+
+---
+
+# ASMR Reel ideas – new product list
+
+| Product | ASMR idea | Sound / shot | On-screen text |
+|---|---|---|---|
+| **Weather Sort** | Sort the sun, cloud, rain & snow pieces into their spots | Each piece "tok" into its slot, overhead shot | "Today's forecast: calm 🌤️" |
+| **My Farm House** | Open the barn, place animals inside one by one | Door creak + soft "tap" of each animal | "Everyone home on the farm 🐄" |
+| **My Sorting Dino** | Drop shapes into the dino one by one | "Plonk" inside the dino, close-up | "Feed the dino 🦖" |
+| **Forest Fun** | Set up trees and animals into a little forest | Pieces placed on wood, gentle taps | "Build a tiny forest 🌳" |
+| **Alpho Spell** | Spell W-U-D-L-Y letter by letter | Letter blocks clacking into place | "Can you spell it?" |
+| **Recycle Ride** | Load pieces into the truck, drive to the right bin | Wheels rolling + pieces dropping | "Sort it. Ride it. Recycle it ♻️" |
+| **Spin Alpha** | Spin the letter wheels to make a word | Soft "click-click-click" of spinning | "Spin… stop… spell!" |
+| **Number Orbit** | Slide numbers around the orbit ring | Beads/pieces gliding, slow-motion | "Numbers in orbit 🪐" |
+| **Little Artist** | Paint/draw then a fast-motion reveal | Brush strokes + paper rustle | "Little hands, big art 🎨" |
+| **Spinomoji** | Spin the emoji faces until they match | Whirr + "tick" stop | "How are you feeling today? 😊" |
+| **Equalizer** | Balance pieces on the scale until level | Pieces "tok", scale tipping & settling | "Perfect balance ⚖️" |
+| **Rollimals** | Line up the rolling animals and race them down a ramp | Wooden wheels rolling, gentle crash at the end | "Ready, set, roll! 🐢" |
+
+Found in catalogue (with links): Alpho Spell (English & Hindi), My Farm House, Recycle Ride, Spin Alpha, Weather Sort, Equalizer, Spinomoji.
+Not in the catalogue PDF: My Sorting Dino, Forest Fun, Number Orbit, Little Artist, Rollimals – need product photos to confirm how they work.
