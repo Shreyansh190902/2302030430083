@@ -1,0 +1,557 @@
+<title>Memorable Walk Meta Ads Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Mukta:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column, section bands with a marigold index rail; tables scroll inside their own wrappers. */
+:root {
+  --bg: #f6f5f8;
+  --surface: #ffffff;
+  --ink: #1f1a27;
+  --muted: #5f5869;
+  --line: #e2dee8;
+  --deep: #7d1f3f;        /* kumkum maroon: headings, structure */
+  --accent: #c97c00;      /* marigold: highlights, markers */
+  --accent-soft: #fbefd6;
+  --fact: #1f6b55;
+  --fact-soft: #e1f2ea;
+  --assume: #8a4b00;
+  --assume-soft: #fdebd0;
+  --display: "Rozha One", "Georgia", serif;
+  --body: "Mukta", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15121a; --surface: #1e1a25; --ink: #eeeaf3; --muted: #aaa2b6; --line: #332d3d;
+    --deep: #f0a3bd; --accent: #f2b440; --accent-soft: #3a2c12;
+    --fact: #7fd6b5; --fact-soft: #173328; --assume: #f6c27a; --assume-soft: #3a2a14;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15121a; --surface: #1e1a25; --ink: #eeeaf3; --muted: #aaa2b6; --line: #332d3d;
+  --deep: #f0a3bd; --accent: #f2b440; --accent-soft: #3a2c12;
+  --fact: #7fd6b5; --fact-soft: #173328; --assume: #f6c27a; --assume-soft: #3a2a14;
+  color-scheme: dark;
+}
+
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+.wrap { max-width: 900px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 72px; display: grid; gap: 56px; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 400; color: var(--deep); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.1rem); }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.05rem); }
+h3 { font-size: 1.25rem; color: var(--ink); }
+p { margin: 0; max-width: 68ch; }
+ul, ol { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+a { color: var(--deep); }
+strong { font-weight: 600; }
+
+.label { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.lede { font-size: 1.15rem; color: var(--muted); }
+
+header { display: grid; gap: 16px; border-bottom: 2px solid var(--accent); padding-bottom: 28px; }
+.meta-row { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.meta-row span { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+
+.glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.glance div { background: var(--surface); padding: 16px 18px; display: grid; gap: 4px; align-content: start; min-width: 0; }
+.glance b { font-weight: 600; font-size: 1.02rem; line-height: 1.35; }
+
+nav.toc ol { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 4px 24px; counter-reset: toc; }
+nav.toc li { counter-increment: toc; display: flex; gap: 10px; }
+nav.toc li::before { content: counter(toc, decimal-leading-zero); font-family: var(--mono); font-size: 0.8rem; color: var(--accent); padding-top: 3px; }
+nav.toc a { text-decoration: none; color: var(--ink); }
+nav.toc a:hover, nav.toc a:focus-visible { color: var(--deep); text-decoration: underline; }
+
+section { display: grid; gap: 18px; scroll-margin-top: 20px; }
+section > .head { display: grid; gap: 6px; }
+section > .head .label { color: var(--accent); }
+
+.chip { display: inline-block; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 1px 8px; border-radius: 99px; vertical-align: 2px; white-space: nowrap; }
+.chip.fact { background: var(--fact-soft); color: var(--fact); }
+.chip.assume { background: var(--assume-soft); color: var(--assume); }
+.chip.rec { background: var(--accent-soft); color: var(--accent); }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+th, td { text-align: left; vertical-align: top; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--mono); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); background: var(--bg); white-space: nowrap; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td:first-child { font-weight: 600; }
+
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+.two > * { min-width: 0; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 10px; align-content: start; }
+
+.note { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; color: var(--muted); }
+
+/* Campaign structure tree */
+.tree { display: grid; gap: 14px; }
+.camp { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; display: grid; gap: 10px; }
+.camp-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; align-items: baseline; }
+.camp-top h3 { font-size: 1.15rem; }
+.adsets { display: grid; gap: 8px; border-left: 2px solid var(--line); padding-left: 16px; margin-left: 4px; }
+.adsets div { display: grid; gap: 2px; }
+.adsets b { font-weight: 600; }
+.adsets span { color: var(--muted); font-size: 0.95rem; }
+
+/* Concepts */
+.concepts { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.concept { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+.concept .fmt { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.05em; text-transform: uppercase; }
+.concept p { font-size: 0.97rem; }
+
+/* Ad copy mockups */
+.ads { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.ad { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; }
+.ad-top { padding: 12px 16px; display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px solid var(--line); }
+.ad-top .who { font-weight: 600; font-size: 0.92rem; }
+.ad-body { padding: 14px 16px; display: grid; gap: 10px; align-content: start; font-size: 0.97rem; }
+.ad-foot { padding: 12px 16px; background: var(--bg); display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.ad-foot .hl { font-weight: 600; font-size: 0.95rem; line-height: 1.3; min-width: 0; }
+.cta { font-family: var(--mono); font-size: 0.75rem; border: 1px solid var(--deep); color: var(--deep); border-radius: 6px; padding: 4px 10px; white-space: nowrap; }
+.ph { background: var(--assume-soft); color: var(--assume); border-radius: 4px; padding: 0 4px; font-size: 0.92em; }
+
+/* Budget tiers */
+.tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.tier { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 10px; align-content: start; }
+.tier.pick { border: 2px solid var(--accent); }
+.tier .amt { font-family: var(--display); font-size: 1.9rem; color: var(--deep); line-height: 1; font-variant-numeric: tabular-nums; }
+.tier .sub { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+.tier ul { font-size: 0.95rem; }
+
+/* Timeline */
+.timeline { display: grid; gap: 0; }
+.step { display: grid; grid-template-columns: 120px 1fr; gap: 18px; padding: 14px 0; border-top: 1px solid var(--line); }
+.step:first-child { border-top: 0; }
+.step .when { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); padding-top: 3px; }
+.step > div { min-width: 0; display: grid; gap: 4px; }
+.step b { font-weight: 600; }
+.step p, .step li { color: var(--muted); font-size: 0.97rem; }
+@media (max-width: 520px) { .step { grid-template-columns: 1fr; gap: 4px; } }
+
+/* Checklist */
+.checklist { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px 22px; list-style: none; padding: 0; }
+.checklist li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; }
+.checklist input { width: 18px; height: 18px; margin-top: 4px; accent-color: var(--deep); }
+.checklist label { display: grid; gap: 1px; cursor: pointer; }
+.checklist label span { color: var(--muted); font-size: 0.93rem; }
+input:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+footer { border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 0.9rem; display: grid; gap: 6px; }
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="label">Meta Ads proposal · Instagram + Facebook</span>
+  <h1>Memorable Walk: Meta Ads Plan for Event Planning &amp; Decor</h1>
+  <p class="lede">A practical 90-day plan to turn Instagram and Facebook into a steady source of qualified event and decor inquiries in Ahmedabad.</p>
+  <div class="meta-row">
+    <span>Prepared for @memorable_walk_event</span>
+    <span>Draft for client review · October 2026</span>
+    <span>Currency: INR</span>
+  </div>
+</header>
+
+<div class="glance" aria-label="Plan at a glance">
+  <div><span class="label">Goal</span><b>Qualified inquiries that turn into bookings</b></div>
+  <div><span class="label">Main action</span><b>Message on WhatsApp, or a short quote form</b></div>
+  <div><span class="label">Where</span><b>Ahmedabad and nearby areas you serve</b></div>
+  <div><span class="label">Recommended start</span><b>₹1,000/day (about ₹30,000/month) for 90 days</b></div>
+</div>
+
+<nav class="toc" aria-label="Contents">
+  <ol>
+    <li><a href="#basis">What this plan is based on</a></li>
+    <li><a href="#objectives">Campaign objectives</a></li>
+    <li><a href="#audiences">Target audiences</a></li>
+    <li><a href="#structure">Campaign structure &amp; formats</a></li>
+    <li><a href="#creative">Creative concepts</a></li>
+    <li><a href="#copy">Sample ad copy</a></li>
+    <li><a href="#budget">Budget &amp; duration</a></li>
+    <li><a href="#testing">Testing &amp; optimization</a></li>
+    <li><a href="#kpis">Key metrics</a></li>
+    <li><a href="#timeline">Launch timeline</a></li>
+    <li><a href="#confirm">To confirm before launch</a></li>
+  </ol>
+</nav>
+
+<!-- 01 -->
+<section id="basis">
+  <div class="head"><span class="label">01 · Basis</span><h2>What this plan is based on</h2></div>
+  <p>This plan uses one reference post from the client's Instagram. Anything taken directly from that post is marked <span class="chip fact">From post</span>. Anything we have assumed to complete the plan is marked <span class="chip assume">Assumption</span> and should be confirmed before launch.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Detail</th><th>What the post shows</th></tr></thead>
+      <tbody>
+        <tr><td>Account</td><td>@memorable_walk_event; brand hashtag #MemorableWalk</td></tr>
+        <tr><td>Location tag</td><td>Ahmedabad, India</td></tr>
+        <tr><td>Service featured</td><td>Ganpati (Ganesh Chaturthi) decoration. Caption: “New decor ideas for ganpati decoration”</td></tr>
+        <tr><td>Call to action</td><td>“Book now: 6351748335” (booking by phone)</td></tr>
+        <tr><td>Format</td><td>5-image carousel, square (1:1) photos, presented as a set of decor ideas</td></tr>
+        <tr><td>Hashtags</td><td>#ganpatidecoration #ganpatidecorideas #MemorableWalk #ganpati</td></tr>
+        <tr><td>Timing</td><td>Posted 11 June 2026, about three months before the festival, which suggests customers plan festival decor well ahead</td></tr>
+        <tr><td>Engagement</td><td>31 likes and 2 comments when reviewed. A modest organic reach, so paid ads can add a lot of visibility.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two">
+    <div class="panel">
+      <h3>What we take from it</h3>
+      <ul>
+        <li>The business is local to Ahmedabad, so ads should target a tight geographic area.</li>
+        <li>Customers already book by phone, so ads should start a conversation rather than send people to a website.</li>
+        <li>Festival decor is a real, seasonal demand driver for this business.</li>
+        <li>An “ideas” carousel is the existing content style, and it translates directly into a carousel ad.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Assumptions used in this plan</h3>
+      <ul>
+        <li><span class="chip assume">A1</span> The trading name is “Memorable Walk” (from the handle and hashtag).</li>
+        <li><span class="chip assume">A2</span> Services go beyond Ganpati decor to general event planning and decor (per the brief; not shown in the post).</li>
+        <li><span class="chip assume">A3</span> The phone number is on WhatsApp Business.</li>
+        <li><span class="chip assume">A4</span> The service area is Ahmedabad and nearby areas.</li>
+        <li><span class="chip assume">A5</span> Customers respond to English, Gujarati and Hindi ads.</li>
+        <li><span class="chip assume">A6</span> More photos and videos of past setups are available.</li>
+        <li><span class="chip assume">A7</span> The Instagram account is linked to a Facebook Page and a Meta ad account.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">We could read the post's caption, tags and details, but the images themselves could not be reviewed for this draft. The colors, themes and decor elements in the creative concepts below are deliberately general. Please confirm the visual style (colors, signature elements, overall look) so ads match the brand.</p>
+</section>
+
+<!-- 02 -->
+<section id="objectives">
+  <div class="head"><span class="label">02 · Objectives</span><h2>Recommended campaign objectives</h2></div>
+  <p>Event decor is visual, personal, and priced per setup. People want to see the work, then talk to someone about their date, space and budget. The objectives below are chosen to get that conversation started.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Objective (in Ads Manager)</th><th>Role</th><th>Why it fits</th></tr></thead>
+      <tbody>
+        <tr><td>Leads → Messaging apps (WhatsApp)</td><td><span class="chip rec">Primary</span></td><td>Matches how bookings already happen (by phone). A tap opens WhatsApp with a pre-filled message, so the team can ask about date, venue and budget and share photos straight away.</td></tr>
+        <tr><td>Leads → Instant form</td><td><span class="chip rec">Test</span></td><td>Collects event type, date, area and budget before anyone talks. Useful if the team can't reply to chats quickly, or to filter out low-fit inquiries. Use the “Higher intent” form type to reduce junk leads.</td></tr>
+        <tr><td>Engagement → Video views</td><td>Support (Growth &amp; Scale budgets only)</td><td>Cheaply shows setup videos to many local people, then builds a warm audience to retarget with inquiry ads.</td></tr>
+        <tr><td>Leads (retargeting)</td><td>Follow-up</td><td>Re-engages people who already viewed, liked or messaged, who are usually the cheapest to convert.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">We are not recommending Traffic or Reach as main objectives. They bring clicks and views, but Meta will then find people who click, not people who inquire.</p>
+</section>
+
+<!-- 03 -->
+<section id="audiences">
+  <div class="head"><span class="label">03 · Audiences</span><h2>Target audiences</h2></div>
+
+  <div class="two">
+    <div class="panel">
+      <h3>Location</h3>
+      <ul>
+        <li><strong>Target:</strong> Ahmedabad city, starting with a 15–20 km radius around the areas served. <span class="chip assume">A4</span></li>
+        <li><strong>Setting:</strong> “People living in this location”, so tourists and passers-through are excluded.</li>
+        <li><strong>Optional:</strong> add Gandhinagar or other nearby towns only if the client travels there.</li>
+        <li><strong>Refine:</strong> once results come in, narrow to the pin codes or areas that produce bookings.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Demographics</h3>
+      <ul>
+        <li><strong>Age:</strong> 24–55 to start; Meta will refine within this. <span class="chip assume">Assumption</span></li>
+        <li><strong>Gender:</strong> all.</li>
+        <li><strong>Languages:</strong> leave open, and run English plus Gujarati or Hindi ad versions. <span class="chip assume">A5</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Audience</th><th>Who it reaches</th><th>How to build it</th></tr></thead>
+      <tbody>
+        <tr><td>1. Broad local</td><td>Anyone in the service area. Meta finds likely inquirers using the creative and conversion signals.</td><td>Advantage+ audience, location only, with the interests below added as suggestions. Usually the most efficient option once the account has some data.</td></tr>
+        <tr><td>2. Interest-led</td><td>People showing interest in celebrations and decor</td><td>Interests: Ganesh Chaturthi, Diwali, Hindu festivals, Event planning, Party planning, Birthday party, Wedding planning, Interior design, Home decor. Life events: Recently engaged (only if weddings are offered); Parents with young children (only if kids' birthdays are offered). <span class="chip assume">A2</span></td></tr>
+        <tr><td>3. Warm (retargeting)</td><td>People who already know the brand</td><td>Instagram and Facebook engagers (last 365 days), people who watched 50%+ of any ad video, people who messaged the business, and website visitors if a Meta Pixel is installed.</td></tr>
+        <tr><td>4. Lookalike</td><td>People similar to past customers</td><td>Upload a list of past client phone numbers (only with their consent). Build a 1% India lookalike, then restrict it to the service area. Needs at least 100 matched contacts.</td></tr>
+        <tr><td>Exclusions</td><td>People we shouldn't pay to reach</td><td>Recently booked clients, staff, and vendors.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="structure">
+  <div class="head"><span class="label">04 · Structure</span><h2>Campaign structure &amp; ad formats</h2></div>
+  <p>Keep the structure lean. With a local business budget, fewer ad sets means each one gets enough data for Meta to learn from.</p>
+
+  <div class="tree">
+    <div class="camp">
+      <div class="camp-top"><h3>Campaign 1 · Always-on inquiries</h3><span class="chip rec">Leads · WhatsApp</span></div>
+      <div class="adsets">
+        <div><b>Ad set 1A: Broad local (Advantage+ audience)</b><span>3–4 ads: carousel, Reel, single image</span></div>
+        <div><b>Ad set 1B: Interest-led</b><span>Same ads as 1A, so the comparison is about the audience, not the creative</span></div>
+      </div>
+    </div>
+    <div class="camp">
+      <div class="camp-top"><h3>Campaign 2 · Retargeting</h3><span class="chip rec">Leads · WhatsApp or form</span></div>
+      <div class="adsets">
+        <div><b>Ad set 2A: Warm audiences (engagers, video viewers, past messagers)</b><span>2–3 ads: client reactions, the booking process, a “check your date” reminder</span></div>
+      </div>
+    </div>
+    <div class="camp">
+      <div class="camp-top"><h3>Campaign 3 · Seasonal bursts</h3><span class="chip rec">Leads · time-limited</span></div>
+      <div class="adsets">
+        <div><b>One ad set per festival or season the client serves</b><span>For example, Ganpati decor (start about 6 weeks before the festival). Diwali, Navratri and wedding season only if offered. <span class="chip assume">A2</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Format</th><th>Sizes</th><th>Best use</th></tr></thead>
+      <tbody>
+        <tr><td>Carousel</td><td>1:1 or 4:5, 3–10 cards</td><td>Decor idea lookbook. This mirrors the existing post style; each card is one setup.</td></tr>
+        <tr><td>Reels / video</td><td>9:16, 15–30 sec</td><td>Setup time-lapse and walkthroughs. Usually the cheapest reach on Instagram.</td></tr>
+        <tr><td>Stories</td><td>9:16</td><td>Quick reveals with a WhatsApp button. Good for retargeting.</td></tr>
+        <tr><td>Single image</td><td>4:5</td><td>One strong hero setup with a clear offer to message.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Placements: use Advantage+ placements (Instagram and Facebook feeds, Reels, Stories), but provide a 9:16 and a 4:5 version of each creative so nothing is cropped badly.</p>
+</section>
+
+<!-- 05 -->
+<section id="creative">
+  <div class="head"><span class="label">05 · Creative</span><h2>Creative concepts</h2></div>
+  <p>All concepts use the client's real photos and videos of completed setups. Real work builds more trust than stock images in this category. <span class="chip assume">A6</span></p>
+  <div class="concepts">
+    <div class="concept"><span class="fmt">Carousel</span><h3>Decor idea lookbook</h3><p>Taken directly from the reference post. Each card shows one complete setup with a short label (for example, theme or occasion). The last card is a clear “Message us to book your date” slide with the WhatsApp number.</p></div>
+    <div class="concept"><span class="fmt">Reel · 15–30 sec</span><h3>From empty space to celebration</h3><p>A time-lapse of a room or venue being transformed, ending on the finished setup. The first 2 seconds show the final result so viewers stop scrolling.</p></div>
+    <div class="concept"><span class="fmt">Reel or carousel</span><h3>In the details</h3><p>Close-ups of the elements that make a setup special, such as backdrops, florals, lighting and table details, depending on what the client uses. Shows quality and care.</p></div>
+    <div class="concept"><span class="fmt">Video or image</span><h3>Client reactions</h3><p>A family or host seeing the finished setup, or a short quote from a happy client. Only with the client's permission. Best for retargeting.</p></div>
+    <div class="concept"><span class="fmt">Carousel or Story</span><h3>How booking works</h3><p>Three simple steps: message us with your date and space, choose a theme and budget, we set it up. Removes uncertainty for first-time customers. The steps should be confirmed against the real process.</p></div>
+    <div class="concept"><span class="fmt">Seasonal</span><h3>Festival decor ideas</h3><p>A refreshed lookbook launched ahead of each festival the client serves (for example, the next Ganpati season), with a prompt to book early. Use urgency only if dates or capacity really are limited.</p></div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section id="copy">
+  <div class="head"><span class="label">06 · Copy</span><h2>Sample ad copy</h2></div>
+  <p>Highlighted text in <span class="ph">[brackets]</span> needs client input. We have not added prices, years in business or claims that aren't in the reference material. Gujarati or Hindi versions should be written by a native speaker from the final English copy.</p>
+
+  <div class="ads">
+    <article class="ad">
+      <div class="ad-top"><span class="who">Memorable Walk</span><span class="label">A · Seasonal · Carousel</span></div>
+      <div class="ad-body">
+        <p>Planning Ganpati decoration this year? 🌼</p>
+        <p>Swipe through our latest Ganpati decor ideas. Send us your date and a photo of your space on WhatsApp, and we'll suggest a setup that fits.</p>
+        <p>Serving <span class="ph">[areas of Ahmedabad]</span>.</p>
+      </div>
+      <div class="ad-foot"><span class="hl">Ganpati decor ideas: book your date</span><span class="cta">Send WhatsApp message</span></div>
+    </article>
+
+    <article class="ad">
+      <div class="ad-top"><span class="who">Memorable Walk</span><span class="label">B · Always-on · Reel</span></div>
+      <div class="ad-body">
+        <p>Have a celebration coming up?</p>
+        <p>From planning to decor, we help you create a setup your guests will remember. Tell us your event, date and venue, and we'll reply with ideas and a quote.</p>
+        <p><span class="ph">[Birthdays · Anniversaries · Festivals · Other events offered]</span></p>
+      </div>
+      <div class="ad-foot"><span class="hl">Event planning &amp; decor in Ahmedabad</span><span class="cta">Send message</span></div>
+    </article>
+
+    <article class="ad">
+      <div class="ad-top"><span class="who">Memorable Walk</span><span class="label">C · Instant form</span></div>
+      <div class="ad-body">
+        <p>Get a decor quote for your event in under a minute.</p>
+        <p>Answer 4 quick questions about your event and our team will contact you with ideas and pricing.</p>
+        <p class="label">Form questions</p>
+        <ol>
+          <li>Event type (multiple choice)</li>
+          <li>Event date</li>
+          <li>Area or venue in Ahmedabad</li>
+          <li>Approximate budget (ranges set by client)</li>
+        </ol>
+      </div>
+      <div class="ad-foot"><span class="hl">Request your decor quote</span><span class="cta">Get quote</span></div>
+    </article>
+
+    <article class="ad">
+      <div class="ad-top"><span class="who">Memorable Walk</span><span class="label">D · Retargeting · Story</span></div>
+      <div class="ad-body">
+        <p>Still planning your celebration?</p>
+        <p>Check if your date is available. Message us your event date and we'll confirm within <span class="ph">[response time]</span>.</p>
+      </div>
+      <div class="ad-foot"><span class="hl">Check your date</span><span class="cta">Send WhatsApp message</span></div>
+    </article>
+  </div>
+
+  <div class="panel">
+    <h3>WhatsApp welcome message (sets up qualifying questions)</h3>
+    <p>“Hi! Thanks for contacting Memorable Walk 🙏 To share the right ideas, please tell us: 1) your event type, 2) the date, 3) the area or venue, and 4) a rough budget. A photo of your space helps too!”</p>
+    <p class="label">Pre-filled message the customer sends</p>
+    <p>“Hi, I saw your ad and want to know about decor for my event.”</p>
+  </div>
+</section>
+
+<!-- 07 -->
+<section id="budget">
+  <div class="head"><span class="label">07 · Budget</span><h2>Budget &amp; campaign duration</h2></div>
+  <p>Recommended duration is <strong>90 days</strong>. The first 2–3 weeks are a learning period while Meta works out who responds. Results usually become steadier and cheaper after that. Seasonal bursts run for 4–6 weeks before each festival, on top of the always-on budget.</p>
+
+  <div class="tiers">
+    <div class="tier">
+      <span class="label">Starter</span>
+      <span class="amt">₹500/day</span>
+      <span class="sub">≈ ₹15,000 / month</span>
+      <ul>
+        <li>Campaign 1 only, one ad set (Broad local): 80%</li>
+        <li>Retargeting: 20%</li>
+        <li>3 creatives</li>
+        <li>Good for proving the channel works</li>
+      </ul>
+    </div>
+    <div class="tier pick">
+      <span class="label">Growth · recommended</span>
+      <span class="amt">₹1,000/day</span>
+      <span class="sub">≈ ₹30,000 / month</span>
+      <ul>
+        <li>Campaign 1 with both ad sets: 65%</li>
+        <li>Retargeting: 20%</li>
+        <li>Video views for warm audience: 15%</li>
+        <li>4–6 creatives, room for proper testing</li>
+      </ul>
+    </div>
+    <div class="tier">
+      <span class="label">Scale</span>
+      <span class="amt">₹2,000/day</span>
+      <span class="sub">≈ ₹60,000 / month</span>
+      <ul>
+        <li>Campaign 1: 55%</li>
+        <li>Retargeting: 20%</li>
+        <li>Seasonal bursts and video: 25%</li>
+        <li>Wider area, Gujarati/Hindi versions, fresh creative every 2–3 weeks</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Setting a target cost per booking</h3>
+    <p>There is no past ad data yet, so we will set cost targets from real results after week 2 rather than guess now. To decide what a good result is, we need the client's <strong>average booking value</strong> and the share of it they're comfortable spending to win a booking.</p>
+    <p class="label">Formula</p>
+    <p>Affordable cost per booking = average booking value × % of revenue for marketing.<br>Affordable cost per inquiry = affordable cost per booking × inquiry-to-booking rate.</p>
+  </div>
+  <p class="note">Budgets shown are ad spend only. Meta charges applicable GST on top of ad spend for Indian accounts; management or creative production fees are separate.</p>
+</section>
+
+<!-- 08 -->
+<section id="testing">
+  <div class="head"><span class="label">08 · Testing</span><h2>Testing &amp; optimization plan</h2></div>
+  <p>Test one thing at a time, so we know what made the difference.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Weeks</th><th>What we test</th><th>How we decide</th></tr></thead>
+      <tbody>
+        <tr><td>1–2</td><td>Creative format: carousel vs Reel vs single image</td><td>Cost per conversation started, and which ad brings qualified chats</td></tr>
+        <tr><td>3–4</td><td>Audience: Broad local vs Interest-led</td><td>Cost per qualified inquiry</td></tr>
+        <tr><td>5–6</td><td>Conversion route: WhatsApp vs Instant form</td><td>Inquiry-to-booking rate, not just lead cost</td></tr>
+        <tr><td>7–8</td><td>Message angle: ideas/inspiration vs “check your date” vs how booking works</td><td>Cost per qualified inquiry</td></tr>
+        <tr><td>9–12</td><td>Scale what works, refresh creative, retarget</td><td>Bookings and revenue from ads</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two">
+    <div class="panel">
+      <h3>Rules we follow</h3>
+      <ul>
+        <li>Let ads run at least 5–7 days before judging them.</li>
+        <li>Avoid major edits during the first 2 weeks, as they restart learning.</li>
+        <li>Pause an ad that spends twice the target cost per inquiry with no inquiry.</li>
+        <li>Increase budget on winners by about 20% every 3–4 days, not all at once.</li>
+        <li>Refresh creative when frequency passes about 3 or click-through rate falls noticeably.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Lead quality loop</h3>
+      <ul>
+        <li>Label every inquiry in WhatsApp Business: New → Qualified → Quote sent → Booked / Lost.</li>
+        <li>Share a weekly count of each label so we optimize for bookings, not just messages.</li>
+        <li>Ask “How did you hear about us?” to confirm ad-driven bookings.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 09 -->
+<section id="kpis">
+  <div class="head"><span class="label">09 · Metrics</span><h2>Key performance metrics</h2></div>
+  <p>A <strong>qualified inquiry</strong> is someone in the service area, with an event type the client offers, a date the client can take, and a budget in range.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>What it tells us</th><th>Where it comes from</th></tr></thead>
+      <tbody>
+        <tr><td>Bookings from ads</td><td>The result that matters most</td><td>Client's records / WhatsApp labels</td></tr>
+        <tr><td>Cost per booking</td><td>Whether ads are profitable</td><td>Ad spend ÷ bookings</td></tr>
+        <tr><td>Qualified inquiries</td><td>Volume of real opportunities</td><td>WhatsApp labels or form review</td></tr>
+        <tr><td>Cost per qualified inquiry</td><td>Main number we optimize toward</td><td>Ad spend ÷ qualified inquiries</td></tr>
+        <tr><td>Inquiry-to-booking rate</td><td>Lead quality and sales follow-up</td><td>Bookings ÷ qualified inquiries</td></tr>
+        <tr><td>Cost per conversation / lead</td><td>Early signal, available from day 1</td><td>Ads Manager</td></tr>
+        <tr><td>Link click-through rate (CTR)</td><td>Whether the creative grabs attention</td><td>Ads Manager</td></tr>
+        <tr><td>Frequency</td><td>When people have seen an ad too often</td><td>Ads Manager</td></tr>
+        <tr><td>Video hook rate</td><td>Share of viewers who stay past 3 seconds</td><td>Ads Manager (3-sec views ÷ impressions)</td></tr>
+        <tr><td>Response time</td><td>Fast replies win bookings; slow replies waste ad spend</td><td>WhatsApp Business</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 10 -->
+<section id="timeline">
+  <div class="head"><span class="label">10 · Timeline</span><h2>Launch &amp; management timeline</h2></div>
+  <div class="timeline">
+    <div class="step"><span class="when">Week 0</span><div><b>Preparation (5–7 days)</b><ul><li>Confirm the checklist below and agree on budget.</li><li>Get access to Meta Business Suite, ad account and payment method; link WhatsApp Business.</li><li>Collect photos and videos; produce 4–6 creatives in 9:16 and 4:5.</li><li>Set up the welcome message, quick replies and inquiry labels.</li></ul></div></div>
+    <div class="step"><span class="when">Week 1</span><div><b>Launch</b><p>Campaign 1 and retargeting go live. Daily checks on spend, ad approval and incoming chats.</p></div></div>
+    <div class="step"><span class="when">Weeks 1–2</span><div><b>Learning period</b><p>Minimal changes. Make sure every inquiry gets a fast reply. First short update to the client at the end of week 2.</p></div></div>
+    <div class="step"><span class="when">Weeks 3–4</span><div><b>First optimization</b><p>Pause weak ads, shift budget to winners, start the audience test. First monthly report.</p></div></div>
+    <div class="step"><span class="when">Month 2</span><div><b>Refine and grow</b><p>Test WhatsApp vs form and new message angles. Add fresh creative. Raise budget on what produces bookings.</p></div></div>
+    <div class="step"><span class="when">Month 3</span><div><b>Scale and review</b><p>Full 90-day review of bookings, cost per booking and lessons learned. Agree the next quarter's plan and the seasonal calendar (for example, starting Ganpati ads about 6 weeks before the festival).</p></div></div>
+    <div class="step"><span class="when">Ongoing</span><div><b>Reporting rhythm</b><p>Quick weekly update (spend, inquiries, bookings); monthly report with recommendations.</p></div></div>
+  </div>
+</section>
+
+<!-- 11 -->
+<section id="confirm">
+  <div class="head"><span class="label">11 · Before launch</span><h2>Information to confirm with the client</h2></div>
+  <p>These answers will finalize targeting, budget and copy. Items marked with an assumption code replace that assumption.</p>
+  <ul class="checklist">
+    <li><input type="checkbox" id="c1"><label for="c1"><b>Service area</b><span>Which areas, pin codes or towns; how far they travel (A4)</span></label></li>
+    <li><input type="checkbox" id="c2"><label for="c2"><b>Services and event types</b><span>Full list, and which ones to prioritise in ads (A2)</span></label></li>
+    <li><input type="checkbox" id="c3"><label for="c3"><b>Ideal customer</b><span>Home events vs venues, typical event size, who usually books</span></label></li>
+    <li><input type="checkbox" id="c4"><label for="c4"><b>Monthly ad budget</b><span>Which tier, and for how long</span></label></li>
+    <li><input type="checkbox" id="c5"><label for="c5"><b>Pricing and booking value</b><span>Starting price or ranges, minimum order, average booking value</span></label></li>
+    <li><input type="checkbox" id="c6"><label for="c6"><b>Booking process</b><span>Steps from inquiry to booking, advance payment, lead time needed</span></label></li>
+    <li><input type="checkbox" id="c7"><label for="c7"><b>Preferred contact method</b><span>WhatsApp, phone call, Instagram DM or form; is 6351748335 on WhatsApp Business? (A3)</span></label></li>
+    <li><input type="checkbox" id="c8"><label for="c8"><b>Who replies, and when</b><span>Team member, working hours, realistic response time</span></label></li>
+    <li><input type="checkbox" id="c9"><label for="c9"><b>Capacity</b><span>How many events per day or per festival, so we don't over-promote</span></label></li>
+    <li><input type="checkbox" id="c10"><label for="c10"><b>Seasonal calendar</b><span>Which festivals and seasons they serve, and when booking starts</span></label></li>
+    <li><input type="checkbox" id="c11"><label for="c11"><b>Brand name and visual style</b><span>Official name, logo, brand colors, signature decor style (A1)</span></label></li>
+    <li><input type="checkbox" id="c12"><label for="c12"><b>Photo and video library</b><span>Available content and permission to show clients' homes or faces (A6)</span></label></li>
+    <li><input type="checkbox" id="c13"><label for="c13"><b>Languages</b><span>English, Gujarati, Hindi: which they prefer to use with customers (A5)</span></label></li>
+    <li><input type="checkbox" id="c14"><label for="c14"><b>Meta account access</b><span>Facebook Page, Business Suite, ad account, payment method, GST details (A7)</span></label></li>
+    <li><input type="checkbox" id="c15"><label for="c15"><b>Website or landing page</b><span>Whether one exists and can have the Meta Pixel installed</span></label></li>
+    <li><input type="checkbox" id="c16"><label for="c16"><b>Offers</b><span>Any early-booking or package offers they are happy to advertise</span></label></li>
+    <li><input type="checkbox" id="c17"><label for="c17"><b>Past client list</b><span>Contacts that can be used for a lookalike audience, with consent</span></label></li>
+  </ul>
+</section>
+
+<footer>
+  <p>Prepared from one public Instagram post (@memorable_walk_event, 11 June 2026). All figures are recommendations, not guaranteed results; performance targets will be set from live campaign data.</p>
+</footer>
+
+</div>
