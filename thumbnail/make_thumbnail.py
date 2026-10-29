@@ -83,23 +83,11 @@ def tag(canvas, xy, text, fnt, bg, fg, angle=0, pad=(26, 16)):
 def main():
     canvas = load_background().convert("RGBA")
 
-    # Soft dark vignette at the top corners so the text pops
-    vig = Image.new("L", (W, H), 0)
-    vd = ImageDraw.Draw(vig)
-    vd.ellipse((-260, -260, 520, 300), fill=120)
-    vd.ellipse((W - 520, -260, W + 260, 300), fill=120)
-    shade = Image.new("RGBA", (W, H), (40, 0, 40, 255))
-    shade.putalpha(vig.filter(ImageFilter.GaussianBlur(70)))
-    canvas.alpha_composite(shade)
-
     # --- Centre top: the real film logo, sitting just above the heads ---
     logo = keyed_logo()
     logo_h = 272
     logo = logo.resize((int(logo.width * logo_h / logo.height), logo_h), Image.LANCZOS)
     lx, ly = (W - logo.width) // 2 + 4, 4
-    glow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    glow.paste((255, 230, 120, 90), (lx, ly), logo.getchannel("A"))
-    canvas.alpha_composite(glow.filter(ImageFilter.GaussianBlur(14)))
     canvas.alpha_composite(logo, (lx, ly))
 
     # --- Top left: STAR CAST / UNFILTERED! ---
