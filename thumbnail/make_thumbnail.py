@@ -1,8 +1,7 @@
 """Generate the YouTube thumbnail for the "Kamal Chhe Tu Kaku" star-cast episode.
 
-Background: cast-group.webp (4 cast members on the magenta stage). Its built-in
-title art is misspelled, so we erase it by re-synthesising the concentric
-stripe pattern and drop the real logo (keyed out of poster.webp) on top.
+Background: cast-group.webp (4 cast members on the magenta stage). The real
+film logo is keyed out of poster.webp and placed above the cast.
 
 Usage: python3 make_thumbnail.py  ->  writes thumbnail.png / thumbnail.jpg (1280x720)
 """
@@ -23,45 +22,14 @@ ANTON = str(HERE / "fonts/Anton-Regular.ttf")
 POPPINS = str(HERE / "fonts/Poppins-Black.ttf")
 GUJ = str(HERE / "fonts/HindVadodara-Bold.ttf")
 
-# Concentric-ellipse stripe model of the background, fitted to clean areas
-STRIPE_CENTER = (790, 790)
-STRIPE_ASPECT = 1.4
 
 
 def font(path, size):
     return ImageFont.truetype(path, size, layout_engine=ImageFont.Layout.RAQM)
 
 
-def clean_background():
-    """Remove the misspelled title art from the group photo."""
-    src = Image.open(HERE / "cast-group.webp").convert("RGB")
-    im = np.asarray(src).astype(float)
-    h, w, _ = im.shape
-    ys, xs = np.mgrid[0:h, 0:w]
-    cx, cy = STRIPE_CENTER
-    ring = (np.sqrt(((xs - cx) / STRIPE_ASPECT) ** 2 + (ys - cy) ** 2) / 2).astype(int)
-    nb = ring.max() + 1
-
-    # Average colour per ring, sampled only from untouched background corners
-    sample = ((xs < 420) & (ys < 300)) | ((xs > 1270) & (ys < 290))
-    count = np.bincount(ring[sample], minlength=nb)
-    ok = count > 5
-    idx = np.arange(nb)
-    profile = np.zeros((nb, 3))
-    for c in range(3):
-        mean = np.bincount(ring[sample], im[..., c][sample], minlength=nb) / np.maximum(count, 1)
-        profile[:, c] = np.interp(idx, idx[ok], mean[ok])
-    fill = Image.fromarray(profile[ring].clip(0, 255).astype("uint8")).filter(ImageFilter.GaussianBlur(2))
-
-    # Paint over the old title, leaving the two heads that overlap it untouched
-    mask = Image.new("L", (w, h), 0)
-    d = ImageDraw.Draw(mask)
-    d.rounded_rectangle((420, 10, 1265, 440), radius=60, fill=255)
-    d.ellipse((572, 370, 728, 560), fill=0)
-    d.ellipse((922, 355, 1078, 560), fill=0)
-    d.rectangle((0, 470, w, h), fill=0)
-    src.paste(fill, (0, 0), mask.filter(ImageFilter.GaussianBlur(6)))
-    return src.resize((W, H), Image.LANCZOS)
+def load_background():
+    return Image.open(HERE / "cast-group.webp").convert("RGB").resize((W, H), Image.LANCZOS)
 
 
 def keyed_logo():
@@ -113,7 +81,7 @@ def tag(canvas, xy, text, fnt, bg, fg, angle=0, pad=(26, 16)):
 
 
 def main():
-    canvas = clean_background().convert("RGBA")
+    canvas = load_background().convert("RGBA")
 
     # Soft dark vignette at the top corners so the text pops
     vig = Image.new("L", (W, H), 0)
