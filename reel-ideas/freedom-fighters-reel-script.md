@@ -44,3 +44,12 @@ Two little learners met India's freedom fighters – and remembered Gandhi Ji's 
 "Interesting game hai, maza aaya!" 💛
 Happy Rashtriya Ekta Diwas 🙏
 #WudlyToys #SardarPatelJayanti #RashtriyaEktaDiwas #LearningThroughPlay #FreedomFighters #PlayNaturally
+
+---
+
+## ✨ Mascot clips – ready in Magnific (new boy mascot, 5 sec each, 1080p, 9:16, silent)
+1. **Scene 1 – Opening:** curious mascot, finger on chin, soft bokeh → https://www.magnific.com/app/creation/8aOiqBpIrU
+2. **Scene 7b – "Think!" bridge** (before scenes 8–9): mascot taps his head and bounces → https://www.magnific.com/app/creation/P3hQW9j42C
+3. **Scene 11 – Closing:** mascot waving with a small tricolour flag and marigolds → https://www.magnific.com/app/creation/eISPuoidqL
+
+Keep the top third clear for on-screen text. Product shots of the game still need the game photo.
