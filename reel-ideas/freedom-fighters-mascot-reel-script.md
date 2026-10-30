@@ -56,3 +56,8 @@ Happy Rashtriya Ekta Diwas 🙏
 Music: the base Reel's voice and music are on one track, so mute it and add a light instrumental under the whole Reel, lowered under the voice. Add on-screen text from the table above.
 
 ⚠️ **Product print error:** the Sardar Patel puzzle's bottom-left cube is printed "Bal Gangadhar Tilak". It was removed from the AI reference so it doesn't appear in the Reel – tell the client to fix the print file.
+
+## 🎬 FINAL REEL (old script + old mascot voice + real puzzles) – 30 sec, 9:16
+https://www.magnific.com/app/creation/jUMtMWJLD0
+Shots 1–2 and 5–6 from the base Reel · shots 3–4 = Gandhi and Sardar Patel cube puzzles · original mascot voice + music over the whole Reel, in sync.
+Still to add in edit: on-screen text, English subtitles, end card.
