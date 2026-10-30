@@ -48,11 +48,11 @@ Happy Rashtriya Ekta Diwas 🙏
 ## Edit plan
 | Time | Video | Audio |
 |---|---|---|
-| 0–10s | Base Reel shots 1–2 | VO lines 1–2 (mute base voice, keep music) |
+| 0–10s | Base Reel shots 1–2 | VO lines 1–2 (mute the base Reel's audio) |
 | 10–15s | **Gandhi puzzle shot** | VO line 3 |
 | 15–20s | **Sardar Patel puzzle shot** | VO line 4 |
 | 20–30s | Base Reel shots 5–6 | VO lines 5–6 |
 | 30–33s | End card (cream, logo top-right, wudlytoys.com) | Music out |
-Music: keep the base Reel's music bed under the whole thing (or any light instrumental), lowered under the voice. Add on-screen text from the table above.
+Music: the base Reel's voice and music are on one track, so mute it and add a light instrumental under the whole Reel, lowered under the voice. Add on-screen text from the table above.
 
 ⚠️ **Product print error:** the Sardar Patel puzzle's bottom-left cube is printed "Bal Gangadhar Tilak". It was removed from the AI reference so it doesn't appear in the Reel – tell the client to fix the print file.
