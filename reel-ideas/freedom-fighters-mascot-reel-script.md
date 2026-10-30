@@ -27,3 +27,32 @@ Our little Wudly buddy says YES – learning about Gandhi Ji and Sardar Patel ji
 Happy Rashtriya Ekta Diwas 🙏
 🛒 wudlytoys.com
 #WudlyToys #SardarPatelJayanti #RashtriyaEktaDiwas #LearningThroughPlay #FreedomFighters #PlayNaturally
+
+---
+
+## ✅ Generated in Magnific (30 Oct)
+**Base Reel (30 sec, 1080p, Hindi voice + music):** https://www.magnific.com/app/creation/jUMovyVLD0
+
+**Real-product shots (replace shots 3–4 of the base Reel, 5 sec each, silent):**
+- Shot 3 – Mascot with the Mahatma Gandhi cube puzzle: https://www.magnific.com/app/creation/vQNnSWGa47
+- Shot 4 – Mascot salutes the Sardar Patel cube puzzle: https://www.magnific.com/app/creation/xSVI2a6jfW
+
+**Clean Hindi voiceover (one file per line – correct name pronunciation):**
+1. क्या हिस्ट्री एक गेम बन सकती है? → https://www.magnific.com/app/creation/lJevY7pgv9
+2. चलो, खेल-खेल में मिलते हैं अपने देश के हीरोज़ से! → https://www.magnific.com/app/creation/s7phnJsl8e
+3. दो अक्टूबर — महात्मा गांधी जी का जन्मदिन! → https://www.magnific.com/app/creation/kscBRSB16B
+4. और इकत्तीस अक्टूबर — सरदार वल्लभभाई पटेल जी का जन्मदिन! → https://www.magnific.com/app/creation/UPBC0i2wny
+5. सिर्फ़ खेलना नहीं… सोचना, समझना, याद रखना! → https://www.magnific.com/app/creation/TdjOHt2VNR
+6. इंटरेस्टिंग है ना? मज़ा आएगा! वुडली के साथ! → https://www.magnific.com/app/creation/EbR0OLOuuO
+
+## Edit plan
+| Time | Video | Audio |
+|---|---|---|
+| 0–10s | Base Reel shots 1–2 | VO lines 1–2 (mute base voice, keep music) |
+| 10–15s | **Gandhi puzzle shot** | VO line 3 |
+| 15–20s | **Sardar Patel puzzle shot** | VO line 4 |
+| 20–30s | Base Reel shots 5–6 | VO lines 5–6 |
+| 30–33s | End card (cream, logo top-right, wudlytoys.com) | Music out |
+Music: keep the base Reel's music bed under the whole thing (or any light instrumental), lowered under the voice. Add on-screen text from the table above.
+
+⚠️ **Product print error:** the Sardar Patel puzzle's bottom-left cube is printed "Bal Gangadhar Tilak". It was removed from the AI reference so it doesn't appear in the Reel – tell the client to fix the print file.
