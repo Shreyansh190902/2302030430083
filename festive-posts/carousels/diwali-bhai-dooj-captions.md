@@ -1,20 +1,19 @@
 # Diwali & Bhai Dooj carousels – captions & posting
-Style: "Playroom" theme – soft pastel slides (blue, peach, lavender, mint, pink, butter), little stars/clouds/confetti doodles, toys on white spotlight circles, sticker labels, boy mascot on cover + last slide. Fonts: Fuzzy Bubbles + Montserrat. No prices, no codes, no diyas. Diwali: product-only. Bhai Dooj: AI-made (Magnific) photos of a brother & sister playing with the real toys.
-Toys used (only these 9): Step Bloom · Barrier Minds · Monkey Easel Board · Joyboard · Tabletop Easel Board · Crack Code · Classic Tumbling Tower · Colorful Stacking Tower · Number Stacking Tower.
-Note: Joyboard and the three towers are clean product-only images made in Magnific from the website photos (the website photos have children).
+Style: client reference theme – white / butter-yellow slides, red Fuzzy Bubbles + Montserrat headlines, mascot on last slide. No prices, no codes.
+Photos: AI-made in Magnific (families / siblings playing with the real Wudly toys – check toy details before posting).
 
-## 1. Diwali Gift Guide (6 slides) – post 5 or 6 Nov
-Slides: Cover (Colorful Tower, Monkey Easel, Barrier Minds) → Baby's first Diwali (Step Bloom) → Ages 3+ (Monkey Easel, Tabletop Easel) → Ages 5–7 (Joyboard) → Diwali game night (Classic Tumbling Tower, Colorful Stacking Tower) → Shop (mascot + Number Stacking Tower)
+## 1. Diwali (6 slides) – post 5 or 6 Nov
+Cover: family with the Ramayan Stacking Tower → Ramayan Stacking Tower "Every block tells a story" (Dadi asks Ramayan questions) → Monkey Easel (diya & rangoli drawing) → Joyboard → Diwali game night, Classic Tumbling Tower → Shop (mascot)
 
 **Caption:**
 This Diwali, gift play that lasts 🪔
-From first steps to family game night – wooden toys for every age that last longer than the festival ✨
+Pull a block, answer a Ramayan question – our new Ramayan Stacking Tower turns family time into story time ✨ Plus easels, threading boards and game-night towers for every age.
 Save this for your Diwali shopping 🔖
 🛒 wudlytoys.com | Amazon.in
-#WudlyToys #HappyDiwali #DiwaliGifts #DiwaliWithWudly #WoodenToys #GiftsForKids #PlayNaturally
+#WudlyToys #HappyDiwali #DiwaliGifts #Ramayan #DiwaliWithWudly #WoodenToys #PlayNaturally
 
-## 2. Bhai Dooj Gifts (6 slides) – post 9 or 10 Nov
-Slides: Cover (Crack Code, Number Tower, Barrier Minds) → Bhai vs Behen, 10+ (Barrier Minds, Crack Code) → Play together (Number Stacking Tower) → For the little artist (Tabletop Easel) → For the tiniest ones (Step Bloom) → Shop (mascot + Colorful Stacking Tower)
+## 2. Bhai Dooj (6 slides) – post 9 or 10 Nov
+Cover: siblings with Colorful Stacking Tower → Bhai vs Behen, Barrier Minds (10+) → Number Stacking Tower → Tabletop Easel → Step Bloom → Shop (mascot)
 
 **Caption:**
 A Bhai Dooj gift they'll actually play with 💛
