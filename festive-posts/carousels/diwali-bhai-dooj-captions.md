@@ -13,7 +13,7 @@ Save this for your Diwali shopping 🔖
 #WudlyToys #HappyDiwali #DiwaliGifts #Ramayan #DiwaliWithWudly #WoodenToys #PlayNaturally
 
 ## 2. Bhai Dooj (6 slides) – post 9 or 10 Nov
-Cover: siblings with Colorful Stacking Tower → Bhai vs Behen, Barrier Minds (10+) → Number Stacking Tower → Tabletop Easel → Step Bloom → Shop (mascot)
+Cover: siblings with Colorful Stacking Tower → Bhai vs Behen, Barrier Minds → Number Stacking Tower → Tabletop Easel → Step Bloom → Shop (mascot)
 
 **Caption:**
 A Bhai Dooj gift they'll actually play with 💛
