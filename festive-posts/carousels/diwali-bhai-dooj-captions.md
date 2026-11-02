@@ -11,7 +11,7 @@ Save this for your Diwali shopping 🔖
 🛒 wudlytoys.com | Amazon.in
 #WudlyToys #HappyDiwali #DiwaliGifts #DiwaliWithWudly #WoodenToys #GiftsForKids #PlayNaturally
 
-⚠️ Slide 6 shows "Use code WUDLYDIWALI10 *" – **placeholder**. Confirm the code/discount with the client, or remove the line before posting.
+No discount code on the slides.
 
 ## 2. Bhai Dooj Gifts (6 slides) – post 9 or 10 Nov
 Folder: `festive-posts/carousels/bhai-dooj-gifts/`
