@@ -1,5 +1,5 @@
 # Diwali & Bhai Dooj carousels – captions & posting
-Style: "Playroom" theme – soft pastel slides (blue, peach, lavender, mint, pink, butter), little stars/clouds/confetti doodles, toys on white spotlight circles, sticker labels, boy mascot on cover + last slide. Fonts: Fuzzy Bubbles + Montserrat. No prices, no codes, no kids, no diyas.
+Style: "Playroom" theme – soft pastel slides (blue, peach, lavender, mint, pink, butter), little stars/clouds/confetti doodles, toys on white spotlight circles, sticker labels, boy mascot on cover + last slide. Fonts: Fuzzy Bubbles + Montserrat. No prices, no codes, no diyas. Diwali: product-only. Bhai Dooj: AI-made (Magnific) photos of a brother & sister playing with the real toys.
 Toys used (only these 9): Step Bloom · Barrier Minds · Monkey Easel Board · Joyboard · Tabletop Easel Board · Crack Code · Classic Tumbling Tower · Colorful Stacking Tower · Number Stacking Tower.
 Note: Joyboard and the three towers are clean product-only images made in Magnific from the website photos (the website photos have children).
 
