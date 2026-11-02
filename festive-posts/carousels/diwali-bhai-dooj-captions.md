@@ -2,7 +2,7 @@
 
 ## 1. Diwali Gift Guide (6 slides) – post 5 or 6 Nov
 Folder: `festive-posts/carousels/diwali-gift-guide/`
-Slides: Cover → Ages 1–3 (Elephant Rs. 299 · Number Board Rs. 550) → Ages 3–5 (Spinning Tops Rs. 399 · Memory Chess Rs. 399) → Ages 5+ (8 Dice Shut The Box Rs. 1,399) → Family (Domino Tower Rs. 559 · Classic Shut The Box Rs. 699) → Shop
+Slides: Cover → Ages 1–3 (Elephant · Number Board) → Ages 3–5 (Spinning Tops · Memory Chess) → Ages 5+ (8 Dice Shut The Box) → Family (Domino Tower · Classic Shut The Box) → Shop
 
 **Caption:**
 Light up their Diwali the natural way 🪔
@@ -15,7 +15,7 @@ Save this for your Diwali shopping 🔖
 
 ## 2. Bhai Dooj Gifts (6 slides) – post 9 or 10 Nov
 Folder: `festive-posts/carousels/bhai-dooj-gifts/`
-Slides: Cover → Little brother (Race Construction Car Rs. 1,999) → Little sister (My Farm House Rs. 1,649) → Play together (Memory Chess Rs. 399 · Classic Shut The Box Rs. 699) → Under Rs. 500 (Elephant Rs. 299 · Spinning Tops Rs. 399) → Shop
+Slides: Cover → Little brother (Race Construction Car) → Little sister (My Farm House) → Play together (Memory Chess · Classic Shut The Box) → Under (Elephant · Spinning Tops) → Shop
 
 **Caption:**
 Bhai Dooj gifts they'll actually play with 💛
@@ -25,4 +25,4 @@ Tag your bhai or behen 👇
 #WudlyToys #HappyBhaiDooj #BhaiDooj #SiblingLove #GiftsForKids #WoodenToys #PlayNaturally
 
 Note: brother/sister picks are just suggestions – every toy works for both.
-Prices from the product catalogue – check against the website before posting.
+No prices on the slides (as requested).
