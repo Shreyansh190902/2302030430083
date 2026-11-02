@@ -47,3 +47,11 @@ This Diwali, our little one learned the Ramayan one block at a time – Raja Das
 Wudly Ramayan Stacking Tower – where every block tells a story.
 🛒 wudlytoys.com
 #WudlyToys #HappyDiwali #Ramayan #DiwaliWithWudly #LearningThroughPlay #WoodenToys #PlayNaturally
+
+---
+
+## 🎬 Generated in Magnific (AI Mom + son version)
+**30 sec · 1080p · 9:16 · Hindi voices + music:** https://www.magnific.com/app/creation/4RaMQRt9Aa
+Checked: all lines spoken correctly (Raja Dashrath, Shabri, Ravan), good lip-sync, Ramayan box visible, tower falls at ~22s, same mother & son throughout.
+Note: the mother says "Ravan ki haar!" (script had the son) – fine as is.
+Still to add in edit: on-screen English text, end card, product link.
