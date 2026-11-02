@@ -1,28 +1,24 @@
 # Diwali & Bhai Dooj carousels – captions & posting
+Style: client reference (Fuzzy Bubbles + Montserrat, red headlines, white / butter-yellow slides, mascot on last slide). No prices, no codes, no kids.
+Toys used (only these 9): Step Bloom · Barrier Minds · Monkey Easel Board · Joyboard · Tabletop Easel Board · Crack Code · Classic Tumbling Tower · Colorful Stacking Tower · Number Stacking Tower.
+Note: Joyboard and the three towers are clean product-only images made in Magnific from the website photos (the website photos have children).
 
 ## 1. Diwali Gift Guide (6 slides) – post 5 or 6 Nov
-Folder: `festive-posts/carousels/diwali-gift-guide/`
-Slides: Cover → Ages 1–3 (Elephant · Number Board) → Ages 3–5 (Spinning Tops · Memory Chess) → Ages 5+ (8 Dice Shut The Box) → Family (Domino Tower · Classic Shut The Box) → Shop
+Slides: Cover (Colorful Tower, Monkey Easel, Barrier Minds) → Baby's first Diwali (Step Bloom) → Ages 3+ (Monkey Easel, Tabletop Easel) → Ages 5–7 (Joyboard) → Diwali game night (Classic Tumbling Tower, Colorful Stacking Tower) → Shop (mascot + Number Stacking Tower)
 
 **Caption:**
-Light up their Diwali the natural way 🪔
-Wooden gifts for every age – from first pull-along toys to family game night. Plastic-free, safe for little hands and made to last longer than the festival ✨
+This Diwali, gift play that lasts 🪔
+From first steps to family game night – wooden toys for every age that last longer than the festival ✨
 Save this for your Diwali shopping 🔖
 🛒 wudlytoys.com | Amazon.in
 #WudlyToys #HappyDiwali #DiwaliGifts #DiwaliWithWudly #WoodenToys #GiftsForKids #PlayNaturally
 
-No discount code on the slides.
-
 ## 2. Bhai Dooj Gifts (6 slides) – post 9 or 10 Nov
-Folder: `festive-posts/carousels/bhai-dooj-gifts/`
-Slides: Cover → Little brother (Race Construction Car) → Little sister (My Farm House) → Play together (Memory Chess · Classic Shut The Box) → Under (Elephant · Spinning Tops) → Shop
+Slides: Cover (Crack Code, Number Tower, Barrier Minds) → Bhai vs Behen, 10+ (Barrier Minds, Crack Code) → Play together (Number Stacking Tower) → For the little artist (Tabletop Easel) → For the tiniest ones (Step Bloom) → Shop (mascot + Colorful Stacking Tower)
 
 **Caption:**
-Bhai Dooj gifts they'll actually play with 💛
-For the little brother who loves to build, the little sister who loves stories – and games for both of them to play together 🎲
+A Bhai Dooj gift they'll actually play with 💛
+Strategy games for big brothers & sisters, stacking fun to play together and first-steps toys for the tiniest ones 🎲
 Tag your bhai or behen 👇
 🛒 wudlytoys.com | Amazon.in
 #WudlyToys #HappyBhaiDooj #BhaiDooj #SiblingLove #GiftsForKids #WoodenToys #PlayNaturally
-
-Note: brother/sister picks are just suggestions – every toy works for both.
-No prices on the slides (as requested).
