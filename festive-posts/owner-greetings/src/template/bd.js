@@ -1,6 +1,6 @@
 const {chromium}=require('playwright');const fs=require('fs');const D=__dirname;
 const OUT=process.argv[2], MODE=process.argv[3]||'still';
-const CFG={story:{h:1920,bg:'bd_story.png',t:250,a:820,s:.8,flames:[],kids:[[330,1180],[700,1120]]},
+const CFG={story:{h:1920,bg:'bd_story.png',t:240,a:812,s:.86,flames:[],kids:[[330,1180],[700,1120]]},
            post:{h:1350,bg:'bd_feed.png',t:150,a:560,s:.6,flames:[],kids:[[480,880],[760,860]]}};
 const rnd=i=>{let x=Math.sin(i*99.13)*43758.5;return x-Math.floor(x)};
 const fx=c=>c.flames.map(([x,y,r])=>`<div class="glow" style="left:${x}px;top:${y}px;width:${r}px;height:${r*1.4}px"></div>`).join('')
