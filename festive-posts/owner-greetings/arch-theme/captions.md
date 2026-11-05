@@ -6,6 +6,7 @@ This set follows the style of the "शुभ दीपावली" arch design 
 - a white calligraphic Hindi greeting, with a small orange word above it
 - a short English wish and the Wudly logo
 - a festive centrepiece on rangoli at the bottom
+- gold decoration filling the empty space: a soft mandala behind the greeting, small sparkles, and a gold divider with a diya
 
 The artwork is AI-generated with Magnific, using your reference image as the style guide.
 
