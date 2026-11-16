@@ -13,12 +13,12 @@ def s_three(n,N,col,kick,hl,sub,items):
 RT='Ramayan Stacking Tower'
 SETS={'gift-guide':[
  ('01-cover',lambda N: s_cover(N,WHITE_BG,'GIFTS THAT LAST',[[('Gifts they','h')],[('unwrap again','s')],[('and again.','s')]],'Wooden toys for every little one on your list',
-   [('color_tower',190,1190,420,300),('ramayan_set',545,1200,440,400),('monkey_easel',895,1190,420,300)])),
+   [('color_tower',190,1190,420,300),('stepbloom',545,1200,420,380),('monkey_easel',895,1190,420,300)])),
  ('02-little-ones',lambda N: s_two(2,N,YEL_BG,'FOR THE LITTLE ONES',[[('Little ','s'),('hands,','h')],[('big ','s'),('discoveries.','h')]],'A steady walker for first steps and a threading board for busy fingers.',('stepbloom',380,420,'Step Bloom'),('joyboard',320,400,'Joyboard'))),
  ('03-little-artists',lambda N: s_two(3,N,WHITE_BG,'FOR LITTLE ARTISTS',[[('Draw ','h'),('it, wipe it,','s')],[('draw ','s'),('again.','h')]],'Whiteboard on one side, blackboard on the other – a gift that grows with them.',('monkey_easel',400,440,'Monkey Easel Board'),('tabletop_easel',400,440,'Tabletop Easel Board'))),
  ('04-stack-it-up',lambda N: s_three(4,N,YEL_BG,'STACK IT UP',[[('Stack, ','h'),('wobble,','s')],[('laugh ','s'),('again.','h')]],'Three towers, endless rounds of who-pulls-next.',[('classic_tower',380,290,'Classic Tumbling|Tower'),('color_tower',380,290,'Colorful Stacking|Tower'),('number_tower',380,290,'Number Stacking|Tower')])),
  ('05-game-night',lambda N: s_two(5,N,WHITE_BG,'FAMILY GAME NIGHT',[[('Game ','s'),('night,','h')],[('all ','s'),('together.','h')]],'Strategy games that bring the whole family to the table.',('barrier',300,420,'Barrier Minds'),('crackcode',300,420,'Crack Code'))),
- ('06-ramayan',lambda N: s_one(6,N,YEL_BG,'A GIFT WITH A STORY',[[('Every ','s'),('block','h')],[('tells a ','s'),('story.','h')]],'A Ramayan question on every block – play, learn and share stories together.',('ramayan_set',500,660),RT,'Questions in English & Hindi')),
+ ('06-favourite',lambda N: s_one(6,N,YEL_BG,'THE CROWD FAVOURITE',[[('Bright, ','h'),('bold,','s')],[('built to ','s'),('last.','h')]],'Colourful blocks, two dice and endless rounds of laughter.',('color_tower',540,500),'Colorful Stacking Tower')),
  ('07-shop',lambda N: s_end(N,WHITE_BG,[[('Wrap up','h')],[('real play.','h')]],'Wooden toys that are loved long after the wrapping paper is gone.')),
 ]}
 render(SETS,REPO+'festive-posts/carousels/product-only/')

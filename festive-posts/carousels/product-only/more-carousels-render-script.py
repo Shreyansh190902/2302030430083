@@ -19,7 +19,7 @@ SETS={
  ('03-lasts',lambda N: s_three(3,N,WHITE_BG,'02 · BUILT TO LAST',[[('Made for ','s'),('years,','h')],[('not ','s'),('weeks.','h')]],'Sturdy blocks that survive every tumble – and get passed on.',[('classic_tower',380,290,'Classic Tumbling|Tower'),('color_tower',380,290,'Colorful Stacking|Tower'),('number_tower',380,290,'Number Stacking|Tower')])),
  ('04-imagination',lambda N: s_two(4,N,YEL_BG,'03 · SPARKS IMAGINATION',[[('No ','s'),('batteries.','h')],[('Just ','s'),('ideas.','h')]],'Open-ended toys let children decide what happens next.',('monkey_easel',400,440,'Monkey Easel Board'),('joyboard',320,400,'Joyboard'))),
  ('05-together',lambda N: s_two(5,N,WHITE_BG,'04 · BRINGS FAMILIES TOGETHER',[[('Screens ','s'),('off,','h')],[('faces ','s'),('up.','h')]],'Games the whole family can play around one table.',('barrier',300,420,'Barrier Minds'),('crackcode',300,420,'Crack Code'))),
- ('06-learning',lambda N: s_one(6,N,YEL_BG,'05 · LEARNING HIDDEN IN PLAY',[[('Play ','h'),('today,','s')],[('remember ','s'),('forever.','h')]],'A Ramayan question on every block – stories they learn while they play.',('ramayan_set',500,660),'Ramayan Stacking Tower','Questions in English & Hindi')),
+ ('06-learning',lambda N: s_two(6,N,YEL_BG,'05 · LEARNING HIDDEN IN PLAY',[[('Count, ','h'),('match,','s')],[('crack the ','s'),('code.','h')]],'Numbers, colours and patterns – learning that feels like a game.',('number_tower',380,300,'Number Stacking Tower'),('crackcode',300,420,'Crack Code'))),
  ('07-shop',lambda N: s_end(N,WHITE_BG,[[('Choose','h')],[('real wood.','h')]],'Safe, natural toys made to be loved for years.')),
 ],
 'play-that-builds-skills':[
@@ -39,7 +39,7 @@ SETS={
  ('03-afternoon',lambda N: s_three(3,N,WHITE_BG,'SATURDAY AFTERNOON',[[('Tower ','h'),('challenge!','s')]],'Who can pull the most blocks before it tumbles?',[('classic_tower',380,290,'Classic Tumbling|Tower'),('color_tower',380,290,'Colorful Stacking|Tower'),('number_tower',380,290,'Number Stacking|Tower')])),
  ('04-evening',lambda N: s_two(4,N,YEL_BG,'SATURDAY NIGHT',[[('Family ','s'),('game','h')],[('night.','h')]],'Phones in a basket, games on the table.',('barrier',300,420,'Barrier Minds'),('crackcode',300,420,'Crack Code'))),
  ('05-sunday',lambda N: s_two(5,N,WHITE_BG,'SUNDAY MORNING',[[('Slow ','h'),('play','s')],[('for little ','s'),('ones.','h')]],'Wobbly first steps and calm threading time.',('stepbloom',380,420,'Step Bloom'),('joyboard',320,400,'Joyboard'))),
- ('06-sunday-evening',lambda N: s_one(6,N,YEL_BG,'SUNDAY EVENING',[[('End ','s'),('with a','s')],[('story.','h')]],'Pull a block, answer a Ramayan question, share the story.',('ramayan_set',500,660),'Ramayan Stacking Tower','Questions in English & Hindi')),
+ ('06-sunday-evening',lambda N: s_one(6,N,YEL_BG,'SUNDAY EVENING',[[('Count ','s'),('down','h')],[('to ','s'),('Monday.','h')]],'One last round of numbers and tumbles before the new week.',('number_tower',520,560),'Number Stacking Tower')),
  ('07-shop',lambda N: s_end(N,WHITE_BG,[[('Plan your','h')],[('play','h')],[('weekend.','h')]],'Everything you need for a screen-free weekend.')),
 ],
 }
