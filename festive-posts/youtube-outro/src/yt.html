@@ -1,0 +1,37 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Fuzzy;font-weight:700;src:url(fuzzy-bubbles-latin-700-normal.woff)}
+@font-face{font-family:Mont;font-weight:700;src:url(montserrat-latin-700-normal.woff)}
+body{margin:0;width:1920px;height:1080px;overflow:hidden;position:relative;background:linear-gradient(#E51C1C 0,#E51C1C 1010px,#C71212 1010px)}
+.l{position:absolute;opacity:0}
+.pop{animation:pop .55s cubic-bezier(.3,1.5,.5,1) forwards}
+@keyframes pop{0%{opacity:0;transform:scale(.6)}60%{opacity:1}100%{opacity:1;transform:scale(1)}}
+.drop{animation:drop .6s cubic-bezier(.3,1.4,.5,1) forwards}
+@keyframes drop{0%{opacity:0;transform:translateY(-60px)}100%{opacity:1;transform:none}}
+.fade{animation:fade .5s ease-out forwards}
+@keyframes fade{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:none}}
+#mas{animation:rise .6s cubic-bezier(.25,1.3,.5,1) forwards 1.3s}
+@keyframes rise{0%{opacity:0;transform:translateY(300px)}100%{opacity:1;transform:none}}
+.dot{position:absolute;border-radius:50%;opacity:0;animation-name:din,drift;animation-fill-mode:forwards,none;animation-iteration-count:1,infinite;animation-timing-function:ease-out,ease-in-out}
+@keyframes din{from{opacity:0;transform:scale(0)}to{opacity:.9;transform:scale(1)}}
+@keyframes drift{0%,100%{opacity:.9;transform:translateY(0)}50%{opacity:.6;transform:translateY(-14px)}}
+.thanks{left:60px;top:50px;width:640px;text-align:center;font-family:Fuzzy;font-weight:700;font-size:62px;line-height:1.05;color:#fff;text-shadow:0 4px 0 rgba(120,0,0,.35)}
+.thanks span{color:#FDD835}
+.box{position:absolute;border:4px dashed rgba(255,255,255,.85);background:rgba(255,255,255,.12);border-radius:22px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:Mont;font-weight:700;font-size:30px;letter-spacing:3px}
+.box b{display:inline-block;width:0;height:0;border-left:34px solid #fff;border-top:22px solid transparent;border-bottom:22px solid transparent;margin-right:20px}
+.watch{left:1180px;top:52px;width:680px;text-align:center;font-family:Fuzzy;font-weight:700;font-size:54px;color:#FDD835;text-shadow:0 4px 0 rgba(120,0,0,.35)}
+.sub{left:860px;top:70px;width:200px;height:200px;border-radius:50%;border:4px dashed rgba(255,255,255,.9);background:rgba(255,255,255,.12)}
+.subbtn{left:810px;top:290px;width:300px;text-align:center}
+.subbtn div{display:inline-block;background:#fff;color:#E51C1C;font-family:Mont;font-weight:700;font-size:30px;letter-spacing:2px;padding:14px 34px;border-radius:40px;box-shadow:0 6px 18px rgba(100,0,0,.3)}
+</style></head><body><div class="dot" style="left:1656px;top:1058px;width:26px;height:26px;background:#E8E0D0;animation-delay:0.92s,0.92s;animation-duration:.5s,3.37s"></div><div class="dot" style="left:40px;top:139px;width:12px;height:12px;background:#F7941D;animation-delay:0.29s,0.29s;animation-duration:.5s,3.48s"></div><div class="dot" style="left:71px;top:960px;width:22px;height:22px;background:#F28C8C;animation-delay:0.89s,0.89s;animation-duration:.5s,3.39s"></div><div class="dot" style="left:19px;top:184px;width:26px;height:26px;background:#E8E0D0;animation-delay:0.42s,0.42s;animation-duration:.5s,5.0s"></div><div class="dot" style="left:480px;top:1060px;width:20px;height:20px;background:#F7941D;animation-delay:0.11s,0.11s;animation-duration:.5s,4.53s"></div><div class="dot" style="left:44px;top:11px;width:18px;height:18px;background:#5B8C2A;animation-delay:1.39s,1.39s;animation-duration:.5s,3.1s"></div><div class="dot" style="left:778px;top:823px;width:24px;height:24px;background:#F7941D;animation-delay:0.85s,0.85s;animation-duration:.5s,3.4s"></div><div class="dot" style="left:1899px;top:251px;width:16px;height:16px;background:#5B8C2A;animation-delay:1.06s,1.06s;animation-duration:.5s,3.02s"></div><div class="dot" style="left:10px;top:562px;width:38px;height:38px;background:#FDD835;animation-delay:0.46s,0.46s;animation-duration:.5s,4.77s"></div><div class="dot" style="left:538px;top:29px;width:36px;height:36px;background:#FDD835;animation-delay:0.49s,0.49s;animation-duration:.5s,3.59s"></div>
+<div class="l drop thanks" style="animation-delay:.15s">Thanks for<br><span>watching!</span></div>
+<img class="l pop" style="left:150px;top:230px;width:460px;animation-delay:.45s" src="card.png">
+<img class="l pop" style="left:110px;top:560px;width:540px;animation-delay:.8s" src="pill1.png">
+<img class="l pop" style="left:150px;top:670px;width:460px;animation-delay:1.05s" src="pill2.png">
+<img class="l fade" style="left:190px;top:790px;width:380px;animation-delay:1.3s" src="web.png">
+<div class="l pop sub" style="animation-delay:1.0s"></div>
+<div class="l pop subbtn" style="animation-delay:1.2s"><div>SUBSCRIBE</div></div>
+<img id="mas" class="l" style="left:808px;top:400px;height:690px" src="mascot.png">
+<div class="l drop watch" style="animation-delay:.3s">Watch next</div>
+<div class="l pop box" style="left:1180px;top:145px;width:680px;height:382px;animation-delay:.6s"><b></b>VIDEO 1</div>
+<div class="l pop box" style="left:1180px;top:575px;width:680px;height:382px;animation-delay:.85s"><b></b>VIDEO 2</div>
+</body></html>
