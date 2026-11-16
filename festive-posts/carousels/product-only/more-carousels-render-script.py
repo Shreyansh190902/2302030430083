@@ -40,7 +40,7 @@ SETS={
  ('04-evening',lambda N: s_two(4,N,YEL_BG,'SATURDAY NIGHT',[[('Family ','s'),('game','h')],[('night.','h')]],'Phones in a basket, games on the table.',('barrier',300,420,'Barrier Minds'),('crackcode',300,420,'Crack Code'))),
  ('05-sunday',lambda N: s_two(5,N,WHITE_BG,'SUNDAY MORNING',[[('Slow ','h'),('play','s')],[('for little ','s'),('ones.','h')]],'Wobbly first steps and calm threading time.',('stepbloom',380,420,'Step Bloom'),('joyboard',320,400,'Joyboard'))),
  ('06-sunday-evening',lambda N: s_one(6,N,YEL_BG,'SUNDAY EVENING',[[('Count ','s'),('down','h')],[('to ','s'),('Monday.','h')]],'One last round of numbers and tumbles before the new week.',('number_tower',520,560),'Number Stacking Tower')),
- ('07-shop',lambda N: s_end(N,WHITE_BG,[[('Plan your','h')],[('play','h')],[('weekend.','h')]],'Everything you need for a screen-free weekend.')),
+ ('07-shop',lambda N: s_end(N,WHITE_BG,[[('Plan your','h')],[('playful','h')],[('weekend.','h')]],'Everything you need for a screen-free weekend.')),
 ],
 }
 render(SETS,REPO+'festive-posts/carousels/product-only/')
