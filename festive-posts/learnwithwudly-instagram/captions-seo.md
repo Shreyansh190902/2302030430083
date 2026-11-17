@@ -20,7 +20,7 @@ Toys: @wudly_toys
 
 🔎 kids learning video, toddler learning, preschool learning, kids story, learning through play, growth mindset for kids, problem solving for kids, memory game for kids, learn colours for kids, Hindi for kids, kids educational video, wooden toys India
 
-#learnwithwudly #wudly #kidslearning #toddlerlearning #preschoollearning #kidsstories #learningthroughplay #growthmindset #hindiforkids #kidsreels #parentingindia #woodentoys
+#learnwithwudly #kidslearning #toddlerlearning #learningthroughplay #kidsreels
 **Alt text:** Animated boy Wudly in a red cap builds a wooden block tower that falls, tries again with big blocks at the bottom, and cheers when it stands.
 
 ---
@@ -39,7 +39,7 @@ Toys: @wudly_toys
 
 🔎 kids learning video, toddler learning, preschool learning, kids story, learning through play, growth mindset for kids, problem solving for kids, memory game for kids, learn colours for kids, Hindi for kids, kids educational video, wooden toys India
 
-#learnwithwudly #wudly #kidslearning #toddlerlearning #preschoollearning #kidsstories #learningthroughplay #growthmindset #hindiforkids #kidsreels #parentingindia #woodentoys
+#learnwithwudly #kidslearning #toddlerlearning #learningthroughplay #kidsreels
 **Alt text:** Wudly uses a magnifying glass to find a red train, a blue ball and a yellow duck, with the colour names shown in English and Hindi.
 
 ---
@@ -56,7 +56,7 @@ Toys: @wudly_toys
 
 🔎 kids learning video, toddler learning, preschool learning, kids story, learning through play, growth mindset for kids, problem solving for kids, memory game for kids, learn colours for kids, Hindi for kids, kids educational video, wooden toys India
 
-#learnwithwudly #wudly #kidslearning #toddlerlearning #preschoollearning #kidsstories #learningthroughplay #growthmindset #hindiforkids #kidsreels #parentingindia #woodentoys
+#learnwithwudly #kidslearning #toddlerlearning #learningthroughplay #kidsreels
 **Alt text:** Wudly leads a copy-me movement game: clapping, reaching up high, touching his toes and jumping, with each action shown on screen.
 
 ---
@@ -74,7 +74,7 @@ Toys: @wudly_toys
 
 🔎 kids learning video, toddler learning, preschool learning, kids story, learning through play, growth mindset for kids, problem solving for kids, memory game for kids, learn colours for kids, Hindi for kids, kids educational video, wooden toys India
 
-#learnwithwudly #wudly #kidslearning #toddlerlearning #preschoollearning #kidsstories #learningthroughplay #growthmindset #hindiforkids #kidsreels #parentingindia #woodentoys
+#learnwithwudly #kidslearning #toddlerlearning #learningthroughplay #kidsreels
 **Alt text:** Wudly shows a train, duck, ball and drum. A toy disappears each round and kids guess which one is missing, with names in English and Hindi.
 
 ---
@@ -92,5 +92,5 @@ Toys: @wudly_toys
 
 🔎 kids learning video, toddler learning, preschool learning, kids story, learning through play, growth mindset for kids, problem solving for kids, memory game for kids, learn colours for kids, Hindi for kids, kids educational video, wooden toys India
 
-#learnwithwudly #wudly #kidslearning #toddlerlearning #preschoollearning #kidsstories #learningthroughplay #growthmindset #hindiforkids #kidsreels #parentingindia #woodentoys
+#learnwithwudly #kidslearning #toddlerlearning #learningthroughplay #kidsreels
 **Alt text:** Wudly's toy train Chuku is stuck at a broken track. Wudly stops, thinks and uses a long wooden block as a new bridge so the train can cross.
