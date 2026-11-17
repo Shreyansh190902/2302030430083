@@ -1,0 +1,21 @@
+exec(open('/tmp/claude-0/-home-user-2302030430083/3958de54-3eb1-593a-a0ed-b5b8eb22afdf/scratchpad/fest_lib.py').read())
+PO=REPO+'product-photos/product-only/'
+im=Image.open(PO+'color_tower.jpg').convert('RGB'); a=np.array(im).astype(int)
+bg=tuple(int(v) for v in np.median(np.concatenate([a[0],a[-1],a[:,0],a[:,-1]]),0)); A['color_tower']=key_out(im,bg,18)
+img=base(YEL_BG); d=ImageDraw.Draw(img)
+y=headline(img,250,[[('Less ','s'),('screen.','h')],[('More ','s'),('dream.','h')]],118,960)
+body(img,y+30,'Real toys. Real play. Big imaginations.',DARK,36,700)
+# thought bubble
+L=Image.new('RGBA',img.size,(0,0,0,0)); dl=ImageDraw.Draw(L)
+dl.ellipse(P(70,640,620,1080),fill=(255,255,255,255))
+for cx,cy,r in ((648,780,30),(708,735,19)):
+    dl.ellipse(P(cx-r,cy-r,cx+r,cy+r),fill=(255,255,255,255))
+sh=L.filter(ImageFilter.GaussianBlur(14*S)); sha=Image.new('RGBA',img.size,(120,90,20,0)); sha.putalpha(sh.split()[3].point(lambda v:int(v*.25)))
+img.alpha_composite(sha,(0,int(10*S))); img.alpha_composite(L)
+product(img,'color_tower',200,1010,280,170)
+product(img,'monkey_easel',345,1010,250,190)
+product(img,'stepbloom',505,1010,230,180)
+m=A['mascot']; q=m.resize((int(m.width*760*S/m.height),int(760*S)),Image.LANCZOS)
+img.alpha_composite(q,(int(1050*S-q.width),int(1335*S-q.height)))
+d=ImageDraw.Draw(img); d.text(P(66,1250),'www.wudlytoys.com',font=MO(700,30),fill=RED)
+img.convert('RGB').resize((1080,1350),Image.LANCZOS).save(REPO+'content-plan/posts/wudly-less-screen-more-dream.png')
