@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Fuzzy;font-weight:700;src:url(fuzzy-bubbles-latin-700-normal.woff)}
+@font-face{font-family:Mont;font-weight:700;src:url(montserrat-latin-700-normal.woff)}
+body{margin:0;width:1080px;height:1920px;overflow:hidden;position:relative;background:linear-gradient(#E51C1C 0,#E51C1C 1840px,#C71212 1840px)}
+.l{position:absolute;opacity:0}
+.pop{animation:pop .55s cubic-bezier(.3,1.5,.5,1) forwards}
+@keyframes pop{0%{opacity:0;transform:scale(.6)}60%{opacity:1}100%{opacity:1;transform:scale(1)}}
+.drop{animation:drop .6s cubic-bezier(.3,1.4,.5,1) forwards}
+@keyframes drop{0%{opacity:0;transform:translateY(-60px)}100%{opacity:1;transform:none}}
+.fade{animation:fade .5s ease-out forwards}
+@keyframes fade{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:none}}
+#mas{animation:rise .6s cubic-bezier(.25,1.3,.5,1) forwards 1.5s}
+@keyframes rise{0%{opacity:0;transform:translateY(400px)}100%{opacity:1;transform:none}}
+.dot{position:absolute;border-radius:50%;opacity:0;animation-name:din,drift;animation-fill-mode:forwards,none;animation-iteration-count:1,infinite;animation-timing-function:ease-out,ease-in-out}
+@keyframes din{from{opacity:0;transform:scale(0)}to{opacity:.9;transform:scale(1)}}
+@keyframes drift{0%,100%{opacity:.9;transform:translateY(0)}50%{opacity:.6;transform:translateY(-20px)}}
+.thanks{left:0;right:0;top:110px;text-align:center;font-family:Fuzzy;font-weight:700;font-size:96px;line-height:1.05;color:#fff;text-shadow:0 5px 0 rgba(120,0,0,.35)}
+.thanks span{color:#FDD835}
+.subwrap{left:0;right:0;top:960px;text-align:center}
+#sub{display:inline-flex;align-items:center;gap:22px;background:#fff;color:#E51C1C;font-family:Mont;font-weight:700;font-size:54px;letter-spacing:3px;padding:26px 56px;border-radius:70px;box-shadow:0 10px 26px rgba(100,0,0,.35);animation:tap .5s ease-in-out 3.2s 1 both}
+@keyframes tap{0%,100%{transform:scale(1)}40%{transform:scale(.9)}70%{transform:scale(1.06)}}
+#hand{left:640px;top:1060px;font-size:90px;opacity:0;animation:hand 1.2s ease-out 2.6s forwards}
+@keyframes hand{0%{opacity:0;transform:translate(120px,140px)}50%{opacity:1;transform:translate(0,0)}70%{opacity:1;transform:translate(-6px,-10px) scale(.92)}100%{opacity:0;transform:translate(0,0)}}
+.handle{left:0;right:0;top:1110px;text-align:center}.handle span{display:inline-block;background:#FFF8EE;color:#E51C1C;font-family:Fuzzy;font-weight:700;font-size:58px;padding:8px 48px 18px;border-radius:60px;box-shadow:0 6px 0 rgba(120,0,0,.25)}
+</style></head><body><div class="dot" style="left:69px;top:1751px;width:44px;height:44px;background:#5B8C2A;animation-delay:0.78s,0.78s;animation-duration:.5s,4.3s"></div><div class="dot" style="left:20px;top:458px;width:28px;height:28px;background:#5B8C2A;animation-delay:1.05s,1.05s;animation-duration:.5s,3.08s"></div><div class="dot" style="left:994px;top:1456px;width:36px;height:36px;background:#5B8C2A;animation-delay:0.58s,0.58s;animation-duration:.5s,3.91s"></div><div class="dot" style="left:47px;top:1154px;width:42px;height:42px;background:#5E4FA2;animation-delay:0.45s,0.45s;animation-duration:.5s,4.18s"></div><div class="dot" style="left:1000px;top:360px;width:18px;height:18px;background:#F7941D;animation-delay:1.18s,1.18s;animation-duration:.5s,3.57s"></div><div class="dot" style="left:943px;top:1363px;width:42px;height:42px;background:#5B8C2A;animation-delay:0.07s,0.07s;animation-duration:.5s,4.33s"></div><div class="dot" style="left:77px;top:1671px;width:46px;height:46px;background:#5E4FA2;animation-delay:1.01s,1.01s;animation-duration:.5s,2.76s"></div><div class="dot" style="left:130px;top:1760px;width:42px;height:42px;background:#5E4FA2;animation-delay:0.17s,0.17s;animation-duration:.5s,4.34s"></div><div class="dot" style="left:1009px;top:1440px;width:36px;height:36px;background:#F28C8C;animation-delay:0.33s,0.33s;animation-duration:.5s,3.44s"></div><div class="dot" style="left:1017px;top:587px;width:48px;height:48px;background:#FDD835;animation-delay:1.04s,1.04s;animation-duration:.5s,3.22s"></div><div class="dot" style="left:1004px;top:572px;width:34px;height:34px;background:#5E4FA2;animation-delay:0.78s,0.78s;animation-duration:.5s,3.66s"></div><div class="dot" style="left:33px;top:1001px;width:32px;height:32px;background:#5E4FA2;animation-delay:0.81s,0.81s;animation-duration:.5s,3.43s"></div><div class="dot" style="left:1034px;top:1355px;width:38px;height:38px;background:#5E4FA2;animation-delay:0.33s,0.33s;animation-duration:.5s,3.19s"></div><div class="dot" style="left:987px;top:609px;width:20px;height:20px;background:#E8E0D0;animation-delay:0.81s,0.81s;animation-duration:.5s,3.33s"></div><div class="dot" style="left:66px;top:430px;width:26px;height:26px;background:#FDD835;animation-delay:0.53s,0.53s;animation-duration:.5s,3.8s"></div><div class="dot" style="left:788px;top:1386px;width:20px;height:20px;background:#FDD835;animation-delay:0.25s,0.25s;animation-duration:.5s,3.94s"></div><div class="dot" style="left:775px;top:31px;width:38px;height:38px;background:#F28C8C;animation-delay:1.14s,1.14s;animation-duration:.5s,4.21s"></div><div class="dot" style="left:245px;top:1440px;width:38px;height:38px;background:#F7941D;animation-delay:0.66s,0.66s;animation-duration:.5s,3.1s"></div><div class="dot" style="left:1020px;top:626px;width:46px;height:46px;background:#E8E0D0;animation-delay:0.46s,0.46s;animation-duration:.5s,4.42s"></div><div class="dot" style="left:986px;top:78px;width:22px;height:22px;background:#E8E0D0;animation-delay:0.75s,0.75s;animation-duration:.5s,3.39s"></div><div class="dot" style="left:981px;top:1631px;width:18px;height:18px;background:#5B8C2A;animation-delay:0.59s,0.59s;animation-duration:.5s,4.19s"></div><div class="dot" style="left:982px;top:1091px;width:22px;height:22px;background:#F7941D;animation-delay:0.91s,0.91s;animation-duration:.5s,3.1s"></div><div class="dot" style="left:64px;top:980px;width:38px;height:38px;background:#5E4FA2;animation-delay:0.82s,0.82s;animation-duration:.5s,4.13s"></div>
+<div class="l drop thanks" style="animation-delay:.15s">Learn &amp; play<br><span>with Wudly!</span></div>
+<img class="l pop" style="left:220px;top:370px;width:640px;animation-delay:.45s" src="card.png">
+<img class="l pop" style="left:170px;top:810px;width:740px;animation-delay:.8s" src="pill1.png">
+<div class="l pop subwrap" style="animation-delay:1.1s"><div id="sub"><svg width="54" height="54" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#E51C1C"/><path d="M12 6v12M6 12h12" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>FOLLOW</div></div>
+<div class="l pop handle" style="animation-delay:1.3s"><span>@learnwithwudly</span></div>
+<img class="l fade" style="left:300px;top:1250px;width:480px;animation-delay:1.5s" src="web.png">
+<img id="mas" class="l" style="left:412px;top:1332px;height:560px" src="mascot.png">
+<div id="hand" class="l">👆</div>
+</body></html>
