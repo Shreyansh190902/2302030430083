@@ -2,6 +2,7 @@
 
 Instagram search reads the first line of the caption, the caption keywords, the alt text and the profile name. Hashtags matter less now.
 - **First line:** keep the keyword-rich first line as it is.
+- **Keywords:** each caption now includes its SEO keywords on the 🔎 line, so just copy the whole caption.
 - **Alt text:** paste it in Advanced settings → Accessibility → Write alt text.
 
 ---
@@ -17,9 +18,9 @@ Will YOU try again too? 👇
 Follow @learnwithwudly for a new story every week 🧸
 Toys: @wudly_toys
 
-#learnwithwudly #kidslearning #growthmindset #dontgiveup #toddleractivities #preschool #woodentoys #kidsreels #parentingindia #wudly
+🔎 kids story • never give up story for kids • growth mindset for kids • toddler learning video • preschool learning • stacking blocks • block tower • problem solving for kids • kids moral story • wooden toys India
 
-**SEO keywords:** kids story, never give up story for kids, growth mindset for kids, toddler learning video, preschool learning, stacking blocks, block tower, problem solving for kids, kids moral story, wooden toys India
+#learnwithwudly #kidslearning #growthmindset #dontgiveup #toddleractivities #preschool #woodentoys #kidsreels #parentingindia #wudly
 **Alt text:** Animated boy Wudly in a red cap builds a wooden block tower that falls, tries again with big blocks at the bottom, and cheers when it stands.
 
 ---
@@ -36,9 +37,9 @@ What colours can YOU find around you? 👇
 Follow @learnwithwudly for more fun learning 🧸
 Toys: @wudly_toys
 
-#learnwithwudly #learncolours #coloursforkids #hindiforkids #toddlerlearning #preschoolactivities #kidsreels #parentingindia #wudly
+🔎 learn colours for kids • colours in Hindi • colour names for toddlers • red blue yellow • laal neela peela • colour hunt game • preschool learning • toddler learning video • Hindi for kids • kids educational video
 
-**SEO keywords:** learn colours for kids, colours in Hindi, colour names for toddlers, red blue yellow, laal neela peela, colour hunt game, preschool learning, toddler learning video, Hindi for kids, kids educational video
+#learnwithwudly #learncolours #coloursforkids #hindiforkids #toddlerlearning #preschoolactivities #kidsreels #parentingindia #wudly
 **Alt text:** Wudly uses a magnifying glass to find a red train, a blue ball and a yellow duck, with the colour names shown in English and Hindi.
 
 ---
@@ -53,9 +54,9 @@ Great moving, friends! Can you do it again – faster? 😄
 Follow @learnwithwudly for more fun with Wudly 🧸
 Toys: @wudly_toys
 
-#learnwithwudly #kidsexercise #brainbreak #movementforkids #toddleractivities #preschool #kidsreels #parentingindia #wudly
+🔎 kids exercise • movement game for kids • brain break • toddler activities at home • copy me game • preschool movement • active play • clap reach touch toes jump • indoor activity for kids • fun exercise for toddlers
 
-**SEO keywords:** kids exercise, movement game for kids, brain break, toddler activities at home, copy me game, preschool movement, active play, clap reach touch toes jump, indoor activity for kids, fun exercise for toddlers
+#learnwithwudly #kidsexercise #brainbreak #movementforkids #toddleractivities #preschool #kidsreels #parentingindia #wudly
 **Alt text:** Wudly leads a copy-me movement game: clapping, reaching up high, touching his toes and jumping, with each action shown on screen.
 
 ---
@@ -71,9 +72,9 @@ Super memory! 🌟 How many did you get? 👇
 Follow @learnwithwudly for more brain games 🧸
 Toys: @wudly_toys
 
-#learnwithwudly #memorygame #kidsgames #preschoolgames #hindiforkids #toddlerlearning #kidsreels #parentingindia #wudly
+🔎 memory game for kids • what's missing game • brain game for toddlers • preschool games • concentration activity • observation game • toy names in Hindi • toddler learning video • kids educational game • early learning
 
-**SEO keywords:** memory game for kids, what's missing game, brain game for toddlers, preschool games, concentration activity, observation game, toy names in Hindi, toddler learning video, kids educational game, early learning
+#learnwithwudly #memorygame #kidsgames #preschoolgames #hindiforkids #toddlerlearning #kidsreels #parentingindia #wudly
 **Alt text:** Wudly shows a train, duck, ball and drum. A toy disappears each round and kids guess which one is missing, with names in English and Hindi.
 
 ---
@@ -89,7 +90,7 @@ When you're stuck: STOP, THINK, and TRY A NEW WAY! 💪
 Follow @learnwithwudly for more stories 🧸
 Toys: @wudly_toys
 
-#learnwithwudly #problemsolving #growthmindset #kidsstories #woodentrain #toddlerlearning #kidsreels #parentingindia #wudly
+🔎 problem solving for kids • kids story • train story for kids • growth mindset for kids • stop think try • wooden train • critical thinking for toddlers • preschool story • kids moral story • learning through play
 
-**SEO keywords:** problem solving for kids, kids story, train story for kids, growth mindset for kids, stop think try, wooden train, critical thinking for toddlers, preschool story, kids moral story, learning through play
+#learnwithwudly #problemsolving #growthmindset #kidsstories #woodentrain #toddlerlearning #kidsreels #parentingindia #wudly
 **Alt text:** Wudly's toy train Chuku is stuck at a broken track. Wudly stops, thinks and uses a long wooden block as a new bridge so the train can cross.
