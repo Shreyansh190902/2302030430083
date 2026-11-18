@@ -94,3 +94,22 @@ Toys: @wudly_toys
 
 #learnwithwudly #kidslearning #toddlerlearning #learningthroughplay #kidsreels
 **Alt text:** Wudly's toy train Chuku is stuck at a broken track. Wudly stops, thinks and uses a long wooden block as a new bridge so the train can cross.
+
+---
+
+## EP07 – Rainy Day Blocks
+**Caption:**
+Rainy day activities for kids 🌧️ | 3 easy block games at home
+Hey grown-ups! One box of blocks = three rainy-day games 🧱
+1️⃣ Tall Tower: stack, count… wobble, wobble… TUMBLE! 😂
+2️⃣ Block Road: line them up and zoom a car along 🚗
+3️⃣ Colour Sort: reds here, blues there, yellows over here 🔴🔵🟡
+Save it for your next rainy day! 📌 Which game first? 👇
+
+Follow @learnwithwudly for more play ideas 🧸
+Toys: @wudly_toys
+
+🔎 kids learning video, toddler learning, preschool learning, kids story, learning through play, growth mindset for kids, problem solving for kids, memory game for kids, learn colours for kids, Hindi for kids, kids educational video, wooden toys India
+
+#learnwithwudly #kidslearning #toddlerlearning #learningthroughplay #kidsreels
+**Alt text:** Wudly shows three rainy-day games with one box of coloured blocks: building a tall tower that tumbles, lining blocks into a road for a toy car, and sorting blocks by colour.
