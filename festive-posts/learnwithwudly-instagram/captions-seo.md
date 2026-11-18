@@ -113,3 +113,94 @@ Toys: @wudly_toys
 
 #learnwithwudly #kidslearning #toddlerlearning #learningthroughplay #kidsreels
 **Alt text:** Wudly shows three rainy-day games with one box of coloured blocks: building a tall tower that tumbles, lining blocks into a road for a toy car, and sorting blocks by colour.
+
+---
+
+## EP10 – The Magic Seed
+**Caption:**
+Planting a seed with kids 🌱 | Good things take time
+Wudly found a tiny little seed! What will it grow into? 🤔
+Into the soil, a little sprinkle of water 💧… and we wait!
+Is it growing yet? Not yet… Wait, look! A tiny green sprout! 🌱
+It's growing and growing… a BIG SUNFLOWER! 🌻
+Good things take time, so be patient! 💛
+
+Follow @learnwithwudly for more stories 🧸
+Toys: @wudly_toys
+
+🔎 kids learning video, toddler learning, preschool learning, kids story, learning through play, growth mindset for kids, problem solving for kids, memory game for kids, learn colours for kids, Hindi for kids, kids educational video, wooden toys India
+
+#learnwithwudly #kidslearning #toddlerlearning #learningthroughplay #kidsreels
+**Alt text:** Wudly plants a tiny seed in a pot, waters it and waits. A sprout appears and grows into a tall sunflower while Wudly cheers.
+
+---
+
+## EP11 – Paper Plane
+**Caption:**
+Never give up story for kids ✈️ | Happy Children's Day!
+Three, two, one… GO! Oh no, Wudly's paper plane fell down 😟
+That's okay! Fold the wings up a little and TRY AGAIN 💪
+WOW! Look at it go! It flies! 🎉
+Friends, Happy Children's Day! 💛
+
+Follow @learnwithwudly for more stories 🧸
+Toys: @wudly_toys
+
+🔎 kids learning video, toddler learning, preschool learning, kids story, learning through play, growth mindset for kids, problem solving for kids, memory game for kids, learn colours for kids, Hindi for kids, kids educational video, wooden toys India
+
+#learnwithwudly #kidslearning #toddlerlearning #learningthroughplay #kidsreels
+**Alt text:** Wudly throws a paper plane that falls, folds the wings and tries again until it flies across the room, then wishes everyone a Happy Children's Day.
+
+---
+
+## EP12 – Bubble Trouble
+**Caption:**
+Big and small for kids 🫧 | The biggest bubble ever!
+A teeny tiny bubble… gone! Too small! 😅
+Let's try bigger… slowly, slowly…
+WOW! A GIANT bubble, as big as Wudly! 😲
+Uh-oh… POP! Right on his nose! 😂 Bubbles make me so happy! 💙
+
+Follow @learnwithwudly for more stories 🧸
+Toys: @wudly_toys
+
+🔎 kids learning video, toddler learning, preschool learning, kids story, learning through play, growth mindset for kids, problem solving for kids, memory game for kids, learn colours for kids, Hindi for kids, kids educational video, wooden toys India
+
+#learnwithwudly #kidslearning #toddlerlearning #learningthroughplay #kidsreels
+**Alt text:** Wudly blows a tiny bubble that pops, then slowly blows a giant bubble as big as himself, which floats down and pops on his nose.
+
+---
+
+## EP13 – Puddle Splash
+**Caption:**
+Rainy day fun for kids 💦 | One, two, three… SPLASH!
+The rain stopped, and look… a BIG puddle! ☀️
+First a tiny step… cold and wiggly! 😆
+One… two… three… JUMP! SPLASH! 💦
+Look up, friends… a RAINBOW! 🌈 Rainy days are fun days! 💛
+
+Follow @learnwithwudly for more stories 🧸
+Toys: @wudly_toys
+
+🔎 kids learning video, toddler learning, preschool learning, kids story, learning through play, growth mindset for kids, problem solving for kids, memory game for kids, learn colours for kids, Hindi for kids, kids educational video, wooden toys India
+
+#learnwithwudly #kidslearning #toddlerlearning #learningthroughplay #kidsreels
+**Alt text:** After the rain, Wudly tests a puddle with a tiny step, counts to three and jumps in with a big splash, then spots a rainbow in the sky.
+
+---
+
+## EP14 – Kite in the Wind
+**Caption:**
+Keep trying story for kids 🪁 | Up, up, up!
+It's so windy today! Perfect for Wudly's kite 🌬️
+Pull… oops! It fell down 😟
+Wait for the wind… UP, UP, UP! It's dancing in the sky! 🎉
+When at first it doesn't fly, KEEP TRYING! 💪
+
+Follow @learnwithwudly for more stories 🧸
+Toys: @wudly_toys
+
+🔎 kids learning video, toddler learning, preschool learning, kids story, learning through play, growth mindset for kids, problem solving for kids, memory game for kids, learn colours for kids, Hindi for kids, kids educational video, wooden toys India
+
+#learnwithwudly #kidslearning #toddlerlearning #learningthroughplay #kidsreels
+**Alt text:** Wudly flies a kite on a windy hill. It falls at first, then he waits for the wind and it soars high in the sky.
